@@ -104,9 +104,35 @@ class Troublelist_model extends CI_Model
         //Update spare part 
     }
 
+    public function updateData()
+    {
+        $data = [
+            'accidentDate' => $this->input->post('発生日', true),
+            'repairDate' => $this->input->post('修理日', true),
+            'department' => $this->input->post('部署', true),
+            'manager' => $this->input->post('担当者', true),
+            'facility' => $this->input->post('設備', true),
+            'unit' => $this->input->post('号機', true),
+            'processName' => $this->input->post('工程名・工程機能', true),
+            'repairTime' => $this->input->post('修理所要時間', true),
+            'failMode' => $this->input->post('故障モード', true),
+            'classification' => $this->input->post('区分', true),
+            'phenomenon' => $this->input->post('現象・不具合要因詳細', true),
+            'repairDet' => $this->input->post('修理内容', true),
+            'measures' => $this->input->post('対策', true),
+            'countermeasure' => $this->input->post('対策書', true)
+        ];
+
+
+
+        $this->db->where('setsubiId', $this->input->post('id'));
+        $this->db->update('equipment', $data);
+        //Update spare part 
+    }
+
     public function deleteData($id, $formID, $head)
     {
         $this->db->where($head, $id);
         $this->db->delete($formID);
-    }   
+    }
 }

@@ -196,15 +196,15 @@
 
     </div>
     <!-- Table -->
-    <table class="table table-light" id="equipment_parts_list">
+    <table class="table table-light text-center" id="equipment_parts_list">
         <thead>
             <tr>
-                <td>部品NO</td>
-                <td>部品名</td>
-                <td>型式</td>
-                <td>メーカー名</td>
-                <td>数量</td>
-                <td>単位</td>
+                <td>[PartId]</td>
+                <td>[PartName]</td>
+                <td>[Model]</td>
+                <td>[Placement]</td>
+                <td>[AMOUNT]</td>
+  
             </tr>
         </thead>
         <tbody>
@@ -219,7 +219,7 @@
     <!-- Button -->
     <div class="row p-3">
         <div class="col-6 mb-2">
-            <button class="btn btn-secondary" type="button" onclick="get_sparepart_list()" data-bs-toggle="modal" data-bs-target="#partsModal"><span>部品</span></button>
+            <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#partsSelect"><span>部品</span></button>
             <input type="submit" name="add_trouble" class="btn btn-secondary" value="登録">
             
         </div>

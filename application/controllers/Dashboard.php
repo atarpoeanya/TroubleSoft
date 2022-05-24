@@ -41,6 +41,7 @@ class Dashboard extends CI_Controller
         $this->load->view('js/dashboard_js');
         // modals
         $this->load->view('modals/addSparts');
+        $this->load->view('modals/delete');
 
 
         //other method
@@ -66,7 +67,18 @@ class Dashboard extends CI_Controller
         f_generate_table_select($data);
     }
 
-    // Form
+    public function get_sparepartList_lite()
+    {
+
+        $data['title'] =
+            ['[PartId]', '[PartName]', '[Model]', '[Placement]', '[AMOUNT]'];
+        $data['sparePart'] = $this->Troublelist_model->getSparepartList();
+        $this->load->view('function/print_table_spare_lite');
+        f_generate_table_select($data);
+    }
+
+
+    // UNUSED
     public function productForm()
     {
         $this->load->view('templates/header');
@@ -119,6 +131,8 @@ class Dashboard extends CI_Controller
     public function postEquipment()
     {
         $id = $this->uri->segment(2);
+
+
         $this->form_validation->set_rules('発生日', 'a', 'required');
         if ($id == 1) {
             if ($this->form_validation->run() == FALSE) {
@@ -140,6 +154,10 @@ class Dashboard extends CI_Controller
                 redirect(base_url(), '/');
             }
         }
+
+        // Invoke Part list
+        //  $this->get_sparepartList();
+        $this->load->view('modals/partsSelect');
     }
 
     public function deleteDatas($id, $title)
@@ -176,14 +194,29 @@ class Dashboard extends CI_Controller
             'その他'
         ];
 
+        $data['inspector_'] = [
+            '水上',
+            '新宮',
+            '齋藤'
+        ];
+
+        $data['tools_name'] = [
+            'プレス',
+            '洗浄機',
+            '塗装設備'
+        ];
+
+        $data['unit'] = [
+            '1号機', '2号機', '3号機'
+        ];
+
         if ($data['items'] != null) {
             $this->load->view('templates/header');
             $this->load->view('Pages/equipmentForm_edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->load->view('templates/header');
-            echo "<div class='container'>Empty</div>";
-            $this->load->view('templates/footer');
+            $this->Troublelist_model->updateData();
+            redirect('/');
         }
     }
 

@@ -79,7 +79,7 @@
                 $("#spare_part_list").html(response);
             },
             complete: function() {
-                console.log('done')
+                $("#spare_part_list").html(response);
             }
         });
     }
@@ -89,6 +89,33 @@
         $(document).on('click', '.form-check-input', function() {
 
         });
+    }
+    function deleteTrouble($id) {
+        
+        var conf = swal({
+                    title: "データを削除しますか？",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal({
+                            // button: false,
+                            title: "データが削除されました",
+                            icon: "success",
+                        });
+                        $.ajax({
+                            url: "<?=base_url()?>dashboard/deleteDatas/"+$id+"/equipment",
+                            complete: function() {
+                                get_troubleList();
+                                
+                            }
+                        });
+                    } else {
+                        // DELETE CANCELLED
+                    }
+                });
     }
 
     // 送品 search function

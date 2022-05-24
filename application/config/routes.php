@@ -58,6 +58,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['as'] = 'dashboard/transition';
 $route['equipment'] = 'dashboard/postequipment';
 $route['product'] = 'dashboard/productForm';
+$route['dashboard'] = 'dashboard';
 
 //Record Routing
 $route['item/(:num)'] = 'dashboard/viewRecord/$id';

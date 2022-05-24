@@ -1,5 +1,4 @@
 <br>
-<?php var_dump($items)?>
 <div class="container col-8 kanjifont" id="mainForm">
     <div class="container">
         <!-- small screen -->
@@ -7,6 +6,7 @@
         
 
         <form action="dashboard/postEquipment/1" method="post" class="mt-4" autocomplete="off" id="equipForm">
+            <input type="hidden" name="id" id="setsubiId" value="<?= $items->setsubiId ?>">
             <!-- Date -->
             <div class="row">
                 <div class="col">
@@ -42,10 +42,13 @@
                 <div class="col">
                     <label class="form-label" for="tantou">担当者 </label>
                     <select class="form-control" name="担当者" id="tantou">
-                        <option value="" disabled selected>選び出す</option>
-                        <option value="水上">水上</option>
-                        <option value="新宮">新宮</option>
-                        <option value="齋藤">齋藤</option>
+                        <?php 
+                        foreach($inspector_ as $i) :
+                            if($i == $items->manager) : ?>
+                            <option value="<?= $i ?>" selected><?= $i ?></option>
+                                <?php else:?>
+                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                    <?php endif; endforeach;?>
                     </select>
                 </div>
             </div>
@@ -55,19 +58,25 @@
                 <div class="col">
                     <label class="form-label" for="setsubi">設備</label>
                     <select class="form-control" name="設備" id="setsubi">
-                        <option value="" disabled selected>選び出す</option>
-                        <option value="プレス">プレス</option>
-                        <option value="洗浄機">洗浄機</option>
-                        <option value="塗装設備">塗装設備</option>
+                        <?php 
+                        foreach($tools_name as $t) :
+                            if($t == $items->facility) : ?>
+                            <option value="<?= $t ?>" selected><?= $t ?></option>
+                                <?php else:?>
+                                    <option value="<?= $t ?>"><?= $t ?></option>
+                                    <?php endif; endforeach;?>
                     </select>
                 </div>
                 <div class="col">
                     <label class="form-label" for="gouki">号機 </label>
                     <select class="form-control" name="号機" id="gouki">
-                        <option value="" disabled selected>選び出す</option>
-                        <option value="1号機">1号機</option>
-                        <option value="2号機">2号機</option>
-                        <option value="3号機">3号機</option>
+                        <?php 
+                        foreach($unit as $u) :
+                            if($u == $items->facility) : ?>
+                            <option value="<?= $u ?>" selected><?= $u ?></option>
+                                <?php else:?>
+                                    <option value="<?= $u ?>"><?= $u ?></option>
+                                    <?php endif; endforeach;?>
                     </select>
                 </div>
             </div>
@@ -219,7 +228,7 @@
     <div class="row p-3">
         <div class="col-6 mb-2">
             <button class="btn btn-secondary" type="button" onclick="get_sparepart_list()" data-bs-toggle="modal" data-bs-target="#partsModal"><span>部品</span></button>
-            <input type="submit" name="add_trouble" class="btn btn-secondary" value="登録">
+            <input type="submit" name="edit_trouble" class="btn btn-secondary" value="登録">
             
         </div>
 
