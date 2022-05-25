@@ -1,4 +1,4 @@
-<div class="modal kanjifont" id="partsSelect" tabindex="-1">
+<div class="modal kanjifont" id="partsSelect" data-bs-backdrop="static" tabindex="-1">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a id="insertTool" class="btn btn-primary">足す</a>
+                <a id="insertTool" class="btn btn-primary" data-bs-dismiss="modal">足す</a>
 
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
             </div>
@@ -23,40 +23,59 @@
 </div>
 
 <script>
+    // var _isInit = 0;
 
     // var myModalEl = document.getElementById('partsSelect')
     // Too detailed probably need to make stand-alone table function
     $('#partsSelect').on('show.bs.modal', function(event) {
+
         $.ajax({
             url: "<?= base_url(); ?>dashboard/get_sparepartList_lite",
             success: function(response) {
                 $("#upper").html(response)
+                if ($('#equipment_parts_list tbody tr').length != 0) {
+                    // $('#foots tr').clone().prependTo('#equipment_parts_list tbody');
+                    $('#foots').append($('#equipment_parts_list tbody tr').clone())
+                    $('#foots').find('td:last-child').show();
+
+                }
             },
             complete: function() {
                 console.log('done')
             }
         });
+        
+        
+    })
+    function search_all_function() {
+    var $rows = $('#gen_table #bodys tr');
 
-        function search_all_function() {
-            var $rows = $('#gen_table tbody tr');
+    $('#table_input').keyup(function() {
+        var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
 
-            $('#table_input').input(function() {
-                var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+        $rows.show().filter(function() {
+            var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+            return !~text.indexOf(val);
+        }).hide();
+    });
 
-                $rows.show().filter(function() {
-                    var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-                    return !~text.indexOf(val);
-                }).hide();
-            });
+}
+
+
+
+    // Clone from modal to main Form
+    $('#insertTool').on('click', function print_checked() {
+        if ($('#foots tr').length != 0) {
+            $('#equipment_parts_list tbody tr').remove()
+            $('.emptyTab').hide()
+        } else {
+            $('#equipment_parts_list tbody tr').remove()
+            $('.emptyTab').show()
         }
 
-        // Clone from modal to main Form
-        $('#insertTool').on('click', function print_checked() {
-            $('#equipment_parts_list tbody').find('tr:first-child').remove(); //Delete the EMPTY placeholder
-            $('#foots tr').clone().prependTo('#equipment_parts_list tbody'); 
-            $('#equipment_parts_list tbody').find('tr:first-child').remove(); //Delete the Selected header
-            $('#equipment_parts_list tbody').find('td:last-child').remove(); //Delete minus button
-        })
-
+        $('#equipment_parts_list tbody').append($('#foots tr')) //Delete the EMPTY placeholder
+        // $('#foots tr').clone().prependTo('#equipment_parts_list tbody'); 
+        // $('#equipment_parts_list tbody').find('tr:first-child').remove(); //Delete the Selected header
+        $('#equipment_parts_list tbody').find('td:last-child').hide(); //Delete minus button
     })
 </script>

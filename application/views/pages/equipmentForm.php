@@ -208,12 +208,14 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td colspan="6" class="text-center">
+        </tbody>
+        <tfoot>
+        <tr>
+                <td colspan="6" class="text-center emptyTab">
                     <span>EMPTY</span>
                 </td>
             </tr>
-        </tbody>
+        </tfoot>
     </table>
 
     <!-- Button -->
@@ -262,7 +264,7 @@
 </style>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function() {        
         $('#fmea_Form').hide()
         $('input[name=flexRadioDefault]').change(function() {
             var val = $(this).val()
@@ -277,5 +279,7 @@
 
             
         })
+
     })
+    
 </script>

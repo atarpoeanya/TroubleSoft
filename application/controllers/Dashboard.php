@@ -53,7 +53,7 @@ class Dashboard extends CI_Controller
     public function get_troubleList()
     {
         $data['troubleList'] = $this->Troublelist_model->getTroubleList();
-        $data['title'] = $this->Troublelist_model->getTitle('equipment');
+        $data['title'] = $this->Troublelist_model->getTitle('t800_equipment');
         $this->load->view('function/print_table_trouble');
         f_generate_table_select($data);
     }

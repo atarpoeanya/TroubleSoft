@@ -9,12 +9,12 @@ function f_generate_table_select($data)
                     <?php
                     foreach ($data['title'] as $thead) {
 
-                        if ($thead == 'facility'  || $thead == 'failMode') {
+                        if ($thead == 'c_facility'  || $thead == 'c_failMode') {
                             switch ($thead) {
-                                case 'facility':
+                                case 'c_facility':
                                     $thead = '工程名・工程機能';
                                     break;
-                                case 'failMode':
+                                case 'c_failMode':
                                     $thead = '故障モード';
                                     break;
                                 default:
@@ -46,13 +46,13 @@ function f_generate_table_select($data)
                 ?>
                     <tr onclick="view_record(this)" >
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3">
-                            <?= $item->facility ?>
+                            <?= $item->c_facility ?>
                         </td>
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3">
-                            <?= $item->failMode ?>
+                            <?= $item->c_failMode ?>
                         </td>
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 ID">
-                            <?= $item->setsubiId ?>
+                            <?= $item->c_t800_id ?>
                         </td>
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-2 button_column text-nowrap" style="display: none;">
                             <a class="btn-block btn btn-primary modify-button" href="<?=base_url()?>dashboard/editdata_view/<?=intval($item->setsubiId)?>" onclick="event.cancelBubble=true;">更新</a>
