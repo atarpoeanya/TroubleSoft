@@ -25,10 +25,6 @@
                         <br>
                         <div class="row">
                             <div class="col">
-                                <label class="form-label" for="buyer">購入者</label>
-                                <input class="form-control" type="text" name="購入者" id="buyer">
-                            </div>
-                            <div class="col">
                                 <label class="form-label" for="placement">使用箇所</label>
                                 <input class="form-control" type="text" name="使用箇所" id="placement">
                             </div>

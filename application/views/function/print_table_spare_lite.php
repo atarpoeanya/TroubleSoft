@@ -34,19 +34,19 @@ function f_generate_table_select($data)
 
 
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 ID">
-                            <?= $item->partId ?>
+                            <?= $item->c_t202_id ?>
                         </td>
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 partname">
-                            <?= $item->partName ?>
+                            <?= $item->c_partName ?>
                         </td>
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 partmodel">
-                            <?= $item->model ?>
+                            <?= $item->c_model ?>
                         </td>
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 partstorage">
-                            <?= $item->placement ?>
+                            <?= $item->c_placement ?>
                         </td>
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 amount">
-                            <?= $item->quantity ?>
+                            <?= $item->c_quantity ?>
                         </td>
 
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-2 button_column text-nowrap">

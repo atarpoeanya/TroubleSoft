@@ -32,7 +32,7 @@ function f_generate_table_select($data)
                     <tr>
                         <?php
                         foreach ($item as $key => $value) {
-                            if ($key == 'partId'){
+                            if ($key == 'c_t202_id'){
                                 $id = $value;
                         ?>
 

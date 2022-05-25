@@ -61,7 +61,7 @@ class Dashboard extends CI_Controller
     public function get_sparepartList()
     {
 
-        $data['title'] = $this->Troublelist_model->getTitle('spareparts');
+        $data['title'] = $this->Troublelist_model->getTitle('t202_spareparts');
         $data['sparePart'] = $this->Troublelist_model->getSparepartList();
         $this->load->view('function/print_table_spare');
         f_generate_table_select($data);
@@ -164,10 +164,10 @@ class Dashboard extends CI_Controller
     {
         switch ($title) {
             case 'equipment':
-                $head = 'setsubiId';
+                $head = 'c_t800_id';
                 break;
             case 'spareparts':
-                $head = 'partId';
+                $head = 'c_t202_id';
                 break;
             default:
                 # code...

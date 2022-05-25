@@ -134,7 +134,19 @@ class Troublelist_model extends CI_Model
 
     public function deleteData($id, $formID, $head)
     {
+        $formName = '';
+        switch ($formID) {
+            case 'equipment':
+                $formName = 't800_equipment';
+                break;
+                case 'equipment':
+                    $formName = 't202_spareparts';
+                    break;
+            default:
+                # code...
+                break;
+        }
         $this->db->where($head, $id);
-        $this->db->delete($formID);
+        $this->db->delete($formName);
     }
 }

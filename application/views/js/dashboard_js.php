@@ -79,7 +79,7 @@
                 $("#spare_part_list").html(response);
             },
             complete: function() {
-                $("#spare_part_list").html(response);
+                console.log('done')
             }
         });
     }

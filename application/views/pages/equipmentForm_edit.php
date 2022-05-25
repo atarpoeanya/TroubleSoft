@@ -6,12 +6,12 @@
         
 
         <form action="dashboard/postEquipment/1" method="post" class="mt-4" autocomplete="off" id="equipForm">
-            <input type="hidden" name="id" id="setsubiId" value="<?= $items->setsubiId ?>">
+            <input type="hidden" name="id" id="setsubiId" value="<?= $items->c_t800_id ?>">
             <!-- Date -->
             <div class="row">
                 <div class="col">
                     <label class="form-label" for="startDay">発生日</label>
-                    <input class="form-control" type="date" name="発生日" id="startDay" value="<?= $items->accidentDate ?>">
+                    <input class="form-control" type="date" name="発生日" id="startDay" value="<?= $items->c_accidentDate ?>">
                     
                     <?php if(form_error('発生日')) {?>
                     <div class="alert alert-danger" role="alert">
@@ -21,7 +21,7 @@
                 </div>
                 <div class="col">
                     <label class="form-label" for="repairDay">修理日</label>
-                    <input class="form-control" type="date" name="修理日" id="repairDay" value="<?= $items->repairDate ?>">
+                    <input class="form-control" type="date" name="修理日" id="repairDay" value="<?= $items->c_repairDate ?>">
                 </div>
             </div>
 
@@ -32,7 +32,7 @@
                     <select class="form-control" name="部署" id="busho">
                         <?php 
                         foreach($division as $d) :
-                            if($d == $items->department) : ?>
+                            if($d == $items->c_department) : ?>
                             <option value="<?= $d ?>" selected><?= $d ?></option>
                                 <?php else:?>
                                     <option value="<?= $d ?>"><?= $d ?></option>
@@ -44,7 +44,7 @@
                     <select class="form-control" name="担当者" id="tantou">
                         <?php 
                         foreach($inspector_ as $i) :
-                            if($i == $items->manager) : ?>
+                            if($i == $items->c_manager) : ?>
                             <option value="<?= $i ?>" selected><?= $i ?></option>
                                 <?php else:?>
                                     <option value="<?= $i ?>"><?= $i ?></option>
@@ -60,7 +60,7 @@
                     <select class="form-control" name="設備" id="setsubi">
                         <?php 
                         foreach($tools_name as $t) :
-                            if($t == $items->facility) : ?>
+                            if($t == $items->c_facility) : ?>
                             <option value="<?= $t ?>" selected><?= $t ?></option>
                                 <?php else:?>
                                     <option value="<?= $t ?>"><?= $t ?></option>
@@ -72,7 +72,7 @@
                     <select class="form-control" name="号機" id="gouki">
                         <?php 
                         foreach($unit as $u) :
-                            if($u == $items->facility) : ?>
+                            if($u == $items->c_facility) : ?>
                             <option value="<?= $u ?>" selected><?= $u ?></option>
                                 <?php else:?>
                                     <option value="<?= $u ?>"><?= $u ?></option>
@@ -84,11 +84,11 @@
             <div class="row">
                 <div class="col">
                     <label class="form-label" for="kouteiNa">工程名・工程機能</label>
-                    <input class="form-control" type="text" name="工程名・工程機能" id="kouteiNa" value="<?= $items->processName?>">
+                    <input class="form-control" type="text" name="工程名・工程機能" id="kouteiNa" value="<?= $items->c_processName?>">
                 </div>
                 <div class="col">
                     <label class="form-label" for="shuriJikan">修理所要時間</label>
-                    <input class="form-control" type="text" name="修理所要時間" id="shuriJikan" value="<?= $items->repairTime?>">
+                    <input class="form-control" type="text" name="修理所要時間" id="shuriJikan" value="<?= $items->c_repairTime?>">
                 </div>
             </div>
 
@@ -96,11 +96,11 @@
             <div class="row">
                 <div class="col">
                     <label class="form-label" for="mode">故障モード</label>
-                    <input class="form-control" type="text" name="故障モード" id="mode" value="<?= $items->failMode?>">
+                    <input class="form-control" type="text" name="故障モード" id="mode" value="<?= $items->c_failMode?>">
                 </div>
                 <div class="col">
                     <label class="form-label" for="kubun">区分</label>
-                    <input class="form-control" type="text" name="区分" id="kubun" value="<?= $items->classification?>">
+                    <input class="form-control" type="text" name="区分" id="kubun" value="<?= $items->c_classification?>">
                 </div>
             </div>
 
@@ -108,18 +108,18 @@
             <div class="row">
                 <div class="col">
                     <label class="form-label" for="gensho">現象・不具合要因詳細</label>
-                    <textarea class="form-control" name="現象・不具合要因詳細" id="gensho" cols="30" rows="10" ><?= $items->phenomenon?></textarea>
+                    <textarea class="form-control" name="現象・不具合要因詳細" id="gensho" cols="30" rows="10" ><?= $items->c_phenomenon?></textarea>
                 </div>
                 <div class="col">
                     <label class="form-label" for="shuriNaiyou">修理内容</label>
-                    <textarea class="form-control" name="修理内容" id="shuriNaiyou" cols="30" rows="10" ><?= $items->repairDet?></textarea>
+                    <textarea class="form-control" name="修理内容" id="shuriNaiyou" cols="30" rows="10" ><?= $items->c_repairDet?></textarea>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col">
                     <label class="form-label" for="taisaku">対策</label>
-                    <textarea class="form-control" name="対策" id="taisaku" cols="30" rows="5" ><?= $items->measures?></textarea>
+                    <textarea class="form-control" name="対策" id="taisaku" cols="30" rows="5" ><?= $items->c_measures?></textarea>
                 </div>
 
                 <div class="col">
