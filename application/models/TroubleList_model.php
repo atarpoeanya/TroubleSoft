@@ -25,6 +25,8 @@ class Troublelist_model extends CI_Model
     public function addData($formID)
     {
         $data = [];
+        $spareJson = null;
+        $spare = [];
         $formName = '';
 
         switch ($formID) {
@@ -44,8 +46,13 @@ class Troublelist_model extends CI_Model
                     'c_phenomenon' => $this->input->post('現象・不具合要因詳細', true),
                     'c_repairDet' => $this->input->post('修理内容', true),
                     'c_measures' => $this->input->post('対策', true),
-                    'c_countermeasure' => $this->input->post('対策書', true)
+                    'c_countermeasure' => $this->input->post('対策書', true),
                 ];
+
+                $spareJson = $this->input->post('spareParts', true);
+                $spare = json_decode($spareJson, true);
+
+
                 break;
             case 'equipment_fmea':
                 $formName = 't201_equipment_fmea';
@@ -103,7 +110,23 @@ class Troublelist_model extends CI_Model
 
 
         $this->db->insert($formName, $data);
-        //Update spare part 
+        //IF EQUIPMENT && ARR != empty
+        $_SESSION['message'] = print_r([$spare, $spareJson],true);
+        
+    }
+
+
+    public function addSpare_used($arr, $arr1)
+    {
+        $spare_data = [];
+        print_r([$arr, $arr1]);
+        //$arr expected [[2,2], [2,1]]
+        $id = $this->db->query("SELECT IDENT_CURRENT('t800_equipment') as last_id")->result();
+        foreach($arr as $value){
+            $spare_data.array_push([$id, $value[0], $value[1]]);
+        }
+        $this->db->insert_batch('t200_used_parts', $spare_data);
+        
     }
 
     public function updateData()
@@ -139,9 +162,9 @@ class Troublelist_model extends CI_Model
             case 'equipment':
                 $formName = 't800_equipment';
                 break;
-                case 'equipment':
-                    $formName = 't202_spareparts';
-                    break;
+            case 'equipment':
+                $formName = 't202_spareparts';
+                break;
             default:
                 # code...
                 break;

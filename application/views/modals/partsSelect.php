@@ -24,7 +24,7 @@
 
 <script>
     // var _isInit = 0;
-
+    var $arr = [];
     // var myModalEl = document.getElementById('partsSelect')
     // Too detailed probably need to make stand-alone table function
     $('#partsSelect').on('show.bs.modal', function(event) {
@@ -44,22 +44,23 @@
                 console.log('done')
             }
         });
-        
-        
+
+
     })
+
     function search_all_function() {
-    var $rows = $('#gen_table #bodys tr');
+        var $rows = $('#gen_table #bodys tr');
 
-    $('#table_input').keyup(function() {
-        var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+        $('#table_input').keyup(function() {
+            var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
 
-        $rows.show().filter(function() {
-            var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-            return !~text.indexOf(val);
-        }).hide();
-    });
+            $rows.show().filter(function() {
+                var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+                return !~text.indexOf(val);
+            }).hide();
+        });
 
-}
+    }
 
 
 
@@ -77,5 +78,22 @@
         // $('#foots tr').clone().prependTo('#equipment_parts_list tbody'); 
         // $('#equipment_parts_list tbody').find('tr:first-child').remove(); //Delete the Selected header
         $('#equipment_parts_list tbody').find('td:last-child').hide(); //Delete minus button
+
+        //IF NOT EMPTY INSERT ALL ID AND AMOUNT INTO ARRAY
+
+        if ($('#equipment_parts_list tbody').length != 0) {
+            $arr.length = 0;
+            $('#equipment_parts_list tbody').find('tr').each(function() {
+                $arr.push( [$(this).find('td:eq(0)').text().trim(), $(this).find('td:eq(4)').text().trim()])
+            })
+            console.log($arr)
+            $('#partinfo').val(JSON.stringify($arr));
+        } 
+        //ELSE SEND EMPTY STATEMENT
+        else {
+            $('#partinfo').val('empty');
+        }
+
+
     })
 </script>

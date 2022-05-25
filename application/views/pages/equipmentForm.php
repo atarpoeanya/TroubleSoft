@@ -217,12 +217,13 @@
             </tr>
         </tfoot>
     </table>
-
+    <input type="hidden" name="spareParts" id="partinfo" value="empty">
     <!-- Button -->
     <div class="row p-3">
         <div class="col-6 mb-2">
             <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#partsSelect"><span>部品</span></button>
             <input type="submit" name="add_trouble" class="btn btn-secondary" value="登録">
+            <a class="btn btn-info" id="serial"></a>
             
         </div>
 
@@ -280,6 +281,12 @@
             
         })
 
+    })
+
+    $('#serial').click(function(){
+        console.log(JSON.stringify($('#partinfo').val()))
+        var x = JSON.stringify($('#partinfo').val());
+        
     })
     
 </script>

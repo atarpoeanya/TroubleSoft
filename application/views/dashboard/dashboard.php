@@ -1,4 +1,10 @@
+<?php
 
+if(!empty($_SESSION['message'])){
+    print $_SESSION['message'];
+    unset($_SESSION['message']);
+}
+?>
 
 
 <div class="container kanjifont mt-4 d-flex flex-column" id="dashboard">

@@ -126,7 +126,7 @@ class Dashboard extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-
+   
     // CRUD FUNCTION //Need validation
     public function postEquipment()
     {
