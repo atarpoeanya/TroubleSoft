@@ -56,7 +56,7 @@ function f_generate_table_select($data)
                         </td>
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-2 button_column text-nowrap" style="display: none;">
                             <a class="btn-block btn btn-primary modify-button" href="<?=base_url()?>dashboard/editdata_view/<?=intval($item->c_t800_id)?>" onclick="event.cancelBubble=true;">更新</a>
-                            <a class="btn-block btn btn-danger modify-button"  onclick="event.cancelBubble=true; deleteTrouble(<?=$item->c_t800_id?>)">削除</a>
+                            <a class="btn-block btn btn-danger modify-button"  onclick="event.cancelBubble=true; deleteData(<?=$item->c_t800_id?>, 'equipment')">削除</a>
                         </td>
                     </tr>
                 <?php

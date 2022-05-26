@@ -5,7 +5,8 @@
         <h2 class="pt-3 mb-3">設備トラブル</h2>
         
 
-        <form action="dashboard/postEquipment/1" method="post" class="mt-4" autocomplete="off" id="equipForm">
+        <form action="dashboard/postEquipment/1" method="post" class="mt-4" autocomplete="off" id="equipForm" enctype="multipart/form-data">
+        <input type="hidden" name="spareParts" id="partinfo" value="">
             <!-- Date -->
             <div class="row">
                 <div class="col">
@@ -217,13 +218,13 @@
             </tr>
         </tfoot>
     </table>
-    <input type="hidden" name="spareParts" id="partinfo" value="empty">
+    
     <!-- Button -->
     <div class="row p-3">
         <div class="col-6 mb-2">
             <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#partsSelect"><span>部品</span></button>
             <input type="submit" name="add_trouble" class="btn btn-secondary" value="登録">
-            <a class="btn btn-info" id="serial"></a>
+
             
         </div>
 
@@ -283,10 +284,5 @@
 
     })
 
-    $('#serial').click(function(){
-        console.log(JSON.stringify($('#partinfo').val()))
-        var x = JSON.stringify($('#partinfo').val());
-        
-    })
-    
+
 </script>

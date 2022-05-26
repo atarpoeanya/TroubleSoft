@@ -53,6 +53,8 @@ $route['default_controller'] = 'dashboard';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['uploads/error'] = 'errors/page_missing';
+
 
 // Main Pages Routing
 $route['as'] = 'dashboard/transition';

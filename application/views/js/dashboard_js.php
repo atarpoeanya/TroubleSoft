@@ -90,7 +90,7 @@
 
         });
     }
-    function deleteTrouble($id) {
+    function deleteData($id, $type) {
         
         var conf = swal({
                     title: "データを削除しますか？",
@@ -106,9 +106,12 @@
                             icon: "success",
                         });
                         $.ajax({
-                            url: "<?=base_url()?>dashboard/deleteDatas/"+$id+"/equipment",
+                            url: "<?=base_url()?>dashboard/deleteDatas/"+$id+"/"+$type,
                             complete: function() {
-                                get_troubleList();
+                                if($type == 'spareparts')
+                                    get_sparepartlist();
+                                else
+                                    get_troubleList();
                                 
                             }
                         });

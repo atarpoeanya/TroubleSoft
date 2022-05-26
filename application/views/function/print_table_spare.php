@@ -37,7 +37,7 @@ function f_generate_table_select($data)
                         ?>
 
                             <td onclick="view_record()" class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 ID">
-                                <?= $value ?>
+                                <?= $id ?>
                             </td>
                         <?php 
                         } else {
@@ -52,7 +52,7 @@ function f_generate_table_select($data)
                         ?>
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-2 button_column text-nowrap" style="display: none;">
                             <a class="btn-block btn btn-primary modify-button" onclick="edit_form()">更新</a>
-                            <a class="btn-block btn btn-danger modify-button" data-bs-toggle="modal" data-bs-target="#deletor" onclick="event.cancelBubble=true;">削除</a>
+                            <a class="btn-block btn btn-danger modify-button" onclick="event.cancelBubble=true;deleteData(<?=$item->c_t202_id?>,'spareparts')">削除</a>
                         </td>
 
                     </tr>
