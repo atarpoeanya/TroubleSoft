@@ -84,41 +84,41 @@
         });
     }
 
-    function delete_sparepart() {
-        partId = [];
-        $(document).on('click', '.form-check-input', function() {
+    // function delete_sparepart() {
+    //     partId = ;
+    //     $(document).on('click', '.form-check-input', function() {
 
-        });
-    }
+    //     });
+    // }
     function deleteData($id, $type) {
-        
+
         var conf = swal({
-                    title: "データを削除しますか？",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        swal({
-                            // button: false,
-                            title: "データが削除されました",
-                            icon: "success",
-                        });
-                        $.ajax({
-                            url: "<?=base_url()?>dashboard/deleteDatas/"+$id+"/"+$type,
-                            complete: function() {
-                                if($type == 'spareparts')
-                                    get_sparepartlist();
-                                else
-                                    get_troubleList();
-                                
-                            }
-                        });
-                    } else {
-                        // DELETE CANCELLED
-                    }
-                });
+                title: "データを削除しますか？",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal({
+                        // button: false,
+                        title: "データが削除されました",
+                        icon: "success",
+                    });
+                    $.ajax({
+                        url: "<?= base_url() ?>dashboard/deleteDatas/" + $id + "/" + $type,
+                        complete: function() {
+                            if ($type == 'spareparts')
+                                get_sparepartlist();
+                            else
+                                get_troubleList();
+
+                        }
+                    });
+                } else {
+                    // DELETE CANCELLED
+                }
+            });
     }
 
     // 送品 search function
@@ -136,11 +136,70 @@
     }
 
 
-    function view_record(el){
-        var $id =  $(el).children('.ID').text().trim();
+    function view_record(el) {
+        var $id = $(el).children('.ID').text().trim();
         var url = 'item/' + $id;
         console.log(url)
-        window.location.replace(<?php base_url() ?>url)   
+        window.location.replace(<?php base_url() ?>url)
     }
+
+    function editSpare_populate(el) {
+        $id = $(el).parent().siblings('.ID').text().trim()
+
+        $.ajax({
+            url: "<?php echo base_url() ?>dashboard/editSpares_view/" + $id,
+            success: function(response) {
+                console.log(response)
+                $('#modalPlaceHolder').append(response)
+                // var editSpareModal = new bootstrap.Modal($('#editPartsModal'))
+                // editSpareModal.show();
+                $('#editPartsModal').modal('show');
+
+            },
+            complete: function() {
+                console.log('done')
+            }
+        });
+        // Get DATA via ID
+        // CALL MODAL FILLED WITH DATA
+        // via ajax
+    }
+
+    function editSpare() {
+        
+        var spare_data = {
+            "c_t202_id": $('#partId_edit').val(),
+            "c_purchaseDate": $('#purchaseDate_edit').val(),
+            "c_department": $('#department_edit').val(),
+            "c_placement": $('#placement_edit').val(),
+            "c_partName": $('#partName_edit').val(),
+            "c_model": $('#model_edit').val(),
+            "c_maker": $('#maker_edit').val(),
+            "c_quantity": $('#quantity_edit').val(),
+            "c_unit": $('#unit_edit').val(),
+            "c_price":$('#price_edit').val()
+        }
+
+        $.ajax({
+            url: "<?= base_url(); ?>dashboard/editSpare",
+            type: 'POST',
+            data: spare_data,
+            success: function(response) {
+                console.log(response);
+                if(response == 1){
+                    $('#editPartsModal').modal('hide');
+                    get_sparepartlist();
+                } else {
+                    $('#alert-msg').html('<div class="alert alert-danger">' + response + '</div>');
+                }   
+            },
+            complete: function() {
+                console.log('DONNNNNN')
+            }
+        });
+        event.preventDefault();
+
+    }
+
     document.addEventListener("DOMContentLoaded", DATA.onLoad)
 </script>

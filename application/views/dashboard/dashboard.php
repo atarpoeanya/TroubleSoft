@@ -35,7 +35,7 @@ if(!empty($_SESSION['message'])){
         <div id="trouble_list"></div>
         <div id="spare_part_list"></div>
     </div>
-
+    <div id="modalPlaceHolder"></div>
 </div>
 
 <script>

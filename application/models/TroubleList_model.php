@@ -44,11 +44,16 @@ class Troublelist_model extends CI_Model
         return $equipment_row;
     }
 
+    public function getSpareId($id)
+    {
+        $spare_row = $this->db->get_where('t202_spareparts', array("c_t202_id" => $id))->row();
+        return $spare_row;
+    }
+
     public function addData($formID,$filename)
     {
         $data = [];
         $formName = '';
-
         switch ($formID) {
             case 'equipment':
                 $formName = 't800_equipment';
@@ -158,8 +163,7 @@ class Troublelist_model extends CI_Model
     public function updateData($_file)
     {
         if($_file != 'error') {
-            $link = '.uploads/'.$this->input->post('oldFile', true);
-            unlink($link);
+            unlink('./uploads/'.$this->input->post('oldFile', true));
         $data = [
             'c_accidentDate' => $this->input->post('発生日', true),
             'c_repairDate' => $this->input->post('修理日', true),
@@ -209,6 +213,8 @@ class Troublelist_model extends CI_Model
         switch ($formID) {
             case 'equipment':
                 $formName = 't800_equipment';
+                if($this->db->where($head, $id)->get($formName)->row()->c_countermeasure)
+                unlink('./uploads/'.$this->db->where($head, $id)->get($formName)->row()->c_countermeasure);
                 break;
             case 'spareparts':
                 $formName = 't202_spareparts';
@@ -219,5 +225,23 @@ class Troublelist_model extends CI_Model
         }
         $this->db->where($head, $id);
         $this->db->delete($formName);
+    }
+
+    public function editSpares()
+    {
+        $data = [
+            'c_purchaseDate' => $this->input->post('c_purchaseDate'),
+            'c_department' => $this->input->post('c_department'),
+            'c_placement' => $this->input->post('c_placement'),
+            'c_partName' => $this->input->post('c_partName'),
+            'c_model' => $this->input->post('c_model'),
+            'c_maker' => $this->input->post('c_maker'),
+            'c_quantity' => $this->input->post('c_quantity'),
+            'c_unit' => $this->input->post('c_unit'),
+            'c_price' => $this->input->post('c_price'),
+        ];
+
+        $this->db->where('c_t202_id', $this->input->post('c_t202_id'));
+        $this->db->update('t202_spareParts', $data);
     }
 }

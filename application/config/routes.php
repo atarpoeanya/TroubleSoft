@@ -55,12 +55,15 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['uploads/error'] = 'errors/page_missing';
 
+// UPLOADS NEED LOGIN ACCESS
+
 
 // Main Pages Routing
 $route['as'] = 'dashboard/transition';
-$route['equipment'] = 'dashboard/postequipment';
+$route['equipment/(:num)'] = 'dashboard/postequipment/$type';
 $route['product'] = 'dashboard/productForm';
 $route['dashboard'] = 'dashboard';
+
 
 //Record Routing
 $route['item/(:num)'] = 'dashboard/viewRecord/$id';

@@ -92,11 +92,13 @@ function f_generate_table_select($data)
         console.log('clicke')
         if ($('#foots tr').length == 0) {
             partRow.addClass('table-success')
+            console.log('newest item')
             $('#foots:last-child').append('<tr class="' + partDetails[0] + '"> <td>' + partDetails[0] + '</td> <td>' + partDetails[1] + '</td> <td>' + partDetails[2] + '</td> <td>' + partDetails[3] + '</td> <td>' + 1 + '</td> <td><a class="btn btn-primary minus">-</a> </td></tr>')
             if (parseInt($('#foots:last-child').find("td:eq(4)").text().trim()) >= parseInt(partDetails[4]))
                 the_button.addClass('disabled')
         } else {
             $('#foots').find('tr').each(function() {
+
                 itemId = $(this).find("td:eq(0)").text().trim();
                 if (partDetails[0] == itemId)
                     flag = 1;
@@ -127,8 +129,9 @@ function f_generate_table_select($data)
             } else {
                 partRow.addClass('table-success')
                 $('#foots:last-child').append('<tr class="' + partDetails[0] + '"><td>' + partDetails[0] + '</td> <td>' + partDetails[1] + '</td> <td>' + partDetails[2] + '</td> <td>' + partDetails[3] + '</td> <td>' + 1 + '</td> <td><a class="btn btn-primary minus">-</a></td> </tr>')
-                if (parseInt($('#foots:last-child').find("td:eq(4)").text().trim()) >= parseInt(partDetails[4]))
+                if (parseInt($('#foots:last-child').find("td:eq(4)").text().trim()) >= parseInt(partDetails[4])){
                     the_button.addClass('disabled')
+                }
 
             }
         }

@@ -27,8 +27,6 @@ class Dashboard extends CI_Controller
         parent::__construct();
         $this->load->model('Troublelist_model');
         $this->load->library('form_validation');
-
-       
     }
 
     public function index()
@@ -42,8 +40,9 @@ class Dashboard extends CI_Controller
         // js
         $this->load->view('js/dashboard_js');
         // modals
-        $this->load->view('modals/addSparts');
+        $this->load->view('modals/addParts');
         $this->load->view('modals/delete');
+        // $this->load->view('modals/editParts');
 
 
         //other method
@@ -80,6 +79,8 @@ class Dashboard extends CI_Controller
     }
 
 
+
+
     // UNUSED
     public function productForm()
     {
@@ -89,7 +90,12 @@ class Dashboard extends CI_Controller
 
         // $this->load->view('Trouble/js/home_js');
         // $this->load->view('Trouble/modal/schedule');
-    }
+    } // UNUSED
+
+
+
+
+
 
     public function equipmentForm()
     {
@@ -136,30 +142,28 @@ class Dashboard extends CI_Controller
 
 
         $this->form_validation->set_rules('発生日', 'a', 'required');
-        $data = $this->doupload();
-        if(empty($data))
-            echo "FAILED";
         if ($id == 1) {
             if ($this->form_validation->run() == FALSE) {
-                var_dump($data);
                 $this->load->view('templates/header');
                 $this->load->view('Pages/equipmentForm');
                 $this->load->view('templates/footer');
             } else {
-                
-
-                $this->Troublelist_model->addData('equipment', $data);
+                $pic = $this->doupload();
+                $this->Troublelist_model->addData('equipment', $pic);
                 $this->session->set_flashdata('flash', 'success');
                 redirect(base_url(), '/');
-
             }
-        } else { //FMEA
+        }
+        if ($id == 2) { //FMEA
             if ($this->form_validation->run() == FALSE) {
                 $this->load->view('templates/header');
                 $this->load->view('Pages/equipmentForm');
                 $this->load->view('templates/footer');
             } else {
-                $this->Troublelist_model->addData('equipment_fmea', $data);
+                $pic = $this->doupload();
+                // CHECK IF PIC IS EMPTY/ERROR
+                // YES -> USE DEFAULT
+                $this->Troublelist_model->addData('equipment_fmea', $pic);
                 redirect(base_url(), '/');
             }
         }
@@ -171,32 +175,25 @@ class Dashboard extends CI_Controller
 
     public function doupload()
     {
-         // File RULES
-         $config['upload_path']          = './uploads/';
-         $config['allowed_types']        = 'gif|jpg|png|pdf';
-         $config['max_size']             = 1024;
-
-         
-         $this->load->library('upload', $config);
-         
-         if ( ! $this->upload->do_upload('対策書'))
-         {
-                //  $error = array('error' => $this->upload->display_errors());
-                return 'error';
-
-                //  $this->load->view('upload_form', $error);
-         }
-         else
-         {
-                 $gambar = $this->upload->data();
-                 $gambar = $gambar['file_name'];
-
-                 return $gambar;
-
-                 
-         }
+        // File RULES
+        $config['upload_path']          = './uploads/';
+        $config['allowed_types']        = 'gif|jpg|png|pdf';
+        $config['max_size']             = 1024;
 
 
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload('対策書')) {
+            //  $error = array('error' => $this->upload->display_errors());
+            return 'error';
+
+            //  $this->load->view('upload_form', $error);
+        } else {
+            $gambar = $this->upload->data();
+            $gambar = $gambar['file_name'];
+
+            return $gambar;
+        }
     }
 
     public function deleteDatas($id, $title)
@@ -260,11 +257,28 @@ class Dashboard extends CI_Controller
         }
     }
 
+    public function editSpares_view($id)
+    {
+        $data['spare'] = $this->Troublelist_model->getSpareId($id);
+        $this->load->view('modals/editParts', $data);
+    }
+
+    public function editSpare()
+    {   
+        
+        $this->form_validation->set_rules('c_department', 'Message', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            echo validation_errors();
+        } else {
+            $this->Troublelist_model->editSpares();
+            echo 1;
+        }
+    }
     // Need Validation
     public function postSpare()
     {
         // Spare part adder 'add_sparepart is modal -> form.ID'
-        
+
         if ($this->input->post('add_sparepart')) {
             $this->Troublelist_model->addData('spareparts', 'empty');
             // if ($this->form_validation->run() == FALSE) {

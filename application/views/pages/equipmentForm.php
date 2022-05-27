@@ -5,7 +5,7 @@
         <h2 class="pt-3 mb-3">設備トラブル</h2>
         
 
-        <form action="dashboard/postEquipment/1" method="post" class="mt-4" autocomplete="off" id="equipForm" enctype="multipart/form-data">
+        <form action="" method="post" class="mt-4" autocomplete="off" id="equipForm" enctype="multipart/form-data">
         <input type="hidden" name="spareParts" id="partinfo" value="">
             <!-- Date -->
             <div class="row">
@@ -272,11 +272,11 @@
             var val = $(this).val()
             if (val == 0) {
                 $('#fmea_Form').hide();
-                $('#equipForm').attr('action', 'dashboard/postEquipment/1');
+                $('#equipForm').attr('action', '/equipment/1');
             }
             else {
                 $('#fmea_Form').show();
-                $('#equipForm').attr('action', 'dashboard/postEquipment/2');
+                $('#equipForm').attr('action', '/equipment/2');
             }
 
             
