@@ -2,6 +2,7 @@
     <div>
         <div class="p-2 flex-row"><button class="btn btn-secondary" type="button" id="mainButton" onclick="location.href='<?= base_url(); ?>equipment/1'">設備・工程</button></div>
         <div class="p-2 flex-row"><button class="btn btn-secondary" type="button" id="mainButton" onclick="location.href='<?= base_url(); ?>product'">製品</button></div>
+        <div class="p-2 flex-row"><button class="btn btn-secondary" type="button" id="mainButton" onclick="location.href='<?= base_url(); ?>'">BACK</button></div>
     </div>
 </div>
 

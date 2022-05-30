@@ -160,6 +160,31 @@ class Troublelist_model extends CI_Model
         $this->db->insert_batch('t200_used_parts', $data);
     }
 
+
+    public function editSpare_used($arr)
+    {
+        $data = [];
+        //$arr expected [[2,2], [2,1]]
+        $id = $this->input->post('id');
+        foreach ($arr as $value) {
+            // $spare_data.array_push([$id, $value[0], $value[1]]);
+            $data[] = [
+                
+                'c_t800_id' => $id,
+                'c_t202_id' => $value[0],
+                'c_amount' => $value[1]
+
+
+            ];
+        }
+
+        $this->db->where('c_t800_id', $id);
+        $this->db->delete('t200_used_parts');
+
+
+        $this->db->insert_batch('t200_used_parts', $data);
+    }
+
     public function updateData($_file)
     {
         if($_file != 'error') {
@@ -205,6 +230,8 @@ class Troublelist_model extends CI_Model
         $this->db->where('c_t800_id', $this->input->post('id'));
         $this->db->update('t800_equipment', $data);
         //Update spare part 
+        if ($this->input->post('spareParts', true)) 
+            $this->editSpare_used(json_decode($this->input->post('spareParts'), true));
     }
 
     public function deleteData($id, $formID, $head)

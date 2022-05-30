@@ -190,6 +190,53 @@
 </div>
 
 
+ <div class="container">
+     <table class="table table-bordered ">
+         <thead><tr><th class="text-center" colspan="8">LONG</th></tr>
+                        <tr><th colspan="1" rowspan="2">smol</th> <th rowspan="2">INTERNAL CIRCULATION <br> internal Meiwa</th> <th rowspan="2" colspan="1">snol</th>  <th rowspan="2">big</th> <td>CREATION-DATE</td> <td>topSmol</td> <td>CONFIRMATIN</td> <td>CREATOR</td></tr>
+                        <tr><td>a</td><td>b</td><td>d</td> <td>s</td></tr>
+        </thead>
+         <tbody >
+            <tr><td colspan="8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem quos tempora quaerat natus quas suscipit porro? Dicta cupiditate adipisci et alias, temporibus libero aliquam in quod animi saepe iusto totam.</td></tr>
+             <tr>
+                 <td>Entry</td>
+                 <td colspan="2">Time Stamp</td>
+                 <td>Place</td>
+                 <td colspan="2">Place Name</td>
+                 <td>Somthing</td>
+                 <td>lorem</td>
+             </tr>
+             <tr class="h-3">
+                 <td colspan="4">Explain_1</td>
+                 <td colspan="4">Explain_2</td>
+             </tr>
+         </tbody>
+     </table>
+     <table class="table table-bordered">
+         <thead>
+             <th colspan="3">SUB_TITLE</th>
+         </thead>
+
+        <tbody>
+        <tr>
+             <td colspan="1" rowspan="2">DETAIL</td>
+             <td colspan="2">NZNZ</td>
+         </tr>
+         <tr>
+             
+             <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel animi, ullam assumenda atque voluptates id? Sunt vitae officia alias, unde in repellendus optio numquam facere repellat voluptatibus incidunt, nihil tempore!</td>
+             <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum nesciunt molestiae adipisci? Officiis voluptatibus voluptatum molestias. Modi voluptas atque ut inventore accusamus aspernatur nemo nesciunt quaerat nihil voluptate, praesentium magnam.</td>
+         </tr>
+         <tr>
+         <td colspan="1" >DETAILE 2</td>
+             <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum laboriosam quam excepturi ducimus sequi corrupti iste aperiam ab, error quia, repellendus natus distinctio? Ex minima vitae debitis harum quaerat sit.</td>
+             <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde officia modi molestiae voluptatum, neque, ea eveniet numquam maxime perspiciatis ex sapiente aut facilis doloribus. Incidunt dolorum iste voluptates repellat provident.</td>
+         </tr>
+        </tbody>
+     </table>
+     
+ </div>
+
 <style>
     table {
         background-color: white;

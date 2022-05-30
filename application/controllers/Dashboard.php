@@ -215,8 +215,9 @@ class Dashboard extends CI_Controller
 
     public function editData_view($id)
     {
+        $this->form_validation->set_rules('発生日', 'a', 'required');
         $id = $this->uri->segment(3);
-        $data['items'] = $this->Troublelist_model->getEquipmentId(intval($id));
+        $data['items'] = $this->Troublelist_model->getEquipmentId(intval($id));        
         $data['division'] = [
             '選び出す',
             '塗装',
@@ -247,14 +248,23 @@ class Dashboard extends CI_Controller
         ];
 
         if ($data['items'] != null) {
-            $this->load->view('templates/header');
-            $this->load->view('Pages/equipmentForm_edit', $data);
-            $this->load->view('templates/footer');
+
+            if ($this->form_validation->run() == FALSE) {
+                $this->load->view('templates/header');
+                $this->load->view('Pages/equipmentForm_edit', $data);
+                $this->load->view('templates/footer');
+                
+            } else {
+                $data = $this->doupload();
+                $this->Troublelist_model->updateData($data);
+                redirect(base_url(), '/');
+            }
         } else {
-            $data = $this->doupload();
-            $this->Troublelist_model->updateData($data);
-            redirect('/');
+           echo "NO DATA";
         }
+
+        //invoke modal spare parte select
+        $this->load->view('modals/partsSelect');
     }
 
     public function editSpares_view($id)

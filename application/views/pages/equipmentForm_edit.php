@@ -1,13 +1,13 @@
-<br>
-<?php var_dump($items) ?>
+
 <div class="container col-8 kanjifont" id="mainForm">
     <div class="container">
         <!-- small screen -->
         <h2 class="pt-3 mb-3">設備トラブル</h2>
 
 
-        <form action="dashboard/postEquipment/1" method="post" class="mt-4" autocomplete="off" id="equipForm" enctype="multipart/form-data">
+        <form action="" method="post" class="mt-4" autocomplete="off" id="equipForm" enctype="multipart/form-data">
             <input type="hidden" name="id" id="setsubiId" value="<?= $items->c_t800_id ?>">
+            <input type="hidden" name="spareParts" id="partinfo" value="">
             <!-- Date -->
             <div class="row">
                 <div class="col">
@@ -215,30 +215,62 @@
 
     </div>
     <!-- Table -->
-    <table class="table table-light" id="equipment_parts_list">
+    <table class="table table-light text-center" id="equipment_parts_list">
         <thead>
             <tr>
                 <td>部品NO</td>
                 <td>部品名</td>
                 <td>型式</td>
-                <td>メーカー名</td>
+                <td>使用箇所</td>
                 <td>数量</td>
-                <td>単位</td>
+  
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td colspan="6" class="text-center">
+        <?php
+        if(property_exists($items, 'spare'))
+                    foreach ($items->spare as $item) {
+                    ?>
+                        <tr>
+                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 ID">
+                            <?= $item->c_t202_id ?>
+                        </td>
+                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 partname">
+                            <?= $item->c_partName ?>
+                        </td>
+                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 partmodel">
+                            <?= $item->c_model ?>
+                        </td>
+                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 partstorage">
+                            <?= $item->c_placement ?>
+                        </td>
+                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 amount">
+                            <?= $item->c_quantity ?>
+                        </td>
+
+                        <td style="display: none;"><a class="btn btn-primary minus">-</a> </td>
+                        </tr>
+                    <?php
+                    } 
+                    ?>
+        </tbody>
+        <tfoot>
+            <?php 
+            if(!property_exists($items, 'spare')):
+            ?>
+        <tr>
+                <td colspan="6" class="text-center emptyTab">
                     <span>EMPTY</span>
                 </td>
             </tr>
-        </tbody>
+            <?php endif; ?>
+        </tfoot>
     </table>
 
     <!-- Button -->
     <div class="row p-3">
         <div class="col-6 mb-2">
-            <button class="btn btn-secondary" type="button" onclick="get_sparepart_list()" data-bs-toggle="modal" data-bs-target="#partsModal"><span>部品</span></button>
+        <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#partsSelect"><span>部品</span></button>
             <input type="submit" name="edit_trouble" class="btn btn-secondary" value="登録">
 
         </div>
@@ -296,5 +328,18 @@
 
 
         })
+
+        if ($('#equipment_parts_list tbody').length != 0) {
+            $arr.length = 0;
+            $('#equipment_parts_list tbody').find('tr').each(function() {
+                $arr.push([$(this).find('td:eq(0)').text().trim(), $(this).find('td:eq(4)').text().trim()])
+            })
+            console.log($arr)
+            $('#partinfo').val(JSON.stringify($arr));
+        }
+        //ELSE SEND EMPTY STATEMENT
+        else {
+            $('#partinfo').val('empty');
+        }
     })
 </script>
