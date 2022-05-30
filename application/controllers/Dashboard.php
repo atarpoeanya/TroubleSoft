@@ -72,7 +72,7 @@ class Dashboard extends CI_Controller
     {
 
         $data['title'] =
-            ['[PartId]', '[PartName]', '[Model]', '[Placement]', '[AMOUNT]'];
+            ['部品NO', '部品名', '型式', '使用箇所', '数量'];
         $data['sparePart'] = $this->Troublelist_model->getSparepartList();
         $this->load->view('function/print_table_spare_lite');
         f_generate_table_select($data);

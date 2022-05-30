@@ -36,7 +36,7 @@ function f_generate_table_select($data)
                 break;
 
             default:
-                # code...
+            array_push($head_name, 'MISSING');
                 break;
         }
     }
@@ -76,13 +76,13 @@ function f_generate_table_select($data)
                                 $id = $value;
                         ?>
 
-                                <td onclick="view_record()" class="kanjifont table-data text-center align-middle border-right border-left pointer colID">
+                                <td  class="kanjifont table-data text-center align-middle border-right border-left pointer col ID">
                                     <?= $id ?>
                                 </td>
                             <?php
                             } else {
                             ?>
-                                <td onclick="view_record()" class="kanjifont table-data text-center align-middle border-right border-left pointer col">
+                                <td  class="kanjifont table-data text-center align-middle border-right border-left pointer col">
                                     <?= $value ?>
                                 </td>
 

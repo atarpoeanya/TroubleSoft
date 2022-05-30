@@ -3,21 +3,21 @@
     <div class="container">
         <!-- small screen -->
         <h2 class="pt-3 mb-3">設備トラブル</h2>
-        
+
 
         <form action="" method="post" class="mt-4" autocomplete="off" id="equipForm" enctype="multipart/form-data">
-        <input type="hidden" name="spareParts" id="partinfo" value="">
+            <input type="hidden" name="spareParts" id="partinfo" value="">
             <!-- Date -->
             <div class="row">
                 <div class="col">
                     <label class="form-label" for="startDay">発生日</label>
                     <input class="form-control" type="date" name="発生日" id="startDay">
-                    
-                    <?php if(form_error('発生日')) {?>
-                    <div class="alert alert-danger" role="alert">
-                    <?= form_error('発生日'); ?>
-                    </div>
-                    <?php }?>
+
+                    <?php if (form_error('発生日')) { ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?= form_error('発生日'); ?>
+                        </div>
+                    <?php } ?>
                 </div>
                 <div class="col">
                     <label class="form-label" for="repairDay">修理日</label>
@@ -200,32 +200,32 @@
     <table class="table table-light text-center" id="equipment_parts_list">
         <thead>
             <tr>
-                <td>[PartId]</td>
-                <td>[PartName]</td>
-                <td>[Model]</td>
-                <td>[Placement]</td>
-                <td>[AMOUNT]</td>
-  
+                <td>部品NO</td>
+                <td>部品名</td>
+                <td>型式</td>
+                <td>使用箇所</td>
+                <td>数量</td>
+
             </tr>
         </thead>
         <tbody>
         </tbody>
         <tfoot>
-        <tr>
+            <tr>
                 <td colspan="6" class="text-center emptyTab">
                     <span>EMPTY</span>
                 </td>
             </tr>
         </tfoot>
     </table>
-    
+
     <!-- Button -->
     <div class="row p-3">
         <div class="col-6 mb-2">
             <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#partsSelect"><span>部品</span></button>
             <input type="submit" name="add_trouble" class="btn btn-secondary" value="登録">
 
-            
+
         </div>
 
 
@@ -266,23 +266,20 @@
 </style>
 
 <script>
-    $(document).ready(function() {        
+    $(document).ready(function() {
         $('#fmea_Form').hide()
         $('input[name=flexRadioDefault]').change(function() {
             var val = $(this).val()
             if (val == 0) {
                 $('#fmea_Form').hide();
                 $('#equipForm').attr('action', '/equipment/1');
-            }
-            else {
+            } else {
                 $('#fmea_Form').show();
                 $('#equipForm').attr('action', '/equipment/2');
             }
 
-            
+
         })
 
     })
-
-
 </script>

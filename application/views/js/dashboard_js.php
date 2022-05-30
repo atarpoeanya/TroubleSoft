@@ -145,7 +145,7 @@
 
     function editSpare_populate(el) {
         $id = $(el).parent().siblings('.ID').text().trim()
-
+        console.log($id)
         $.ajax({
             url: "<?php echo base_url() ?>dashboard/editSpares_view/" + $id,
             success: function(response) {

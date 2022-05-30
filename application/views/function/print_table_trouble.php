@@ -18,7 +18,7 @@ function f_generate_table_select($data)
                                     $thead = '故障モード';
                                     break;
                                 default:
-                                    # code...
+                                $thead = 'missing';
                                     break;
                             }
 
@@ -45,16 +45,16 @@ function f_generate_table_select($data)
 
                 ?>
                     <tr onclick="view_record(this)" >
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3">
+                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col">
                             <?= $item->c_facility ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3">
+                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col">
                             <?= $item->c_failMode ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 ID">
+                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col ID">
                             <?= $item->c_t800_id ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-2 button_column text-nowrap" style="display: none;">
+                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col button_column text-nowrap" style="display: none;">
                             <a class="btn-block btn btn-primary modify-button" href="<?=base_url()?>dashboard/editdata_view/<?=intval($item->c_t800_id)?>" onclick="event.cancelBubble=true;">更新</a>
                             <a class="btn-block btn btn-danger modify-button"  onclick="event.cancelBubble=true; deleteData(<?=$item->c_t800_id?>, 'equipment')">削除</a>
                         </td>
@@ -91,6 +91,7 @@ function f_generate_table_select($data)
         width: auto;
         height: 70vh;
         overflow-y: scroll;
+        
     }
 
     .text-nowrap {

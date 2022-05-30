@@ -36,16 +36,16 @@ function f_generate_table_select($data)
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 ID">
                             <?= $item->c_t202_id ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 partname">
+                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer partname">
                             <?= $item->c_partName ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 partmodel">
+                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer partmodel">
                             <?= $item->c_model ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 partstorage">
+                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer partstorage">
                             <?= $item->c_placement ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 amount">
+                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer  amount">
                             <?= $item->c_quantity ?>
                         </td>
 
