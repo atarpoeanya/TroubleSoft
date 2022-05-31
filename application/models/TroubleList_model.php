@@ -112,22 +112,23 @@ class Troublelist_model extends CI_Model
                 // $data = $data_trouble + $data_fmea;
                 break;
 
-            case 'spareparts':
-                $formName = 't202_spareparts';
-                $data = [
-                    'c_purchaseDate' => $this->input->post('購入日'),
-                    'c_department' => $this->input->post('部署名'),
-                    'c_placement' => $this->input->post('使用箇所'),
-                    'c_partName' => $this->input->post('部品名'),
-                    'c_model' => $this->input->post('型式'),
-                    'c_maker' => $this->input->post('メーカー名'),
-                    'c_quantity' => $this->input->post('数量'),
-                    'c_unit' => $this->input->post('単位'),
-                    'c_price' => $this->input->post('金額'),
-                ];
-                break;
+                // WAS FOR SPARE PART, TURN OUT USING MODAL CHANGE THE MECHANISM
+            // case 'spareparts':
+            //     $formName = 't202_spareparts';
+            //     $data = [
+            //         'c_purchaseDate' => $this->input->post('購入日'),
+            //         'c_department' => $this->input->post('部署名'),
+            //         'c_placement' => $this->input->post('使用箇所'),
+            //         'c_partName' => $this->input->post('部品名'),
+            //         'c_model' => $this->input->post('型式'),
+            //         'c_maker' => $this->input->post('メーカー名'),
+            //         'c_quantity' => $this->input->post('数量'),
+            //         'c_unit' => $this->input->post('単位'),
+            //         'c_price' => $this->input->post('金額'),
+            //     ];
+            //     break;
             default:
-
+                echo 'error';
                 break;
         }
 
@@ -270,5 +271,23 @@ class Troublelist_model extends CI_Model
 
         $this->db->where('c_t202_id', $this->input->post('c_t202_id'));
         $this->db->update('t202_spareParts', $data);
+    }
+
+    public function addSpares()
+    {
+        $data = [
+            'c_purchaseDate' => $this->input->post('c_purchaseDate'),
+            'c_department' => $this->input->post('c_department'),
+            'c_placement' => $this->input->post('c_placement'),
+            'c_partName' => $this->input->post('c_partName'),
+            'c_model' => $this->input->post('c_model'),
+            'c_maker' => $this->input->post('c_maker'),
+            'c_quantity' => $this->input->post('c_quantity'),
+            'c_unit' => $this->input->post('c_unit'),
+            'c_price' => $this->input->post('c_price'),
+        ];
+
+        
+        $this->db->insert('t202_spareParts', $data);
     }
 }

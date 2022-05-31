@@ -2,7 +2,7 @@
 function f_generate_table_select($data)
 {
 ?>
-    <div class="sticky-top mb-2"><input class="sticky-top form-control" type="text" id="table_input" onkeyup="search_all_function()" placeholder="Search"></div>
+        <div class="sticky-top mb-2"><input class="sticky-top form-control" type="text" id="table_input" oninput="search_all_function()" placeholder="Search"></div>
     <div class="table-responsive table-wrapper table-wrapper-scroll">
         <table class="table table-stripped table-bordered" id="gen_table">
             <thead>

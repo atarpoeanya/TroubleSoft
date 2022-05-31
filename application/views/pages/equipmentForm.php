@@ -11,17 +11,11 @@
             <div class="row">
                 <div class="col">
                     <label class="form-label" for="startDay">発生日</label>
-                    <input class="form-control" type="date" name="発生日" id="startDay">
-
-                    <?php if (form_error('発生日')) { ?>
-                        <div class="alert alert-danger" role="alert">
-                            <?= form_error('発生日'); ?>
-                        </div>
-                    <?php } ?>
+                    <input class="form-control <?= (form_error('発生日') ? 'is-invalid' : ''); ?>" type="date" name="発生日" id="startDay" value="<?php echo set_value('発生日'); ?>">
                 </div>
                 <div class="col">
                     <label class="form-label" for="repairDay">修理日</label>
-                    <input class="form-control" type="date" name="修理日" id="repairDay">
+                    <input class="form-control <?= (form_error('修理日') ? 'is-invalid' : ''); ?>" type="date" name="修理日" id="repairDay" value="<?php echo set_value('修理日'); ?>">
                 </div>
             </div>
 
@@ -29,7 +23,8 @@
             <div class="row">
                 <div class="col">
                     <label class="form-label" for="busho">部署</label>
-                    <select class="form-control" name="部署" id="busho">
+                    <select class="form-control <?= (form_error('部署') ? 'is-invalid' : ''); ?>" name="部署" id="busho">
+                    
                         <option value="" disabled selected>選び出す</option>
                         <option value="塗装">塗装</option>
                         <option value="生技">生技</option>
@@ -43,7 +38,7 @@
                 </div>
                 <div class="col">
                     <label class="form-label" for="tantou">担当者 </label>
-                    <select class="form-control" name="担当者" id="tantou">
+                    <select class="form-control  <?= (form_error('担当者') ? 'is-invalid' : ''); ?>" name="担当者" id="tantou">
                         <option value="" disabled selected>選び出す</option>
                         <option value="水上">水上</option>
                         <option value="新宮">新宮</option>
@@ -56,7 +51,7 @@
             <div class="row">
                 <div class="col">
                     <label class="form-label" for="setsubi">設備</label>
-                    <select class="form-control" name="設備" id="setsubi">
+                    <select class="form-control <?= (form_error('設備') ? 'is-invalid' : ''); ?>" name="設備" id="setsubi">
                         <option value="" disabled selected>選び出す</option>
                         <option value="プレス">プレス</option>
                         <option value="洗浄機">洗浄機</option>
@@ -65,7 +60,7 @@
                 </div>
                 <div class="col">
                     <label class="form-label" for="gouki">号機 </label>
-                    <select class="form-control" name="号機" id="gouki">
+                    <select class="form-control <?= (form_error('号機') ? 'is-invalid' : ''); ?>" name="号機" id="gouki">
                         <option value="" disabled selected>選び出す</option>
                         <option value="1号機">1号機</option>
                         <option value="2号機">2号機</option>
@@ -77,11 +72,11 @@
             <div class="row">
                 <div class="col">
                     <label class="form-label" for="kouteiNa">工程名・工程機能</label>
-                    <input class="form-control" type="text" name="工程名・工程機能" id="kouteiNa">
+                    <input class="form-control <?= (form_error('工程名・工程機能') ? 'is-invalid' : ''); ?>" type="text" name="工程名・工程機能" id="kouteiNa" value="<?php echo set_value('工程名・工程機能'); ?>">
                 </div>
                 <div class="col">
                     <label class="form-label" for="shuriJikan">修理所要時間</label>
-                    <input class="form-control" type="text" name="修理所要時間" id="shuriJikan">
+                    <input class="form-control <?= (form_error('修理所要時間') ? 'is-invalid' : ''); ?>" type="text" name="修理所要時間" id="shuriJikan" value="<?php echo set_value('修理所要時間'); ?>">
                 </div>
             </div>
 
@@ -89,11 +84,11 @@
             <div class="row">
                 <div class="col">
                     <label class="form-label" for="mode">故障モード</label>
-                    <input class="form-control" type="text" name="故障モード" id="mode">
+                    <input class="form-control <?= (form_error('故障モード') ? 'is-invalid' : ''); ?>" type="text" name="故障モード" id="mode" value="<?php echo set_value('故障モード'); ?>">
                 </div>
                 <div class="col">
                     <label class="form-label" for="kubun">区分</label>
-                    <input class="form-control" type="text" name="区分" id="kubun">
+                    <input class="form-control <?= (form_error('区分') ? 'is-invalid' : ''); ?>" type="text" name="区分" id="kubun" value="<?php echo set_value('区分'); ?>">
                 </div>
             </div>
 
@@ -101,23 +96,23 @@
             <div class="row">
                 <div class="col">
                     <label class="form-label" for="gensho">現象・不具合要因詳細</label>
-                    <textarea class="form-control" name="現象・不具合要因詳細" id="gensho" cols="30" rows="10"></textarea>
+                    <textarea class="form-control <?= (form_error('現象・不具合要因詳細') ? 'is-invalid' : ''); ?>" name="現象・不具合要因詳細" id="gensho" cols="30" rows="10"><?php echo set_value('現象・不具合要因詳細'); ?></textarea >
                 </div>
                 <div class="col">
                     <label class="form-label" for="shuriNaiyou">修理内容</label>
-                    <textarea class="form-control" name="修理内容" id="shuriNaiyou" cols="30" rows="10"></textarea>
+                    <textarea class="form-control <?= (form_error('修理内容') ? 'is-invalid' : ''); ?>" name="修理内容" id="shuriNaiyou" cols="30" rows="10"><?php echo set_value('修理内容'); ?></textarea>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col">
                     <label class="form-label" for="taisaku">対策</label>
-                    <textarea class="form-control" name="対策" id="taisaku" cols="30" rows="5"></textarea>
+                    <textarea class="form-control <?= (form_error('対策') ? 'is-invalid' : ''); ?>" name="対策" id="taisaku" cols="30" rows="5"><?php echo set_value('対策'); ?></textarea>
                 </div>
 
                 <div class="col">
                     <label class="form-label" for="taisakusho">対策書</label>
-                    <input class="form-control mb-2" type="file" name="対策書" id="taisakusho">
+                    <input class="form-control mb-2 <?= (form_error('対策書') ? 'is-invalid' : ''); ?>" type="file" name="対策書" id="taisakusho" value="<?php echo set_value('対策書'); ?>">
 
                     <span>FMEA</span>
                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="0" checked>
@@ -140,14 +135,14 @@
         <div class="row">
             <div class="col">
                 <label class="form-label" for="detail">故障の影響</label>
-                <textarea class="form-control" name="故障の影響" id="detail" cols="30" rows="10"></textarea>
+                <textarea class="form-control <?= (form_error('故障の影響') ? 'is-invalid' : ''); ?>" name="故障の影響" id="detail" cols="30" rows="10"><?php echo set_value('故障の影響'); ?></textarea>
             </div>
             <div class="col">
                 <label class="form-label" for="shuriJikan">ライン停止の可能性</label>
-                <input class="form-control" type="text" name="ライン停止の可能性">
+                <input class="form-control <?= (form_error('ライン停止の可能性') ? 'is-invalid' : ''); ?>" type="text" name="ライン停止の可能性" value="<?php echo set_value('ライン停止の可能性'); ?>">
 
                 <label class="form-label" for="shuriJikan">特 殊 特性等</label>
-                <input class="form-control" type="text" name="特殊特性等">
+                <input class="form-control <?= (form_error('特殊特性等') ? 'is-invalid' : ''); ?>" type="text" name="特殊特性等" value="<?php echo set_value('特殊特性等'); ?>">
             </div>
         </div>
 
@@ -157,23 +152,23 @@
         <div class="row border border-dark rounded mx-1 pt-3 pb-3">
             <div class="col-6">
                 <label class="form-label" for="shuriJikan">予防</label>
-                <input class="form-control" type="text" name="予防">
+                <input class="form-control <?= (form_error('予防') ? 'is-invalid' : ''); ?>" type="text" name="予防" value="<?php echo set_value('予防'); ?>">
             </div>
 
             <div class="col-3">
                 <label class="form-label" for="shuriJikan">周期</label>
-                <input class="form-control" type="text" name="周期">
+                <input class="form-control <?= (form_error('周期') ? 'is-invalid' : ''); ?>" type="text" name="周期" value="<?php echo set_value('周期'); ?>">
             </div>
 
             <div class="col-3">
                 <label class="form-label" for="shuriJikan">月</label>
-                <input class="form-control" type="text" name="月">
+                <input class="form-control  <?= (form_error('月') ? 'is-invalid' : ''); ?>" type="text" name="月" value="<?php echo set_value('月'); ?>">
             </div>
 
 
             <div class="col-6">
                 <label class="form-label" for="shuriJikan">検出</label>
-                <input class="form-control" type="text" name="検出">
+                <input class="form-control <?= (form_error('検出') ? 'is-invalid' : ''); ?>" type="text" name="検出" value="<?php echo set_value('検出'); ?>">
             </div>
 
 
@@ -183,15 +178,15 @@
         <div class="row">
             <div class="col-6">
                 <label class="form-label" for="detail">対策案</label>
-                <textarea class="form-control" name="対策案" id="detail" cols="30" rows="10"></textarea>
+                <textarea class="form-control <?= (form_error('対策案') ? 'is-invalid' : ''); ?>" name="対策案" id="detail" cols="30" rows="10" ><?php echo set_value('対策案'); ?></textarea>
             </div>
             <div class="col-3">
                 <label class="form-label" for="shuriJikan">担当者日程</label>
-                <input class="form-control" type="text" name="担当者日程">
+                <input class="form-control <?= (form_error('担当者日程') ? 'is-invalid' : ''); ?>" type="text" name="担当者日程" value="<?php echo set_value('担当者日程'); ?>"> 
             </div>
             <div class="col-3">
                 <label class="form-label" for="shuriJikan">対応・処置</label>
-                <input class="form-control" type="text" name="対応処置">
+                <input class="form-control <?= (form_error('対応処置') ? 'is-invalid' : ''); ?>" type="text" name="対応処置" value="<?php echo set_value('対応処置'); ?>">
             </div>
         </div>
 
@@ -209,6 +204,7 @@
             </tr>
         </thead>
         <tbody>
+            
         </tbody>
         <tfoot>
             <tr>
@@ -268,6 +264,15 @@
 <script>
     $(document).ready(function() {
         $('#fmea_Form').hide()
+
+        if ($('input[name=flexRadioDefault]').val() == 0) {
+                $('#fmea_Form').hide();
+                $('#equipForm').attr('action', '/equipment/1');
+            } else {
+                $('#fmea_Form').show();
+                $('#equipForm').attr('action', '/equipment/2');
+            }
+
         $('input[name=flexRadioDefault]').change(function() {
             var val = $(this).val()
             if (val == 0) {

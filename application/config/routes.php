@@ -64,6 +64,10 @@ $route['equipment/(:num)'] = 'dashboard/postequipment/$type';
 $route['product'] = 'dashboard/productForm';
 $route['dashboard'] = 'dashboard';
 
+//Equipment editing
+$route['editEquipment/(:num)'] = 'dashboard/editdata_view/$id';
+
 
 //Record Routing
 $route['item/(:num)'] = 'dashboard/viewRecord/$id';
+

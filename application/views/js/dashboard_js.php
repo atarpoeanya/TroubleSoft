@@ -163,10 +163,14 @@
         // Get DATA via ID
         // CALL MODAL FILLED WITH DATA
         // via ajax
-    }
+    } //USed on 更新 button to populate with db data
 
+
+    // CAUTION UGLIEST PART OF THE CODE
+    // TRIPLE FOR LOOP , DOUBLE sWTICH CASE WITH ONE OF THE LOOP BEING NESTED
+    // IT"S DUMB AND I DONT LIKE IT (ALL FOR VALIDATION PURPOSES)
     function editSpare() {
-        
+
         var spare_data = {
             "c_t202_id": $('#partId_edit').val(),
             "c_purchaseDate": $('#purchaseDate_edit').val(),
@@ -177,7 +181,7 @@
             "c_maker": $('#maker_edit').val(),
             "c_quantity": $('#quantity_edit').val(),
             "c_unit": $('#unit_edit').val(),
-            "c_price":$('#price_edit').val()
+            "c_price": $('#price_edit').val()
         }
 
         $.ajax({
@@ -186,12 +190,12 @@
             data: spare_data,
             success: function(response) {
                 console.log(response);
-                if(response == 1){
+                if (response == 1) {
                     $('#editPartsModal').modal('hide');
                     get_sparepartlist();
                 } else {
                     $('#alert-msg').html('<div class="alert alert-danger">' + response + '</div>');
-                }   
+                }
             },
             complete: function() {
                 console.log('DONNNNNN')
@@ -200,6 +204,133 @@
         event.preventDefault();
 
     }
+
+    function addSpare() {
+
+        var spare_data = {
+            "c_t202_id": $('#partId').val(),
+            "c_purchaseDate": $('#purchaseDate').val(),
+            "c_department": $('#department').val(),
+            "c_placement": $('#placement').val(),
+            "c_partName": $('#partName').val(),
+            "c_model": $('#model').val(),
+            "c_maker": $('#maker').val(),
+            "c_quantity": $('#quantity').val(),
+            "c_unit": $('#unit').val(),
+            "c_price": $('#price').val()
+        }
+
+        $.ajax({
+            url: "<?= base_url(); ?>dashboard/postSpare",
+            type: 'POST',
+            data: spare_data,
+            success: function(response) {
+                console.log(response);
+                if (response == 1) {
+                    $('#addPartsModal').modal('hide');
+                    $('#form-parts').find("input[type=text], textarea").val("");
+                    $('#form-parts').find("input[type=number], textarea").val("");
+                    get_sparepartlist();
+                } else {
+                    var stringNum = response.replace(/[^0-9.]/g, '');
+                    var arrNum = Array.from(String(stringNum), Number)
+                    for (let index = 0; index < arrNum.length; index++) {
+
+                        switch (arrNum[index]) {
+                            case 1:
+                                $('#purchaseDate').addClass('is-invalid')
+                                break;
+                            case 2:
+                                $('#department').addClass('is-invalid')
+                                break;
+                            case 3:
+                                $('#placement').addClass('is-invalid')
+                                break;
+                            case 4:
+                                $('#partName').addClass('is-invalid')
+                                break;
+                            case 5:
+                                $('#model').addClass('is-invalid')
+                                break;
+                            case 6:
+                                $('#maker').addClass('is-invalid')
+                                break;
+                            case 7:
+                                $('#quantity').addClass('is-invalid')
+                                break;
+                            case 8:
+                                $('#unit').addClass('is-invalid')
+                                break;
+                            case 9:
+                                $('#price').addClass('is-invalid')
+                                break;
+
+
+                            default:
+                                break;
+                        }
+
+
+                    }
+                    var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+                    for (let i = 0; i < arr.length; i++) {
+                        for (let k = 0; k < arrNum.length; k++) {
+                            if (arrNum.includes(arr[i]))
+                                continue;
+                            else {
+                                switch (arr[i]) {
+                                    case 1:
+                                        $('#purchaseDate').removeClass('is-invalid')
+                                        break;
+                                    case 2:
+                                        $('#department').removeClass('is-invalid')
+                                        break;
+                                    case 3:
+                                        $('#placement').removeClass('is-invalid')
+                                        break;
+                                    case 4:
+                                        $('#partName').removeClass('is-invalid')
+                                        break;
+                                    case 5:
+                                        $('#model').removeClass('is-invalid')
+                                        break;
+                                    case 6:
+                                        $('#maker').removeClass('is-invalid')
+                                        break;
+                                    case 7:
+                                        $('#quantity').removeClass('is-invalid')
+                                        break;
+                                    case 8:
+                                        $('#unit').removeClass('is-invalid')
+
+                                        break;
+                                    case 9:
+                                        $('#price').removeClass('is-invalid')
+                                        break;
+
+
+                                    default:
+                                        break;
+                                }
+                            }
+
+                        }
+
+                    }
+                }
+            },
+            complete: function() {
+                console.log('DONNNNNN')
+            }
+        });
+        event.preventDefault();
+
+    }
+
+
+
+
+
 
     document.addEventListener("DOMContentLoaded", DATA.onLoad)
 </script>

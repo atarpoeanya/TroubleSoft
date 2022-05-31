@@ -142,6 +142,22 @@ class Dashboard extends CI_Controller
 
 
         $this->form_validation->set_rules('発生日', 'a', 'required');
+        $this->form_validation->set_rules('修理日', 'a', 'required');
+
+        $this->form_validation->set_rules('部署', 'a', 'required|callback_check_default');
+        $this->form_validation->set_rules('担当者', 'a', 'required|callback_check_default');
+        $this->form_validation->set_rules('設備', 'a', 'required|callback_check_default');
+        $this->form_validation->set_rules('号機', 'a', 'required|callback_check_default');
+
+        $this->form_validation->set_rules('工程名・工程機能', 'a', 'required');
+        $this->form_validation->set_rules('修理所要時間', 'a', 'required');
+        $this->form_validation->set_rules('故障モード', 'a', 'required');
+        $this->form_validation->set_rules('区分', 'a', 'required');
+        $this->form_validation->set_rules('現象・不具合要因詳細', 'a', 'required');
+        $this->form_validation->set_rules('修理内容', 'a', 'required');
+        $this->form_validation->set_rules('対策', 'a', 'required');
+
+
         if ($id == 1) {
             if ($this->form_validation->run() == FALSE) {
                 $this->load->view('templates/header');
@@ -155,6 +171,16 @@ class Dashboard extends CI_Controller
             }
         }
         if ($id == 2) { //FMEA
+            $this->form_validation->set_rules('故障の影響', 'a', 'required');
+            $this->form_validation->set_rules('ライン停止の可能性', 'a', 'required');
+            $this->form_validation->set_rules('予防', 'a', 'required');
+            $this->form_validation->set_rules('特殊特性等', 'a', 'required');
+            $this->form_validation->set_rules('周期', 'a', 'required');
+            $this->form_validation->set_rules('月', 'a', 'required');
+            $this->form_validation->set_rules('検出', 'a', 'required');
+            $this->form_validation->set_rules('対策案', 'a', 'required');
+            $this->form_validation->set_rules('担当者日程', 'a', 'required');
+            $this->form_validation->set_rules('対応処置', 'a', 'required');
             if ($this->form_validation->run() == FALSE) {
                 $this->load->view('templates/header');
                 $this->load->view('Pages/equipmentForm');
@@ -171,6 +197,11 @@ class Dashboard extends CI_Controller
         // Invoke Part list
         //  $this->get_sparepartList();
         $this->load->view('modals/partsSelect');
+    }
+
+    function check_default($post_string)
+    {
+        return $post_string == '' ? FALSE : TRUE;
     }
 
     public function doupload()
@@ -216,8 +247,9 @@ class Dashboard extends CI_Controller
     public function editData_view($id)
     {
         $this->form_validation->set_rules('発生日', 'a', 'required');
-        $id = $this->uri->segment(3);
-        $data['items'] = $this->Troublelist_model->getEquipmentId(intval($id));        
+        $id = $this->uri->segment(2);
+        $data['items'] = $this->Troublelist_model->getEquipmentId(intval($id));
+
         $data['division'] = [
             '選び出す',
             '塗装',
@@ -247,24 +279,22 @@ class Dashboard extends CI_Controller
             '1号機', '2号機', '3号機'
         ];
 
-        if ($data['items'] != null) {
+        if (!empty($data['items'])) {
 
             if ($this->form_validation->run() == FALSE) {
                 $this->load->view('templates/header');
                 $this->load->view('Pages/equipmentForm_edit', $data);
                 $this->load->view('templates/footer');
-                
             } else {
                 $data = $this->doupload();
                 $this->Troublelist_model->updateData($data);
                 redirect(base_url(), '/');
             }
+            //invoke modal spare parte select
+            $this->load->view('modals/partsSelect');
         } else {
-           echo "NO DATA";
+            echo "NO DATA";
         }
-
-        //invoke modal spare parte select
-        $this->load->view('modals/partsSelect');
     }
 
     public function editSpares_view($id)
@@ -274,9 +304,19 @@ class Dashboard extends CI_Controller
     }
 
     public function editSpare()
-    {   
-        
-        $this->form_validation->set_rules('c_department', 'Message', 'required');
+    {
+
+        $this->form_validation->set_rules("c_t202_id", 'Message', 'required');
+        $this->form_validation->set_rules("c_purchaseDate", 'Message', 'required');
+        $this->form_validation->set_rules("c_department", 'Message', 'required');
+        $this->form_validation->set_rules("c_placement", 'Message', 'required');
+        $this->form_validation->set_rules("c_partName", 'Message', 'required');
+        $this->form_validation->set_rules("c_model", 'Message', 'required');
+        $this->form_validation->set_rules("c_maker", 'Message', 'required');
+        $this->form_validation->set_rules("c_quantity", 'Message', 'required');
+        $this->form_validation->set_rules("c_unit", 'Message', 'required');
+        $this->form_validation->set_rules("c_price", 'Message', 'required');
+
         if ($this->form_validation->run() == FALSE) {
             echo validation_errors();
         } else {
@@ -287,10 +327,40 @@ class Dashboard extends CI_Controller
     // Need Validation
     public function postSpare()
     {
+        $this->form_validation->set_rules("c_purchaseDate", '1', 'required');
+        $this->form_validation->set_rules("c_department", '2', 'required');
+        $this->form_validation->set_rules("c_placement", '3', 'required');
+        $this->form_validation->set_rules("c_partName", '4', 'required');
+        $this->form_validation->set_rules("c_model", '5', 'required');
+        $this->form_validation->set_rules("c_maker", '6', 'required');
+        $this->form_validation->set_rules("c_quantity", '7', 'required|is_natural');
+        $this->form_validation->set_rules("c_unit", '8', 'required');
+        $this->form_validation->set_rules("c_price", '9', 'required|is_natural');
+
+        $this->form_validation->set_message('required', '{field}');
+
+        if ($this->form_validation->run() == FALSE) {
+            echo validation_errors();
+        } else {
+            $this->Troublelist_model->addSpares();
+            echo 1;
+        }
+
+
+
+
+        
         // Spare part adder 'add_sparepart is modal -> form.ID'
 
-        if ($this->input->post('add_sparepart')) {
-            $this->Troublelist_model->addData('spareparts', 'empty');
+        // if ($this->input->post('add_sparepart')) {
+        //     $this->form_validation->set_rules("購入日", 'Message', 'required');
+        //     if ($this->form_validation->run() == FALSE) {
+        //         echo validation_errors();
+        //     } else {
+        //         $this->Troublelist_model->addData('spareparts', 'empty');
+        //         echo 1;
+        //     }
+           
             // if ($this->form_validation->run() == FALSE) {
 
 
@@ -299,6 +369,11 @@ class Dashboard extends CI_Controller
             // 	redirect(base_url(),'/');
             // }
 
-        }
+        // }
+
+        
     }
+
+
+    
 }
