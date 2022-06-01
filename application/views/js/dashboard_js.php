@@ -169,6 +169,8 @@
     // CAUTION UGLIEST PART OF THE CODE
     // TRIPLE FOR LOOP , DOUBLE sWTICH CASE WITH ONE OF THE LOOP BEING NESTED
     // IT"S DUMB AND I DONT LIKE IT (ALL FOR VALIDATION PURPOSES)
+
+    // WE GUCCHI
     function editSpare() {
 
         var spare_data = {
@@ -192,9 +194,49 @@
                 console.log(response);
                 if (response == 1) {
                     $('#editPartsModal').modal('hide');
+                    $('#form-parts-edit').find("input[type=text],input[type=number], textarea").val("");
                     get_sparepartlist();
                 } else {
-                    $('#alert-msg').html('<div class="alert alert-danger">' + response + '</div>');
+                    var stringNum = response.replace(/[^0-9.]/g, '');
+                    var arrNum = Array.from(String(stringNum), Number)
+                    for (let index = 0; index < arrNum.length; index++) {
+
+                        switch (arrNum[index]) {
+                            case 2:
+                                $('#purchaseDate_edit').addClass('is-invalid')
+                                break;
+                            case 3:
+                                $('#department_edit').addClass('is-invalid')
+                                break;
+                            case 4:
+                                $('#placement_edit').addClass('is-invalid')
+                                break;
+                            case 5:
+                                $('#partName_edit').addClass('is-invalid')
+                                break;
+                            case 6:
+                                $('#model_edit').addClass('is-invalid')
+                                break;
+                            case 7:
+                                $('#maker_edit').addClass('is-invalid')
+                                break;
+                            case 8:
+                                $('#quantity_edit').addClass('is-invalid')
+                                break;
+                            case 9:
+                                $('#unit_edit').addClass('is-invalid')
+                                break;
+                            case 10:
+                                $('#price_edit').addClass('is-invalid')
+                                break;
+
+
+                            default:
+                                break;
+                        }
+
+
+                    }
                 }
             },
             complete: function() {
@@ -329,6 +371,8 @@
 
 
     // ON FOCUS REMOVE CLASS (Probably solution to the double loop)
+
+    // SAVIOOUR
    $('input').on('click', function name(params) {
     $(this).removeClass('is-invalid')
    })

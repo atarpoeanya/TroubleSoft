@@ -327,9 +327,9 @@ class Dashboard extends CI_Controller
         $this->form_validation->set_rules("c_partName", '5', 'required');
         $this->form_validation->set_rules("c_model", '6', 'required');
         $this->form_validation->set_rules("c_maker", '7', 'required');
-        $this->form_validation->set_rules("c_quantity", '8', 'required');
+        $this->form_validation->set_rules("c_quantity", '8', 'required|is_natural');
         $this->form_validation->set_rules("c_unit", '9', 'required');
-        $this->form_validation->set_rules("c_price", '10', 'required');
+        $this->form_validation->set_rules("c_price", '10', 'required|is_natural');
 
         if ($this->form_validation->run() == FALSE) {
             echo validation_errors();
