@@ -228,8 +228,8 @@
                 console.log(response);
                 if (response == 1) {
                     $('#addPartsModal').modal('hide');
-                    $('#form-parts').find("input[type=text], textarea").val("");
-                    $('#form-parts').find("input[type=number], textarea").val("");
+                    $('#form-parts').find("input[type=text],input[type=number], textarea").val("");
+                    // $('#form-parts').find("input[type=number], textarea").val("");
                     get_sparepartlist();
                 } else {
                     var stringNum = response.replace(/[^0-9.]/g, '');
@@ -272,51 +272,51 @@
 
 
                     }
-                    var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-                    for (let i = 0; i < arr.length; i++) {
-                        for (let k = 0; k < arrNum.length; k++) {
-                            if (arrNum.includes(arr[i]))
-                                continue;
-                            else {
-                                switch (arr[i]) {
-                                    case 1:
-                                        $('#purchaseDate').removeClass('is-invalid')
-                                        break;
-                                    case 2:
-                                        $('#department').removeClass('is-invalid')
-                                        break;
-                                    case 3:
-                                        $('#placement').removeClass('is-invalid')
-                                        break;
-                                    case 4:
-                                        $('#partName').removeClass('is-invalid')
-                                        break;
-                                    case 5:
-                                        $('#model').removeClass('is-invalid')
-                                        break;
-                                    case 6:
-                                        $('#maker').removeClass('is-invalid')
-                                        break;
-                                    case 7:
-                                        $('#quantity').removeClass('is-invalid')
-                                        break;
-                                    case 8:
-                                        $('#unit').removeClass('is-invalid')
+                    // var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+                    // for (let i = 0; i < arr.length; i++) {
+                    //     for (let k = 0; k < arrNum.length; k++) {
+                    //         if (arrNum.includes(arr[i]))
+                    //             continue;
+                    //         else {
+                    //             switch (arr[i]) {
+                    //                 case 1:
+                    //                     $('#purchaseDate').removeClass('is-invalid')
+                    //                     break;
+                    //                 case 2:
+                    //                     $('#department').removeClass('is-invalid')
+                    //                     break;
+                    //                 case 3:
+                    //                     $('#placement').removeClass('is-invalid')
+                    //                     break;
+                    //                 case 4:
+                    //                     $('#partName').removeClass('is-invalid')
+                    //                     break;
+                    //                 case 5:
+                    //                     $('#model').removeClass('is-invalid')
+                    //                     break;
+                    //                 case 6:
+                    //                     $('#maker').removeClass('is-invalid')
+                    //                     break;
+                    //                 case 7:
+                    //                     $('#quantity').removeClass('is-invalid')
+                    //                     break;
+                    //                 case 8:
+                    //                     $('#unit').removeClass('is-invalid')
 
-                                        break;
-                                    case 9:
-                                        $('#price').removeClass('is-invalid')
-                                        break;
+                    //                     break;
+                    //                 case 9:
+                    //                     $('#price').removeClass('is-invalid')
+                    //                     break;
 
 
-                                    default:
-                                        break;
-                                }
-                            }
+                    //                 default:
+                    //                     break;
+                    //             }
+                    //         }
 
-                        }
+                    //     }
 
-                    }
+                    // }
                 }
             },
             complete: function() {
@@ -326,6 +326,12 @@
         event.preventDefault();
 
     }
+
+
+    // ON FOCUS REMOVE CLASS (Probably solution to the double loop)
+   $('input').on('click', function name(params) {
+    $(this).removeClass('is-invalid')
+   })
 
 
 

@@ -6,7 +6,7 @@
             </div>
 
             <div class="modal-body bg-light">
-                <form action="" id="form-parts" method="post" class="needs-validation" novalidate>
+                <form action="" id="form-parts" method="post" class="needs-validation" novalidate autocomplete="off">
                     <div class="row d-flex justify-content-evenly text-nowrap">
                         <div class="row">
                             <!-- <div class="col">
@@ -26,40 +26,40 @@
                         <div class="row">
                             <div class="col">
                                 <label class="form-label" for="placement">使用箇所</label>
-                                <input class="form-control" type="text" name="使用箇所" id="placement">
+                                <input class="form-control" type="text" name="使用箇所" id="placement" required>
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col">
                                 <label class="form-label" for="partName">部品名</label>
-                                <input class="form-control <?= (form_error('c_partName') ? 'is-invalid' : ''); ?>" type="text" name="部品名" id="partName">
+                                <input class="form-control" type="text" name="部品名" id="partName" required>
                             </div>
                             <div class="col">
                                 <label class="form-label" for="model">型式</label>
-                                <input class="form-control <?= (form_error('c_model') ? 'is-invalid' : ''); ?>" type="text" name="型式" id="model">
+                                <input class="form-control " type="text" name="型式" id="model" required>
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col">
                                 <label class="form-label " for="maker">メーカー名</label>
-                                <input class="form-control " type="text" name="メーカー名" id="maker">
+                                <input class="form-control " type="text" name="メーカー名" id="maker" required>
                             </div>
                             <div class="col">
                                 <label class="form-label" for="quantity">数量</label>
-                                <input class="form-control " type="number" name="数量" id="quantity">
+                                <input class="form-control " type="number" name="数量" id="quantity" required>
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col">
                                 <label class="form-label" for="price">金額</label>
-                                <input class="form-control " type="number" name="金額" id="price">
+                                <input class="form-control " type="number" name="金額" id="price" required>
                             </div>
                             <div class="col">
                                 <label class="form-label" for="unit">単位</label>
-                                <input class="form-control " type="text" name="単位" id="unit">
+                                <input class="form-control " type="text" name="単位" id="unit" required>
                             </div>
                         </div>
                     </div>
@@ -74,3 +74,8 @@
         <div id="alert-msg"></div>
     </div>
 </div>
+<script>
+      $('input').on('click', function name(params) {
+    $(this).removeClass('is-invalid')
+   })
+</script>

@@ -5,24 +5,20 @@
         <h2 class="pt-3 mb-3">設備トラブル</h2>
 
 
-        <form action="" method="post" class="mt-4" autocomplete="off" id="equipForm" enctype="multipart/form-data">
+        <form action="" method="post" class="mt-4 needs-validation" autocomplete="off" id="equipForm" enctype="multipart/form-data" novalidate>
             <input type="hidden" name="id" id="setsubiId" value="<?= $items->c_t800_id ?>">
             <input type="hidden" name="spareParts" id="partinfo" value="">
             <!-- Date -->
             <div class="row">
                 <div class="col">
                     <label class="form-label" for="startDay">発生日</label>
-                    <input class="form-control" type="date" name="発生日" id="startDay" value="<?= $items->c_accidentDate ?>">
+                    <input class="form-control" type="date" name="発生日" id="startDay" value="<?= $items->c_accidentDate ?>" required>
 
-                    <?php if (form_error('発生日')) { ?>
-                        <div class="alert alert-danger" role="alert">
-                            <?= form_error('発生日'); ?>
-                        </div>
-                    <?php } ?>
+                   
                 </div>
                 <div class="col">
                     <label class="form-label" for="repairDay">修理日</label>
-                    <input class="form-control" type="date" name="修理日" id="repairDay" value="<?= $items->c_repairDate ?>">
+                    <input class="form-control" type="date" name="修理日" id="repairDay" value="<?= $items->c_repairDate ?>" required>
                 </div>
             </div>
 
@@ -30,7 +26,7 @@
             <div class="row">
                 <div class="col">
                     <label class="form-label" for="busho">部署</label>
-                    <select class="form-control" name="部署" id="busho">
+                    <select class="form-control" name="部署" id="busho" required>
                         <?php
                         foreach ($division as $d) :
                             if ($d == $items->c_department) : ?>
@@ -43,7 +39,7 @@
                 </div>
                 <div class="col">
                     <label class="form-label" for="tantou">担当者 </label>
-                    <select class="form-control" name="担当者" id="tantou">
+                    <select class="form-control" name="担当者" id="tantou" required>
                         <?php
                         foreach ($inspector_ as $i) :
                             if ($i == $items->c_manager) : ?>
@@ -60,7 +56,7 @@
             <div class="row">
                 <div class="col">
                     <label class="form-label" for="setsubi">設備</label>
-                    <select class="form-control" name="設備" id="setsubi">
+                    <select class="form-control" name="設備" id="setsubi" required>
                         <?php
                         foreach ($tools_name as $t) :
                             if ($t == $items->c_facility) : ?>
@@ -73,7 +69,7 @@
                 </div>
                 <div class="col">
                     <label class="form-label" for="gouki">号機 </label>
-                    <select class="form-control" name="号機" id="gouki">
+                    <select class="form-control" name="号機" id="gouki" required>
                         <?php
                         foreach ($unit as $u) :
                             if ($u == $items->c_facility) : ?>
@@ -89,11 +85,11 @@
             <div class="row">
                 <div class="col">
                     <label class="form-label" for="kouteiNa">工程名・工程機能</label>
-                    <input class="form-control" type="text" name="工程名・工程機能" id="kouteiNa" value="<?= $items->c_processName ?>">
+                    <input class="form-control" type="text" name="工程名・工程機能" id="kouteiNa" value="<?= $items->c_processName ?>" required>
                 </div>
                 <div class="col">
                     <label class="form-label" for="shuriJikan">修理所要時間</label>
-                    <input class="form-control" type="text" name="修理所要時間" id="shuriJikan" value="<?= $items->c_repairTime ?>">
+                    <input class="form-control" type="text" name="修理所要時間" id="shuriJikan" value="<?= $items->c_repairTime ?>" required>
                 </div>
             </div>
 
@@ -101,11 +97,11 @@
             <div class="row">
                 <div class="col">
                     <label class="form-label" for="mode">故障モード</label>
-                    <input class="form-control" type="text" name="故障モード" id="mode" value="<?= $items->c_failMode ?>">
+                    <input class="form-control" type="text" name="故障モード" id="mode" value="<?= $items->c_failMode ?>" required>
                 </div>
                 <div class="col">
                     <label class="form-label" for="kubun">区分</label>
-                    <input class="form-control" type="text" name="区分" id="kubun" value="<?= $items->c_classification ?>">
+                    <input class="form-control" type="text" name="区分" id="kubun" value="<?= $items->c_classification ?>" required>
                 </div>
             </div>
 
@@ -113,18 +109,18 @@
             <div class="row">
                 <div class="col">
                     <label class="form-label" for="gensho">現象・不具合要因詳細</label>
-                    <textarea class="form-control" name="現象・不具合要因詳細" id="gensho" cols="30" rows="10"><?= $items->c_phenomenon ?></textarea>
+                    <textarea class="form-control" name="現象・不具合要因詳細" id="gensho" cols="30" rows="10" required><?= $items->c_phenomenon ?></textarea>
                 </div>
                 <div class="col">
                     <label class="form-label" for="shuriNaiyou">修理内容</label>
-                    <textarea class="form-control" name="修理内容" id="shuriNaiyou" cols="30" rows="10"><?= $items->c_repairDet ?></textarea>
+                    <textarea class="form-control" name="修理内容" id="shuriNaiyou" cols="30" rows="10" required><?= $items->c_repairDet ?></textarea>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col">
                     <label class="form-label" for="taisaku">対策</label>
-                    <textarea class="form-control" name="対策" id="taisaku" cols="30" rows="5"><?= $items->c_measures ?></textarea>
+                    <textarea class="form-control" name="対策" id="taisaku" cols="30" rows="5" required><?= $items->c_measures ?></textarea>
                 </div>
                 <div class="col">
                     <label class="form-label" for="taisakusho">対策書</label>
@@ -315,6 +311,7 @@
 
 <script>
     $(document).ready(function() {
+        console.log($('#partinfo').val())
         $('#fmea_Form').hide()
         $('input[name=flexRadioDefault]').change(function() {
             var val = $(this).val()
@@ -334,7 +331,7 @@
             $('#equipment_parts_list tbody').find('tr').each(function() {
                 $arr.push([$(this).find('td:eq(0)').text().trim(), $(this).find('td:eq(4)').text().trim()])
             })
-            console.log($arr)
+            
             $('#partinfo').val(JSON.stringify($arr));
         }
         //ELSE SEND EMPTY STATEMENT
@@ -342,4 +339,26 @@
             $('#partinfo').val('empty');
         }
     })
+
+    $(document).ready(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+
+    
+})
 </script>

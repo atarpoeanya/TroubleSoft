@@ -280,7 +280,21 @@ class Dashboard extends CI_Controller
         ];
 
         if (!empty($data['items'])) {
+            $this->form_validation->set_rules('発生日', 'a', 'required');
+            $this->form_validation->set_rules('修理日', 'a', 'required');
 
+            $this->form_validation->set_rules('部署', 'a', 'required|callback_check_default');
+            $this->form_validation->set_rules('担当者', 'a', 'required|callback_check_default');
+            $this->form_validation->set_rules('設備', 'a', 'required|callback_check_default');
+            $this->form_validation->set_rules('号機', 'a', 'required|callback_check_default');
+
+            $this->form_validation->set_rules('工程名・工程機能', 'a', 'required');
+            $this->form_validation->set_rules('修理所要時間', 'a', 'required');
+            $this->form_validation->set_rules('故障モード', 'a', 'required');
+            $this->form_validation->set_rules('区分', 'a', 'required');
+            $this->form_validation->set_rules('現象・不具合要因詳細', 'a', 'required');
+            $this->form_validation->set_rules('修理内容', 'a', 'required');
+            $this->form_validation->set_rules('対策', 'a', 'required');
             if ($this->form_validation->run() == FALSE) {
                 $this->load->view('templates/header');
                 $this->load->view('Pages/equipmentForm_edit', $data);
@@ -349,7 +363,7 @@ class Dashboard extends CI_Controller
 
 
 
-        
+
         // Spare part adder 'add_sparepart is modal -> form.ID'
 
         // if ($this->input->post('add_sparepart')) {
@@ -360,20 +374,17 @@ class Dashboard extends CI_Controller
         //         $this->Troublelist_model->addData('spareparts', 'empty');
         //         echo 1;
         //     }
-           
-            // if ($this->form_validation->run() == FALSE) {
+
+        // if ($this->form_validation->run() == FALSE) {
 
 
-            // } else {
+        // } else {
 
-            // 	redirect(base_url(),'/');
-            // }
+        // 	redirect(base_url(),'/');
+        // }
 
         // }
 
-        
+
     }
-
-
-    
 }
