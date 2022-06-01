@@ -9,9 +9,9 @@ function f_generate_table_select($data)
                     <?php
                     foreach ($data['title'] as $thead) {
 
-                        if ($thead == 'c_facility'  || $thead == 'c_failMode') {
+                        if ($thead == 'c_processName'  || $thead == 'c_failMode') {
                             switch ($thead) {
-                                case 'c_facility':
+                                case 'c_processName':
                                     $thead = '工程名・工程機能';
                                     break;
                                 case 'c_failMode':
@@ -46,7 +46,7 @@ function f_generate_table_select($data)
                 ?>
                     <tr onclick="view_record(this)" >
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer col">
-                            <?= $item->c_facility ?>
+                            <?= $item->c_processName ?>
                         </td>
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer col">
                             <?= $item->c_failMode ?>

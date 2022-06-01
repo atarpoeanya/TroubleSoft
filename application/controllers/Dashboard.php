@@ -320,16 +320,16 @@ class Dashboard extends CI_Controller
     public function editSpare()
     {
 
-        $this->form_validation->set_rules("c_t202_id", 'Message', 'required');
-        $this->form_validation->set_rules("c_purchaseDate", 'Message', 'required');
-        $this->form_validation->set_rules("c_department", 'Message', 'required');
-        $this->form_validation->set_rules("c_placement", 'Message', 'required');
-        $this->form_validation->set_rules("c_partName", 'Message', 'required');
-        $this->form_validation->set_rules("c_model", 'Message', 'required');
-        $this->form_validation->set_rules("c_maker", 'Message', 'required');
-        $this->form_validation->set_rules("c_quantity", 'Message', 'required');
-        $this->form_validation->set_rules("c_unit", 'Message', 'required');
-        $this->form_validation->set_rules("c_price", 'Message', 'required');
+        $this->form_validation->set_rules("c_t202_id", '1', 'required');
+        $this->form_validation->set_rules("c_purchaseDate", '2', 'required');
+        $this->form_validation->set_rules("c_department", '3', 'required');
+        $this->form_validation->set_rules("c_placement", '4', 'required');
+        $this->form_validation->set_rules("c_partName", '5', 'required');
+        $this->form_validation->set_rules("c_model", '6', 'required');
+        $this->form_validation->set_rules("c_maker", '7', 'required');
+        $this->form_validation->set_rules("c_quantity", '8', 'required');
+        $this->form_validation->set_rules("c_unit", '9', 'required');
+        $this->form_validation->set_rules("c_price", '10', 'required');
 
         if ($this->form_validation->run() == FALSE) {
             echo validation_errors();
