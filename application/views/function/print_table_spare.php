@@ -36,7 +36,7 @@ function f_generate_table_select($data)
                 break;
 
             default:
-            array_push($head_name, 'MISSING');
+                array_push($head_name, 'MISSING');
                 break;
         }
     }
@@ -76,13 +76,13 @@ function f_generate_table_select($data)
                                 $id = $value;
                         ?>
 
-                                <td  class="kanjifont table-data text-center align-middle border-right border-left pointer col ID">
+                                <td class="kanjifont table-data text-center align-middle border-right border-left pointer col ID">
                                     <?= $id ?>
                                 </td>
                             <?php
                             } else {
                             ?>
-                                <td  class="kanjifont table-data text-center align-middle border-right border-left pointer col">
+                                <td class="kanjifont table-data text-center align-middle border-right border-left pointer col">
                                     <?= $value ?>
                                 </td>
 
@@ -110,3 +110,14 @@ function f_generate_table_select($data)
 
 
 </style>
+
+<script>
+    $(document).ready(function() {
+        $('#gen_table tbody').find('tr').each(function() {
+            // debugger;
+            $amount = $(this).find("td:eq(7)").text().trim();
+            if($amount == 0)
+                $(this).addClass('bg-warning')
+        })
+    })
+</script>

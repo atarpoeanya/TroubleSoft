@@ -1,21 +1,15 @@
-<?php
 
-if(!empty($_SESSION['message'])){
-    print $_SESSION['message'];
-    unset($_SESSION['message']);
-}
-?>
 
 
 <div class="container kanjifont mt-4 d-flex flex-column" id="dashboard">
 
     <div class="row my-2 pt-3 ps-3">
-        <div class="col-lg-9 col-md-11 mb-2">
+        <div class="col-lg-9 col-md-12 mb-2">
 
             <div class="btn-group switch-field text-nowrap">
-                <a onclick="buttonSwitch(this);get_troubleList()" class="btn btn-block btn-outline-primary active" aria-current="page">設備トラブルリースト</a>
-                <a onclick="buttonSwitch(this);get_troubleList()" class="btn btn-block btn-outline-secondary">品質トラブルリースト</a>
-                <a onclick="buttonSwitch(this);get_sparepartlist()" class="btn btn-block btn-outline-secondary">予備品リスト</a>
+                <a onclick="buttonSwitch(this);get_troubleList()" class="btn btn-outline-primary active" aria-current="page">設備トラブルリースト</a>
+                <a onclick="buttonSwitch(this);get_troubleList()" class="btn  btn-outline-secondary">品質トラブルリースト</a>
+                <a onclick="buttonSwitch(this);get_sparepartlist()" class="btn  btn-outline-secondary">予備品リスト</a>
             </div>
         </div>
         <div class="col-lg-3 col-md">

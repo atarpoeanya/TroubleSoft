@@ -21,19 +21,7 @@
                                 <label class="form-label" for="purchaseDate">購入日</label>
                                 <input class="form-control" type="date" name="購入日_edit" id="purchaseDate_edit" value="<?=$spare->c_purchaseDate ?>" required>
                             </div>
-                            <div class="col">
-                                <label class="form-label" for="department">部署名</label>
-                                <input class="form-control" type="text" name="部署名_edit" id="department_edit" value="<?=$spare->c_department ?>"
-                                required>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col">
-                                <label class="form-label" for="placement">使用箇所</label>
-                                <input class="form-control" type="text" name="使用箇所_edit" id="placement_edit" value="<?=$spare->c_placement ?>" required>
-                            </div>
-                        </div>
+
                         <br>
                         <div class="row">
                             <div class="col">
@@ -73,8 +61,8 @@
             <div class="modal-footer">
                 <!-- <input type="submit" name="edit_sparepart" form="form-parts" class="btn btn-primary" value="足す"> -->
                 <!-- <button class="btn btn-primary" type="submit" onclick="editSpare()">足す</button> -->
-                <input type="submit" name="edit_sapre" form="form-parts" class="btn btn-primary" onclick="editSpare()" value="足す">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                <input type="submit" name="edit_sapre" form="form-parts" class="btn btn-primary" onclick="editSpare()" value="足す">
             </div>
             <div id="alert-msg"></div>
         </div>

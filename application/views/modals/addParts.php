@@ -1,4 +1,4 @@
-<div class="modal kanjifont" id="addPartsModal" tabindex="-1">
+<div class="modal kanjifont" id="addPartsModal" tabindex="-1" data-bs-backdrop="static">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -16,17 +16,6 @@
                             <div class="col">
                                 <label class="form-label" for="purchaseDate">購入日</label>
                                 <input class="form-control" type="date" name="購入日" id="purchaseDate" required>
-                            </div>
-                            <div class="col">
-                                <label class="form-label" for="department">部署名</label>
-                                <input class="form-control" type="text" name="部署名" id="department" required>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col">
-                                <label class="form-label" for="placement">使用箇所</label>
-                                <input class="form-control" type="text" name="使用箇所" id="placement" required>
                             </div>
                         </div>
                         <br>
@@ -65,9 +54,9 @@
                     </div>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
                 <input type="submit" name="add_sparepart" form="form-parts" class="btn btn-primary" onclick="addSpare()" value="足す">
 
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
             </div>
             </form>
         </div>
@@ -77,5 +66,11 @@
 <script>
       $('input').on('click', function name(params) {
     $(this).removeClass('is-invalid')
+   })
+   $('#addPartsModal').on('hidden.bs.modal', function (e) {
+       $('input').removeClass('is-invalid');
+       $('input').not(':last').val('')
+
+
    })
 </script>

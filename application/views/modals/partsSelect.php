@@ -14,9 +14,9 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
                 <a id="insertTool" class="btn btn-primary" data-bs-dismiss="modal">足す</a>
 
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
             </div>
         </div>
     </div>
@@ -34,11 +34,11 @@
             url: "<?= base_url(); ?>dashboard/get_sparepartList_lite",
             success: function(response) {
                 $("#upper").html(response)
-                if ($('#equipment_parts_list tbody tr').length != 0) {
+                if ($('#equipment_parts_list tbody tr, #equipment_parts_list_edit tbody tr').length != 0) {
                     
                     // $('#foots tr').clone().prependTo('#equipment_parts_list tbody');
                     // IF EXIST IN BODY, APPEND
-                    $('#foots').append($('#equipment_parts_list tbody tr').clone())
+                    $('#foots').append($('#equipment_parts_list tbody tr, #equipment_parts_list_edit tbody tr').clone())
                     // CHECK ID for button disabling and color success bg
                     var flag = 0;
                     var itemId = ''
@@ -48,7 +48,7 @@
 
                     $('#foots').find('tr').each(function() {
                         itemId = $(this).find("td:eq(0)").text().trim();
-                        amount = $(this).find("td:eq(4)").text().trim();
+                        amount = $(this).find("td:eq(3)").text().trim();
                         $('#bodys').find('tr').each(function() {
                             id = $(this).find("td:eq(0)").text().trim();
 
@@ -61,8 +61,8 @@
                             if (flag == 1) {
                                 $(this).addClass('table-success')
 
-                                if(parseInt($(this).find("td:eq(4)").text().trim()) <= amount)
-                                    $(this).find("td:eq(5)").children('.plus').addClass('disabled')
+                                if(parseInt($(this).find("td:eq(3)").text().trim()) <= amount)
+                                    $(this).find("td:eq(4)").children('.plus').addClass('disabled')
                             }
                         })
                         // if (id == $(this).find("td:eq(0)").text().trim())
@@ -105,22 +105,22 @@
     // Clone from modal to main Form
     $('#insertTool').on('click', function print_checked() {
         if ($('#foots tr').length != 0) {
-            $('#equipment_parts_list tbody tr').remove()
+            $('#equipment_parts_list tbody tr, #equipment_parts_list_edit tbody tr').remove()
             $('.emptyTab').hide()
         } else {
-            $('#equipment_parts_list tbody tr').remove()
+            $('#equipment_parts_list tbody tr, #equipment_parts_list_edit tbody tr').remove()
             $('.emptyTab').show()
         }
 
-        $('#equipment_parts_list tbody').append($('#foots tr')) //Delete the EMPTY placeholder
-        $('#equipment_parts_list tbody').find('td:last-child').hide(); //Delete minus button
+        $('#equipment_parts_list tbody, #equipment_parts_list_edit tbody').append($('#foots tr')) //Delete the EMPTY placeholder
+        $('#equipment_parts_list tbody, #equipment_parts_list_edit tbody').find('td:last-child').hide(); //Delete minus button
 
         //IF NOT EMPTY INSERT ALL ID AND AMOUNT INTO ARRAY
 
-        if ($('#equipment_parts_list tbody').length != 0) {
+        if ($('#equipment_parts_list tbody, #equipment_parts_list_edit tbody').length != 0) {
             $arr.length = 0;
-            $('#equipment_parts_list tbody').find('tr').each(function() {
-                $arr.push([$(this).find('td:eq(0)').text().trim(), $(this).find('td:eq(4)').text().trim()])
+            $('#equipment_parts_list tbody, #equipment_parts_list_edit tbody').find('tr').each(function() {
+                $arr.push([$(this).find('td:eq(0)').text().trim(), $(this).find('td:eq(3)').text().trim()])
             })
             console.log($arr)
             $('#partinfo').val(JSON.stringify($arr));

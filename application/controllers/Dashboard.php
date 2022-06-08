@@ -72,7 +72,7 @@ class Dashboard extends CI_Controller
     {
 
         $data['title'] =
-            ['部品NO', '部品名', '型式', '使用箇所', '数量'];
+            ['部品NO', '部品名', '型式',  '数量'];
         $data['sparePart'] = $this->Troublelist_model->getSparepartList();
         $this->load->view('function/print_table_spare_lite');
         f_generate_table_select($data);
@@ -104,7 +104,7 @@ class Dashboard extends CI_Controller
         $this->load->view('templates/header');
         $this->load->view('Pages/equipmentForm');
         $this->load->view('templates/footer');
-
+        $this->load->view('modals/partsSelect');
         // $this->load->view('Trouble/js/home_js');
         // $this->load->view('Trouble/modal/spareParts');
         // $this->load->model('Trouble_model');
@@ -139,24 +139,11 @@ class Dashboard extends CI_Controller
     public function postEquipment()
     {
         $id = $this->uri->segment(2);
+        if(empty($id))
+            $id = 1;
 
 
         $this->form_validation->set_rules('発生日', 'a', 'required');
-        $this->form_validation->set_rules('修理日', 'a', 'required');
-
-        $this->form_validation->set_rules('部署', 'a', 'required|callback_check_default');
-        $this->form_validation->set_rules('担当者', 'a', 'required|callback_check_default');
-        $this->form_validation->set_rules('設備', 'a', 'required|callback_check_default');
-        $this->form_validation->set_rules('号機', 'a', 'required|callback_check_default');
-
-        $this->form_validation->set_rules('工程名・工程機能', 'a', 'required');
-        $this->form_validation->set_rules('修理所要時間', 'a', 'required');
-        $this->form_validation->set_rules('故障モード', 'a', 'required');
-        $this->form_validation->set_rules('区分', 'a', 'required');
-        $this->form_validation->set_rules('現象・不具合要因詳細', 'a', 'required');
-        $this->form_validation->set_rules('修理内容', 'a', 'required');
-        $this->form_validation->set_rules('対策', 'a', 'required');
-
 
         if ($id == 1) {
             if ($this->form_validation->run() == FALSE) {
@@ -171,16 +158,6 @@ class Dashboard extends CI_Controller
             }
         }
         if ($id == 2) { //FMEA
-            $this->form_validation->set_rules('故障の影響', 'a', 'required');
-            $this->form_validation->set_rules('ライン停止の可能性', 'a', 'required');
-            $this->form_validation->set_rules('予防', 'a', 'required');
-            $this->form_validation->set_rules('特殊特性等', 'a', 'required');
-            $this->form_validation->set_rules('周期', 'a', 'required');
-            $this->form_validation->set_rules('月', 'a', 'required');
-            $this->form_validation->set_rules('検出', 'a', 'required');
-            $this->form_validation->set_rules('対策案', 'a', 'required');
-            $this->form_validation->set_rules('担当者日程', 'a', 'required');
-            $this->form_validation->set_rules('対応処置', 'a', 'required');
             if ($this->form_validation->run() == FALSE) {
                 $this->load->view('templates/header');
                 $this->load->view('Pages/equipmentForm');
@@ -208,15 +185,15 @@ class Dashboard extends CI_Controller
     {
         // File RULES
         $config['upload_path']          = './uploads/';
-        $config['allowed_types']        = 'gif|jpg|png|pdf';
-        $config['max_size']             = 1024;
+        $config['allowed_types']        = 'pdf';
+        $config['max_size']             = 5024;
 
 
         $this->load->library('upload', $config);
 
         if (!$this->upload->do_upload('対策書')) {
             //  $error = array('error' => $this->upload->display_errors());
-            return 'error';
+            return 'no_file';
 
             //  $this->load->view('upload_form', $error);
         } else {
@@ -281,20 +258,6 @@ class Dashboard extends CI_Controller
 
         if (!empty($data['items'])) {
             $this->form_validation->set_rules('発生日', 'a', 'required');
-            $this->form_validation->set_rules('修理日', 'a', 'required');
-
-            $this->form_validation->set_rules('部署', 'a', 'required|callback_check_default');
-            $this->form_validation->set_rules('担当者', 'a', 'required|callback_check_default');
-            $this->form_validation->set_rules('設備', 'a', 'required|callback_check_default');
-            $this->form_validation->set_rules('号機', 'a', 'required|callback_check_default');
-
-            $this->form_validation->set_rules('工程名・工程機能', 'a', 'required');
-            $this->form_validation->set_rules('修理所要時間', 'a', 'required');
-            $this->form_validation->set_rules('故障モード', 'a', 'required');
-            $this->form_validation->set_rules('区分', 'a', 'required');
-            $this->form_validation->set_rules('現象・不具合要因詳細', 'a', 'required');
-            $this->form_validation->set_rules('修理内容', 'a', 'required');
-            $this->form_validation->set_rules('対策', 'a', 'required');
             if ($this->form_validation->run() == FALSE) {
                 $this->load->view('templates/header');
                 $this->load->view('Pages/equipmentForm_edit', $data);
@@ -322,14 +285,12 @@ class Dashboard extends CI_Controller
 
         $this->form_validation->set_rules("c_t202_id", '1', 'required');
         $this->form_validation->set_rules("c_purchaseDate", '2', 'required');
-        $this->form_validation->set_rules("c_department", '3', 'required');
-        $this->form_validation->set_rules("c_placement", '4', 'required');
-        $this->form_validation->set_rules("c_partName", '5', 'required');
-        $this->form_validation->set_rules("c_model", '6', 'required');
-        $this->form_validation->set_rules("c_maker", '7', 'required');
-        $this->form_validation->set_rules("c_quantity", '8', 'required|is_natural');
-        $this->form_validation->set_rules("c_unit", '9', 'required');
-        $this->form_validation->set_rules("c_price", '10', 'required|is_natural');
+        $this->form_validation->set_rules("c_partName", '3', 'required');
+        $this->form_validation->set_rules("c_model", '4', 'required');
+        $this->form_validation->set_rules("c_maker", '5', 'required');
+        $this->form_validation->set_rules("c_quantity", '6', 'required|is_natural');
+        $this->form_validation->set_rules("c_unit", '7', 'required');
+        $this->form_validation->set_rules("c_price", '8', 'required|is_natural');
 
         if ($this->form_validation->run() == FALSE) {
             echo validation_errors();
@@ -342,14 +303,12 @@ class Dashboard extends CI_Controller
     public function postSpare()
     {
         $this->form_validation->set_rules("c_purchaseDate", '1', 'required');
-        $this->form_validation->set_rules("c_department", '2', 'required');
-        $this->form_validation->set_rules("c_placement", '3', 'required');
-        $this->form_validation->set_rules("c_partName", '4', 'required');
-        $this->form_validation->set_rules("c_model", '5', 'required');
-        $this->form_validation->set_rules("c_maker", '6', 'required');
-        $this->form_validation->set_rules("c_quantity", '7', 'required|is_natural');
-        $this->form_validation->set_rules("c_unit", '8', 'required');
-        $this->form_validation->set_rules("c_price", '9', 'required|is_natural');
+        $this->form_validation->set_rules("c_partName", '2', 'required');
+        $this->form_validation->set_rules("c_model", '3', 'required');
+        $this->form_validation->set_rules("c_maker", '4', 'required');
+        $this->form_validation->set_rules("c_quantity", '5', 'required|is_natural');
+        $this->form_validation->set_rules("c_unit", '6', 'required');
+        $this->form_validation->set_rules("c_price", '7', 'required|is_natural');
 
         $this->form_validation->set_message('required', '{field}');
 

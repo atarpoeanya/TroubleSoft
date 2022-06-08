@@ -62,11 +62,11 @@ class Troublelist_model extends CI_Model
                     'c_manager' => $this->input->post('担当者', true),
                     'c_facility' => $this->input->post('設備', true),
                     'c_unit' => $this->input->post('号機', true),
-                    'c_processName' => $this->input->post('工程名・工程機能', true),
+                    'c_processName' => $this->input->post('工程名', true),
                     'c_repairTime' => $this->input->post('修理所要時間', true),
                     'c_failMode' => $this->input->post('故障モード', true),
                     'c_classification' => $this->input->post('区分', true),
-                    'c_phenomenon' => $this->input->post('現象・不具合要因詳細', true),
+                    'c_phenomenon' => $this->input->post('現象', true),
                     'c_repairDet' => $this->input->post('修理内容', true),
                     'c_measures' => $this->input->post('対策', true),
                     'c_countermeasure' => $filename, //ONLY NAME
@@ -94,17 +94,19 @@ class Troublelist_model extends CI_Model
                     'c_countermeasure' => $filename
                 ];
                 $this->db->insert('t800_equipment', $data_trouble);
+                $id = $this->db->query("SELECT IDENT_CURRENT('t800_equipment') as last_id")->result();
                 $data = [
-                    'c_failImpact' => $this->input->post('故障の影響'),
-                    'c_lineEffect' => $this->input->post('ライン停止の可能性'),
-                    'c_specialChar' => $this->input->post('特殊特性等'),
-                    'c_prevention' => $this->input->post('予防'),
-                    'c_period' => $this->input->post('周期'),
-                    'c_month' => $this->input->post('月'),
-                    'c_detection' => $this->input->post('検出'),
-                    'c_counterPlan' => $this->input->post('対策案'),
-                    'c_picSchedule' => $this->input->post('担当者日程'),
-                    'c_response' => $this->input->post('対応処置')
+                    'c_failImpact' => $this->input->post('故障の影響', true),
+                    'c_lineEffect' => $this->input->post('ライン停止の可能性', true),
+                    'c_specialChar' => $this->input->post('特殊特性等', true),
+                    'c_prevention' => $this->input->post('予防', true),
+                    'c_period' => $this->input->post('周期', true),
+                    'c_month' => $this->input->post('月', true),
+                    'c_detection' => $this->input->post('検出', true),
+                    'c_counterPlan' => $this->input->post('対策案', true),
+                    'c_picSchedule' => $this->input->post('担当者日程', true),
+                    'c_response' => $this->input->post('対応処置', true),
+                    'c_t800_id' => $id[0]->last_id
                 ];
 
                 // $data = $data_trouble + $data_fmea;
@@ -153,7 +155,6 @@ class Troublelist_model extends CI_Model
                 'c_t202_id' => $value[0],
                 'c_amount' => $value[1]
 
-
             ];
         }
         $this->db->insert_batch('t200_used_parts', $data);
@@ -190,7 +191,7 @@ class Troublelist_model extends CI_Model
 
     public function updateData($_file)
     {
-        if ($_file != 'error') {
+        if ($_file != 'no_file') {
             unlink('./uploads/' . $this->input->post('oldFile', true));
             $data = [
                 'c_accidentDate' => $this->input->post('発生日', true),
@@ -199,11 +200,11 @@ class Troublelist_model extends CI_Model
                 'c_manager' => $this->input->post('担当者', true),
                 'c_facility' => $this->input->post('設備', true),
                 'c_unit' => $this->input->post('号機', true),
-                'c_processName' => $this->input->post('工程名・工程機能', true),
-                'c_repairTime' => $this->input->post('修理所要時間', true),
+                'c_processName' => $this->input->post('工程名', true),
+                'c_repairTime' => $this->input->post('修理時間', true),
                 'c_failMode' => $this->input->post('故障モード', true),
                 'c_classification' => $this->input->post('区分', true),
-                'c_phenomenon' => $this->input->post('現象・不具合要因詳細', true),
+                'c_phenomenon' => $this->input->post('現象', true),
                 'c_repairDet' => $this->input->post('修理内容', true),
                 'c_measures' => $this->input->post('対策', true),
                 'c_countermeasure' => $_file
@@ -217,11 +218,11 @@ class Troublelist_model extends CI_Model
                 'c_manager' => $this->input->post('担当者', true),
                 'c_facility' => $this->input->post('設備', true),
                 'c_unit' => $this->input->post('号機', true),
-                'c_processName' => $this->input->post('工程名・工程機能', true),
-                'c_repairTime' => $this->input->post('修理所要時間', true),
+                'c_processName' => $this->input->post('工程名', true),
+                'c_repairTime' => $this->input->post('修理時間', true),
                 'c_failMode' => $this->input->post('故障モード', true),
                 'c_classification' => $this->input->post('区分', true),
-                'c_phenomenon' => $this->input->post('現象・不具合要因詳細', true),
+                'c_phenomenon' => $this->input->post('現象', true),
                 'c_repairDet' => $this->input->post('修理内容', true),
                 'c_measures' => $this->input->post('対策', true),
                 'c_countermeasure' => $this->input->post('oldFile', true)
@@ -243,26 +244,31 @@ class Troublelist_model extends CI_Model
         switch ($formID) {
             case 'equipment':
                 $formName = 't800_equipment';
-                if ($this->db->where($head, $id)->get($formName)->row()->c_countermeasure)
-                    unlink('./uploads/' . $this->db->where($head, $id)->get($formName)->row()->c_countermeasure);
+                $pic = $this->db->where($head, $id)->get($formName)->row()->c_countermeasure;
+                if ($pic && $pic !== 'no_file')
+                    unlink('./uploads/' . $pic);
+
+                    $this->db->where($head, $id);
+                    $this->db->delete($formName);
                 break;
             case 'spareparts':
                 $formName = 't202_spareparts';
+                $arrf  = [ 'c_quantity' => 0];
+
+                $this->db->where($head, $id);
+                $this->db->update($formName, $arrf);
                 break;
             default:
                 # code...
                 break;
         }
-        $this->db->where($head, $id);
-        $this->db->delete($formName);
     }
 
     public function editSpares()
     {
         $data = [
             'c_purchaseDate' => $this->input->post('c_purchaseDate'),
-            'c_department' => $this->input->post('c_department'),
-            'c_placement' => $this->input->post('c_placement'),
+      
             'c_partName' => $this->input->post('c_partName'),
             'c_model' => $this->input->post('c_model'),
             'c_maker' => $this->input->post('c_maker'),
@@ -279,8 +285,7 @@ class Troublelist_model extends CI_Model
     {
         $data = [
             'c_purchaseDate' => $this->input->post('c_purchaseDate'),
-            'c_department' => $this->input->post('c_department'),
-            'c_placement' => $this->input->post('c_placement'),
+      
             'c_partName' => $this->input->post('c_partName'),
             'c_model' => $this->input->post('c_model'),
             'c_maker' => $this->input->post('c_maker'),

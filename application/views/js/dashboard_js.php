@@ -31,7 +31,11 @@
                 $(document).ready(function() {
                     // Setup - add a text input to each cell
                     $('#trouble_table thead tr:eq(0) th').each(function() {
-                        var title = $(this).text();
+                        var title = $(this).text().trim();
+                        
+                        if(title == '発生日')
+                        $(this).html('<label class="form-label" for="search-bar-' + title + '">' + title + '</label><input type="date" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" />');
+                        else
                         $(this).html('<label class="form-label" for="search-bar-' + title + '">' + title + '</label><input type="text" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" />');
                     });
 
@@ -50,7 +54,7 @@
                     });
 
                     // Apply the search
-                    $('#trouble_table thead').on('keyup', ".column_search", function() {
+                    $('#trouble_table thead').on('keyup change', ".column_search", function() {
 
                         table
                             .column($(this).parent().index())
@@ -79,7 +83,7 @@
                 $("#spare_part_list").html(response);
             },
             complete: function() {
-                console.log('done')
+                // console.log('done')
             }
         });
     }
@@ -139,17 +143,17 @@
     function view_record(el) {
         var $id = $(el).children('.ID').text().trim();
         var url = 'item/' + $id;
-        console.log(url)
+        // console.log(url)
         window.location.replace(<?php base_url() ?>url)
     }
 
     function editSpare_populate(el) {
         $id = $(el).parent().siblings('.ID').text().trim()
-        console.log($id)
+        // console.log($id)
         $.ajax({
             url: "<?php echo base_url() ?>dashboard/editSpares_view/" + $id,
             success: function(response) {
-                console.log(response)
+                // console.log(response)
                 $('#modalPlaceHolder').append(response)
                 // var editSpareModal = new bootstrap.Modal($('#editPartsModal'))
                 // editSpareModal.show();
@@ -157,7 +161,7 @@
 
             },
             complete: function() {
-                console.log('done')
+                // console.log('done')
             }
         });
         // Get DATA via ID
@@ -206,27 +210,21 @@
                                 $('#purchaseDate_edit').addClass('is-invalid')
                                 break;
                             case 3:
-                                $('#department_edit').addClass('is-invalid')
-                                break;
-                            case 4:
-                                $('#placement_edit').addClass('is-invalid')
-                                break;
-                            case 5:
                                 $('#partName_edit').addClass('is-invalid')
                                 break;
-                            case 6:
+                            case 4:
                                 $('#model_edit').addClass('is-invalid')
                                 break;
-                            case 7:
+                            case 5:
                                 $('#maker_edit').addClass('is-invalid')
                                 break;
-                            case 8:
+                            case 6:
                                 $('#quantity_edit').addClass('is-invalid')
                                 break;
-                            case 9:
+                            case 7:
                                 $('#unit_edit').addClass('is-invalid')
                                 break;
-                            case 10:
+                            case 8:
                                 $('#price_edit').addClass('is-invalid')
                                 break;
 
@@ -252,8 +250,6 @@
         var spare_data = {
             "c_t202_id": $('#partId').val(),
             "c_purchaseDate": $('#purchaseDate').val(),
-            "c_department": $('#department').val(),
-            "c_placement": $('#placement').val(),
             "c_partName": $('#partName').val(),
             "c_model": $('#model').val(),
             "c_maker": $('#maker').val(),
@@ -267,7 +263,7 @@
             type: 'POST',
             data: spare_data,
             success: function(response) {
-                console.log(response);
+                // console.log(response);
                 if (response == 1) {
                     $('#addPartsModal').modal('hide');
                     $('#form-parts').find("input[type=text],input[type=number], textarea").val("");
@@ -283,27 +279,21 @@
                                 $('#purchaseDate').addClass('is-invalid')
                                 break;
                             case 2:
-                                $('#department').addClass('is-invalid')
-                                break;
-                            case 3:
-                                $('#placement').addClass('is-invalid')
-                                break;
-                            case 4:
                                 $('#partName').addClass('is-invalid')
                                 break;
-                            case 5:
+                            case 3:
                                 $('#model').addClass('is-invalid')
                                 break;
-                            case 6:
+                            case 4:
                                 $('#maker').addClass('is-invalid')
                                 break;
-                            case 7:
+                            case 5:
                                 $('#quantity').addClass('is-invalid')
                                 break;
-                            case 8:
+                            case 6:
                                 $('#unit').addClass('is-invalid')
                                 break;
-                            case 9:
+                            case 7:
                                 $('#price').addClass('is-invalid')
                                 break;
 
@@ -362,7 +352,7 @@
                 }
             },
             complete: function() {
-                console.log('DONNNNNN')
+                // console.log('DONNNNNN')
             }
         });
         event.preventDefault();

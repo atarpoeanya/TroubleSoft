@@ -10,13 +10,14 @@ function f_generate_table_select($data)
 
                     <?php
                     foreach ($data['title'] as $thead) {
+                        if($thead != '使用箇所') {
                     ?>
                         <th class="kanjifont table-head text-center border-right border-left">
                             <?= $thead ?>
                         </th>
 
                     <?php
-
+                        }
                     }
                     ?>
                     <th class="button_column"></th>
@@ -25,7 +26,7 @@ function f_generate_table_select($data)
             <tbody id="bodys">
                 <?php
 
-
+                                                                                            
                 foreach ($data['sparePart'] as $item) {
 
                 ?>
@@ -42,16 +43,21 @@ function f_generate_table_select($data)
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer partmodel">
                             <?= $item->c_model ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer partstorage">
+                        <!-- <td class="kanjifont table-data text-center align-middle border-right border-left pointer partstorage">
                             <?= $item->c_placement ?>
-                        </td>
+                        </td> -->
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer  amount">
                             <?= $item->c_quantity ?>
                         </td>
 
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-2 button_column text-nowrap">
+                            <?php if($item->c_quantity == 0) {?>
+                            <a class="btn-block btn btn-primary modify-button plus disabled" onclick="event.cancelBubble=true;" >+</a>
+                            <a class="btn-block btn btn-danger modify-button minus disabled" onclick="event.cancelBubble=true; ">-</a>
+                            <?php } else {?>
                             <a class="btn-block btn btn-primary modify-button plus" onclick="event.cancelBubble=true;">+</a>
                             <a class="btn-block btn btn-danger modify-button minus" onclick="event.cancelBubble=true; ">-</a>
+                            <?php }?>
                         </td>
 
 
@@ -82,7 +88,7 @@ function f_generate_table_select($data)
             $(this).parent().siblings('.ID').text().trim(),
             $(this).parent().siblings('.partname').text().trim(),
             $(this).parent().siblings('.partmodel').text().trim(),
-            $(this).parent().siblings('.partstorage').text().trim(),
+            // $(this).parent().siblings('.partstorage').text().trim(),
             $(this).parent().siblings('.amount').text().trim()
 
         ]
@@ -93,7 +99,7 @@ function f_generate_table_select($data)
         if ($('#foots tr').length == 0) {
             partRow.addClass('table-success')
             console.log('newest item')
-            $('#foots:last-child').append('<tr class="' + partDetails[0] + '"> <td>' + partDetails[0] + '</td> <td>' + partDetails[1] + '</td> <td>' + partDetails[2] + '</td> <td>' + partDetails[3] + '</td> <td>' + 1 + '</td> <td><a class="btn btn-primary minus">-</a> </td></tr>')
+            $('#foots:last-child').append('<tr class="' + partDetails[0] + '"> <td>' + partDetails[0] + '</td> <td>' + partDetails[1] + '</td> <td>' + partDetails[2] + '</td> <td>' + 1 + '</td> <td><a class="btn btn-primary minus">-</a> </td></tr>')
             if (parseInt($('#foots:last-child').find("td:eq(4)").text().trim()) >= parseInt(partDetails[4]))
                 the_button.addClass('disabled')
         } else {
@@ -111,12 +117,12 @@ function f_generate_table_select($data)
                     if (partDetails[0] == itemId) {
                         // if (parseInt($(this).find("td:eq(4)").html()) < parseInt(partDetails[4])) {
                         // the_button.attr('disable', false); 
-                        amount = parseInt($(this).find("td:eq(4)").text().trim())
+                        amount = parseInt($(this).find("td:eq(3)").text().trim())
 
                         amount++
-                        $(this).find("td:eq(4)").html(amount)
-                        console.log([$(this).find("td:eq(4)").html(), parseInt(partDetails[4]), amount])
-                        if (amount >= parseInt(partDetails[4])){
+                        $(this).find("td:eq(3)").html(amount)
+                        // console.log([$(this).find("td:eq(3)").html(), parseInt(partDetails[ 4]), amount])
+                        if (amount >= parseInt(partDetails[3]) && !$('#equipment_parts_list_edit').length){
                         
                             the_button.addClass('disabled')
                         }
@@ -130,8 +136,8 @@ function f_generate_table_select($data)
                 })
             } else {
                 partRow.addClass('table-success')
-                $('#foots:last-child').append('<tr class="' + partDetails[0] + '"><td>' + partDetails[0] + '</td> <td>' + partDetails[1] + '</td> <td>' + partDetails[2] + '</td> <td>' + partDetails[3] + '</td> <td>' + 1 + '</td> <td><a class="btn btn-primary minus">-</a></td> </tr>')
-                if (parseInt(partDetails[4]) == 1){
+                $('#foots:last-child').append('<tr class="' + partDetails[0] + '"><td>' + partDetails[0] + '</td> <td>' + partDetails[1] + '</td> <td>' + partDetails[2] + '</td> <td>' + 1 + '</td> <td><a class="btn btn-primary minus">-</a></td> </tr>')
+                if (parseInt(partDetails[3]) == 1 ||parseInt(partDetails[3]) == 0){
                     the_button.addClass('disabled')
                 }
 
@@ -167,14 +173,14 @@ function f_generate_table_select($data)
                     $(this).find("td:eq(5)").children('.plus').removeClass('disabled')
             })
 
-            var amount = $(this).find("td:eq(4)").text().trim();
+            var amount = $(this).find("td:eq(3)").text().trim();
             $('#foots').find('tr').each(function() {
                 itemId = $(this).find("td:eq(0)").text().trim();
                 if (id == itemId) {
-                    amount = parseInt($(this).find("td:eq(4)").text().trim())
+                    amount = parseInt($(this).find("td:eq(3)").text().trim())
                     if (amount > 0) {
                         amount--;
-                        $(this).find("td:eq(4)").html(amount)
+                        $(this).find("td:eq(3)").html(amount)
 
 
                     } else {

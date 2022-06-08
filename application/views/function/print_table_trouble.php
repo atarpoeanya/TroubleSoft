@@ -2,14 +2,14 @@
 function f_generate_table_select($data)
 {
 ?>
-    <div class="table-responsive table-wrapper table-wrapper-scroll">
+    <div class="table-responsive table-wrapper table-wrapper-scroll overflow-hidden">
         <table class="table table-striped table-hover" id="trouble_table">
             <thead>
                 <tr>
                     <?php
                     foreach ($data['title'] as $thead) {
 
-                        if ($thead == 'c_processName'  || $thead == 'c_failMode') {
+                        if ($thead == 'c_processName'  || $thead == 'c_failMode' || $thead == 'c_accidentDate') {
                             switch ($thead) {
                                 case 'c_processName':
                                     $thead = '工程名・工程機能';
@@ -17,8 +17,11 @@ function f_generate_table_select($data)
                                 case 'c_failMode':
                                     $thead = '故障モード';
                                     break;
+                                case 'c_accidentDate':
+                                    $thead = '発生日';
+                                    break;
                                 default:
-                                $thead = 'missing';
+                                // $thead = 'missing';
                                     break;
                             }
 
@@ -45,6 +48,9 @@ function f_generate_table_select($data)
 
                 ?>
                     <tr onclick="view_record(this)" >
+                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col">
+                            <?= $item->c_accidentDate ?>
+                        </td>
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer col">
                             <?= $item->c_processName ?>
                         </td>
