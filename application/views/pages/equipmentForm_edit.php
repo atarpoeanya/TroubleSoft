@@ -1,9 +1,11 @@
-<?php 
-print_r($items)
+<?php
+print_r($items);
+echo "<hr>";
+print_r($FMEA);
 ?>
 <div class="container col-8 kanjifont mt-4" id="mainForm">
 
-<div class="container">
+    <div class="container">
         <form action="" method="post" class="mt-4" autocomplete="off" id="equipForm" enctype="multipart/form-data">
             <h2 class="pt-3 mb-3">MAIN_HEADER</h2>
             <!-- item ID -->
@@ -43,15 +45,15 @@ print_r($items)
                     <div class="col-4">
                         <label class="form-label" for="tantou">inspector_name </label>
                         <select class="form-control" name="担当者" id="tantou" required>
-                        <?php
-                        foreach ($inspector_ as $i) :
-                            if ($i == $items->c_manager) : ?>
-                                <option value="<?= $i ?>" selected><?= $i ?></option>
-                            <?php else : ?>
-                                <option value="<?= $i ?>"><?= $i ?></option>
-                        <?php endif;
-                        endforeach; ?>
-                    </select>
+                            <?php
+                            foreach ($inspector_ as $i) :
+                                if ($i == $items->c_manager) : ?>
+                                    <option value="<?= $i ?>" selected><?= $i ?></option>
+                                <?php else : ?>
+                                    <option value="<?= $i ?>"><?= $i ?></option>
+                            <?php endif;
+                            endforeach; ?>
+                        </select>
                     </div>
 
                 </div>
@@ -138,25 +140,33 @@ print_r($items)
                     <!-- FILE INPUT -->
                     <div class="row gy-4 ">
                         <!-- old file placeholder -->
-                    <input type="hidden" name="oldFile" value="<?= $items->c_countermeasure ?>">
+                        <input type="hidden" name="oldFile" value="<?= $items->c_countermeasure ?>">
                         <div class="col-12">
                             <label class="form-label" for="taisakusho">対策書</label>
                             <input class="form-control" type="file" name="対策書" id="taisakusho" value="<?= $items->c_countermeasure ?>">
+                            <!-- <label class="form-label" for="old-link">OLD_LINK</label> -->
+                            <a class=" card-link" href="<?= base_url() ?>uploads/<?= $items->c_countermeasure ?>" target="_blank" rel="noopener noreferrer" id="old-link"><?= $items->c_countermeasure ?></a>
                         </div>
+
+
 
                         <div class="col pt-3 position-relative" style="background-color:#E5E5E5; top:1px; left:1.3px;border-top-left-radius: 5px; border: 1px solid ;border-color: black #E5E5E5 #E5E5E5 black">
                             <div class="bg-light px-3 pb-2 rounded">
                                 <!-- FMEA TOGGLE -->
+                                <?php if (isset($FMEA)) : ?>
+                                    <input type="text" hidden readonly value="<?= $FMEA->c_t800_id ?>" id="fmea-id" name="fmea-Id">
+                                <?php endif ?>
+
                                 <div class="row">
                                     <!-- <label class="form-label" for="fmea-toggle-btn">FMEA</label> -->
                                     <span>FMEA</span>
                                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group" id="fmea-toggle-btn">
 
                                         <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-                                        <label class="btn btn-outline-primary mt-0" for="btnradio1">NO NEED</label>
+                                        <label class="btn btn-outline-primary mt-0 disabled" for="btnradio1">NO NEED</label>
 
                                         <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-                                        <label class="btn btn-outline-primary mt-0" for="btnradio2">NEED</label>
+                                        <label class="btn btn-outline-primary mt-0 disabled" for="btnradio2">NEED</label>
 
                                     </div>
                                 </div>
@@ -212,7 +222,19 @@ print_r($items)
                             <?php
                                 }
                             ?>
-                            </tfoot>
+                        </tbody>
+                        <tfoot class="table-striped table-light">
+
+                            <?php
+                            if (!property_exists($items, 'spare')) :
+                            ?>
+                                <tr>
+                                    <td style="height: 100px;" colspan="4" class="text-center emptyTab">
+                                        <span>EMPTY</span>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
+                        </tfoot>
                     </table>
 
                 </div>
@@ -221,77 +243,79 @@ print_r($items)
             <h3 class="fmea-group position-relative" style="top: 30px; left: 40px; background-color: #c4c4c4; width: max-content;">
                 &nbsp;FMEA&nbsp;</h3>
             <div id="fmea-group" class="fmea-group pt-4 pb-3 px-3 border border-dark rounded">
+                <?php if (isset($FMEA)) : ?>
+                    
 
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label" for="detail">故障の影響</label>
+                            <textarea class="form-control <?= (form_error('故障の影響') ? 'is-invalid' : ''); ?>" name="故障の影響" id="detail" cols="30" rows="10"><?= $FMEA->c_failImpact ?></textarea>
+                        </div>
+                        <div class="col">
+                            <label class="form-label" for="shuriJikan">ライン停止の可能性</label>
+                            <input class="form-control <?= (form_error('ライン停止の可能性') ? 'is-invalid' : ''); ?>" type="text" name="ライン停止の可能性" value="<?= $FMEA->c_lineEffect ?>">
 
-                <div class="row">
-                    <div class="col">
-                        <label class="form-label" for="detail">故障の影響</label>
-                        <textarea class="form-control <?= (form_error('故障の影響') ? 'is-invalid' : ''); ?>" name="故障の影響" id="detail" cols="30" rows="10"><?= set_value('故障の影響'); ?></textarea>
-                    </div>
-                    <div class="col">
-                        <label class="form-label" for="shuriJikan">ライン停止の可能性</label>
-                        <input class="form-control <?= (form_error('ライン停止の可能性') ? 'is-invalid' : ''); ?>" type="text" name="ライン停止の可能性" value="<?= set_value('ライン停止の可能性'); ?>">
-
-                        <label class="form-label" for="shuriJikan">特 殊 特性等</label>
-                        <input class="form-control <?= (form_error('特殊特性等') ? 'is-invalid' : ''); ?>" type="text" name="特殊特性等" value="<?= set_value('特殊特性等'); ?>">
-                    </div>
-                </div>
-
-
-                <p class=" position-relative" style="top: 30px; left: 40px; background-color: #c4c4c4; width: max-content;">
-                    &nbsp;現在の工程管理&nbsp;</p>
-                <div class="row border border-dark rounded mx-1 pt-3 pb-3">
-                    <div class="col-6">
-                        <label class="form-label" for="shuriJikan">予防</label>
-                        <input class="form-control <?= (form_error('予防') ? 'is-invalid' : ''); ?>" type="text" name="予防" value="<?= set_value('予防'); ?>">
-                    </div>
-
-                    <div class="col-3">
-                        <label class="form-label" for="shuriJikan">周期</label>
-                        <input class="form-control <?= (form_error('周期') ? 'is-invalid' : ''); ?>" type="text" name="周期" value="<?= set_value('周期'); ?>">
-                    </div>
-
-                    <div class="col-3">
-                        <label class="form-label" for="shuriJikan">月</label>
-                        <input class="form-control  <?= (form_error('月') ? 'is-invalid' : ''); ?>" type="text" name="月" value="<?= set_value('月'); ?>">
+                            <label class="form-label" for="shuriJikan">特 殊 特性等</label>
+                            <input class="form-control <?= (form_error('特殊特性等') ? 'is-invalid' : ''); ?>" type="text" name="特殊特性等" value="<?= $FMEA->c_specialChar ?>">
+                        </div>
                     </div>
 
 
-                    <div class="col-6">
-                        <label class="form-label" for="shuriJikan">検出</label>
-                        <input class="form-control <?= (form_error('検出') ? 'is-invalid' : ''); ?>" type="text" name="検出" value="<?= set_value('検出'); ?>">
-                    </div>
+                    <p class=" position-relative" style="top: 30px; left: 40px; background-color: #c4c4c4; width: max-content;">
+                        &nbsp;現在の工程管理&nbsp;</p>
+                    <div class="row border border-dark rounded mx-1 pt-3 pb-3">
+                        <div class="col-6">
+                            <label class="form-label" for="shuriJikan">予防</label>
+                            <input class="form-control <?= (form_error('予防') ? 'is-invalid' : ''); ?>" type="text" name="予防" value="<?= $FMEA->c_prevention ?>">
+                        </div>
+
+                        <div class="col-3">
+                            <label class="form-label" for="shuriJikan">周期</label>
+                            <input class="form-control <?= (form_error('周期') ? 'is-invalid' : ''); ?>" type="text" name="周期" value="<?= $FMEA->c_period ?>">
+                        </div>
+
+                        <div class="col-3">
+                            <label class="form-label" for="shuriJikan">月</label>
+                            <input class="form-control  <?= (form_error('月') ? 'is-invalid' : ''); ?>" type="text" name="月" value="<?= $FMEA->c_month ?>">
+                        </div>
+
+
+                        <div class="col-6">
+                            <label class="form-label" for="shuriJikan">検出</label>
+                            <input class="form-control <?= (form_error('検出') ? 'is-invalid' : ''); ?>" type="text" name="検出" value="<?= $FMEA->c_detection ?>">
+                        </div>
 
 
 
-                </div>
+                    </div>
 
-                <div class="row">
-                    <div class="col-6">
-                        <label class="form-label" for="detail">対策案</label>
-                        <textarea class="form-control <?= (form_error('対策案') ? 'is-invalid' : ''); ?>" name="対策案" id="detail" cols="30" rows="10"><?= set_value('対策案'); ?></textarea>
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="form-label" for="detail">対策案</label>
+                            <textarea class="form-control <?= (form_error('対策案') ? 'is-invalid' : ''); ?>" name="対策案" id="detail" cols="30" rows="10"><?= $FMEA->c_counterPlan ?></textarea>
+                        </div>
+                        <div class="col-3">
+                            <label class="form-label" for="shuriJikan">担当者日程</label>
+                            <input class="form-control <?= (form_error('担当者日程') ? 'is-invalid' : ''); ?>" type="text" name="担当者日程" value="<?= $FMEA->c_picSchedule ?>">
+                        </div>
+                        <div class="col-3">
+                            <label class="form-label" for="shuriJikan">対応・処置</label>
+                            <input class="form-control <?= (form_error('対応処置') ? 'is-invalid' : ''); ?>" type="text" name="対応処置" value="<?= $FMEA->c_response ?>">
+                        </div>
                     </div>
-                    <div class="col-3">
-                        <label class="form-label" for="shuriJikan">担当者日程</label>
-                        <input class="form-control <?= (form_error('担当者日程') ? 'is-invalid' : ''); ?>" type="text" name="担当者日程" value="<?= set_value('担当者日程'); ?>">
-                    </div>
-                    <div class="col-3">
-                        <label class="form-label" for="shuriJikan">対応・処置</label>
-                        <input class="form-control <?= (form_error('対応処置') ? 'is-invalid' : ''); ?>" type="text" name="対応処置" value="<?= set_value('対応処置'); ?>">
-                    </div>
-                </div>
             </div>
 
-            <div class="row">
-                <div class="col mb-2">
-                    <input type="submit" name="edit_trouble" class="btn btn-primary float-end" value="登録">
-                    <a class="btn btn-warning float-end me-1" href='<?= base_url(); ?>'>CANCEL</a>
-
-
-                </div>
+        <?php endif ?>
+        <div class="row">
+            <div class="col mb-2">
+                <input type="submit" name="edit_trouble" class="btn btn-primary float-end" value="登録">
+                <a class="btn btn-warning float-end me-1" href='<?= base_url(); ?>'>CANCEL</a>
 
 
             </div>
+
+
+        </div>
         </form>
     </div>
 </div>
@@ -349,28 +373,21 @@ print_r($items)
 
         // })
 
-        
-            var btn_1 = $('#btnradio1')
-            var btn_2 = $('#btnradio2')
 
-            if (btn_1.prop('checked')) {
-                $('.fmea-group').hide()
-                $("#fmea_Form :input").attr("disabled", true);
-                
-            }
-            if (btn_2.prop('checked'))
-                $('.fmea-group').show()
-            $("#fmea_Form :input").attr("disabled", false);
-            
 
-            $('input[type=radio]').change(function() {
-                if (btn_1.prop('checked'))
-                    $('.fmea-group').hide()
-                if (btn_2.prop('checked'))
-                    $('.fmea-group').show()
 
-            })
-        
+        if ($('#fmea-id').length != 0) {
+            $('.fmea-group').show()
+            $("#fmea-group :input").attr("disabled", false);
+            $('#btnradio2').attr('checked', true)
+        } else {
+            $('.fmea-group').hide()
+            $("#fmea-group :input").attr("disabled", true);
+        }
+
+
+
+
 
         if ($('#equipment_parts_list_edit tbody').length != 0) {
             $arr.length = 0;

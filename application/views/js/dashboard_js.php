@@ -32,16 +32,27 @@
                     // Setup - add a text input to each cell
                     $('#trouble_table thead tr:eq(0) th').each(function() {
                         var title = $(this).text().trim();
-                        
+                       
+
                         if(title == '発生日')
-                        $(this).html('<label class="form-label" for="search-bar-' + title + '">' + title + '</label><input type="date" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" />');
+                        $('#search-bar').append('<th><input type="date" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
+                        else if (title.length == 0)
+                        $('#search-bar').append('<th class="button_column buttons" style="display:none"></th>');
                         else
-                        $(this).html('<label class="form-label" for="search-bar-' + title + '">' + title + '</label><input type="text" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" />');
+                        $('#search-bar').append('<th><input type="text" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
+
                     });
 
                     // DataTable
                     var table = $('#trouble_table').DataTable({
-                        ordering: false,
+                        ordering: true,
+                        aoColumns: [
+    { "bSortable": true },
+    { "bSortable": true },
+    { "bSortable": true },
+    { "bSortable": true },
+    { "bSortable": false },
+                        ],
                         info: false,
                         // searching:false,
                         paging: false,

@@ -37,7 +37,10 @@ function f_generate_table_select($data)
                     <th class="kanjifont table-head text-center border-right border-left">
                                 ID
                             </th>
-                    <th class="button_column" style="display:none"></th>
+                    <th class="button_column buttons" style="display:none"></th>
+                </tr>
+                <tr id="search-bar">
+
                 </tr>
             </thead>
             <tbody>

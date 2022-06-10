@@ -120,6 +120,7 @@ class Dashboard extends CI_Controller
         $id = $this->uri->segment(2);
         $data['item'] = $this->Troublelist_model->getEquipmentId(intval($id));
         $data['title'] = $this->Troublelist_model->getTitle('t202_spareparts');
+        $data['FMEA'] = $this->Troublelist_model->GetFmea($id);
 
         $this->load->view('templates/header');
         $this->load->view('Pages/recordView', $data);
@@ -225,6 +226,7 @@ class Dashboard extends CI_Controller
     {
         $this->form_validation->set_rules('発生日', 'a', 'required');
         $id = $this->uri->segment(2);
+        $data['FMEA'] = $this->Troublelist_model->GetFmea($id);
         $data['items'] = $this->Troublelist_model->getEquipmentId(intval($id));
 
         $data['division'] = [

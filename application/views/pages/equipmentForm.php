@@ -14,25 +14,25 @@
 
                 <div class="col-6">
                     <label for="start_day" class="form-label">start_day</label>
-                    <input type="date" class="form-control" id="start_day" name="発生日">
+                    <input required type="date" class="form-control" id="start_day" name="発生日">
                 </div>
 
                 <div class="col-6">
                     <label for="repair_day" class="form-label">repair_day</label>
-                    <input type="date" class="form-control" id="repair_day" name="修理日">
+                    <input required type="date" class="form-control" id="repair_day" name="修理日">
                 </div>
 
                 <div class="col-3">
                     <label for="time_start" class="form-label">repair_time_start</label>
-                    <input type="time" class="form-control" id="time_start">
+                    <input required type="time" class="form-control" id="time_start">
                 </div>
                 <div class="col-3">
                     <label for="time_end" class="form-label">repair_time_end</label>
-                    <input type="time" class="form-control" id="time_end">
+                    <input required type="time" class="form-control" id="time_end">
                 </div>
                 <div class="col-3">
                     <label for="time_duration" class="form-label">repair_time_duration</label>
-                    <input type="text" class="form-control" name="修理時間" id="time_duration">
+                    <input required type="text" class="form-control" name="修理時間" id="time_duration">
                 </div>
 
                 <div class="col-9">
@@ -79,18 +79,18 @@
 
                 <div class="col">
                     <label for="" class="form-label">Process_Name</label>
-                    <input type="text" class="form-control" name="工程名" id="kouteiNa">
+                    <input required type="text" class="form-control" name="工程名" id="kouteiNa">
                 </div>
 
                 <div class="col">
                     <label for="" class="form-label">Failure_mode</label>
-                    <input type="text" class="form-control" name="故障モード" id="mode">
+                    <input required type="text" class="form-control" name="故障モード" id="mode">
                 </div>
 
                 <div class="col-12">
                     <div class="col-4">
                         <label for="" class="form-label">Classificaion</label>
-                        <input type="text" class="form-control" name="区分" id="kubun">
+                        <input required type="text" class="form-control" name="区分" id="kubun">
                     </div>
                 </div>
             </div>
@@ -100,22 +100,22 @@
             <div class="detail row border border-dark  rounded">
                 <div class="col-12">
                     <label class="form-label" for="a">現象・不具合要因詳細</label>
-                    <textarea name="現象" id="gensho" class="form-control" cols="30" rows="10"></textarea>
+                    <textarea required name="現象" id="gensho" class="form-control" cols="30" rows="10"></textarea>
                 </div>
                 <div class="col-12">
                     <label class="form-label" for="a">修理内容</label>
-                    <textarea name="修理内容" id="shuriNaiyou" class="form-control" cols="30" rows="10"></textarea>
+                    <textarea required name="修理内容" id="shuriNaiyou" class="form-control" cols="30" rows="10"></textarea>
                 </div>
                 <div class="col-7">
                     <label class="form-label" for="a">対策</label>
-                    <textarea name="対策" id="taisaku" class="form-control" cols="30" rows="5"></textarea>
+                    <textarea required name="対策" id="taisaku" class="form-control" cols="30" rows="5"></textarea>
                 </div>
                 <div class="col">
-                    <!-- FILE INPUT -->
+                    <!-- FILE input required -->
                     <div class="row gy-4 ">
                         <div class="col-12">
                             <label class="form-label" for="taisakusho">対策書</label>
-                            <input class="form-control" type="file" name="対策書" id="taisakusho">
+                            <input  class="form-control" type="file" name="対策書" id="taisakusho">
                         </div>
 
                         <div class="col pt-3 position-relative" style="background-color:#E5E5E5; top:1px; left:1.3px;border-top-left-radius: 5px; border: 1px solid ;border-color: black #E5E5E5 #E5E5E5 black">
@@ -220,7 +220,7 @@
                     </div>
 
 
-
+                
                 </div>
 
                 <div class="row">
@@ -240,7 +240,7 @@
             </div>
 
             <div class="row">
-                <div class="col mb-2">
+                <div class="col my-2">
                     <input type="submit" name="add_trouble" class="btn btn-primary float-end" value="登録">
                     <a class="btn btn-warning float-end me-1" href='<?= base_url(); ?>as'>CANCEL</a>
 
@@ -292,23 +292,27 @@
 
             if (btn_1.prop('checked')) {
                 $('.fmea-group').hide()
-                $("#fmea_Form :input").attr("disabled", true);
+                $("#fmea-group :input").attr("disabled", true);
+                $("#fmea-group :input").attr("required", false);
                 $('#equipForm').attr('action', '/equipment/1');
             }
             if (btn_2.prop('checked'))
                 $('.fmea-group').show()
-            $("#fmea_Form :input").attr("disabled", false);
+            $("#fmea-group :input").attr("disabled", false);
+            $("#fmea-group :input").attr("required", true);
             $('#equipForm').attr('action', '/equipment/2');
 
             $('input[type=radio]').change(function() {
                 if (btn_1.prop('checked')) {
                     $('.fmea-group').hide()
-                    $("#fmea_Form :input").attr("disabled", true);
+                    $("#fmea-group :input").attr("disabled", true);
+                    $("#fmea-group :input").attr("required", false);
                     $('#equipForm').attr('action', '/equipment/1');
                 }
                 if (btn_2.prop('checked')) {
                     $('.fmea-group').show()
-                    $("#fmea_Form :input").attr("disabled", false);
+                    $("#fmea-group :input").attr("disabled", false);
+                    $("#fmea-group :input").attr("required", true);
                     $('#equipForm').attr('action', '/equipment/2');
                 }
             })
@@ -374,3 +378,4 @@
 
         // })
     </script>
+    
