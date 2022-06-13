@@ -12,6 +12,38 @@
         $("#search-bar-").hide();
     }
 
+    function category_switcher(el) {
+        // Get selected A
+        var a = $(el).html()
+        // Get selected B
+
+        // var x  = selc
+
+        switch (a) {
+            case '設備':
+                get_troubleList();
+                $("#real, #fmea-s").show()
+                $("#real").attr("onclick", "buttonSwitch(this);get_troubleList()");
+                $("#fmea-s").attr("onclick", "buttonSwitch(this);get_sparepartlist()");
+                break;
+            case '予備品':
+                get_sparepartlist();
+                $("#real, #fmea-s").hide()
+
+
+                break;
+            case '品質':
+                $("#real").attr("onclick", "buttonSwitch(this);get_troubleList()");
+                $("#fmea-s").attr("onclick", "buttonSwitch(this);get_sparepartlist()");
+                break;
+            default:
+                break;
+        }
+
+        console.log(a, b)
+
+    }
+
     // 設備 Table Constructor -> Via dashboard/get_troubleList
     // Also has ajax based search bar
     function get_troubleList() {
@@ -32,26 +64,35 @@
                     // Setup - add a text input to each cell
                     $('#trouble_table thead tr:eq(0) th').each(function() {
                         var title = $(this).text().trim();
-                       
 
-                        if(title == '発生日')
-                        $('#search-bar').append('<th><input type="date" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
+
+                        if (title == '発生日')
+                            $('#search-bar').append('<th><input type="date" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
                         else if (title.length == 0)
-                        $('#search-bar').append('<th class="button_column buttons" style="display:none"></th>');
+                            $('#search-bar').append('<th class="button_column buttons" style="display:none"></th>');
                         else
-                        $('#search-bar').append('<th><input type="text" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
+                            $('#search-bar').append('<th><input type="text" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
 
                     });
 
                     // DataTable
                     var table = $('#trouble_table').DataTable({
                         ordering: true,
-                        aoColumns: [
-    { "bSortable": true },
-    { "bSortable": true },
-    { "bSortable": true },
-    { "bSortable": true },
-    { "bSortable": false },
+                        aoColumns: [{
+                                "bSortable": true
+                            },
+                            {
+                                "bSortable": true
+                            },
+                            {
+                                "bSortable": true
+                            },
+                            {
+                                "bSortable": true
+                            },
+                            {
+                                "bSortable": false
+                            },
                         ],
                         info: false,
                         // searching:false,
@@ -374,9 +415,9 @@
     // ON FOCUS REMOVE CLASS (Probably solution to the double loop)
 
     // SAVIOOUR
-   $('input').on('click', function name(params) {
-    $(this).removeClass('is-invalid')
-   })
+    $('input').on('click', function name(params) {
+        $(this).removeClass('is-invalid')
+    })
 
 
 

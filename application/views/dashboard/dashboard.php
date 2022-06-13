@@ -1,15 +1,19 @@
-
-
-
-<div class="container kanjifont mt-4 d-flex flex-column" id="dashboard">
+<div class="container mt-4">
+    <div class="btn-group switch-field text-nowrap">
+        <a onclick="buttonSwitch(this);category_switcher(this)" class="btn btn-outline-primary active topper" aria-current="page">設備</a>
+        <a onclick="buttonSwitch(this);category_switcher(this)" class="btn  btn-outline-secondary topper">品質</a>
+        <a onclick="buttonSwitch(this);category_switcher(this)" class="btn  btn-outline-secondary topper">予備品</a>
+    </div>
+</div>
+</div>
+<div class="container kanjifont  d-flex flex-column" id="dashboard">
 
     <div class="row my-2 pt-3 ps-3">
         <div class="col-lg-9 col-md-12 mb-2">
 
             <div class="btn-group switch-field text-nowrap">
-                <a onclick="buttonSwitch(this);get_troubleList()" class="btn btn-outline-primary active" aria-current="page">設備トラブルリースト</a>
-                <a onclick="buttonSwitch(this);get_troubleList()" class="btn  btn-outline-secondary">品質トラブルリースト</a>
-                <a onclick="buttonSwitch(this);get_sparepartlist()" class="btn  btn-outline-secondary">予備品リスト</a>
+                <a id="real" onclick="buttonSwitch(this);get_troubleList()" class="btn btn-outline-primary bottm active" aria-current="page">実</a>
+                <a id="fmea-s"  onclick="buttonSwitch(this);get_sparepartlist()" class="btn  btn-outline-secondary bottm">FMEA</a>
             </div>
         </div>
         <div class="col-lg-3 col-md">
@@ -23,8 +27,8 @@
         </div>
     </div>
 
-    
-    
+
+
     <div class="row py-2">
         <div id="trouble_list"></div>
         <div id="spare_part_list"></div>
@@ -33,7 +37,7 @@
 </div>
 
 <script>
-    function buttonSwitch (el){
+    function buttonSwitch(el) {
         $(el).siblings().removeClass('active')
         $(el).siblings().removeClass('btn-outline-primary')
         $(el).siblings().addClass('btn-outline-secondary')
@@ -45,13 +49,16 @@
 </script>
 
 <style>
-    .switch-field a{
+    .switch-field a {
         padding-left: 2rem;
         padding-right: 2rem;
 
     }
+    .topper {
+        border-radius: 15px 15px 0px 0px/ 15px;
+    }
 
-/*
+    /*
     
 
     .switch-field {
@@ -68,7 +75,7 @@
          width: 20vw; 
     }
     */
-     /* .switch-field a:not(.active) {
+    /* .switch-field a:not(.active) {
         cursor: pointer;
     } */
 
