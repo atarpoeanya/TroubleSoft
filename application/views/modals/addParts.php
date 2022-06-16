@@ -50,6 +50,14 @@
                                 <label class="form-label" for="unit">単位</label>
                                 <input class="form-control " type="text" name="単位" id="unit" required>
                             </div>
+                            <div class="col">
+                                <label class="form-label" for="unit">stprage</label>
+                                <input class="form-control " type="text" name="単位" id="storage" required>
+                            </div>
+                            <div class="col">
+                                <label class="form-label" for="unit">Arra</label>
+                                <input class="form-control " type="text" name="単位" id="arra" required>
+                            </div>
                         </div>
                     </div>
             </div>

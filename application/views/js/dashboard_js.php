@@ -23,8 +23,14 @@
             case '設備':
                 get_troubleList();
                 $("#real, #fmea-s").show()
+                
                 $("#real").attr("onclick", "buttonSwitch(this);get_troubleList()");
-                $("#fmea-s").attr("onclick", "buttonSwitch(this);get_sparepartlist()");
+                $("#fmea-s").attr("onclick", "buttonSwitch(this);get_troubleList_fmea()");
+
+                $("#real").addClass('active');
+                $("#fmea-s").removeClass('active')
+
+
                 break;
             case '予備品':
                 get_sparepartlist();
@@ -40,7 +46,7 @@
                 break;
         }
 
-        console.log(a, b)
+        console.log(a)
 
     }
 
@@ -51,13 +57,15 @@
         $('#new_spareparts').hide();
         $('#new_trouble').show();
         // Toggle Div
-        $('#spare_part_list').hide();
-        $("#trouble_list").show();
+        // $('#spare_part_list').hide();
+        // $("#trouble_list").show();
+        // $("#trouble_list_fmea").hide();
+        $('#list').children().remove()
 
         $.ajax({
             url: "<?php echo base_url(); ?>dashboard/get_troubleList",
             success: function(response) {
-                $("#trouble_list").html(response);
+                $("#list").html(response);
             },
             complete: function() {
                 $(document).ready(function() {
@@ -119,6 +127,92 @@
         });
     }
 
+    // 設備 Table Constructor -> Via dashboard/get_troubleList
+    // Also has ajax based search bar
+    function get_troubleList_fmea() {
+        // Toggle Button
+        $('#new_spareparts').hide();
+        $('#new_trouble').show();
+        // Toggle Div
+        // $('#spare_part_list').hide();
+        // $("#trouble_list").hide();
+        // $("#trouble_list_fmea").show();
+        $('#list').children().remove()
+
+
+
+        $.ajax({
+            url: "<?php echo base_url(); ?>dashboard/get_troubleList_fmea",
+            success: function(response) {
+                $("#list").html(response);
+            },
+            complete: function() {
+               
+
+
+
+ $(document).ready(function() {
+                    // Setup - add a text input to each cell
+                    $('#trouble_fmea_table thead tr:eq(0) th').each(function() {
+                        var title = $(this).text().trim();
+
+
+                        if (title == '発生日')
+                            $('#search-bar').append('<th><input type="date" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
+                        else if (title.length == 0)
+                            $('#search-bar').append('<th class="button_column buttons" style="display:none"></th>');
+                        else
+                            $('#search-bar').append('<th><input type="text" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
+
+                    });
+
+                    // DataTable
+                    var table = $('#trouble_fmea_table').DataTable({
+                        ordering: true,
+                        aoColumns: [{
+                                "bSortable": true
+                            },
+                            {
+                                "bSortable": true
+                            },
+                            {
+                                "bSortable": true
+                            },
+                            {
+                                "bSortable": true
+                            },
+                            {
+                                "bSortable": false
+                            },
+                        ],
+                        info: false,
+                        // searching:false,
+                        paging: false,
+                        orderCellsTop: true,
+                        fixedHeader: true,
+                        pageLength: 100,
+                        "language": {
+                            "zeroRecords": "該当する記録は見つかりません",
+                        }
+                    });
+
+                    // Apply the search
+                    $('#trouble_fmea_table thead').on('keyup change', ".column_search", function() {
+
+                        table
+                            .column($(this).parent().index())
+                            .search(this.value)
+                            .draw();
+                    });
+
+                });
+
+
+
+            }
+        });
+    }
+
     // 送品 Table Constructor -> Via dashboard/get_sparepartList
     // Also has ajax based search bar
     function get_sparepartlist() {
@@ -126,13 +220,14 @@
         $('#new_trouble').hide();
         $('#new_spareparts').show();
         // Toggle Div
-        $('#trouble_list').hide();
-        $("#spare_part_list").show();
+        // $('#trouble_list').hide();
+        $('#list').children().remove()
+        // $("#spare_part_list").show();
 
         $.ajax({
             url: "<?php echo base_url(); ?>dashboard/get_sparepartList",
             success: function(response) {
-                $("#spare_part_list").html(response);
+                $("#list").html(response);
             },
             complete: function() {
                 // console.log('done')
@@ -307,7 +402,10 @@
             "c_maker": $('#maker').val(),
             "c_quantity": $('#quantity').val(),
             "c_unit": $('#unit').val(),
-            "c_price": $('#price').val()
+            "c_price": $('#price').val(),
+
+            'c_storage' : $('#storage').val(),
+            'c_arrangement' :$('#arra').val(),
         }
 
         $.ajax({

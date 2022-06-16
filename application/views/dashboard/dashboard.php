@@ -1,6 +1,6 @@
 <div class="container mt-4">
     <div class="btn-group switch-field text-nowrap">
-        <a onclick="buttonSwitch(this);category_switcher(this)" class="btn btn-outline-primary active topper" aria-current="page">設備</a>
+        <a onclick="buttonSwitch(this);category_switcher(this)" class="btn btn-outline-secondary active topper" aria-current="page">設備</a>
         <a onclick="buttonSwitch(this);category_switcher(this)" class="btn  btn-outline-secondary topper">品質</a>
         <a onclick="buttonSwitch(this);category_switcher(this)" class="btn  btn-outline-secondary topper">予備品</a>
     </div>
@@ -9,12 +9,13 @@
 <div class="container kanjifont  d-flex flex-column" id="dashboard">
 
     <div class="row my-2 pt-3 ps-3">
-        <div class="col-lg-9 col-md-12 mb-2">
+        <div class="col-lg-9 col-md-8 mb-2">
 
             <div class="btn-group switch-field text-nowrap">
-                <a id="real" onclick="buttonSwitch(this);get_troubleList()" class="btn btn-outline-primary bottm active" aria-current="page">実</a>
-                <a id="fmea-s"  onclick="buttonSwitch(this);get_sparepartlist()" class="btn  btn-outline-secondary bottm">FMEA</a>
+                <a id="real" onclick="buttonSwitch(this);get_troubleList()" class="btn btn-outline-secondary bottm active" aria-current="page">実</a>
+                <a id="fmea-s"  onclick="buttonSwitch(this);get_troubleList_fmea()" class="btn  btn-outline-secondary bottm">FMEA</a>
             </div>
+            <!-- <h1>HELLO</h1> -->
         </div>
         <div class="col-lg-3 col-md">
 
@@ -30,8 +31,7 @@
 
 
     <div class="row py-2">
-        <div id="trouble_list"></div>
-        <div id="spare_part_list"></div>
+        <div id="list"></div>
     </div>
     <div id="modalPlaceHolder"></div>
 </div>
@@ -39,11 +39,6 @@
 <script>
     function buttonSwitch(el) {
         $(el).siblings().removeClass('active')
-        $(el).siblings().removeClass('btn-outline-primary')
-        $(el).siblings().addClass('btn-outline-secondary')
-
-        $(el).removeClass('btn-outline-secondary')
-        $(el).addClass('btn-outline-primary')
         $(el).addClass('active')
     }
 </script>
@@ -55,7 +50,14 @@
 
     }
     .topper {
-        border-radius: 15px 15px 0px 0px/ 15px;
+        border-radius: 10px 10px 0px 0px/ 10px;
+        padding: 0;
+        padding-top: 2px;
+        height: 30px;
+    }
+
+    .btn.active{
+        background-color: #1B3384;
     }
 
     /*
@@ -92,11 +94,6 @@
     .switch-field label:last-of-type {
         border-radius: 0 4px 4px 0;
     }  */
-
-    .kanjifont {
-        font-family: BIZ UDGothic;
-        size: 22;
-    }
 
     .dataTables_filter {
         display: none;

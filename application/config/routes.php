@@ -61,6 +61,8 @@ $route['uploads/error'] = 'errors/page_missing';
 // Main Pages Routing
 $route['as'] = 'dashboard/transition';
 $route['equipment'] = 'dashboard/equipmentform';
+$route['equipment_fmea'] = 'dashboard/equipmentFmea';
+$route['equipment_fmea/(:num)'] = 'dashboard/postequipment/$type';
 $route['equipment/(:num)'] = 'dashboard/postequipment/$type';
 $route['product'] = 'dashboard/productForm';
 $route['dashboard'] = 'dashboard';

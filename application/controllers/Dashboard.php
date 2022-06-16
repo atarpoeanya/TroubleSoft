@@ -59,6 +59,23 @@ class Dashboard extends CI_Controller
         f_generate_table_select($data);
     }
 
+    public function get_troubleList_fmea()
+    {
+        $data['tool_Fmea'] = $this->Troublelist_model->getTrouble_fmea();
+        $data['title'] = $this->Troublelist_model->getTitle('t203_equipment_fmea');
+        $this->load->view('function/print_table_tool_fmea');
+        f_generate_table_select($data);
+    }
+
+    
+    public function get_troubleList_fmea_lite()
+    {
+        $data['tool_Fmea'] = $this->Troublelist_model->getTrouble_fmea();
+        $data['title'] = $this->Troublelist_model->getTitle('t203_equipment_fmea');
+        $this->load->view('function/print_table_tool_fmea_lite');
+        f_generate_table_select($data);
+    }
+
     public function get_sparepartList()
     {
 
@@ -75,6 +92,14 @@ class Dashboard extends CI_Controller
             ['部品NO', '部品名', '型式',  '数量'];
         $data['sparePart'] = $this->Troublelist_model->getSparepartList();
         $this->load->view('function/print_table_spare_lite');
+        f_generate_table_select($data);
+    }
+
+    public function fmea_tool_print($id)
+    {
+        
+        $data['fmea_tool'] = $this->Troublelist_model->getFmeaId($id);
+        $this->load->view('function/print_fmea_tool_formHelper');
         f_generate_table_select($data);
     }
 
@@ -104,6 +129,26 @@ class Dashboard extends CI_Controller
         $this->load->view('templates/header');
         $this->load->view('Pages/equipmentForm');
         $this->load->view('templates/footer');
+
+        // modal
+        $this->load->view('modals/partsSelect');
+        $this->load->view('modals/tfmeaSelect');
+        // $this->load->view('Trouble/js/home_js');
+        // $this->load->view('Trouble/modal/spareParts');
+        // $this->load->model('Trouble_model');
+        // if ($this->input->post('add_trouble')) {
+        //     $this->Trouble_model->add_equipment_data();
+        //     $this->Trouble_model->add_equipment_fmea_data();
+        // }
+    }
+
+    public function equipmentFMEA()
+    {
+
+
+        $this->load->view('templates/header');
+        $this->load->view('Pages/equipmentFmea');
+        $this->load->view('templates/footer');
         $this->load->view('modals/partsSelect');
         // $this->load->view('Trouble/js/home_js');
         // $this->load->view('Trouble/modal/spareParts');
@@ -114,16 +159,21 @@ class Dashboard extends CI_Controller
         // }
     }
 
+
     // View individual item
     public function viewRecord()
     {
         $id = $this->uri->segment(2);
+
         $data['item'] = $this->Troublelist_model->getEquipmentId(intval($id));
+        
+        $fmeaid = $this->db->get_where('t800_equipment', array("c_t800_id" => $id))->row()->c_t203_id;
+        $data['fmea'] = $this->Troublelist_model->getFmeaId($fmeaid);
         $data['title'] = $this->Troublelist_model->getTitle('t202_spareparts');
-        $data['FMEA'] = $this->Troublelist_model->GetFmea($id);
+        
 
         $this->load->view('templates/header');
-        $this->load->view('Pages/recordView', $data);
+        $this->load->view('Pages/recordView_equipment', $data);
         $this->load->view('templates/footer');
     }
 
@@ -158,16 +208,21 @@ class Dashboard extends CI_Controller
                 redirect(base_url(), '/');
             }
         }
+
+
+
+
+
         if ($id == 2) { //FMEA
             if ($this->form_validation->run() == FALSE) {
                 $this->load->view('templates/header');
-                $this->load->view('Pages/equipmentForm');
+                $this->load->view('Pages/equipmentFmea');
                 $this->load->view('templates/footer');
             } else {
-                $pic = $this->doupload();
+                // $pic = $this->doupload();
                 // CHECK IF PIC IS EMPTY/ERROR
                 // YES -> USE DEFAULT
-                $this->Troublelist_model->addData('equipment_fmea', $pic);
+                $this->Troublelist_model->addData('equipment_fmea', null);
                 redirect(base_url(), '/');
             }
         }
@@ -226,7 +281,6 @@ class Dashboard extends CI_Controller
     {
         $this->form_validation->set_rules('発生日', 'a', 'required');
         $id = $this->uri->segment(2);
-        $data['FMEA'] = $this->Troublelist_model->GetFmea($id);
         $data['items'] = $this->Troublelist_model->getEquipmentId(intval($id));
 
         $data['division'] = [
@@ -305,12 +359,7 @@ class Dashboard extends CI_Controller
     public function postSpare()
     {
         $this->form_validation->set_rules("c_purchaseDate", '1', 'required');
-        $this->form_validation->set_rules("c_partName", '2', 'required');
-        $this->form_validation->set_rules("c_model", '3', 'required');
-        $this->form_validation->set_rules("c_maker", '4', 'required');
-        $this->form_validation->set_rules("c_quantity", '5', 'required|is_natural');
-        $this->form_validation->set_rules("c_unit", '6', 'required');
-        $this->form_validation->set_rules("c_price", '7', 'required|is_natural');
+      
 
         $this->form_validation->set_message('required', '{field}');
 
@@ -321,30 +370,6 @@ class Dashboard extends CI_Controller
             echo 1;
         }
 
-
-
-
-
-        // Spare part adder 'add_sparepart is modal -> form.ID'
-
-        // if ($this->input->post('add_sparepart')) {
-        //     $this->form_validation->set_rules("購入日", 'Message', 'required');
-        //     if ($this->form_validation->run() == FALSE) {
-        //         echo validation_errors();
-        //     } else {
-        //         $this->Troublelist_model->addData('spareparts', 'empty');
-        //         echo 1;
-        //     }
-
-        // if ($this->form_validation->run() == FALSE) {
-
-
-        // } else {
-
-        // 	redirect(base_url(),'/');
-        // }
-
-        // }
 
 
     }

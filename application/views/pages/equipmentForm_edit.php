@@ -239,73 +239,7 @@ print_r($FMEA);
 
                 </div>
             </div>
-            <!-- FMEA -->
-            <h3 class="fmea-group position-relative" style="top: 30px; left: 40px; background-color: #c4c4c4; width: max-content;">
-                &nbsp;FMEA&nbsp;</h3>
-            <div id="fmea-group" class="fmea-group pt-4 pb-3 px-3 border border-dark rounded">
-                <?php if (isset($FMEA)) : ?>
-                    
-
-                    <div class="row">
-                        <div class="col">
-                            <label class="form-label" for="detail">故障の影響</label>
-                            <textarea class="form-control <?= (form_error('故障の影響') ? 'is-invalid' : ''); ?>" name="故障の影響" id="detail" cols="30" rows="10"><?= $FMEA->c_failImpact ?></textarea>
-                        </div>
-                        <div class="col">
-                            <label class="form-label" for="shuriJikan">ライン停止の可能性</label>
-                            <input class="form-control <?= (form_error('ライン停止の可能性') ? 'is-invalid' : ''); ?>" type="text" name="ライン停止の可能性" value="<?= $FMEA->c_lineEffect ?>">
-
-                            <label class="form-label" for="shuriJikan">特 殊 特性等</label>
-                            <input class="form-control <?= (form_error('特殊特性等') ? 'is-invalid' : ''); ?>" type="text" name="特殊特性等" value="<?= $FMEA->c_specialChar ?>">
-                        </div>
-                    </div>
-
-
-                    <p class=" position-relative" style="top: 30px; left: 40px; background-color: #c4c4c4; width: max-content;">
-                        &nbsp;現在の工程管理&nbsp;</p>
-                    <div class="row border border-dark rounded mx-1 pt-3 pb-3">
-                        <div class="col-6">
-                            <label class="form-label" for="shuriJikan">予防</label>
-                            <input class="form-control <?= (form_error('予防') ? 'is-invalid' : ''); ?>" type="text" name="予防" value="<?= $FMEA->c_prevention ?>">
-                        </div>
-
-                        <div class="col-3">
-                            <label class="form-label" for="shuriJikan">周期</label>
-                            <input class="form-control <?= (form_error('周期') ? 'is-invalid' : ''); ?>" type="text" name="周期" value="<?= $FMEA->c_period ?>">
-                        </div>
-
-                        <div class="col-3">
-                            <label class="form-label" for="shuriJikan">月</label>
-                            <input class="form-control  <?= (form_error('月') ? 'is-invalid' : ''); ?>" type="text" name="月" value="<?= $FMEA->c_month ?>">
-                        </div>
-
-
-                        <div class="col-6">
-                            <label class="form-label" for="shuriJikan">検出</label>
-                            <input class="form-control <?= (form_error('検出') ? 'is-invalid' : ''); ?>" type="text" name="検出" value="<?= $FMEA->c_detection ?>">
-                        </div>
-
-
-
-                    </div>
-
-                    <div class="row">
-                        <div class="col-6">
-                            <label class="form-label" for="detail">対策案</label>
-                            <textarea class="form-control <?= (form_error('対策案') ? 'is-invalid' : ''); ?>" name="対策案" id="detail" cols="30" rows="10"><?= $FMEA->c_counterPlan ?></textarea>
-                        </div>
-                        <div class="col-3">
-                            <label class="form-label" for="shuriJikan">担当者日程</label>
-                            <input class="form-control <?= (form_error('担当者日程') ? 'is-invalid' : ''); ?>" type="text" name="担当者日程" value="<?= $FMEA->c_picSchedule ?>">
-                        </div>
-                        <div class="col-3">
-                            <label class="form-label" for="shuriJikan">対応・処置</label>
-                            <input class="form-control <?= (form_error('対応処置') ? 'is-invalid' : ''); ?>" type="text" name="対応処置" value="<?= $FMEA->c_response ?>">
-                        </div>
-                    </div>
-            </div>
-
-        <?php endif ?>
+           
         <div class="row">
             <div class="col mb-2">
                 <input type="submit" name="edit_trouble" class="btn btn-primary float-end" value="登録">

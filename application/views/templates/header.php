@@ -20,6 +20,13 @@
 <!-- Sweetalert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+<style>
+    html * {
+        font-family: BIZ UDGothic;
+        size: 22;
+    }
+</style>
+
 <head>
     <title>明和工業過去トラブルデータベース</title>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">

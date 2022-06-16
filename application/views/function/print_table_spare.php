@@ -34,6 +34,12 @@ function f_generate_table_select($data)
             case 'c_price':
                 array_push($head_name, '金額');
                 break;
+            case 'c_storage':
+                array_push($head_name, '予備品の保管場所');
+                break;
+            case 'c_arrangement':
+                array_push($head_name, '必要時の手配先');
+                break;
 
             default:
                 array_push($head_name, 'MISSING');
@@ -50,7 +56,7 @@ function f_generate_table_select($data)
                     <?php
                     foreach ($head_name as $thead) {
                     ?>
-                        <th class="kanjifont table-head text-center border-right border-left">
+                        <th class=" table-head text-center border-right border-left">
                             <?= $thead ?>
                         </th>
 
@@ -76,13 +82,13 @@ function f_generate_table_select($data)
                                 $id = $value;
                         ?>
 
-                                <td class="kanjifont table-data text-center align-middle border-right border-left pointer col ID">
+                                <td class=" table-data text-center align-middle border-right border-left pointer col ID">
                                     <?= $id ?>
                                 </td>
                             <?php
                             } else {
                             ?>
-                                <td class="kanjifont table-data text-center align-middle border-right border-left pointer col">
+                                <td class=" table-data text-center align-middle border-right border-left pointer col">
                                     <?= $value ?>
                                 </td>
 
@@ -90,7 +96,7 @@ function f_generate_table_select($data)
                             }
                         }
                         ?>
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-2 button_column text-nowrap" style="display: none;">
+                        <td class=" table-data text-center align-middle border-right border-left pointer col-md-2 button_column text-nowrap" style="display: none;">
                             <a class="btn-block btn btn-primary modify-button" onclick="editSpare_populate(this)">更新</a>
                             <a class="btn-block btn btn-danger modify-button" onclick="event.cancelBubble=true;deleteData(<?= $item->c_t202_id ?>,'spareparts')">削除</a>
                         </td>
@@ -107,7 +113,33 @@ function f_generate_table_select($data)
 }
 ?>
 <style>
+ .pointer:hover {
+        cursor: pointer;
+    }
 
+    .table-title {
+        background: #435d7d;
+        color: #fff;
+        padding: 6px 6px;
+        border-radius: 3px 3px 0 0;
+    }
+
+    .table-wrapper {
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    }
+
+    .table-wrapper-scrolls {
+        width: auto;
+        height: 70vh;
+        overflow-y: scroll;
+        
+    }
+
+    .text-nowrap {
+        white-space: nowrap;
+    }
 
 </style>
 
