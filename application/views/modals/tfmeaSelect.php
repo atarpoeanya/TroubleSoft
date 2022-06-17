@@ -11,8 +11,10 @@
                 <div class="col-12">
 
                     <label for="recipient-name" class="col-form-label">部署</label>
-                    <select class="form-control" name="" id="">
-                        <option value="" selected>Default</option>
+                    <select class="form-control" name="" id="departement_select">
+                        <option value="" selected>全て</option>
+                        <option value="1" >1</option>
+                        <option value="2" >2</option>
                     </select>
 
 
@@ -38,7 +40,81 @@
             success: function(response) {
                 $("#fmeaUpper").html(response)
 
+            },
+
+            complete: function() {
+
+
+
+
+                $(document).ready(function() {
+                    // Setup - add a text input to each cell
+                    $('#trouble_fmea_table_lite thead tr:eq(0) th').each(function() {
+                        var title = $(this).text().trim();
+
+
+                        if (title == '発生日')
+                            $('#search-bar').append('<th><input type="date" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
+                        else if (title.length == 0 )
+                            $('#search-bar').append('<th></th>');
+                        else
+                            $('#search-bar').append('<th><input type="text" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
+
+                    });
+
+                    // DataTable
+                    var table = $('#trouble_fmea_table_lite').DataTable({
+                        ordering: true,
+                        aoColumns: [{
+                                "bSortable": true
+                            },
+                            {
+                                "bSortable": true
+                            },
+                            {
+                                "bSortable": true
+                            },
+                            {
+                                "bSortable": true
+                            },
+                            {
+                                "bSortable": false
+                            },
+                            {
+                                "bSortable": false
+                            },
+                        ],
+                        info: false,
+                        // searching:false,
+                        paging: false,
+                        orderCellsTop: true,
+                        fixedHeader: true,
+                        pageLength: 100,
+                        dom: 't',
+                        "language": {
+                            "zeroRecords": "該当する記録は見つかりません",
+                        }
+                    });
+
+                    // Apply the search
+                    $('#trouble_fmea_table_lite thead').on('keyup change', ".column_search", function() {
+
+                        table
+                            .column($(this).parent().index())
+                            .search(this.value)
+                            .draw();
+                    });
+
+                    $('#departement_select').on('change', function () {
+                        table.column($('#department_ref').index()).search($(this).val()).draw();
+                    })
+
+                });
+
+
+
             }
+
         })
     })
 </script>

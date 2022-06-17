@@ -23,7 +23,7 @@
             case '設備':
                 get_troubleList();
                 $("#real, #fmea-s").show()
-                
+
                 $("#real").attr("onclick", "buttonSwitch(this);get_troubleList()");
                 $("#fmea-s").attr("onclick", "buttonSwitch(this);get_troubleList_fmea()");
 
@@ -147,11 +147,11 @@
                 $("#list").html(response);
             },
             complete: function() {
-               
 
 
 
- $(document).ready(function() {
+
+                $(document).ready(function() {
                     // Setup - add a text input to each cell
                     $('#trouble_fmea_table thead tr:eq(0) th').each(function() {
                         var title = $(this).text().trim();
@@ -289,7 +289,11 @@
 
     function view_record(el) {
         var $id = $(el).children('.ID').text().trim();
-        var url = 'item/' + $id;
+
+        if (!$(el).hasClass('fmea-tools'))
+            var url = 'item/' + $id;
+        else
+            var url = 'item_fmea/' + $id;
         // console.log(url)
         window.location.replace(<?php base_url() ?>url)
     }
@@ -404,8 +408,8 @@
             "c_unit": $('#unit').val(),
             "c_price": $('#price').val(),
 
-            'c_storage' : $('#storage').val(),
-            'c_arrangement' :$('#arra').val(),
+            'c_storage': $('#storage').val(),
+            'c_arrangement': $('#arra').val(),
         }
 
         $.ajax({

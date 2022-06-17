@@ -74,3 +74,5 @@ $route['editEquipment/(:num)'] = 'dashboard/editdata_view/$id';
 //Record Routing
 $route['item/(:num)'] = 'dashboard/viewRecord/$id';
 
+$route['item_fmea/(:num)'] = 'dashboard/viewRecord_fmea/$id';
+

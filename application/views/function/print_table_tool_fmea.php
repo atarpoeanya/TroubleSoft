@@ -50,7 +50,7 @@ function f_generate_table_select($data)
                 foreach ($data['tool_Fmea'] as $item) {
 
                 ?>
-                    <tr onclick="view_record(this)" >
+                    <tr class="fmea-tools" onclick="view_record(this)" >
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer col">
                             <?= $item->c_accidentDate ?>
                         </td>

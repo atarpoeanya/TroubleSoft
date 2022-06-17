@@ -5,7 +5,7 @@ function f_generate_table_select($data)
     // if($data == "x"){
 ?>
     <div class="table-responsive table-wrapper table-wrapper-scroll overflow-hidden">
-        <table class="table table-striped table-hover" id="trouble_fmea_table">
+        <table class="table table-striped table-hover" id="trouble_fmea_table_lite">
             <thead>
                 <tr>
                     <?php
@@ -23,27 +23,24 @@ function f_generate_table_select($data)
                                     $thead = '発生日';
                                     break;
                                 default:
-                                // $thead = 'missing';
+                                    // $thead = 'missing';
                                     break;
                             }
 
                     ?>
-                            <th class="kanjifont table-head text-center border-right border-left">
-                                <?= $thead ?>
-                            </th>
+                            <th class=" table-head text-center border-right border-left"><?= $thead ?></th>
 
                     <?php
                         }
                     }
                     ?>
-                    <th class="kanjifont table-head text-center border-right border-left">
-                                ID
-                            </th>
-                    <th class="button_column buttons" style="display:none"></th>
+                    <th class=" table-head text-center border-right border-left">
+                        ID
+                    </th>
+                    <th class="button_column buttons"></th>
+                    <th class="" id="department_ref" ></th>
                 </tr>
-                <tr id="search-bar">
-
-                </tr>
+                <tr id="search-bar"></tr>
             </thead>
             <tbody>
                 <?php
@@ -52,22 +49,24 @@ function f_generate_table_select($data)
                 foreach ($data['tool_Fmea'] as $item) {
 
                 ?>
-                    <tr  >
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col">
+                    <tr>
+                        <td class=" table-data text-center align-middle border-right border-left pointer col">
                             <?= $item->c_accidentDate ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col">
+                        <td class=" table-data text-center align-middle border-right border-left pointer col">
                             <?= $item->c_processName ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col">
+                        <td class=" table-data text-center align-middle border-right border-left pointer col">
                             <?= $item->c_failMode ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col ID">
+                        <td class=" table-data text-center align-middle border-right border-left pointer col ID">
                             <?= $item->c_t203_id ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col button_column text-nowrap">
-                            <a  class="btn btn-primary buttons" data-bs-dismiss="modal">choose (temp)</a>
-                            
+                        <td class=" table-data text-center align-middle border-right border-left pointer col button_column text-nowrap">
+                            <a class="btn btn-primary buttons" data-bs-dismiss="modal">choose (temp)</a>
+                        </td>
+                        <td>
+                        <?= $item->c_department ?>
                         </td>
                     </tr>
                 <?php
@@ -77,12 +76,12 @@ function f_generate_table_select($data)
         </table>
     </div>
 
+    <?php
+    // } if($data == 'y') {
+    ?>
+
 <?php
-// } if($data == 'y') {
-?>
- 
-<?php
-// }
+    // }
 }
 ?>
 <style>
@@ -107,7 +106,7 @@ function f_generate_table_select($data)
         width: auto;
         height: 70vh;
         overflow-y: scroll;
-        
+
     }
 
     .text-nowrap {
@@ -120,13 +119,17 @@ function f_generate_table_select($data)
         $id = $(this).parent().siblings('.ID').html().trim()
 
         $.ajax({
-            url: "<?= base_url(); ?>dashboard/fmea_tool_print/"+$id,
-            
+            url: "<?= base_url(); ?>dashboard/fmea_tool_print/" + $id,
+
             success: function(response) {
                 $("#fmea_place").html(response);
                 $('#fmea_id').val($id)
+
+
                 
-            }
+
+            },
+           
         })
     })
 </script>

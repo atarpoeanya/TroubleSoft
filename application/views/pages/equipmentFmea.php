@@ -1,8 +1,8 @@
 <div class="d-flex row">
     <div class="col">
-    <form action="/equipment_fmea/2" method="post" class="mt-4 p-4 col mainForm" autocomplete="off" id="equipForm" enctype="multipart/form-data">
-        <!-- For Spare part [Id, Amount] -->
-        <input type="hidden" name="spareParts" id="partinfo" value="">
+        <form action="/equipment_fmea/2" method="post" class="mt-4 p-4 col mainForm" autocomplete="off" id="equipForm" enctype="multipart/form-data">
+            <!-- For Spare part [Id, Amount] -->
+            <input type="hidden" name="spareParts" id="partinfo" value="">
 
             <div class="container">
                 <div class="row">
@@ -38,6 +38,8 @@
                         <select class="form-control" name="部署" id="busho">
                             <option value="" selected>Default</option>
                             <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="ATAR">ATAR</option>
                         </select>
                     </div>
 
@@ -92,10 +94,18 @@
 
             <div class="container">
                 <div class="row">
-                    <div class="col"><label class="form-label" for="">Fail_Mech</label><input type="text" class="form-control" name="fail_mech"></div>
-                    <div class="col"><label class="form-label" for="">Line_effect</label><input type="text" class="form-control" name="ライン停止の可能性"></div>
-                    <div class="col"><label class="form-label" for="">Impact</label><input type="text" class="form-control" name="故障の影響"></div>
-                    <div class="col"><label class="form-label" for="">Special_Characteristic</label><input type="text" class="form-control" name="特殊特性等"></div>
+                    <div class="col"><label class="form-label" for="">Fail_Mech</label>
+                        <textarea class="form-control" name="fail_mech" cols="30" rows="5"></textarea>
+                    </div>
+                    <div class="col"><label class="form-label" for="">Line_effect</label>
+                        <textarea name="ライン停止の可能性" class="form-control" cols="30" rows="5"></textarea>
+                    </div>
+                    <div class="col"><label class="form-label" for="">Impact</label>
+                        <input type="text" class="form-control" name="故障の影響">
+                    </div>
+                    <div class="col"><label class="form-label" for="">Special_Characteristic</label>
+                        <input type="text" class="form-control" name="特殊特性等">
+                    </div>
                 </div>
             </div>
 
@@ -113,8 +123,7 @@
                     </div>
                     <div class="col">
                         <label class="form-label" for="">Month</label>
-                        <input type="text" class="form-control"
-                        name="月">
+                        <input type="text" class="form-control" name="月">
 
                     </div>
 
@@ -132,39 +141,39 @@
                 </div>
             </div>
             <div class="spare row mt-3">
-                        <div class="col  p-0 rounded-2 overflow-hidden mb-2">
-                            <table class="table text-center m-0" id="equipment_parts_list">
-                                <thead>
-                                    <tr>
-                                        <td colspan="3"></td>
-                                        <td class=" table-light rounded-top shadow-sm" style="width: 150px;">
-                                            <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#partsSelect">SPARE PART</a>
-                                        </td>
-                                    </tr>
-                                    <tr class="table-dark">
-                                        <td>部品NO</td>
-                                        <td>部品名</td>
-                                        <td>型式</td>
-                                        <td>数量</td>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-striped table-light">
+                <div class="col  p-0 rounded-2 overflow-hidden mb-2">
+                    <table class="table text-center m-0 nolimit" id="equipment_parts_list">
+                        <thead>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td class=" table-light rounded-top shadow-sm" style="width: 150px;">
+                                    <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#partsSelect">SPARE PART</a>
+                                </td>
+                            </tr>
+                            <tr class="table-dark">
+                                <td>部品NO</td>
+                                <td>部品名</td>
+                                <td>型式</td>
+                                <td>数量</td>
+                            </tr>
+                        </thead>
+                        <tbody class="table-striped table-light">
 
-                                </tbody>
-                                <tfoot class="table-striped table-light">
-                                    <tr>
-                                        <td style="height: 100px;" colspan="4" class="text-center emptyTab">
-                                            <span>EMPTY</span>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
+                        </tbody>
+                        <tfoot class="table-striped table-light">
+                            <tr>
+                                <td style="height: 100px;" colspan="4" class="text-center emptyTab">
+                                    <span>EMPTY</span>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col my-2">
-                    <input type="submit" name="add_trouble" class="btn btn-primary float-end" value="登録" id="submitTrouble" >
+                    <input type="submit" name="add_trouble" class="btn btn-primary float-end" value="登録" id="submitTrouble">
                     <button type="button" class="btn btn-primary" onclick="printName()">CLICK ME</button>
                     <a class="btn btn-warning float-end me-1" href='<?= base_url(); ?>as'>CANCEL</a>
 
@@ -174,7 +183,7 @@
 
             </div>
         </form>
-        
+
     </div>
 
     <div class="col-5"></div>
@@ -183,7 +192,7 @@
 
 <script>
     function printName() {
-        $('form :input').each(function (i, e) {
+        $('form :input').each(function(i, e) {
             console.log(e.name)
         })
     }

@@ -2,7 +2,7 @@
 function f_generate_table_select($data)
 {
 ?>
-        <div class="sticky-top mb-2"><input class="sticky-top form-control" type="text" id="table_input" oninput="search_all_function()" placeholder="Search"></div>
+    <div class="sticky-top mb-2"><input class="sticky-top form-control" type="text" id="table_input" oninput="search_all_function()" placeholder="Search"></div>
     <div class="table-responsive table-wrapper table-wrapper-scroll">
         <table class="table table-stripped table-bordered" id="gen_table">
             <thead>
@@ -10,11 +10,11 @@ function f_generate_table_select($data)
 
                     <?php
                     foreach ($data['title'] as $thead) {
-                        if($thead != '使用箇所') {
+                        if ($thead != '使用箇所') {
                     ?>
-                        <th class="kanjifont table-head text-center border-right border-left">
-                            <?= $thead ?>
-                        </th>
+                            <th class="kanjifont table-head text-center border-right border-left">
+                                <?= $thead ?>
+                            </th>
 
                     <?php
                         }
@@ -26,7 +26,7 @@ function f_generate_table_select($data)
             <tbody id="bodys">
                 <?php
 
-                                                                                            
+
                 foreach ($data['sparePart'] as $item) {
 
                 ?>
@@ -51,13 +51,13 @@ function f_generate_table_select($data)
                         </td>
 
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-2 button_column text-nowrap">
-                            <?php if($item->c_quantity == 0) {?>
-                            <a class="btn-block btn btn-primary modify-button plus disabled" onclick="event.cancelBubble=true;" >+</a>
-                            <a class="btn-block btn btn-danger modify-button minus disabled" onclick="event.cancelBubble=true; ">-</a>
-                            <?php } else {?>
-                            <a class="btn-block btn btn-primary modify-button plus" onclick="event.cancelBubble=true;">+</a>
-                            <a class="btn-block btn btn-danger modify-button minus" onclick="event.cancelBubble=true; ">-</a>
-                            <?php }?>
+                            <?php if ($item->c_quantity == 0 && base_url()) { ?>
+                                <a class="btn-block btn btn-primary modify-button plus disabled" onclick="event.cancelBubble=true;">+</a>
+                                <a class="btn-block btn btn-danger modify-button minus disabled" onclick="event.cancelBubble=true; ">-</a>
+                            <?php } else { ?>
+                                <a class="btn-block btn btn-primary modify-button plus" onclick="event.cancelBubble=true;">+</a>
+                                <a class="btn-block btn btn-danger modify-button minus" onclick="event.cancelBubble=true; ">-</a>
+                            <?php } ?>
                         </td>
 
 
@@ -81,7 +81,11 @@ function f_generate_table_select($data)
 }
 ?>
 <script>
-    $('.plus').click(function() {
+    $(document).ready(function() {
+      if($('table').hasClass('nolimit')) 
+        $('.plus, .minus').removeClass('disabled')
+    })
+    $('.plus').click(function plus() {
         var the_button = $(this)
         var partRow = $(this).parents('tr')
         var partDetails = [
@@ -122,10 +126,11 @@ function f_generate_table_select($data)
                         amount++
                         $(this).find("td:eq(3)").html(amount)
                         // console.log([$(this).find("td:eq(3)").html(), parseInt(partDetails[ 4]), amount])
-                        if (amount >= parseInt(partDetails[3]) && !$('#equipment_parts_list_edit').length){
-                        
-                            the_button.addClass('disabled')
-                        }
+                        if (!$('table').hasClass('nolimit'))
+                            if (amount >= parseInt(partDetails[3]) && !$('#equipment_parts_list_edit').length) {
+
+                                the_button.addClass('disabled')
+                            }
                         // the_button.removeClass('btn-primary')
                         // the_button.addClass('btn-secondary')
 
@@ -137,9 +142,10 @@ function f_generate_table_select($data)
             } else {
                 partRow.addClass('table-success')
                 $('#foots:last-child').append('<tr class="' + partDetails[0] + '"><td>' + partDetails[0] + '</td> <td>' + partDetails[1] + '</td> <td>' + partDetails[2] + '</td> <td>' + 1 + '</td> <td><a class="btn btn-primary minus">-</a></td> </tr>')
-                if (parseInt(partDetails[3]) == 1 ||parseInt(partDetails[3]) == 0){
-                    the_button.addClass('disabled')
-                }
+                if (!$('table').hasClass('nolimit'))
+                    if (parseInt(partDetails[3]) == 1 || parseInt(partDetails[3]) == 0) {
+                        the_button.addClass('disabled')
+                    }
 
             }
         }

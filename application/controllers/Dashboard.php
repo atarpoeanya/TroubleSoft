@@ -149,14 +149,9 @@ class Dashboard extends CI_Controller
         $this->load->view('templates/header');
         $this->load->view('Pages/equipmentFmea');
         $this->load->view('templates/footer');
+
         $this->load->view('modals/partsSelect');
-        // $this->load->view('Trouble/js/home_js');
-        // $this->load->view('Trouble/modal/spareParts');
-        // $this->load->model('Trouble_model');
-        // if ($this->input->post('add_trouble')) {
-        //     $this->Trouble_model->add_equipment_data();
-        //     $this->Trouble_model->add_equipment_fmea_data();
-        // }
+        
     }
 
 
@@ -174,6 +169,19 @@ class Dashboard extends CI_Controller
 
         $this->load->view('templates/header');
         $this->load->view('Pages/recordView_equipment', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function viewRecord_fmea()
+    {
+        $id = $this->uri->segment(2);
+
+        $data['fmea'] = $this->Troublelist_model->getFmeaId($id);
+        $data['title'] = $this->Troublelist_model->getTitle('t202_spareparts');
+        
+
+        $this->load->view('templates/header');
+        $this->load->view('Pages/recordView_equipment_FMEA', $data);
         $this->load->view('templates/footer');
     }
 
