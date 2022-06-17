@@ -261,8 +261,10 @@
                         complete: function() {
                             if ($type == 'spareparts')
                                 get_sparepartlist();
-                            else
+                            if(($type == 'equipment'))
                                 get_troubleList();
+                            else
+                                get_troubleList_fmea()
 
                         }
                     });

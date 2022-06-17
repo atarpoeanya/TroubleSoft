@@ -26,7 +26,7 @@ function f_generate_table_select($data)
                             }
 
                     ?>
-                            <th class="kanjifont table-head text-center border-right border-left">
+                            <th class=" table-head text-center border-right border-left">
                                 <?= $thead ?>
                             </th>
 
@@ -34,7 +34,7 @@ function f_generate_table_select($data)
                         }
                     }
                     ?>
-                    <th class="kanjifont table-head text-center border-right border-left">
+                    <th class=" table-head text-center border-right border-left">
                                 ID
                             </th>
                     <th class="button_column buttons" style="display:none"></th>
@@ -51,19 +51,19 @@ function f_generate_table_select($data)
 
                 ?>
                     <tr onclick="view_record(this)" >
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col">
+                        <td class=" table-data text-center align-middle border-right border-left pointer col">
                             <?= $item->c_accidentDate ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col">
+                        <td class=" table-data text-center align-middle border-right border-left pointer col">
                             <?= $item->c_processName ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col">
+                        <td class=" table-data text-center align-middle border-right border-left pointer col">
                             <?= $item->c_failMode ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col ID">
+                        <td class=" table-data text-center align-middle border-right border-left pointer col ID">
                             <?= $item->c_t800_id ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col button_column text-nowrap" style="display: none;">
+                        <td class=" table-data text-center align-middle border-right border-left pointer col button_column text-nowrap" style="display: none;">
                             <a class="btn-block btn btn-primary modify-button" href="<?=base_url()?>editEquipment/<?=intval($item->c_t800_id)?>" onclick="event.cancelBubble=true;">更新</a>
                             <a class="btn-block btn btn-danger modify-button"  onclick="event.cancelBubble=true; deleteData(<?=$item->c_t800_id?>, 'equipment')">削除</a>
                         </td>

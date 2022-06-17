@@ -277,6 +277,9 @@ class Dashboard extends CI_Controller
             case 'spareparts':
                 $head = 'c_t202_id';
                 break;
+            case 'equipment_fmea':
+                $head = 'c_t203_id';
+                break;
             default:
                 # code...
                 break;

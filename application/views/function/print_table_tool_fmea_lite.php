@@ -38,7 +38,7 @@ function f_generate_table_select($data)
                         ID
                     </th>
                     <th class="button_column buttons"></th>
-                    <th class="" id="department_ref" ></th>
+                    <th class="" id="department_ref"></th>
                 </tr>
                 <tr id="search-bar"></tr>
             </thead>
@@ -66,7 +66,7 @@ function f_generate_table_select($data)
                             <a class="btn btn-primary buttons" data-bs-dismiss="modal">choose (temp)</a>
                         </td>
                         <td>
-                        <?= $item->c_department ?>
+                            <?= $item->c_department ?>
                         </td>
                     </tr>
                 <?php
@@ -126,10 +126,10 @@ function f_generate_table_select($data)
                 $('#fmea_id').val($id)
 
 
-                
+
 
             },
-           
+
         })
     })
 </script>

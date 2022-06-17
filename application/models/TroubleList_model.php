@@ -203,7 +203,7 @@ class Troublelist_model extends CI_Model
         if ($this->input->post('spareParts', true)) {
             $this->addSpare_used(json_decode($this->input->post('spareParts'), true), $formName);
         }
-        
+
         if ($this->db->trans_status() === FALSE) {
             $this->db->trans_rollback();
         } else {
@@ -214,7 +214,7 @@ class Troublelist_model extends CI_Model
 
     public function addSpare_used($arr, $formId)
     {
-        
+
         $data = [];
         //$arr expected [[2,2], [2,1]]
         $id = $this->db->query("SELECT IDENT_CURRENT('$formId') as last_id")->result();
@@ -241,7 +241,7 @@ class Troublelist_model extends CI_Model
 
                 ];
                 $amountReal = $this->db->where('c_t202_id', $value[0])->get('t202_spareparts')->row()->c_quantity;
-                
+
                 $this->db->set('c_quantity', intval($amountReal) - intval($value[1]), false);
                 $this->db->where('c_t202_id', $value[0]);
                 $this->db->update('t202_spareparts');
@@ -351,6 +351,7 @@ class Troublelist_model extends CI_Model
     public function deleteData($id, $formID, $head)
     {
         $formName = '';
+        $this->db->trans_begin();
         switch ($formID) {
             case 'equipment':
                 $formName = 't800_equipment';
@@ -361,6 +362,14 @@ class Troublelist_model extends CI_Model
                 $this->db->where($head, $id);
                 $this->db->delete($formName);
                 break;
+
+            case 'equipment_fmea':
+                $formName = 't203_equipment_fmea';
+
+                $this->db->where($head, $id);
+                $this->db->delete($formName);
+                break;
+
             case 'spareparts':
                 $formName = 't202_spareparts';
                 $arrf  = ['c_quantity' => 0];
@@ -371,6 +380,11 @@ class Troublelist_model extends CI_Model
             default:
                 # code...
                 break;
+        }
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+        } else {
+            $this->db->trans_commit();
         }
     }
 
