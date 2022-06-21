@@ -113,8 +113,6 @@ class Dashboard extends CI_Controller
         $this->load->view('Pages/productForm');
         $this->load->view('templates/footer');
 
-        // $this->load->view('Trouble/js/home_js');
-        // $this->load->view('Trouble/modal/schedule');
     } // UNUSED
 
 
@@ -133,13 +131,7 @@ class Dashboard extends CI_Controller
         // modal
         $this->load->view('modals/partsSelect');
         $this->load->view('modals/tfmeaSelect');
-        // $this->load->view('Trouble/js/home_js');
-        // $this->load->view('Trouble/modal/spareParts');
-        // $this->load->model('Trouble_model');
-        // if ($this->input->post('add_trouble')) {
-        //     $this->Trouble_model->add_equipment_data();
-        //     $this->Trouble_model->add_equipment_fmea_data();
-        // }
+
     }
 
     public function equipmentFMEA()
@@ -245,7 +237,7 @@ class Dashboard extends CI_Controller
         return $post_string == '' ? FALSE : TRUE;
     }
 
-    public function doupload()
+    public function doupload() //For files
     {
         // File RULES
         $config['upload_path']          = './uploads/';
@@ -332,6 +324,30 @@ class Dashboard extends CI_Controller
             } else {
                 $data = $this->doupload();
                 $this->Troublelist_model->updateData($data);
+                redirect(base_url(), '/');
+            }
+            //invoke modal spare parte select
+            $this->load->view('modals/partsSelect');
+        } else {
+            echo "NO DATA";
+        }
+    }
+
+    public function editData_fmea($id)
+    {
+        $this->form_validation->set_rules('発生日', 'a', 'required');
+        $id = $this->uri->segment(2);
+        $data['items'] = $this->Troublelist_model->getFmeaId(intval($id));
+
+        if (!empty($data['items'])) {
+            $this->form_validation->set_rules('発生日', 'a', 'required');
+            if ($this->form_validation->run() == FALSE) {
+                $this->load->view('templates/header');
+                $this->load->view('Pages/equipmentFmea_edit', $data);
+                $this->load->view('templates/footer');
+            } else {
+                
+                $this->Troublelist_model->updateData_fmea($data);
                 redirect(base_url(), '/');
             }
             //invoke modal spare parte select

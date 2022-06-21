@@ -25,7 +25,7 @@
 <script>
     // var _isInit = 0;
     var $arr = [];
-    // var myModalEl = document.getElementById('partsSelect')
+
     // Too detailed probably need to make stand-alone table function
     $('#partsSelect').on('show.bs.modal', function(event) {
 
@@ -36,7 +36,7 @@
                 $("#upper").html(response)
                 if ($('#equipment_parts_list tbody tr, #equipment_parts_list_edit tbody tr').length != 0) {
                     
-                    // $('#foots tr').clone().prependTo('#equipment_parts_list tbody');
+
                     // IF EXIST IN BODY, APPEND
                     $('#foots').append($('#equipment_parts_list tbody tr, #equipment_parts_list_edit tbody tr').clone())
                     // CHECK ID for button disabling and color success bg
@@ -52,7 +52,7 @@
                         $('#bodys').find('tr').each(function() {
                             id = $(this).find("td:eq(0)").text().trim();
 
-                            // $(this).find("td:eq(0)").text().trim();
+
                             if (id == itemId)
                                 flag = 1;
                                 else
@@ -65,7 +65,7 @@
                                     $(this).find("td:eq(4)").children('.plus').addClass('disabled')
                             }
                         })
-                        // if (id == $(this).find("td:eq(0)").text().trim())
+    
                             
 
                         $(this).find('td:last-child').show();

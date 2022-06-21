@@ -15,9 +15,7 @@
     function category_switcher(el) {
         // Get selected A
         var a = $(el).html()
-        // Get selected B
 
-        // var x  = selc
 
         switch (a) {
             case '設備':
@@ -56,10 +54,7 @@
         // Toggle Button
         $('#new_spareparts').hide();
         $('#new_trouble').show();
-        // Toggle Div
-        // $('#spare_part_list').hide();
-        // $("#trouble_list").show();
-        // $("#trouble_list_fmea").hide();
+
         $('#list').children().remove()
 
         $.ajax({
@@ -133,10 +128,7 @@
         // Toggle Button
         $('#new_spareparts').hide();
         $('#new_trouble').show();
-        // Toggle Div
-        // $('#spare_part_list').hide();
-        // $("#trouble_list").hide();
-        // $("#trouble_list_fmea").show();
+
         $('#list').children().remove()
 
 
@@ -220,27 +212,20 @@
         $('#new_trouble').hide();
         $('#new_spareparts').show();
         // Toggle Div
-        // $('#trouble_list').hide();
+
         $('#list').children().remove()
-        // $("#spare_part_list").show();
+
 
         $.ajax({
             url: "<?php echo base_url(); ?>dashboard/get_sparepartList",
             success: function(response) {
                 $("#list").html(response);
-            },
-            complete: function() {
-                // console.log('done')
             }
+    
         });
     }
 
-    // function delete_sparepart() {
-    //     partId = ;
-    //     $(document).on('click', '.form-check-input', function() {
 
-    //     });
-    // }
     function deleteData($id, $type) {
 
         var conf = swal({
@@ -296,20 +281,17 @@
             var url = 'item/' + $id;
         else
             var url = 'item_fmea/' + $id;
-        // console.log(url)
+
         window.location.replace(<?php base_url() ?>url)
     }
 
     function editSpare_populate(el) {
         $id = $(el).parent().siblings('.ID').text().trim()
-        // console.log($id)
         $.ajax({
             url: "<?php echo base_url() ?>dashboard/editSpares_view/" + $id,
             success: function(response) {
-                // console.log(response)
+
                 $('#modalPlaceHolder').append(response)
-                // var editSpareModal = new bootstrap.Modal($('#editPartsModal'))
-                // editSpareModal.show();
                 $('#editPartsModal').modal('show');
 
             },
@@ -460,55 +442,8 @@
 
 
                     }
-                    // var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-                    // for (let i = 0; i < arr.length; i++) {
-                    //     for (let k = 0; k < arrNum.length; k++) {
-                    //         if (arrNum.includes(arr[i]))
-                    //             continue;
-                    //         else {
-                    //             switch (arr[i]) {
-                    //                 case 1:
-                    //                     $('#purchaseDate').removeClass('is-invalid')
-                    //                     break;
-                    //                 case 2:
-                    //                     $('#department').removeClass('is-invalid')
-                    //                     break;
-                    //                 case 3:
-                    //                     $('#placement').removeClass('is-invalid')
-                    //                     break;
-                    //                 case 4:
-                    //                     $('#partName').removeClass('is-invalid')
-                    //                     break;
-                    //                 case 5:
-                    //                     $('#model').removeClass('is-invalid')
-                    //                     break;
-                    //                 case 6:
-                    //                     $('#maker').removeClass('is-invalid')
-                    //                     break;
-                    //                 case 7:
-                    //                     $('#quantity').removeClass('is-invalid')
-                    //                     break;
-                    //                 case 8:
-                    //                     $('#unit').removeClass('is-invalid')
-
-                    //                     break;
-                    //                 case 9:
-                    //                     $('#price').removeClass('is-invalid')
-                    //                     break;
-
-
-                    //                 default:
-                    //                     break;
-                    //             }
-                    //         }
-
-                    //     }
-
-                    // }
+                   
                 }
-            },
-            complete: function() {
-                // console.log('DONNNNNN')
             }
         });
         event.preventDefault();

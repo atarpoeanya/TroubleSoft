@@ -23,10 +23,6 @@ class Troublelist_model extends CI_Model
         return $this->db->get('t202_spareparts')->result();
     }
 
-    // public function getFmea($id)
-    // {
-    //     return $this->db->where('c_t800_id', $id)->get('t201_equipment_fmea')->row();
-    // }
 
     public function getEquipmentId($id)
     {
@@ -36,6 +32,9 @@ class Troublelist_model extends CI_Model
 
 
         $equipment_row = $this->db->get_where('t800_equipment', array("c_t800_id" => $id))->row();
+        $equipment_row->c_repairStart = date("H:i", strtotime($equipment_row->c_repairStart));
+        $equipment_row->c_repairEnd = date("H:i", strtotime($equipment_row->c_repairEnd));
+
 
         if ($used_part_id) {
             $itemNum = 1;
@@ -176,21 +175,7 @@ class Troublelist_model extends CI_Model
                 // $data = $data_trouble + $data_fmea;
                 break;
 
-                // WAS FOR SPARE PART, TURN OUT USING MODAL CHANGE THE MECHANISM
-                // case 'spareparts':
-                //     $formName = 't202_spareparts';
-                //     $data = [
-                //         'c_purchaseDate' => $this->input->post('購入日'),
-                //         'c_department' => $this->input->post('部署名'),
-                //         'c_placement' => $this->input->post('使用箇所'),
-                //         'c_partName' => $this->input->post('部品名'),
-                //         'c_model' => $this->input->post('型式'),
-                //         'c_maker' => $this->input->post('メーカー名'),
-                //         'c_quantity' => $this->input->post('数量'),
-                //         'c_unit' => $this->input->post('単位'),
-                //         'c_price' => $this->input->post('金額'),
-                //     ];
-                //     break;
+               
             default:
                 echo 'error';
                 break;
@@ -218,10 +203,12 @@ class Troublelist_model extends CI_Model
         $data = [];
         //$arr expected [[2,2], [2,1]]
         $id = $this->db->query("SELECT IDENT_CURRENT('$formId') as last_id")->result();
+        // Get the respective spare part table name.
         if ($formId == 't203_equipment_fmea')
             $spareTab = 't201_equipment_fmea_used_parts';
         elseif ($formId == 't800_equipment')
             $spareTab = 't200_equipment_used_parts';
+
         foreach ($arr as $value) {
             // $spare_data.array_push([$id, $value[0], $value[1]]);
             if ($formId == 't203_equipment_fmea')
@@ -253,31 +240,51 @@ class Troublelist_model extends CI_Model
     }
 
 
-    public function editSpare_used($arr)
+    public function editSpare_used($arr, $formId)
     {
         $data = [];
         //$arr expected [[2,2], [2,1]]
         $id = $this->input->post('id');
+        // Get the respective spare part table name.
+        if ($formId == 't203_equipment_fmea'){
+            $spareTab = 't201_equipment_fmea_used_parts';
+            $idTab = 'c_t203_id';
+        }
+        elseif ($formId == 't800_equipment'){
+            $spareTab = 't200_equipment_used_parts';
+            $idTab = 'c_t800_id';
+        }
+
         if (!empty($arr)) {
             foreach ($arr as $value) {
                 // $spare_data.array_push([$id, $value[0], $value[1]]);
-                $data[] = [
 
-                    'c_t800_id' => $id,
-                    'c_t202_id' => $value[0],
-                    'c_amount' => $value[1]
+                if ($formId == 't203_equipment_fmea')
+                    $data[] = [
 
+                        'c_t203_id' => $id,
+                        'c_t202_id' => $value[0],
+                        'c_amount' => $value[1]
 
-                ];
+                    ];
+                elseif ($formId == 't800_equipment') {
+                    $data[] = [
+
+                        'c_t800_id' => $id,
+                        'c_t202_id' => $value[0],
+                        'c_amount' => $value[1]
+
+                    ];
+                }
             }
 
-            $this->db->where('c_t800_id', $id);
-            $this->db->delete('t200_used_parts');
+            $this->db->where($idTab, $id);
+            $this->db->delete($spareTab);
 
-            $this->db->insert_batch('t200_used_parts', $data);
+            $this->db->insert_batch($spareTab, $data);
         } else {
-            $this->db->where('c_t800_id', $id);
-            $this->db->delete('t200_used_parts');
+            $this->db->where($idTab, $id);
+            $this->db->delete($spareTab);
         }
     }
 
@@ -306,48 +313,102 @@ class Troublelist_model extends CI_Model
             $data = [
                 'c_accidentDate' => $this->input->post('発生日', true),
                 'c_repairDate' => $this->input->post('修理日', true),
+
+                'c_repairStart' => $this->input->post('time_start', true),
+                'c_repairEnd' => $this->input->post('time_end', true),
+
+
                 'c_department' => $this->input->post('部署', true),
                 'c_manager' => $this->input->post('担当者', true),
                 'c_facility' => $this->input->post('設備', true),
                 'c_unit' => $this->input->post('号機', true),
                 'c_processName' => $this->input->post('工程名', true),
-                'c_repairTime' => $this->input->post('修理時間', true),
+
                 'c_failMode' => $this->input->post('故障モード', true),
                 'c_classification' => $this->input->post('区分', true),
                 'c_phenomenon' => $this->input->post('現象', true),
                 'c_repairDet' => $this->input->post('修理内容', true),
-                'c_measures' => $this->input->post('対策', true),
+
+                'c_response' => $this->input->post('response', true),
+                'c_failMech' => $this->input->post('fail_mech', true),
                 'c_countermeasure' => $this->input->post('oldFile', true)
             ];
         }
 
-        if ($this->input->post('fmea-Id', true)) {
-            $data_fmea = [
-                'c_failImpact' => $this->input->post('故障の影響', true),
-                'c_lineEffect' => $this->input->post('ライン停止の可能性', true),
-                'c_specialChar' => $this->input->post('特殊特性等', true),
-                'c_prevention' => $this->input->post('予防', true),
-                'c_period' => $this->input->post('周期', true),
-                'c_month' => $this->input->post('月', true),
-                'c_detection' => $this->input->post('検出', true),
-                'c_counterPlan' => $this->input->post('対策案', true),
-                'c_picSchedule' => $this->input->post('担当者日程', true),
-                'c_response' => $this->input->post('対応処置', true)
-            ];
-            $this->db->where('c_t800_id', $this->input->post('fmea-Id', true));
-            $this->db->update('t201_equipment_fmea', $data_fmea);
-        }
 
 
 
 
+        $this->db->trans_begin();
         $this->db->where('c_t800_id', $this->input->post('id'));
         $this->db->update('t800_equipment', $data);
         //Update spare part 
         if ($this->input->post('spareParts', true))
-            $this->editSpare_used(json_decode($this->input->post('spareParts'), true));
+            $this->editSpare_used(json_decode($this->input->post('spareParts'), true), 't800_equipment');
+            if ($this->db->trans_status() === FALSE) {
+                $this->db->trans_rollback();
+            } else {
+                $this->db->trans_commit();
+            }
     }
 
+    public function updateData_fmea()
+    {   
+
+        $data = [
+            'c_accidentDate' => $this->input->post('発生日', true),
+            'c_repairDate' => $this->input->post('修理日', true),
+
+            'c_repairStart' => $this->input->post('time_start', true),
+            'c_repairEnd' => $this->input->post('time_end', true),
+
+
+            'c_department' => $this->input->post('部署', true),
+
+            'c_facility' => $this->input->post('設備', true),
+            'c_unit' => $this->input->post('号機', true),
+            'c_processName' => $this->input->post('工程名', true),
+
+            'c_failMode' => $this->input->post('故障モード', true),
+
+            'c_phenomenon' => $this->input->post('現象', true),
+            'c_repairDet' => $this->input->post('修理内容', true),
+
+
+            'c_failMech' => $this->input->post('fail_mech', true),
+
+            'c_failImpact' => $this->input->post('故障の影響', true),
+            'c_lineEffect' => $this->input->post('ライン停止の可能性', true),
+            'c_specialChar' => $this->input->post('特殊特性等', true),
+
+            'c_prevention' => $this->input->post('予防', true),
+            'c_period' => $this->input->post('周期', true),
+            'c_month' => $this->input->post('月', true),
+            'c_detection' => $this->input->post('検出', true),
+            'c_counterPlan' => $this->input->post('対策案', true),
+            'c_picSchedule' => $this->input->post('担当者日程', true),
+            'c_response' => $this->input->post('対応処置', true),
+            'c_measure' => $this->input->post('対策', true),
+
+        ];
+
+
+
+
+
+
+        $this->db->trans_begin();
+        $this->db->where('c_t203_id', $this->input->post('id'));
+        $this->db->update('t203_equipment_fmea', $data);
+        //Update spare part 
+        if ($this->input->post('spareParts', true))
+            $this->editSpare_used(json_decode($this->input->post('spareParts'), true), 't203_equipment_fmea');
+            if ($this->db->trans_status() === FALSE) {
+                $this->db->trans_rollback();
+            } else {
+                $this->db->trans_commit();
+            }
+    }
     public function deleteData($id, $formID, $head)
     {
         $formName = '';
@@ -400,9 +461,14 @@ class Troublelist_model extends CI_Model
             'c_unit' => $this->input->post('c_unit'),
             'c_price' => $this->input->post('c_price'),
         ];
-
+        $this->db->trans_begin();
         $this->db->where('c_t202_id', $this->input->post('c_t202_id'));
         $this->db->update('t202_spareParts', $data);
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+        } else {
+            $this->db->trans_commit();
+        }
     }
 
     public function addSpares()
@@ -421,7 +487,12 @@ class Troublelist_model extends CI_Model
             'c_arrangement' => $this->input->post('c_arrangement'),
         ];
 
-
+        $this->db->trans_begin();
         $this->db->insert('t202_spareParts', $data);
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+        } else {
+            $this->db->trans_commit();
+        }
     }
 }

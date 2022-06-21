@@ -115,6 +115,7 @@
         
                                     </tbody>
                                 </table>
+
                                 <table class="table table-bordered mb-0">
                                     <thead class="table-dark">
                                         <?php
@@ -174,7 +175,7 @@
                                                 <?php
                                                 foreach ($num as $key => $value) {
                                                 ?>
-                                                    <td onclick="view_record()" class="text-center  pointer">
+                                                    <td  class="text-center  pointer">
                                                         <?= $value ?>
                                                     </td>
                                                 <?php
@@ -338,16 +339,16 @@
                                                 foreach ($fmea->spare as $item) {
                                             ?>
                                                 <tr>
-                                                    <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 ID">
+                                                    <td class=" table-data text-center align-middle border-right border-left pointer col-md-3 ID">
                                                         <?= $item->c_t202_id ?>
                                                     </td>
-                                                    <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 partname">
+                                                    <td class=" table-data text-center align-middle border-right border-left pointer col-md-3 partname">
                                                         <?= $item->c_partName ?>
                                                     </td>
-                                                    <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 partmodel">
+                                                    <td class=" table-data text-center align-middle border-right border-left pointer col-md-3 partmodel">
                                                         <?= $item->c_model ?>
                                                     </td>
-                                                    <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 amount">
+                                                    <td class=" table-data text-center align-middle border-right border-left pointer col-md-3 amount">
                                                         <?= $item->c_quantity ?>
                                                     </td>
         
@@ -603,7 +604,7 @@
                     <?php
                     foreach ($title as $thead) {
                     ?>
-                        <th class="kanjifont table-head text-center border-right border-left">
+                        <th class=" table-head text-center border-right border-left">
                             <?= $thead ?>
                         </th>
 
@@ -621,7 +622,7 @@
                             <?php
                             foreach ($num as $key => $value) {
                             ?>
-                                <td onclick="view_record()" class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3">
+                                <td onclick="view_record()" class=" table-data text-center align-middle border-right border-left pointer col-md-3">
                                     <?= $value ?>
                                 </td>
                             <?php

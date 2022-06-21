@@ -69,6 +69,7 @@ $route['dashboard'] = 'dashboard';
 
 //Equipment editing
 $route['editEquipment/(:num)'] = 'dashboard/editdata_view/$id';
+$route['editEquipment_fmea/(:num)'] = 'dashboard/editData_fmea/$id';
 
 
 //Record Routing

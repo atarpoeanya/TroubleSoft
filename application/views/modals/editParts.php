@@ -59,8 +59,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <!-- <input type="submit" name="edit_sparepart" form="form-parts" class="btn btn-primary" value="足す"> -->
-                <!-- <button class="btn btn-primary" type="submit" onclick="editSpare()">足す</button> -->
+
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
                 <input type="submit" name="edit_sapre" form="form-parts" class="btn btn-primary" onclick="editSpare()" value="足す">
             </div>

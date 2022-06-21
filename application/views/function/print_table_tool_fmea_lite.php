@@ -4,7 +4,8 @@ function f_generate_table_select($data)
     // print_r($data['tool_Fmea'][0]->c_t203_id)
     // if($data == "x"){
 ?>
-    <div class="table-responsive table-wrapper table-wrapper-scroll overflow-hidden">
+    <div class="">
+
         <table class="table table-striped table-hover" id="trouble_fmea_table_lite">
             <thead>
                 <tr>
@@ -42,37 +43,40 @@ function f_generate_table_select($data)
                 </tr>
                 <tr id="search-bar"></tr>
             </thead>
-            <tbody>
-                <?php
+            
+                <tbody >
+                    
+                    <?php
 
 
-                foreach ($data['tool_Fmea'] as $item) {
+                    foreach ($data['tool_Fmea'] as $item) {
 
-                ?>
-                    <tr>
-                        <td class=" table-data text-center align-middle border-right border-left pointer col">
-                            <?= $item->c_accidentDate ?>
-                        </td>
-                        <td class=" table-data text-center align-middle border-right border-left pointer col">
-                            <?= $item->c_processName ?>
-                        </td>
-                        <td class=" table-data text-center align-middle border-right border-left pointer col">
-                            <?= $item->c_failMode ?>
-                        </td>
-                        <td class=" table-data text-center align-middle border-right border-left pointer col ID">
-                            <?= $item->c_t203_id ?>
-                        </td>
-                        <td class=" table-data text-center align-middle border-right border-left pointer col button_column text-nowrap">
-                            <a class="btn btn-primary buttons" data-bs-dismiss="modal">choose (temp)</a>
-                        </td>
-                        <td>
-                            <?= $item->c_department ?>
-                        </td>
-                    </tr>
-                <?php
-                }
-                ?>
-            </tbody>
+                    ?>
+                        <tr>
+                            <td class=" table-data text-center align-middle border-right border-left pointer col"> 
+                                <?= $item->c_accidentDate ?>
+                            </td>
+                            <td class=" table-data text-center align-middle border-right border-left pointer col">
+                                <?= $item->c_processName ?>
+                            </td>
+                            <td class=" table-data text-center align-middle border-right border-left pointer col">
+                                <?= $item->c_failMode ?>
+                            </td>
+                            <td class=" table-data text-center align-middle border-right border-left pointer col ID">
+                                <?= $item->c_t203_id ?>
+                            </td>
+                            <td class=" table-data text-center align-middle border-right border-left pointer col button_column text-nowrap">
+                                <a class="btn btn-primary buttons" data-bs-dismiss="modal">choose (temp)</a>
+                            </td>
+                            <td>
+                                <?= $item->c_department ?>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+            
         </table>
     </div>
 

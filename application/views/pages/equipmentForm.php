@@ -4,7 +4,7 @@
         <div class="col">
             <div class="row">
                 <h2 class="pt-3 mb-3">設備のトラブル</h2>
-                <form action="/equipment/1" method="post" class="mt-4 p-4 col mainForm" autocomplete="off" id="equipForm" enctype="multipart/form-data">
+                <form action="/equipment/1" method="post" class="mt-4 p-4 col " autocomplete="off" id="equipForm" enctype="multipart/form-data">
                     <!-- For Spare part [Id, Amount] -->
                     <input type="hidden" name="spareParts" id="partinfo" value="">
 
@@ -203,39 +203,8 @@
             </div>
         </div>
     </div>
+</div>
 
-
-
-    <!-- Modal -->
-    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">部署</label>
-                            <select class="form-control" name="" id="">
-                                <option value="" selected>Default</option>
-                            </select>
-
-                        </div>
-                        <div class="mb-3">
-                            <label for="message-text" class="col-form-label">Message:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send message</button>
-                </div>
-            </div>
-        </div>
-    </div> -->
 
     <style>
         h2 {

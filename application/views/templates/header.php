@@ -12,6 +12,7 @@
 <!-- JQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+
 <!-- JQuery DataTables -->
 <link href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap5.min.css" rel="stylesheet"></link>
 <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>

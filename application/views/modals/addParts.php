@@ -9,10 +9,7 @@
                 <form action="" id="form-parts" method="post" class="needs-validation" novalidate autocomplete="off">
                     <div class="row d-flex justify-content-evenly text-nowrap">
                         <div class="row">
-                            <!-- <div class="col">
-                                <label class="form-label" for="partId">部品NO</label>
-                                <input class="form-control" type="text" name="部品NO" id="partId">
-                            </div> -->
+
                             <div class="col">
                                 <label class="form-label" for="purchaseDate">購入日</label>
                                 <input class="form-control" type="date" name="購入日" id="purchaseDate" required>

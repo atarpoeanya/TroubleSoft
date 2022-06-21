@@ -64,7 +64,7 @@ function f_generate_table_select($data)
                             <?= $item->c_t203_id ?>
                         </td>
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer col button_column text-nowrap" style="display: none;">
-                        <a class="btn-block btn btn-primary modify-button" href="<?=base_url()?>editEquipment/<?=intval($item->c_t203_id)?>" onclick="event.cancelBubble=true;">更新</a>
+                        <a class="btn-block btn btn-primary modify-button" href="<?=base_url()?>editEquipment_fmea/<?=intval($item->c_t203_id)?>" onclick="event.cancelBubble=true;">更新</a>
                             <a class="btn-block btn btn-danger modify-button"  onclick="event.cancelBubble=true; deleteData(<?=$item->c_t203_id?>, 'equipment_fmea')">削除</a>
                             
                         </td>
