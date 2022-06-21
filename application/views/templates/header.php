@@ -19,7 +19,7 @@
 <script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap5.min.js"></script>
 
 <!-- Sweetalert -->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 
 <style>
     html * {
@@ -30,7 +30,7 @@
 
 <head>
     <title>明和工業過去トラブルデータベース</title>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <nav class="navbar bg-dark navbar-dark">
         <!-- Links -->
         <ul class="navbar-nav kanjifont">
             <a class="navbar-brand kanjifont" href="<?= base_url()?>">

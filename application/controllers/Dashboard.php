@@ -49,7 +49,7 @@ class Dashboard extends CI_Controller
         $this->postSpare();
     }
 
-    // Data Grabber
+    // Data Grabbers
 
     public function get_troubleList()
     {
@@ -95,6 +95,7 @@ class Dashboard extends CI_Controller
         f_generate_table_select($data);
     }
 
+    // Create fmea reference layout in  equipmentForm
     public function fmea_tool_print($id)
     {
         
@@ -141,7 +142,8 @@ class Dashboard extends CI_Controller
         $this->load->view('templates/header');
         $this->load->view('Pages/equipmentFmea');
         $this->load->view('templates/footer');
-
+        
+        // modal
         $this->load->view('modals/partsSelect');
         
     }
@@ -219,9 +221,7 @@ class Dashboard extends CI_Controller
                 $this->load->view('Pages/equipmentFmea');
                 $this->load->view('templates/footer');
             } else {
-                // $pic = $this->doupload();
-                // CHECK IF PIC IS EMPTY/ERROR
-                // YES -> USE DEFAULT
+
                 $this->Troublelist_model->addData('equipment_fmea', null);
                 redirect(base_url(), '/');
             }
