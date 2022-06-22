@@ -48,15 +48,24 @@ function f_generate_table_select($data)
     }
 
 ?>
-    <div class="sticky-top mb-2"><input class="sticky-top form-control" type="text" id="table_input" oninput="search_all_function()" placeholder="Search"></div>
-    <div class="table-responsive table-wrapper table-wrapper-scroll">
-        <table class="table table-striped table-hover" id="gen_table">
+
+    <div class="table-responsive table-wrapper border">
+        <div class="d-flex p-2 border-bottom">件数:&nbsp; <div id="amount-sum"><b><?= count($data['sparePart']) ?></b></div>
+        </div>
+
+
+        <table class="table table-striped table-hover m-0 text-nowrap" id="gen_table">
             <thead>
                 <tr>
+                    <div class="p-1 my-2 border-bottom">
+                        <input class="form-control" type="text" id="table_input" oninput="search_all_function()" placeholder="Search">
+                    </div>
+                </tr>
+                <tr class="border-bottom border-dark bg-light">
                     <?php
                     foreach ($head_name as $thead) {
                     ?>
-                        <th class=" table-head text-center border-right border-left">
+                        <th class=" table-head text-center border-start">
                             <?= $thead ?>
                         </th>
 
@@ -65,7 +74,7 @@ function f_generate_table_select($data)
                     }
                     ?>
 
-                    <th class="button_column" style="display:none"></th>
+                    <th class="button_column text-center border-start" style="display:none"></th>
                 </tr>
             </thead>
             <tbody>
@@ -75,20 +84,20 @@ function f_generate_table_select($data)
                 foreach ($data['sparePart'] as $item) {
                 ?>
 
-                    <tr>
+                    <tr class="data-row">
                         <?php
                         foreach ($item as $key => $value) {
                             if ($key == 'c_t202_id') {
                                 $id = $value;
                         ?>
 
-                                <td class=" table-data text-center align-middle border-right border-left pointer col ID">
+                                <td class=" table-data text-center align-middle border-end  pointer col ID">
                                     <?= $id ?>
                                 </td>
                             <?php
                             } else {
                             ?>
-                                <td class=" table-data text-center align-middle border-right border-left pointer col">
+                                <td class=" table-data text-center align-middle border-end  pointer col">
                                     <?= $value ?>
                                 </td>
 
@@ -113,15 +122,8 @@ function f_generate_table_select($data)
 }
 ?>
 <style>
- .pointer:hover {
+    .pointer:hover {
         cursor: pointer;
-    }
-
-    .table-title {
-        background: #435d7d;
-        color: #fff;
-        padding: 6px 6px;
-        border-radius: 3px 3px 0 0;
     }
 
     .table-wrapper {
@@ -130,16 +132,16 @@ function f_generate_table_select($data)
         box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
     }
 
-    .table-wrapper-scrolls {
-        width: auto;
-        height: 70vh;
-        overflow-y: scroll;
-        
+    .table-head {
+        background-color: #fff;
+        box-shadow: 10px 5px rgba(0, 0, 0, .05);
+        width: 800px;
     }
 
-    .text-nowrap {
-        white-space: nowrap;
+    div.dataTables_wrapper {
+        width: 100%;
     }
+
 
 </style>
 
@@ -148,7 +150,7 @@ function f_generate_table_select($data)
         $('#gen_table tbody').find('tr').each(function() {
             // debugger;
             $amount = $(this).find("td:eq(7)").text().trim();
-            if($amount == 0)
+            if ($amount == 0)
                 $(this).addClass('bg-warning')
         })
     })

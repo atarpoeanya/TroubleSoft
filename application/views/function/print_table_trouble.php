@@ -2,10 +2,15 @@
 function f_generate_table_select($data)
 {
 ?>
-    <div class="table-responsive table-wrapper table-wrapper-scroll overflow-hidden">
+    <div class="table-responsive table-wrapper border ">
+        <div class="d-flex p-2 border-bottom">件数:&nbsp; <div id="amount-sum"><b><?= count($data['troubleList']) ?></b></div>
+        </div>
         <table class="table table-striped table-hover" id="trouble_table">
-            <thead>
-                <tr>
+            <thead class="">
+                <tr id="search-bar">
+
+                </tr>
+                <tr class="border-bottom border-dark">
                     <?php
                     foreach ($data['title'] as $thead) {
 
@@ -21,12 +26,12 @@ function f_generate_table_select($data)
                                     $thead = '発生日';
                                     break;
                                 default:
-                                // $thead = 'missing';
+                                    // $thead = 'missing';
                                     break;
                             }
 
                     ?>
-                            <th class=" table-head text-center border-right border-left">
+                            <th class=" table-head text-center border-end text-nowrap ">
                                 <?= $thead ?>
                             </th>
 
@@ -34,14 +39,12 @@ function f_generate_table_select($data)
                         }
                     }
                     ?>
-                    <th class=" table-head text-center border-right border-left">
-                                ID
-                            </th>
-                    <th class="button_column buttons" style="display:none"></th>
+                    <th class=" table-head text-center ">
+                        ID
+                    </th>
+                    <th class="button_column buttons text-center border-start" style="display:none"></th>
                 </tr>
-                <tr id="search-bar">
 
-                </tr>
             </thead>
             <tbody>
                 <?php
@@ -50,22 +53,22 @@ function f_generate_table_select($data)
                 foreach ($data['troubleList'] as $item) {
 
                 ?>
-                    <tr onclick="view_record(this)" >
-                        <td class=" table-data text-center align-middle border-right border-left pointer col">
+                    <tr onclick="view_record(this)" class="data-row">
+                        <td class=" table-data text-center align-middle border-end  pointer col">
                             <?= $item->c_accidentDate ?>
                         </td>
-                        <td class=" table-data text-center align-middle border-right border-left pointer col">
+                        <td class=" table-data text-center align-middle border-end  pointer col">
                             <?= $item->c_processName ?>
                         </td>
-                        <td class=" table-data text-center align-middle border-right border-left pointer col">
+                        <td class=" table-data text-center align-middle border-end  pointer col">
                             <?= $item->c_failMode ?>
                         </td>
-                        <td class=" table-data text-center align-middle border-right border-left pointer col ID">
+                        <td class=" table-data text-center align-middle border-end  pointer col ID">
                             <?= $item->c_t800_id ?>
                         </td>
-                        <td class=" table-data text-center align-middle border-right border-left pointer col button_column text-nowrap" style="display: none;">
-                            <a class="btn-block btn btn-primary modify-button" href="<?=base_url()?>editEquipment/<?=intval($item->c_t800_id)?>" onclick="event.cancelBubble=true;">更新</a>
-                            <a class="btn-block btn btn-danger modify-button"  onclick="event.cancelBubble=true; deleteData(<?=$item->c_t800_id?>, 'equipment')">削除</a>
+                        <td class=" table-data text-center align-middle border-end  pointer col button_column text-nowrap" style="display: none;">
+                            <a class="btn-block btn btn-primary modify-button" href="<?= base_url() ?>editEquipment/<?= intval($item->c_t800_id) ?>" onclick="event.cancelBubble=true;">更新</a>
+                            <a class="btn-block btn btn-danger modify-button" onclick="event.cancelBubble=true; deleteData(<?= $item->c_t800_id ?>, 'equipment')">削除</a>
                         </td>
                     </tr>
                 <?php
@@ -83,27 +86,15 @@ function f_generate_table_select($data)
         cursor: pointer;
     }
 
-    .table-title {
-        background: #435d7d;
-        color: #fff;
-        padding: 6px 6px;
-        border-radius: 3px 3px 0 0;
-    }
-
     .table-wrapper {
         background: #fff;
         border-radius: 5px;
         box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
     }
+   
 
-    .table-wrapper-scrolls {
-        width: auto;
-        height: 70vh;
-        overflow-y: scroll;
-        
-    }
-
-    .text-nowrap {
-        white-space: nowrap;
+    .table-head {
+        z-index: 5;
+        box-shadow: 10px 5px rgba(0, 0, 0, .05);
     }
 </style>

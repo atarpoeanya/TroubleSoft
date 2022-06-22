@@ -14,9 +14,13 @@
 
 
 <!-- JQuery DataTables -->
-<link href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap5.min.css" rel="stylesheet"></link>
+<link href="https://cdn.datatables.net/fixedcolumns/4.1.0/css/fixedColumns.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+</link>
+</link>
 <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/fixedcolumns/4.1.0/js/dataTables.fixedColumns.min.js"></script>
 
 <!-- Sweetalert -->
 <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
@@ -29,15 +33,26 @@
 </style>
 
 <head>
-    <title>明和工業過去トラブルデータベース</title>
-    <nav class="navbar bg-dark navbar-dark">
-        <!-- Links -->
-        <ul class="navbar-nav kanjifont">
-            <a class="navbar-brand kanjifont" href="<?= base_url()?>">
-                <img src="<?= base_url()?>public/MEIWA_150_white.png" width="50" height="25" class="d-inline-block align-top mt-1" alt="" style="margin-right: 15px;margin-left: 15px">
+    <!-- <title>明和工業過去トラブルデータベース</title>
+    <nav class="navbar bg-dark navbar-dark"> -->
+    <!-- Links -->
+    <!-- <ul class="navbar-nav kanjifont">
+            <a class="navbar-brand kanjifont" href="<?= base_url() ?>">
+                <img src="<?= base_url() ?>public/MEIWA_150_white.png" width="50" height="25" class="d-inline-block align-top mt-1" alt="" style="margin-right: 15px;margin-left: 15px">
                 <p1>明和工業過去トラブルデータベース</p1>
             </a>
         </ul>
-    </nav>
+    </nav>  -->
 </head>
+
 <body>
+    <header class="mb-4 py-3">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand kanjifont" href="<?= base_url() ?>">
+                    <img src="<?= base_url() ?>public/MEIWA_150_white.png" width="50" height="25" class="d-inline-block align-top mt-1" alt="" style="margin-right: 15px;margin-left: 15px">
+                    <p1>明和工業過去トラブルデータベース</p1>
+                </a>
+            </div>
+        </nav>
+    </header>

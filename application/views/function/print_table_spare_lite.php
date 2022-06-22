@@ -3,9 +3,12 @@ function f_generate_table_select($data)
 {
 ?>
     <div class="sticky-top mb-2"><input class="sticky-top form-control" type="text" id="table_input" oninput="search_all_function()" placeholder="Search"></div>
+    <div class="d-flex bg-primary text-light p-2">件数:&nbsp;
+        <div id="amount-sum"><?= count($data['sparePart']) ?></div>
+    </div>
     <div class="table-responsive table-wrapper table-wrapper-scroll">
         <table class="table table-stripped table-bordered" id="gen_table">
-            <thead>
+            <thead class="table-dark">
                 <tr>
 
                     <?php
@@ -31,7 +34,7 @@ function f_generate_table_select($data)
 
                 ?>
 
-                    <tr class="">
+                    <tr class="data-row">
 
 
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 ID">
@@ -67,7 +70,7 @@ function f_generate_table_select($data)
                 ?>
             </tbody>
             <tbody>
-                <tr class="text-center">
+                <tr class="text-center table-dark">
                     <th colspan="6">SELECTED</th>
                 </tr>
 
@@ -82,8 +85,12 @@ function f_generate_table_select($data)
 ?>
 <script>
     $(document).ready(function() {
-      if($('table').hasClass('nolimit')) 
-        $('.plus, .minus').removeClass('disabled')
+
+
+
+
+        if ($('table').hasClass('nolimit'))
+            $('.plus, .minus').removeClass('disabled')
     })
     $('.plus').click(function plus() {
         var the_button = $(this)

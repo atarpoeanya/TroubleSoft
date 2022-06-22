@@ -6,10 +6,15 @@
         get_troubleList();
     }
 
+    $(window).resize(function() {
+        $('table').DataTable().columns.adjust();
+    })
+
     // 更新 Button toggle
     function show_button() {
         $(".button_column").toggle();
-        $("#search-bar-").hide();
+        // $("#search-bar-").hide();
+        $('table').DataTable().columns.adjust();
     }
 
     function category_switcher(el) {
@@ -26,7 +31,9 @@
                 $("#fmea-s").attr("onclick", "buttonSwitch(this);get_troubleList_fmea()");
 
                 $("#real").addClass('active');
+                $("#real").removeClass('bg-white')
                 $("#fmea-s").removeClass('active')
+
 
 
                 break;
@@ -65,14 +72,14 @@
             complete: function() {
                 $(document).ready(function() {
                     // Setup - add a text input to each cell
-                    $('#trouble_table thead tr:eq(0) th').each(function() {
+                    $('#trouble_table thead tr:eq(1) th').each(function() {
                         var title = $(this).text().trim();
 
 
                         if (title == '発生日')
                             $('#search-bar').append('<th><input type="date" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
                         else if (title.length == 0)
-                            $('#search-bar').append('<th class="button_column buttons" style="display:none"></th>');
+                            $('#search-bar').append('<th class="button_column buttons" style="display:none;"></th>');
                         else
                             $('#search-bar').append('<th><input type="text" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
 
@@ -96,25 +103,36 @@
                             {
                                 "bSortable": false
                             },
+
                         ],
                         info: false,
-                        // searching:false,
+                        searching: true,
                         paging: false,
-                        orderCellsTop: true,
+                        orderCellsTop: false,
                         fixedHeader: true,
-                        pageLength: 100,
+                        scrollY: "200px",
+                        scrollCollapse: true,
                         "language": {
                             "zeroRecords": "該当する記録は見つかりません",
-                        }
+                        },
+                        columnDefs: [{
+                            targets: [1, 2],
+                            render: function(data, type, row) {
+                                return type === 'display' && data.length > 5 ?
+                                    data.substr(0, 10) + '...' :
+                                    data;
+                            }
+                        }]
                     });
 
                     // Apply the search
-                    $('#trouble_table thead').on('keyup change', ".column_search", function() {
+                    $('#search-bar').on('keyup change', ".column_search", function() {
 
                         table
                             .column($(this).parent().index())
                             .search(this.value)
                             .draw();
+                        $('#amount-sum').html($('.data-row').not(':hidden').length);
                     });
 
                 });
@@ -137,6 +155,8 @@
             url: "<?php echo base_url(); ?>dashboard/get_troubleList_fmea",
             success: function(response) {
                 $("#list").html(response);
+
+
             },
             complete: function() {
 
@@ -145,7 +165,7 @@
 
                 $(document).ready(function() {
                     // Setup - add a text input to each cell
-                    $('#trouble_fmea_table thead tr:eq(0) th').each(function() {
+                    $('#trouble_fmea_table thead tr:eq(1) th').each(function() {
                         var title = $(this).text().trim();
 
 
@@ -178,26 +198,37 @@
                             },
                         ],
                         info: false,
-                        // searching:false,
+                        searching: true,
                         paging: false,
-                        orderCellsTop: true,
+                        orderCellsTop: false,
                         fixedHeader: true,
-                        pageLength: 100,
+                        scrollY: "50vh",
+                        scrollCollapse: true,
                         "language": {
                             "zeroRecords": "該当する記録は見つかりません",
-                        }
+                        },
+                        columnDefs: [{
+                            targets: [1, 2],
+                            render: function(data, type, row) {
+                                return type === 'display' && data.length > 5 ?
+                                    data.substr(0, 10) + '...' :
+                                    data;
+                            }
+                        }]
                     });
 
                     // Apply the search
-                    $('#trouble_fmea_table thead').on('keyup change', ".column_search", function() {
+                    $('#search-bar').on('keyup change', ".column_search", function() {
 
                         table
                             .column($(this).parent().index())
                             .search(this.value)
                             .draw();
+                        $('#amount-sum').html($('.data-row').not(':hidden').length);
                     });
 
                 });
+
 
 
 
@@ -220,8 +251,36 @@
             url: "<?php echo base_url(); ?>dashboard/get_sparepartList",
             success: function(response) {
                 $("#list").html(response);
+            },
+            complete: function() {
+                // DataTable
+                var table = $('#gen_table').DataTable({
+                    ordering: true,
+                    info: false,
+                    searching: true,
+                    paging: false,
+                    fixedColumns: {
+                        
+                        leftColumns: 3,
+                        
+                    },
+                    scrollY: "650px",
+                    sScrollX: true,
+                    scrollCollapse: true,
+                    "language": {
+                        "zeroRecords": "該当する記録は見つかりません",
+                    },
+                    columnDefs: [{
+                        targets: [1, 2],
+                        render: function(data, type, row) {
+                            return type === 'display' && data.length > 5 ?
+                                data.substr(0, 10) + '...' :
+                                data;
+                        }
+                    }]
+                });
             }
-    
+
         });
     }
 
@@ -246,7 +305,7 @@
                         complete: function() {
                             if ($type == 'spareparts')
                                 get_sparepartlist();
-                            if(($type == 'equipment'))
+                            if (($type == 'equipment'))
                                 get_troubleList();
                             else
                                 get_troubleList_fmea()
@@ -270,6 +329,7 @@
                 var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
                 return !~text.indexOf(val);
             }).hide();
+            $('#amount-sum').html($('.data-row').not(':hidden').length);
         });
     }
 
@@ -442,7 +502,7 @@
 
 
                     }
-                   
+
                 }
             }
         });
