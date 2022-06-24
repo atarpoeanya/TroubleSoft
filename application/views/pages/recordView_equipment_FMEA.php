@@ -1,5 +1,12 @@
 
 
+<nav class="navbar fixed-bottom">
+
+<a class="btn btn-warning ms-5" href='<?= base_url(); ?>'><?= $this->data['CANCEL_BUTTON']?></a>
+<div class="container-fluid justify-content-center">
+</div>
+
+</nav>
 <p class=" position-relative" style="top: 30px; left: 40px; background-color: white; width: max-content;">
         &nbsp;SECTION_1_<b>設備の内容</b>&nbsp;</p>
     <div class="row border border-dark p-3 rounded my-auto">

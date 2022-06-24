@@ -10,57 +10,57 @@
                     <div class="row d-flex justify-content-evenly text-nowrap">
                         <div class="row">
 
-                            <div class="col">
-                                <label class="form-label" for="purchaseDate">購入日</label>
+                            <div class="col pt-3">
+                                <label class="form-label" for="purchaseDate"><?= $this->data['PURCHASE_DATE']?></label>
                                 <input class="form-control" type="date" name="購入日" id="purchaseDate" required>
                             </div>
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col">
-                                <label class="form-label" for="partName">部品名</label>
+                            <div class="col pt-3">
+                                <label class="form-label" for="partName"><?= $this->data['PARTS_NAME']?></label>
                                 <input class="form-control" type="text" name="部品名" id="partName" required>
                             </div>
-                            <div class="col">
-                                <label class="form-label" for="model">型式</label>
+                            <div class="col pt-3">
+                                <label class="form-label" for="model"><?= $this->data['MODEL']?></label>
                                 <input class="form-control " type="text" name="型式" id="model" required>
                             </div>
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col">
-                                <label class="form-label " for="maker">メーカー名</label>
+                            <div class="col pt-3">
+                                <label class="form-label " for="maker"><?= $this->data['MAKER_NAME']?></label>
                                 <input class="form-control " type="text" name="メーカー名" id="maker" required>
                             </div>
-                            <div class="col">
-                                <label class="form-label" for="quantity">数量</label>
+                            <div class="col pt-3">
+                                <label class="form-label" for="quantity"><?= $this->data['QUANTITY']?></label>
                                 <input class="form-control " type="number" name="数量" id="quantity" required>
                             </div>
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col">
-                                <label class="form-label" for="price">金額</label>
+                            <div class="col pt-3">
+                                <label class="form-label" for="price"><?= $this->data['PRICE']?></label>
                                 <input class="form-control " type="number" name="金額" id="price" required>
                             </div>
-                            <div class="col">
-                                <label class="form-label" for="unit">単位</label>
+                            <div class="col pt-3">
+                                <label class="form-label" for="unit"><?= $this->data['UNIT']?></label>
                                 <input class="form-control " type="text" name="単位" id="unit" required>
                             </div>
-                            <div class="col">
-                                <label class="form-label" for="unit">stprage</label>
+                            <div class="col pt-3">
+                                <label class="form-label" for="unit"><?= $this->data['STORAGE']?></label>
                                 <input class="form-control " type="text" name="単位" id="storage" required>
                             </div>
-                            <div class="col">
-                                <label class="form-label" for="unit">Arra</label>
+                            <div class="col pt-3">
+                                <label class="form-label" for="unit"><?= $this->data['ARRANGEMENT']?></label>
                                 <input class="form-control " type="text" name="単位" id="arra" required>
                             </div>
                         </div>
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-                <input type="submit" name="add_sparepart" form="form-parts" class="btn btn-primary" onclick="addSpare()" value="足す">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= $this->data['CANCEL_BUTTON']?></button>
+                <button  type="submit" name="add_sparepart" form="form-parts" class="btn btn-primary" onclick="addSpare()"><?= $this->data['SUBMIT_BUTTON']?></button>
 
             </div>
             </form>

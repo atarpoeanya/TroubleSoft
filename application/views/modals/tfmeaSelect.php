@@ -25,8 +25,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send message</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= $this->data['CANCEL_BUTTON'] ?></button>
             </div>
         </div>
     </div>
@@ -80,9 +79,7 @@
                             {
                                 "bSortable": false
                             },
-                            {
-                                "bSortable": false
-                            },
+
                         ],
                         info: false,
                         // searching:false,

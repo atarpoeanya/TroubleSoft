@@ -5,7 +5,7 @@
 ?>
 <nav class="navbar fixed-bottom">
 
-    <a class="btn btn-warning ms-5" href='<?= base_url(); ?>'>Back</a>
+    <a class="btn btn-warning ms-5" href='<?= base_url(); ?>'><?= $this->data['CANCEL_BUTTON']?></a>
     <div class="container-fluid justify-content-center">
     </div>
 

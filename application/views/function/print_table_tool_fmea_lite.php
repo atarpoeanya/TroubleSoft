@@ -39,7 +39,7 @@ function f_generate_table_select($data)
                         ID
                     </th>
                     <th class="button_column buttons"></th>
-                    <th class="" id="department_ref"></th>
+                    
                 </tr>
                 <tr id="search-bar"></tr>
             </thead>
@@ -66,11 +66,9 @@ function f_generate_table_select($data)
                                 <?= $item->c_t203_id ?>
                             </td>
                             <td class=" table-data text-center align-middle border-right border-left pointer col button_column text-nowrap">
-                                <a class="btn btn-primary buttons" data-bs-dismiss="modal">choose (temp)</a>
+                                <a class="btn btn-primary buttons" data-bs-dismiss="modal"><?= $data['SUBMIT_BUTTON'] ?></a>
                             </td>
-                            <td>
-                                <?= $item->c_department ?>
-                            </td>
+
                         </tr>
                     <?php
                     }
@@ -119,21 +117,21 @@ function f_generate_table_select($data)
 </style>
 
 <script>
-    $('.buttons').on('click', function() {
-        $id = $(this).parent().siblings('.ID').html().trim()
+   $('.buttons').on('click', function() {
+            $id = $(this).parent().siblings('.ID').html().trim()
 
-        $.ajax({
-            url: "<?= base_url(); ?>dashboard/fmea_tool_print/" + $id,
+            $.ajax({
+                url: "<?= base_url(); ?>dashboard/fmea_tool_print/" + $id,
 
-            success: function(response) {
-                $("#fmea_place").html(response);
-                $('#fmea_id').val($id)
-
-
+                success: function(response) {
+                    $("#fmea_place").html(response);
+                    $('#fmea_id').val($id)
 
 
-            },
 
+
+                },
+
+            })
         })
-    })
 </script>

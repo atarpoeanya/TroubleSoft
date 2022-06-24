@@ -53,7 +53,7 @@ function f_generate_table_select($data)
                 foreach ($data['tool_Fmea'] as $item) {
 
                 ?>
-                    <tr class="fmea-tools data-row" onclick="view_record(this)">
+                    <tr class="fmea-tools data-row" onclick="window.location='<?= base_url()?>item_fmea/<?= $item->c_t203_id ?>';">
                         <td class="kanjifont table-data text-center align-middle border-end pointer col">
                             <?= $item->c_accidentDate ?>
                         </td>
@@ -67,8 +67,8 @@ function f_generate_table_select($data)
                             <?= $item->c_t203_id ?>
                         </td>
                         <td class="kanjifont table-data text-center align-middle border-end pointer col button_column text-nowrap" style="display: none;">
-                            <a class="btn btn-primary" href="<?= base_url() ?>editEquipment_fmea/<?= intval($item->c_t203_id) ?>" onclick="event.cancelBubble=true;">更新</a>
-                            <a class="btn btn-danger " onclick="event.cancelBubble=true; deleteData(<?= $item->c_t203_id ?>, 'equipment_fmea')">削除</a>
+                            <a class="btn btn-primary" href="<?= base_url() ?>editEquipment_fmea/<?= intval($item->c_t203_id) ?>" onclick="event.cancelBubble=true;"><?= $data['UPDATE_BUTTON']?></a>
+                            <a class="btn btn-danger " onclick="event.cancelBubble=true; deleteData(<?= $item->c_t203_id ?>, 'equipment_fmea')"><?= $data['DELETE_BUTTON']?></a>
 
                         </td>
                     </tr>

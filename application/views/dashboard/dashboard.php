@@ -1,9 +1,9 @@
 <main class="container p-sm-2">
 <div class="container mt-4">
     <div class="btn-group switch-field text-nowrap">
-        <a onclick="buttonSwitch(this);category_switcher(this)" class="btn btn-outline-secondary active topper" aria-current="page">設備</a>
-        <a onclick="buttonSwitch(this);category_switcher(this)" class="btn  btn-outline-secondary topper bg-white">品質</a>
-        <a onclick="buttonSwitch(this);category_switcher(this)" class="btn  btn-outline-secondary topper bg-white">予備品</a>
+        <a name="設備" onclick="buttonSwitch(this);category_switcher(this)" class="btn btn-outline-secondary active topper" aria-current="page"><?= $this->data['RADIO_A_EQUIPMENT']?></a>
+        <a name="品質" onclick="buttonSwitch(this);category_switcher(this)" class="btn  btn-outline-secondary topper bg-white"><?= $this->data['RADIO_A_PRODUCT']?></a>
+        <a name="予備品" onclick="buttonSwitch(this);category_switcher(this)" class="btn  btn-outline-secondary topper bg-white"><?= $this->data['RADIO_A_SPARE']?></a>
     </div>
 </div>
 </div>
@@ -14,17 +14,18 @@
             <div class="col-lg-9 col-md-8 mb-2">
     
                 <div class="btn-group switch-field text-nowrap">
-                    <a id="real" onclick="buttonSwitch(this);get_troubleList()" class="btn btn-outline-secondary bottm active" aria-current="page">実</a>
-                    <a id="fmea-s"  onclick="buttonSwitch(this);get_troubleList_fmea()" class="btn  btn-outline-secondary bottm bg-white">FMEA</a>
+                    <a id="real" onclick="buttonSwitch(this);get_troubleList()" class="btn btn-outline-secondary bottm active" aria-current="page"><?= $this->data['RADIO_B_REAL']?></a>
+                    
+                    <a id="fmea-s"  onclick="buttonSwitch(this);get_troubleList_fmea()" class="btn  btn-outline-secondary bottm bg-white"><?= $this->data['RADIO_B_FMEA']?></a>
                 </div>
                 <!-- <h1>HELLO</h1> -->
             </div>
             <div class="col-lg-3 col-md">
     
                 <div class="">
-                    <a href="<?= base_url() ?>as" class=" btn btn-success text-nowrap" id="new_trouble">新しトラブル</a>
-                    <button class="m-1 btn btn-success text-nowrap" id="new_spareparts" onclick="" data-bs-toggle="modal" data-bs-target="#addPartsModal" style="display: none;">新し予備品</button>
-                    <a onclick="show_button()" class=" btn btn-primary text-nowrap" id="update_trouble">変更</a>
+                    <a href="<?= base_url() ?>as" class=" btn btn-success text-nowrap" id="new_trouble"><?= $this->data['INSERT_BUTTON_TROUBLE']?></a>
+                    <button class="m-1 btn btn-success text-nowrap" id="new_spareparts" onclick="" data-bs-toggle="modal" data-bs-target="#addPartsModal" style="display: none;"><?= $this->data['INSERT_BUTTON_SPARE']?></button>
+                    <a onclick="show_button()" class=" btn btn-primary text-nowrap" id="update_trouble"><?= $this->data['UPDATE_BUTTON']?></a>
                 </div>
     
             </div>
@@ -77,9 +78,6 @@
 }
 
 
-    .dataTables_filter {
-        display: none;
-    }
 
     #dashboard {
         background-color: white;

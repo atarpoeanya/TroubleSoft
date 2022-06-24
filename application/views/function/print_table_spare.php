@@ -58,7 +58,7 @@ function f_generate_table_select($data)
             <thead>
                 <tr>
                     <div class="p-1 my-2 border-bottom">
-                        <input class="form-control" type="text" id="table_input" oninput="search_all_function()" placeholder="Search">
+                        <input class="form-control" type="text" id="search-bar" placeholder="Search">
                     </div>
                 </tr>
                 <tr class="border-bottom border-dark bg-light">
@@ -106,8 +106,8 @@ function f_generate_table_select($data)
                         }
                         ?>
                         <td class=" table-data text-center align-middle border-right border-left pointer col-md-2 button_column text-nowrap" style="display: none;">
-                            <a class="btn-block btn btn-primary modify-button" onclick="editSpare_populate(this)">更新</a>
-                            <a class="btn-block btn btn-danger modify-button" onclick="event.cancelBubble=true;deleteData(<?= $item->c_t202_id ?>,'spareparts')">削除</a>
+                            <a class="btn-block btn btn-primary modify-button" onclick="editSpare_populate(this)"><?= $data['UPDATE_BUTTON']?></a>
+                            <a class="btn-block btn btn-danger modify-button" onclick="event.cancelBubble=true;deleteData(<?= $item->c_t202_id ?>,'spareparts')"><?= $data['DELETE_BUTTON']?></a>
                         </td>
 
                     </tr>

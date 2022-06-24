@@ -92,6 +92,7 @@ function f_generate_table_select($data)
         if ($('table').hasClass('nolimit'))
             $('.plus, .minus').removeClass('disabled')
     })
+
     $('.plus').click(function plus() {
         var the_button = $(this)
         var partRow = $(this).parents('tr')

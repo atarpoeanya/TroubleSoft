@@ -11,10 +11,10 @@
                         <div class="btn-group" role="group" aria-label="Basic radio toggle button group" id="fmea-toggle-btn">
 
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-                            <label class="btn btn-outline-primary mt-0" for="btnradio1">不要</label>
+                            <label class="btn btn-outline-primary mt-0" for="btnradio1"><?= $this->data['FMEA_BUTTON_NOT'] ?></label>
 
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-                            <label class="btn btn-outline-primary mt-0" for="btnradio2">要</label>
+                            <label class="btn btn-outline-primary mt-0" for="btnradio2"><?= $this->data['FMEA_BUTTON_NEED'] ?></label>
                         </div>
                     </div>
                     <!-- FORM SECTION -->
@@ -26,32 +26,32 @@
 
                         <!-- SECTION_1_Identity -->
                         <p class=" position-relative sub-header">
-                            &nbsp;SECTION_1_<b>インフォ</b>&nbsp;</p>
+                            &nbsp;<b><?= $this->data['SECTION_1'] ?></b>&nbsp;</p>
                         <div class="inspector row border-top py-3">
 
                             <div class="col-6 pt-3">
-                                <label for="start_day" class="form-label">発生日</label>
+                                <label for="start_day" class="form-label"><?= $this->data['ACCIDENT_DATE'] ?></label>
                                 <input required type="date" class="form-control" id="start_day" name="発生日">
                             </div>
 
                             <div class="col-6 pt-3">
-                                <label for="repair_day" class="form-label">修理日</label>
+                                <label for="repair_day" class="form-label"><?= $this->data['REPAIR_DATE'] ?></label>
                                 <input required type="date" class="form-control" id="repair_day" name="修理日">
                             </div>
 
                             <div class="col-4 pt-3">
-                                <label for="time_start" class="form-label">発生時間（最初）</label>
+                                <label for="time_start" class="form-label"><?= $this->data['HAPPENING_TIME'] ?></label>
                                 <input required type="time" class="form-control" id="time_start" name="time_start">
                             </div>
                             <div class="col-4 pt-3">
-                                <label for="time_end" class="form-label">発生時間（最終）</label>
+                                <label for="time_end" class="form-label"><?= $this->data['STOP_TIME'] ?></label>
                                 <input required type="time" class="form-control" id="time_end" name="time_end">
                             </div>
 
 
                             <div class="col-9 pt-3">
                                 <div class="col-4">
-                                    <label class="form-label" for="tantou">担当者</label>
+                                    <label class="form-label" for="tantou"><?= $this->data['PIC'] ?></label><!-- PERSON IN CHARGE-->
                                     <select class=" form-control  <?= (form_error('担当者') ? 'is-invalid' : ''); ?>" name="担当者" id="tantou" required>
                                         <option value="" <?= set_select('担当者', '', true); ?> disabled selected>選び出す</option>
                                         <option value="水上" <?= set_select('担当者', '水上'); ?>>水上</option>
@@ -64,10 +64,10 @@
                         </div>
                         <!-- SECTION_2_EquipmentInfo -->
                         <p class=" position-relative sub-header">
-                            &nbsp;SECTION_2_<b>設備の内容</b>&nbsp;</p>
+                            &nbsp;<b><?= $this->data['SECTION_2'] ?></b>&nbsp;</p>
                         <div class="item row border-top py-3">
                             <div class="col-4 pt-3">
-                                <label class="form-label" for="busho">部署 （設備の）</label>
+                                <label class="form-label" for="busho"><?= $this->data['DEPARTMENT'] ?></label>
                                 <select class="form-control <?= (form_error('部署') ? 'is-invalid' : ''); ?>" name="部署" id="busho" required>
 
                                     <option value="" <?= set_select('部署', '', true); ?>disabled selected>選び出す</option>
@@ -76,14 +76,14 @@
                             </div>
                             <!-- Probably connect with each other -->
                             <div class="col-4 pt-3">
-                                <label class="form-label" for="setsubi">設備名</label>
+                                <label class="form-label" for="setsubi"><?= $this->data['FACILITY'] ?></label>
                                 <select class="form-control <?= (form_error('設備') ? 'is-invalid' : ''); ?>" name="設備" id="setsubi" required>
                                     <option value="" <?= set_select('設備', '', true); ?> disabled selected>選び出す</option>
                                     <option value="プレス" <?= set_select('設備', 'プレス'); ?>>プレス</option>
                                 </select>
                             </div>
                             <div class="col-4 pt-3">
-                                <label class="form-label" for="gouki">号機</label>
+                                <label class="form-label" for="gouki"><?= $this->data['UNIT'] ?></label>
                                 <select class="form-control <?= (form_error('号機') ? 'is-invalid' : ''); ?>" name="号機" id="gouki" required>
                                     <option value="" <?= set_select('号機', '', true); ?> disabled selected>選び出す</option>
                                     <option value="1号機" <?= set_select('号機', '1号機'); ?>>1号機</option>
@@ -92,12 +92,12 @@
                             </div>
 
                             <div class="col pt-3">
-                                <label for="" class="form-label">工程名</label>
+                                <label for="" class="form-label"><?= $this->data['PROCESS_NAME'] ?></label>
                                 <input required type="text" class="form-control" name="工程名" id="kouteiNa">
                             </div>
 
                             <div class="col pt-3">
-                                <label for="" class="form-label">故障モード</label>
+                                <label for="" class="form-label"><?= $this->data['FAIL_MODE'] ?></label>
                                 <input required type="text" class="form-control" name="故障モード" id="mode">
                             </div>
 
@@ -105,24 +105,24 @@
                         </div>
                         <!-- SECTION_3_FixDetails  -->
                         <p class=" position-relative sub-header">
-                            &nbsp;SECTION_3_<b>修理内容</b>&nbsp;</p>
+                            &nbsp;<b><?= $this->data['SECTION_3'] ?></b>&nbsp;</p>
                         <div class="item row border-top py-3">
                             <div class="col-12 pt-3">
-                                <label class="form-label" for="a">現象・不具合要因詳細</label>
+                                <label class="form-label" for="a"><?= $this->data['PHENOMENON'] ?></label>
                                 <textarea required name="現象" id="gensho" class="form-control" cols="30" rows="10"></textarea>
                             </div>
                             <div class="col-12 pt-3">
-                                <label class="form-label" for="a">修理内容</label>
+                                <label class="form-label" for="a"><?= $this->data['REPAIR_DETAIL'] ?></label>
                                 <textarea required name="修理内容" id="shuriNaiyou" class="form-control" cols="30" rows="10"></textarea>
                             </div>
 
                             <div class="col-6 pt-3">
-                                <label class="form-label" for="a">故障のメカニズム</label>
+                                <label class="form-label" for="a"><?= $this->data['MECHANISM'] ?></label>
                                 <textarea required name="fail_mech" id="failMech" class="form-control" cols="30" rows="5"></textarea>
                             </div>
 
                             <div class="col-6 pt-3">
-                                <label class="form-label" for="a">対応・処置</label>
+                                <label class="form-label" for="a"><?= $this->data['RESPONSE'] ?></label>
                                 <textarea required name="response" id="response" class="form-control" cols="30" rows="5"></textarea>
                             </div>
 
@@ -130,7 +130,7 @@
                                 <!-- FILE input required -->
                                 <div class="row gy-4 ">
                                     <div class="col-12">
-                                        <label class="form-label" for="taisakusho">対策書</label>
+                                        <label class="form-label" for="taisakusho"><?= $this->data['COUNTERMEASURES'] ?></label>
                                         <input class="form-control" type="file" name="対策書" id="taisakusho">
                                     </div>
 
@@ -142,7 +142,7 @@
 
                         <div class="spare row mt-3">
                             <div class="col">
-                                <a href="" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#partsSelect">予備部品リース</a>
+                                <a href="" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#partsSelect"><?= $this->data['SPARE_LIST_BUTTON'] ?></a>
                             </div>
                             <div class="col-12 mt-3">
                                 <div class="rounded-2 overflow-hidden p-0">
@@ -179,8 +179,8 @@
                         </div>
 
                         <div class="d-flex justify-content-center">
-                            <input type="submit" name="add_trouble" class="btn btn-primary float-end me-5" value="登録" id="submitTrouble">
-                            <a class="btn btn-warning float-end me-1" href='<?= base_url(); ?>as'>CANCEL</a>
+                            <button type="submit" name="add_trouble" class="btn btn-primary float-end me-5" value="登録" id="submitTrouble"><?= $this->data['SUBMIT_BUTTON'] ?></button>
+                            <a class="btn btn-warning float-end me-1" href='<?= base_url(); ?>as'><?= $this->data['CANCEL_BUTTON'] ?></a>
 
 
                         </div>
@@ -199,7 +199,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                             </svg>
-                            検索</a>
+                            <?= $this->data['FMEA_SEARCH_BUTTON'] ?></a>
                     </div>
 
                     <!-- FMEA CONTENT PLACEHOLDER -->
@@ -209,13 +209,13 @@
 
 
             </div>
-            <div class="card  sticky-top h-50">
-                <div class="card-body pt-0 overflow-scroll">
-                    <div class="card-title sticky-top">
-                        <div class="bg-dark text-light">
-                            <h2 class="p-1">FMEA</h2>
-                        </div>
+            <div class="card  sticky-top h-50 mt-2">
+                <div class="card-title sticky-top p-3">
+                    <div class="">
+                        <h2 class="p-1">FMEA</h2>
                     </div>
+                </div>
+                <div class="card-body pt-0 overflow-scroll">
                     <div class="container" id="fmea_place" style="height: 500px;">
                         <div class="text-center">
 
@@ -249,7 +249,7 @@
 
 
 
-<!-- REMINDER TO UNIFY THIS -->
+<!-- REMINDER TO UNIFY THIS
 <script>
     $(document).ready(function() {
         var btn_1 = $('#btnradio1')
@@ -276,4 +276,4 @@
             }
         })
     })
-</script>
+</script> -->

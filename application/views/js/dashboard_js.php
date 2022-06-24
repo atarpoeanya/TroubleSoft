@@ -2,24 +2,34 @@
 <script>
     const DATA = {};
 
+    // Making sure the first seen table get loaded first.
     DATA.onLoad = function() {
         get_troubleList();
     }
 
+
+    // Responsive hack, can be delete if unedeed
+    //PROBLEM: on browser resize the table on dashboard wont resize too making it either smaller or bigger than the actual space.
+    //Might be because DataTable
     $(window).resize(function() {
         $('table').DataTable().columns.adjust();
     })
 
     // 更新 Button toggle
+    // Also work as colum resizing,
+    //PROBLEM: the table head for button parts on table dashboard wont resize when toggled (appear) but will resize when the button inside it is clicked.
+    //Might be because DataTable (Smiliar issue with table resize)
     function show_button() {
         $(".button_column").toggle();
         // $("#search-bar-").hide();
         $('table').DataTable().columns.adjust();
     }
 
+    // Normal button switched for choosing the displayed table, using class to manipulate the colors
+    // Switch the button function around for displaying sub table REAL/FMEA
     function category_switcher(el) {
         // Get selected A
-        var a = $(el).html()
+        var a = $(el).prop('name')
 
 
         switch (a) {
@@ -51,12 +61,12 @@
                 break;
         }
 
-        console.log(a)
+        // console.log(a)
 
     }
 
-    // 設備 Table Constructor -> Via dashboard/get_troubleList
-    // Also has ajax based search bar
+    // 設備 Table Constructor -> Via ajax dashboard/get_troubleList
+    // The search bar is dataTables, work on surface level by hiding loaded element
     function get_troubleList() {
         // Toggle Button
         $('#new_spareparts').hide();
@@ -76,9 +86,9 @@
                         var title = $(this).text().trim();
 
 
-                        if (title == '発生日')
+                        if (title == '発生日') //
                             $('#search-bar').append('<th><input type="date" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
-                        else if (title.length == 0)
+                        else if (title.length == 0) //no title column for displaying edit buttons
                             $('#search-bar').append('<th class="button_column buttons" style="display:none;"></th>');
                         else
                             $('#search-bar').append('<th><input type="text" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
@@ -112,6 +122,7 @@
                         fixedHeader: true,
                         scrollY: "200px",
                         scrollCollapse: true,
+                        dom: 'lrt',
                         "language": {
                             "zeroRecords": "該当する記録は見つかりません",
                         },
@@ -140,8 +151,8 @@
         });
     }
 
-    // 設備 Table Constructor -> Via dashboard/get_troubleList
-    // Also has ajax based search bar
+    // 設備 Table Constructor -> Via ajax dashboard/get_troubleList
+    // The search bar is dataTables, work on surface level by hiding loaded element
     function get_troubleList_fmea() {
         // Toggle Button
         $('#new_spareparts').hide();
@@ -204,6 +215,7 @@
                         fixedHeader: true,
                         scrollY: "50vh",
                         scrollCollapse: true,
+                        dom: 'lrt',
                         "language": {
                             "zeroRecords": "該当する記録は見つかりません",
                         },
@@ -236,8 +248,8 @@
         });
     }
 
-    // 送品 Table Constructor -> Via dashboard/get_sparepartList
-    // Also has ajax based search bar
+    // 送品 Table Constructor -> Ajax Via dashboard/get_sparepartList
+    // The search bar is dataTables, work on surface level by hiding loaded element
     function get_sparepartlist() {
         // Toggle Button
         $('#new_trouble').hide();
@@ -256,14 +268,50 @@
                 // DataTable
                 var table = $('#gen_table').DataTable({
                     ordering: true,
+                    aoColumns: [{
+                            "bSortable": true
+                        },
+                        {
+                            "bSortable": true
+                        },
+                        {
+                            "bSortable": true
+                        },
+                        {
+                            "bSortable": true
+                        },
+                        {
+                            "bSortable": true
+                        },
+                        {
+                            "bSortable": true
+                        },
+                        {
+                            "bSortable": true
+                        },
+                        {
+                            "bSortable": true
+                        },
+                        {
+                            "bSortable": true
+                        },
+                        {
+                            "bSortable": true
+                        },
+                        {
+                            "bSortable": false
+                        },
+
+                    ],
                     info: false,
                     searching: true,
                     paging: false,
                     fixedColumns: {
-                        
+
                         leftColumns: 3,
-                        
+
                     },
+                    dom: 'lrt',
                     scrollY: "650px",
                     sScrollX: true,
                     scrollCollapse: true,
@@ -279,6 +327,15 @@
                         }
                     }]
                 });
+
+                $('#search-bar').on('keyup change', function() {
+
+                    table
+                        .search(this.value)
+                        .draw();
+                    $('#amount-sum').html($('.data-row').not(':hidden').length);
+                });
+
             }
 
         });
@@ -319,31 +376,32 @@
     }
 
     // 送品 search function
-    function search_all_function() {
-        var $rows = $('#gen_table tbody tr');
+    // function search_all_function() {
+    //     var $rows = $('#gen_table tbody tr');
 
-        $('#table_input').keyup(function() {
-            var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+    //     $('#table_input').keyup(function() {
+    //         var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
 
-            $rows.show().filter(function() {
-                var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-                return !~text.indexOf(val);
-            }).hide();
-            $('#amount-sum').html($('.data-row').not(':hidden').length);
-        });
-    }
+    //         $rows.show().filter(function() {
+    //             var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+    //             return !~text.indexOf(val);
+    //         }).hide();
+    //         $('#amount-sum').html($('.data-row').not(':hidden').length);
+    //     });
+    // }
 
+    //This function get trigger when clicking a row on equipment, then choose the ID part <td>
+    //
+    // function view_record(el) {
+    //     var $id = $(el).children('.ID').text().trim();
 
-    function view_record(el) {
-        var $id = $(el).children('.ID').text().trim();
+    //     if (!$(el).hasClass('fmea-tools'))
+    //         var url = 'item/' + $id;
+    //     else
+    //         var url = 'item_fmea/' + $id;
 
-        if (!$(el).hasClass('fmea-tools'))
-            var url = 'item/' + $id;
-        else
-            var url = 'item_fmea/' + $id;
-
-        window.location.replace(<?php base_url() ?>url)
-    }
+    //     window.location.replace(<?php base_url() ?>url)
+    // }
 
     function editSpare_populate(el) {
         $id = $(el).parent().siblings('.ID').text().trim()

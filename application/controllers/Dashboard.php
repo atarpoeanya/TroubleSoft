@@ -27,20 +27,225 @@ class Dashboard extends CI_Controller
         parent::__construct();
         $this->load->model('Troublelist_model');
         $this->load->library('form_validation');
+        // $this->lang->load('information', 'japanese'); //If lang become available you can use this instead of the array labels.
+
+        // this array labels
+        $this->data = array(
+            // Buttons [
+            'CANCEL_BUTTON' => 'CANCEL',
+            'SUBMIT_BUTTON' => 'SUBMIT',
+            'UPDATE_BUTTON' => '_UPDATE',
+            'DELETE_BUTTON' => '_DELETE',
+
+            'INSERT_BUTTON_TROUBLE' => '_INSERT_TROUBLE',
+            'INSERT_BUTTON_SPARE' => '_INSERT_SPARE',
+            'SPARE_LIST_BUTTON' => 'SPARE_LIST',
+
+            'NEW_TROUBLE_BUTTON' => 'NEW_TROUBLE',
+            'NEW_SPARE_BUTTON' => 'NEW_SPARE',
+
+
+            // Dashboard 
+            'RADIO_A_EQUIPMENT' => 'EQUIPMENT',
+            'RADIO_A_PRODUCT' => 'PRODUCT',
+            'RADIO_A_SPARE' => 'SPARE',
+
+            'RADIO_B_REAL' => 'REAL',
+            'RADIO_B_FMEA' => 'FMEA',
+
+            //Transition screen
+
+            'TRANSITION_BACK' => 'BACK',
+
+            //Form 
+            //Equipment
+            'FMEA_BUTTON_NEED' => 'NEED',
+            'FMEA_BUTTON_NOT' => 'NOT NEED',
+
+            'FMEA_SEARCH_BUTTON' => 'SEARCH',
+            'FMEA_ADD_BUTTON' => 'ADD',
+            //]
+
+            // Labels[
+
+            //Form (EQUIPMENT)
+            'FORM_TITLE' => '設備トラブル',
+            'ACCIDENT_DATE' => '発生日',
+            'REPAIR_DATE' => '修理日',
+            'HAPPENING_TIME' => '発生時間',
+            'STOP_TIME' => '停止時間',
+            'DEPARTMENT' => '部署',
+            'PIC' => '担当者',
+            'FACILITY' => '設備',
+            'UNIT' => '号機',
+            'PROCESS_NAME' => '工程名',
+            'FAIL_MODE' => '故障モード',
+            'PHENOMENON' => '現象・不具合要因詳細',
+            'REPAIR_DETAIL' => '修理内容',
+            'RESPONSE' => '対応・処置',
+            'MECHANISM' => '故障のメカニズム',
+            'COUNTERMEASURES' => '対策書',
+            'SECTION_1' => 'インフォ',
+            'SECTION_2' => '設備の内容',
+            'SECTION_3' => '修理内容',
+            'SECTION_3_F' => '影響',
+
+
+            'SECTION_4' => '現在の工程管理',
+            'SECTION_5' => '対策',
+            '' => '',
+
+            'COUNTERMEASURES_OLD' => '今＿ファイル',
+            //Form (FMEA)
+            'FORM_TITLE' => '設備トラブル',
+            'EQUIPMENT_ACCIDENT_DATE_F' => '発生日',
+            'EQUIPMENT_REPAIR_DATE_F' => '修理日',
+            // 'EQUIPMENT_HAPPENING_TIME_F' => '発生時間',
+            // 'EQUIPMENT_STOP_TIME_F' => '停止時間',
+            'EQUIPMENT_DEPARTMENT_F' => '部署',
+            'EQUIPMENT_PIC_F' => '担当者',
+            'EQUIPMENT_FACILITY_F' => '設備',
+            'EQUIPMENT_UNIT_F' => '号機',
+            'EQUIPMENT_PROCESS_NAME_F' => '工程名',
+            'EQUIPMENT_FAIL_MODE_F' => '故障モード',
+            'EQUIPMENT_PHENOMENON_F' => '現象・不具合要因詳細',
+            'EQUIPMENT_REPAIR_DETAIL_F' => '修理内容',
+            'EQUIPMENT_RESPONSE_F' => '対応・処置',
+            'EQUIPMENT_MECHANISM_F' => '故障のメカニズム',
+            'EQUIPMENT_FAIL_IMPACT_F' => '故障の影響',
+            'EQUIPMENT_LINE_EFFECT_F' => 'ライン停止の可能性',
+            'EQUIPMENT_SPECIAL_CHAR_F' => '特 殊 特性等',
+            'EQUIPMENT_PIC_SCHEDULE_F' => '担当者 日程',
+            'EQUIPMENT_PERIOD_F' => '周期',
+            'EQUIPMENT_MONTH_F' => '月',
+            'EQUIPMENT_PREVENTION_F' => '予防',
+            'EQUIPMENT_DETECTION_F' => '検出',
+
+
+
+
+            'EQUIPMENT_COUNTER_PLAN_F' => '対策案',
+            'EQUIPMENT_MEASURE_F' => '対策',
+            'EQUIPMENT_SECTION_1_F' => 'インフォ',
+            'EQUIPMENT_SECTION_2_F' => '設備の内容',
+            'EQUIPMENT_SECTION_3_F' => '修理内容',
+
+            //Form (SPARE_PART)
+            'PURCHASE_DATE' => '購入日',
+            'PARTS_NAME' => '部品名',
+            'MODEL' => '型式',
+            'MAKER_NAME' => 'メーカー名',
+            'QUANTITY' => '数量',
+            'PRICE' => '金額',
+            'UNIT' => '単位',
+            'STORAGE' => '保管',
+            'ARRANGEMENT' => '必要時の手配先',
+
+            // Delete confirm
+            'DELETE_CONFIRM' => 'データを削除しますか？',
+            'DELETE_SUCCESS' => 'データが削除されました',
+            'DELETE_FAIL' => '',
+
+            //]
+
+
+        );
     }
+    public function setting_application_info()
+    {
+
+        // $data = [
+        //     // header.php
+        //     'WEB_TITLE' => '明和工業過去トラブルデータベース',
+        //     'DASHBOARD_TITLE' => '明和工業過去トラブルデータベース',
+
+        //     // footer.php
+        //     'COMPANY_NAME' => 'Meiwa Industry 2022',
+        //     'SOFTWARE_VERSION' => '1.0.0',
+
+        //     // dashboard.php
+        //     'EQUIPMENT_RADIO' => '設備',
+        //     'PRODUCT_RADIO' => '品質',
+        //     'SPAREPART_RADIO' => '予備品',
+        //     'REAL_RADIO' => '実',
+        //     'FMEA_RADIO' => 'FMEA',
+
+        //     'NEW_TROUBLE_BUTTON' => '新しトラブル',
+        //     'NEW_SPAREPART_BUTTON' => '新し予備品',
+        //     'CHANGE_BUTTON' => '変更',
+        //     '' => '',
+
+        //     // addparts.php
+        //     'SPAREPARTS_MODAL' => '予備品',
+        //     'PURCHASE_DATE' => '購入日',
+        //     'PARTS_NAME' => '部品名',
+        //     'MODEL' => '型式',
+        //     'MAKER_NAME' => 'メーカー名',
+        //     'QUANTITY' => '数量',
+        //     'PRICE' => '金額',
+        //     'UNIT' => '単位',
+        //     'STORAGE' => '保管',
+        //     'ARRANGEMENT' => '必要時の手配先',
+
+        //     'BACK_BUTTON' => '閉じる',
+        //     'ADD_BUTTON' => '足す',
+
+        //     // equipmentForm.php
+        //     'FORM_TITLE' => '設備トラブル',
+        //     'ACCIDENT_DATE' => '発生日',
+        //     'REPAIR_DATE' => '修理日',
+        //     'HAPPENING_TIME' => '発生時間',
+        //     'STOP_TIME' => '停止時間',
+        //     'DEPARTMENT' => '部署',
+        //     'PIC' => '担当者',
+        //     'FACILITY' => '設備',
+        //     'UNIT' => '号機',
+        //     'PROCESS_NAME' => '工程名',
+        //     'FAIL_MODE' => '故障モード',
+        //     'PHENOMENON' => '現象・不具合要因詳細',
+        //     'REPAIR_DETAIL' => '修理内容',
+        //     'RESPONSE' => '対応・処置',
+        //     'MECHANISM' => '故障の潜在原因 メカニズム',
+        //     'COUNTERMEASURES' => '対策書',
+        //     'SECTION_1' => 'インフォ',
+        //     'SECTION_2' => '設備の内容',
+        //     'SECTION_3' => '修理内容',
+        //     '' => '',
+
+        //     'FMEA_NO_RADIO' => '不要',
+        //     'FMEA_YES_RADIO' => '要',
+        //     'FMEA_SEARCH_BUTTON' => '検索',
+        //     'SPAREPART_LIST_BUTTON' => '予備品リスト',
+        //     'REGISTER_BUTTON' => '登録',
+        //     'CANCEL_BUTTON' => 'CANCEL',
+
+        //     // partsSelect.PHP
+
+        //     'MODAL_TITLE' => '予備品',
+
+        //     'BACK_BUTTON' => '閉じる',
+        //     'ADD_BUTTON' => '足す',
+
+        //     // issueStart.php
+
+        // ];
+
+        // return $data;
+    }
+
 
     public function index()
     {
-
+        $data = $this->data;
 
         // View Load
         $this->load->view('templates/header');
-        $this->load->view('dashboard/dashboard');
+        $this->load->view('dashboard/dashboard', $data);
         $this->load->view('templates/footer');
         // js
         $this->load->view('js/dashboard_js');
         // modals
-        $this->load->view('modals/addParts');
+        $this->load->view('modals/addParts', $data);
         $this->load->view('modals/delete');
         // $this->load->view('modals/editParts');
 
@@ -53,54 +258,57 @@ class Dashboard extends CI_Controller
 
     public function get_troubleList()
     {
+        $data = $this->data;
         $data['troubleList'] = $this->Troublelist_model->getTroubleList();
         $data['title'] = $this->Troublelist_model->getTitle('t800_equipment');
-        $this->load->view('function/print_table_trouble');
+        $this->load->view('function/print_table_trouble', $data);
         f_generate_table_select($data);
     }
 
     public function get_troubleList_fmea()
     {
+        $data = $this->data;
         $data['tool_Fmea'] = $this->Troublelist_model->getTrouble_fmea();
         $data['title'] = $this->Troublelist_model->getTitle('t203_equipment_fmea');
-        $this->load->view('function/print_table_tool_fmea');
+        $this->load->view('function/print_table_tool_fmea', $data);
         f_generate_table_select($data);
     }
 
-    
+
     public function get_troubleList_fmea_lite()
     {
+        $data = $this->data;
         $data['tool_Fmea'] = $this->Troublelist_model->getTrouble_fmea();
         $data['title'] = $this->Troublelist_model->getTitle('t203_equipment_fmea');
-        $this->load->view('function/print_table_tool_fmea_lite');
+        $this->load->view('function/print_table_tool_fmea_lite', $data);
         f_generate_table_select($data);
     }
 
     public function get_sparepartList()
     {
-
+        $data = $this->data;
         $data['title'] = $this->Troublelist_model->getTitle('t202_spareparts');
         $data['sparePart'] = $this->Troublelist_model->getSparepartList();
-        $this->load->view('function/print_table_spare');
+        $this->load->view('function/print_table_spare', $data);
         f_generate_table_select($data);
     }
 
     public function get_sparepartList_lite()
     {
-
+        $data = $this->data;
         $data['title'] =
             ['部品NO', '部品名', '型式',  '数量'];
         $data['sparePart'] = $this->Troublelist_model->getSparepartList();
-        $this->load->view('function/print_table_spare_lite');
+        $this->load->view('function/print_table_spare_lite', $data);
         f_generate_table_select($data);
     }
 
     // Create fmea reference layout in  equipmentForm
     public function fmea_tool_print($id)
     {
-        
+        $data = $this->data;
         $data['fmea_tool'] = $this->Troublelist_model->getFmeaId($id);
-        $this->load->view('function/print_fmea_tool_formHelper');
+        $this->load->view('function/print_fmea_tool_formHelper', $data);
         f_generate_table_select($data);
     }
 
@@ -113,7 +321,6 @@ class Dashboard extends CI_Controller
         $this->load->view('templates/header');
         $this->load->view('Pages/productForm');
         $this->load->view('templates/footer');
-
     } // UNUSED
 
 
@@ -124,28 +331,32 @@ class Dashboard extends CI_Controller
     public function equipmentForm()
     {
 
-
+        $data = $this->data;
         $this->load->view('templates/header');
-        $this->load->view('Pages/equipmentForm');
+        $this->load->view('Pages/equipmentForm', $data);
         $this->load->view('templates/footer');
 
         // modal
         $this->load->view('modals/partsSelect');
-        $this->load->view('modals/tfmeaSelect');
+        $this->load->view('modals/tfmeaSelect', $data);
 
+        //js
+        $this->load->view('js/form_js.php');
     }
 
     public function equipmentFMEA()
     {
 
-
+        $data = $this->data;
         $this->load->view('templates/header');
-        $this->load->view('Pages/equipmentFmea');
+        $this->load->view('Pages/equipmentFmea', $data);
         $this->load->view('templates/footer');
-        
+
         // modal
         $this->load->view('modals/partsSelect');
-        
+
+        //js
+        $this->load->view('js/form_js');
     }
 
 
@@ -153,13 +364,14 @@ class Dashboard extends CI_Controller
     public function viewRecord()
     {
         $id = $this->uri->segment(2);
+        $data = $this->data;
 
         $data['item'] = $this->Troublelist_model->getEquipmentId(intval($id));
-        
+
         $fmeaid = $this->db->get_where('t800_equipment', array("c_t800_id" => $id))->row()->c_t203_id;
         $data['fmea'] = $this->Troublelist_model->getFmeaId($fmeaid);
         $data['title'] = $this->Troublelist_model->getTitle('t202_spareparts');
-        
+
 
         $this->load->view('templates/header');
         $this->load->view('Pages/recordView_equipment', $data);
@@ -169,10 +381,10 @@ class Dashboard extends CI_Controller
     public function viewRecord_fmea()
     {
         $id = $this->uri->segment(2);
-
+        $data = $this->data;
         $data['fmea'] = $this->Troublelist_model->getFmeaId($id);
         $data['title'] = $this->Troublelist_model->getTitle('t202_spareparts');
-        
+
 
         $this->load->view('templates/header');
         $this->load->view('Pages/recordView_equipment_FMEA', $data);
@@ -192,7 +404,7 @@ class Dashboard extends CI_Controller
     public function postEquipment()
     {
         $id = $this->uri->segment(2);
-        if(empty($id))
+        if (empty($id))
             $id = 1;
 
 
@@ -327,14 +539,18 @@ class Dashboard extends CI_Controller
                 redirect(base_url(), '/');
             }
             //invoke modal spare parte select
-            $this->load->view('modals/partsSelect');
+            $this->load->view('modals/partsSelect', $data);
         } else {
             echo "NO DATA";
         }
+
+        //js
+        $this->load->view('js/form_js');
     }
 
     public function editData_fmea($id)
     {
+        $data = $this->data;
         $this->form_validation->set_rules('発生日', 'a', 'required');
         $id = $this->uri->segment(2);
         $data['items'] = $this->Troublelist_model->getFmeaId(intval($id));
@@ -346,7 +562,7 @@ class Dashboard extends CI_Controller
                 $this->load->view('Pages/equipmentFmea_edit', $data);
                 $this->load->view('templates/footer');
             } else {
-                
+
                 $this->Troublelist_model->updateData_fmea($data);
                 redirect(base_url(), '/');
             }
@@ -359,6 +575,7 @@ class Dashboard extends CI_Controller
 
     public function editSpares_view($id)
     {
+        $data = $this->data;
         $data['spare'] = $this->Troublelist_model->getSpareId($id);
         $this->load->view('modals/editParts', $data);
     }
@@ -386,7 +603,7 @@ class Dashboard extends CI_Controller
     public function postSpare()
     {
         $this->form_validation->set_rules("c_purchaseDate", '1', 'required');
-      
+
 
         $this->form_validation->set_message('required', '{field}');
 
@@ -396,8 +613,5 @@ class Dashboard extends CI_Controller
             $this->Troublelist_model->addSpares();
             echo 1;
         }
-
-
-
     }
 }
