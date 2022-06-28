@@ -19,10 +19,10 @@
 
                     <div class="col">
                         <label class="form-label" for="">time_start</label>
-                        <input type="time" class="form-control" name="time_start">
+                        <input type="time" class="form-control" name="time_start" required>
                     </div>
                     <div class="col"><label class="form-label" for="">time_end</label>
-                        <input type="time" class="form-control" name="time_end">
+                        <input type="time" class="form-control" name="time_end" required>
                     </div>
 
 
@@ -34,7 +34,7 @@
 
                     <div class="col-6 pt-3">
                         <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_DEPARTMENT_F']?></label>
-                        <select class="form-control" name="部署" id="busho">
+                        <select class="form-control" name="部署" id="busho" required>
                             <option value="" selected>Default</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -44,25 +44,25 @@
 
                     <div class="col-6 pt-3">
                         <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_FACILITY_F']?></label>
-                        <select class="form-control" name="設備" id="setsubi">
+                        <select class="form-control" name="設備" id="setsubi" required>
                             <option value="" selected>Default</option>
                             <option value="1">1</option>
                         </select>
                     </div>
                     <div class="col pt-3">
                         <label class="form-label" for=""><?= $this->data['EQUIPMENT_UNIT_F']?></label>
-                        <select class="form-control" name="号機" id="gouki">
+                        <select class="form-control" name="号機" id="gouki" required>
                             <option value="" selected>Default</option>
                             <option value="1">1</option>
                         </select>
                     </div>
                     <div class="col-3 pt-3">
                         <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_PROCESS_NAME_F']?></label>
-                        <input type="text" class="form-control" name="工程名">
+                        <input type="text" class="form-control" name="工程名" required>
                     </div>
                     <div class="col-3 pt-3">
                         <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_FAIL_MODE_F']?></label>
-                        <input type="text" class="form-control" name="故障モード">
+                        <input type="text" class="form-control" name="故障モード" required>
                     </div>
                 </div>
 
@@ -72,15 +72,15 @@
 
                     <div class="col-12 pt-3">
                         <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_PHENOMENON_F']?></label>
-                        <textarea class="form-control" name="現象" id="gensho" cols="30" rows="5"></textarea>
+                        <textarea class="form-control" name="現象" id="gensho" cols="30" rows="5" required></textarea>
                     </div>
                     <div class="col-12 pt-3">
                         <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_REPAIR_DETAIL_F']?></label>
-                        <textarea class="form-control" name="修理内容" id="repair_detail" cols="30" rows="5"></textarea>
+                        <textarea class="form-control" name="修理内容" id="repair_detail" cols="30" rows="5" required></textarea>
                     </div>
                     <div class="col-12 pt-3">
                         <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_RESPONSE_F']?></label>
-                        <textarea class="form-control" name="対応処置" id="response" cols="30" rows="5"></textarea>
+                        <textarea class="form-control" name="対応処置" id="response" cols="30" rows="5" required></textarea>
                     </div>
 
 
@@ -92,20 +92,20 @@
 
                     <div class="col-6 pt-3">
                         <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_MECHANISM_F']?></label>
-                        <textarea class="form-control" name="fail_mech" cols="30" rows="5"></textarea>
+                        <textarea class="form-control" name="fail_mech" cols="30" rows="5" required></textarea>
                     </div>
 
                     <div class="col-6 pt-3">
                         <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_FAIL_IMPACT_F']?></label>
-                        <textarea class="form-control" cols="30" rows="6" name="故障の影響"></textarea>
+                        <textarea class="form-control" cols="30" rows="6" name="故障の影響" required></textarea>
                     </div>
                     <div class="col-6 pt-3">
                         <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_LINE_EFFECT_F']?></label>
-                        <textarea name="ライン停止の可能性" class="form-control" cols="30" rows="5"></textarea>
+                        <textarea name="ライン停止の可能性" class="form-control" cols="30" rows="5" required></textarea>
                     </div>
                     <div class="col-6 pt-3">
                         <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_SPECIAL_CHAR_F']?></label>
-                        <input type="text" class="form-control" name="特殊特性等">
+                        <input type="text" class="form-control" name="特殊特性等" required>
                     </div>
                 </div>
 
@@ -115,14 +115,14 @@
 
                     <div class="col-4 pt-3">
                         <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_PIC_SCHEDULE_F']?></label>
-                        <select class="form-control" name="担当者日程">
+                        <select class="form-control" name="担当者日程" required>
                             <option value="" selected>Default</option>
                             <option value="1">1</option>
                         </select>
                     </div>
                     <div class="col-2 pt-3">
                         <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_PERIOD_F']?></label>
-                        <input type="text" class="form-control" name="周期">
+                        <input type="text" class="form-control" name="周期" required>
                     </div>
                     <div class="col-2 pt-3">
                         <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_MONTH_F']?></label>
@@ -131,11 +131,11 @@
                     <div class="col-12 pt-3">
                         <div class="col">
                             <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_PREVENTION_F']?></label>
-                            <textarea class="form-control" name="予防" id="" cols="30" rows="5"></textarea>
+                            <textarea class="form-control" name="予防" id="" cols="30" rows="5" required></textarea>
                         </div>
                         <div class="col pt-3">
                             <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_DETECTION_F']?></label>
-                            <input type="text" class="form-control" name="検出">
+                            <input type="text" class="form-control" name="検出" required>
                         </div>
                     </div>
 
@@ -148,12 +148,12 @@
 
                     <div class="col-6 pt-3">
                         <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_COUNTER_PLAN_F']?></label>
-                        <textarea class="form-control" name="対策案" id="" cols="30" rows="5"></textarea>
+                        <textarea class="form-control" name="対策案" id="" cols="30" rows="5" required></textarea>
                     </div>
 
                     <div class="col-6 pt-3">
                         <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_MEASURE_F']?></label>
-                        <textarea class="form-control" name="対策" id="" cols="30" rows="5"></textarea>
+                        <textarea class="form-control" name="対策" id="" cols="30" rows="5" required></textarea>
                     </div>
 
                 </div>
@@ -189,9 +189,9 @@
                 </div>
 
                 <div class="d-flex justify-content-center mt-2">
+                    <a class="btn btn-warning float-end me-1" href='<?= base_url(); ?>as'><?= $this->data['CANCEL_BUTTON']?></a>
                     <button type="submit" name="add_trouble" class="btn btn-primary float-end me-5" value="登録" id="submitTrouble"><?= $this->data['SUBMIT_BUTTON'];?></button>
                     <!-- <input type="submit" name="add_trouble" class="btn btn-primary float-end me-5" value="登録" id="submitTrouble"> -->
-                    <a class="btn btn-warning float-end me-1" href='<?= base_url(); ?>as'><?= $this->data['CANCEL_BUTTON']?></a>
 
 
                 </div>

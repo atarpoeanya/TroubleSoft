@@ -33,37 +33,37 @@ class Dashboard extends CI_Controller
         $this->data = array(
             // Buttons [
             'CANCEL_BUTTON' => 'CANCEL',
-            'SUBMIT_BUTTON' => 'SUBMIT',
-            'UPDATE_BUTTON' => '_UPDATE',
-            'DELETE_BUTTON' => '_DELETE',
+            'SUBMIT_BUTTON' => '登録',
+            'UPDATE_BUTTON' => '変更',
+            'DELETE_BUTTON' => '削除',
 
-            'INSERT_BUTTON_TROUBLE' => '_INSERT_TROUBLE',
-            'INSERT_BUTTON_SPARE' => '_INSERT_SPARE',
-            'SPARE_LIST_BUTTON' => 'SPARE_LIST',
+            'INSERT_BUTTON_TROUBLE' => '新しトラブル',
+            'INSERT_BUTTON_SPARE' => '新し予備品',
+            'SPARE_LIST_BUTTON' => '予備品リスト',
 
             'NEW_TROUBLE_BUTTON' => 'NEW_TROUBLE',
             'NEW_SPARE_BUTTON' => 'NEW_SPARE',
 
 
             // Dashboard 
-            'RADIO_A_EQUIPMENT' => 'EQUIPMENT',
-            'RADIO_A_PRODUCT' => 'PRODUCT',
-            'RADIO_A_SPARE' => 'SPARE',
+            'RADIO_A_EQUIPMENT' => '設備',
+            'RADIO_A_PRODUCT' => '品質',
+            'RADIO_A_SPARE' => '予備品',
 
-            'RADIO_B_REAL' => 'REAL',
+            'RADIO_B_REAL' => '実',
             'RADIO_B_FMEA' => 'FMEA',
 
             //Transition screen
 
-            'TRANSITION_BACK' => 'BACK',
+            'TRANSITION_BACK' => '閉じる',
 
             //Form 
             //Equipment
-            'FMEA_BUTTON_NEED' => 'NEED',
-            'FMEA_BUTTON_NOT' => 'NOT NEED',
+            'FMEA_BUTTON_NEED' => '要',
+            'FMEA_BUTTON_NOT' => '不要',
 
-            'FMEA_SEARCH_BUTTON' => 'SEARCH',
-            'FMEA_ADD_BUTTON' => 'ADD',
+            'FMEA_SEARCH_BUTTON' => '検索',
+            'FMEA_ADD_BUTTON' => '足す',
             //]
 
             // Labels[
@@ -539,7 +539,7 @@ class Dashboard extends CI_Controller
                 redirect(base_url(), '/');
             }
             //invoke modal spare parte select
-            $this->load->view('modals/partsSelect', $data);
+            $this->load->view('modals/partSelect_Edit', $data);
         } else {
             echo "NO DATA";
         }

@@ -31,21 +31,21 @@
 
                             <div class="col-6 pt-3">
                                 <label for="start_day" class="form-label"><?= $this->data['ACCIDENT_DATE'] ?></label>
-                                <input required type="date" class="form-control" id="start_day" name="発生日">
+                                <input required type="date" class="form-control" id="start_day" name="発生日" required>
                             </div>
 
                             <div class="col-6 pt-3">
                                 <label for="repair_day" class="form-label"><?= $this->data['REPAIR_DATE'] ?></label>
-                                <input required type="date" class="form-control" id="repair_day" name="修理日">
+                                <input required type="date" class="form-control" id="repair_day" name="修理日" required>
                             </div>
 
                             <div class="col-4 pt-3">
                                 <label for="time_start" class="form-label"><?= $this->data['HAPPENING_TIME'] ?></label>
-                                <input required type="time" class="form-control" id="time_start" name="time_start">
+                                <input required type="time" class="form-control" id="time_start" name="time_start" required>
                             </div>
                             <div class="col-4 pt-3">
                                 <label for="time_end" class="form-label"><?= $this->data['STOP_TIME'] ?></label>
-                                <input required type="time" class="form-control" id="time_end" name="time_end">
+                                <input required type="time" class="form-control" id="time_end" name="time_end" required>
                             </div>
 
 
@@ -109,21 +109,21 @@
                         <div class="item row border-top py-3">
                             <div class="col-12 pt-3">
                                 <label class="form-label" for="a"><?= $this->data['PHENOMENON'] ?></label>
-                                <textarea required name="現象" id="gensho" class="form-control" cols="30" rows="10"></textarea>
+                                <textarea required name="現象" id="gensho" class="form-control" cols="30" rows="10" required></textarea>
                             </div>
                             <div class="col-12 pt-3">
                                 <label class="form-label" for="a"><?= $this->data['REPAIR_DETAIL'] ?></label>
-                                <textarea required name="修理内容" id="shuriNaiyou" class="form-control" cols="30" rows="10"></textarea>
+                                <textarea required name="修理内容" id="shuriNaiyou" class="form-control" cols="30" rows="10" required></textarea>
                             </div>
 
                             <div class="col-6 pt-3">
                                 <label class="form-label" for="a"><?= $this->data['MECHANISM'] ?></label>
-                                <textarea required name="fail_mech" id="failMech" class="form-control" cols="30" rows="5"></textarea>
+                                <textarea required name="fail_mech" id="failMech" class="form-control" cols="30" rows="5" required></textarea>
                             </div>
 
                             <div class="col-6 pt-3">
                                 <label class="form-label" for="a"><?= $this->data['RESPONSE'] ?></label>
-                                <textarea required name="response" id="response" class="form-control" cols="30" rows="5"></textarea>
+                                <textarea required name="response" id="response" class="form-control" cols="30" rows="5" required></textarea>
                             </div>
 
                             <div class="col-12 pt-3">
@@ -179,8 +179,8 @@
                         </div>
 
                         <div class="d-flex justify-content-center">
-                            <button type="submit" name="add_trouble" class="btn btn-primary float-end me-5" value="登録" id="submitTrouble"><?= $this->data['SUBMIT_BUTTON'] ?></button>
                             <a class="btn btn-warning float-end me-1" href='<?= base_url(); ?>as'><?= $this->data['CANCEL_BUTTON'] ?></a>
+                            <button type="submit" name="add_trouble" class="btn btn-primary float-end me-5" value="登録" id="submitTrouble"><?= $this->data['SUBMIT_BUTTON'] ?></button>
 
 
                         </div>

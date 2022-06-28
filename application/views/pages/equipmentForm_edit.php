@@ -47,29 +47,29 @@
                         <div class="inspector row border-top py-3">
 
                             <div class="col-6 pt-3">
-                                <label for="start_day" class="form-label"><?= $this->data['ACCIDENT_DATE']?></label>
-                                <input required type="date" class="form-control" id="start_day" name="発生日" value="<?= $items->c_accidentDate ?>">
+                                <label for="start_day" class="form-label"><?= $this->data['ACCIDENT_DATE'] ?></label>
+                                <input required type="date" class="form-control" id="start_day" name="発生日" value="<?= $items->c_accidentDate ?>" required>
                             </div>
 
                             <div class="col-6 pt-3">
-                                <label for="repair_day" class="form-label"><?= $this->data['REPAIR_DATE']?></label>
-                                <input required type="date" class="form-control" id="repair_day" name="修理日" value="<?= $items->c_repairDate ?>">
+                                <label for="repair_day" class="form-label"><?= $this->data['REPAIR_DATE'] ?></label>
+                                <input required type="date" class="form-control" id="repair_day" name="修理日" value="<?= $items->c_repairDate ?>" required>
                             </div>
 
                             <div class="col-4 pt-3">
-                                <label for="time_start" class="form-label"><?= $this->data['HAPPENING_TIME']?></label>
-                                <input required type="time" class="form-control" id="time_start" name="time_start" value="<?= $items->c_repairStart ?>">
+                                <label for="time_start" class="form-label"><?= $this->data['HAPPENING_TIME'] ?></label>
+                                <input required type="time" class="form-control" id="time_start" name="time_start" value="<?= $items->c_repairStart ?>" required>
                             </div>
                             <div class="col-4 pt-3">
-                                <label for="time_end" class="form-label"><?= $this->data['STOP_TIME']?></label>
-                                <input required type="time" class="form-control" id="time_end" name="time_end" value="<?= $items->c_repairEnd ?>">
+                                <label for="time_end" class="form-label"><?= $this->data['STOP_TIME'] ?></label>
+                                <input required type="time" class="form-control" id="time_end" name="time_end" value="<?= $items->c_repairEnd ?>" required>
                             </div>
 
 
 
                             <div class="col-9 pt-3">
                                 <div class="col-4">
-                                    <label class="form-label" for="tantou"><?= $this->data['PIC']?></label>
+                                    <label class="form-label" for="tantou"><?= $this->data['PIC'] ?></label>
                                     <select class=" form-control  <?= (form_error('担当者') ? 'is-invalid' : ''); ?>" name="担当者" id="tantou" required>
                                         <?php
                                         foreach ($inspector_ as $i) :
@@ -89,7 +89,7 @@
                             &nbsp;<b><?= $this->data['SECTION_2'] ?></b>&nbsp;</p>
                         <div class="item row border-top py-3">
                             <div class="col-4 pt-3">
-                                <label class="form-label" for="busho"><?= $this->data['DEPARTMENT']?></label>
+                                <label class="form-label" for="busho"><?= $this->data['DEPARTMENT'] ?></label>
                                 <select class="form-control <?= (form_error('部署') ? 'is-invalid' : ''); ?>" name="部署" id="busho" required>
 
                                     <?php
@@ -104,7 +104,7 @@
                             </div>
                             <!-- Probably connect with each other -->
                             <div class="col-4 pt-3">
-                                <label class="form-label" for="setsubi"><?= $this->data['PROCESS_NAME']?></label>
+                                <label class="form-label" for="setsubi"><?= $this->data['PROCESS_NAME'] ?></label>
                                 <select class="form-control <?= (form_error('設備') ? 'is-invalid' : ''); ?>" name="設備" id="setsubi" required>
                                     <?php
                                     foreach ($tools_name as $t) :
@@ -117,7 +117,7 @@
                                 </select>
                             </div>
                             <div class="col-4 pt-3">
-                                <label class="form-label" for="gouki"><?= $this->data['UNIT']?></label>
+                                <label class="form-label" for="gouki"><?= $this->data['UNIT'] ?></label>
                                 <select class="form-control <?= (form_error('号機') ? 'is-invalid' : ''); ?>" name="号機" id="gouki" required>
                                     <?php
                                     foreach ($unit as $u) :
@@ -131,13 +131,13 @@
                             </div>
 
                             <div class="col pt-3">
-                                <label for="" class="form-label"><?= $this->data['PROCESS_NAME']?></label>
-                                <input required type="text" class="form-control" name="工程名" id="kouteiNa" value="<?= $items->c_processName ?>">
+                                <label for="" class="form-label"><?= $this->data['PROCESS_NAME'] ?></label>
+                                <input required type="text" class="form-control" name="工程名" id="kouteiNa" value="<?= $items->c_processName ?>" required>
                             </div>
 
                             <div class="col pt-3">
-                                <label for="" class="form-label"><?= $this->data['FAIL_MODE']?></label>
-                                <input required type="text" class="form-control" name="故障モード" id="mode" value="<?= $items->c_failMode ?>">
+                                <label for="" class="form-label"><?= $this->data['FAIL_MODE'] ?></label>
+                                <input required type="text" class="form-control" name="故障モード" id="mode" value="<?= $items->c_failMode ?>" required>
                             </div>
 
 
@@ -147,22 +147,22 @@
                             &nbsp;<b><?= $this->data['SECTION_3'] ?></b>&nbsp;</p>
                         <div class="detail row border-top py-3">
                             <div class="col-12 pt-3">
-                                <label class="form-label" for="a"><?= $this->data['PHENOMENON']?></label>
-                                <textarea required name="現象" id="gensho" class="form-control" cols="30" rows="10"><?= $items->c_phenomenon ?></textarea>
+                                <label class="form-label" for="a"><?= $this->data['PHENOMENON'] ?></label>
+                                <textarea required name="現象" id="gensho" class="form-control" cols="30" rows="10" required><?= $items->c_phenomenon ?></textarea>
                             </div>
                             <div class="col-12 pt-3">
-                                <label class="form-label" for="a"><?= $this->data['REPAIR_DETAIL']?></label>
-                                <textarea required name="修理内容" id="shuriNaiyou" class="form-control" cols="30" rows="10"><?= $items->c_repairDet ?></textarea>
+                                <label class="form-label" for="a"><?= $this->data['REPAIR_DETAIL'] ?></label>
+                                <textarea required name="修理内容" id="shuriNaiyou" class="form-control" cols="30" rows="10" required><?= $items->c_repairDet ?></textarea>
                             </div>
 
                             <div class="col-6 pt-3">
-                                <label class="form-label" for="a"><?= $this->data['MECHANISM']?></label>
-                                <textarea required name="fail_mech" id="failMech" class="form-control" cols="30" rows="5"><?= $items->c_failMech ?></textarea>
+                                <label class="form-label" for="a"><?= $this->data['MECHANISM'] ?></label>
+                                <textarea required name="fail_mech" id="failMech" class="form-control" cols="30" rows="5" required><?= $items->c_failMech ?></textarea>
                             </div>
 
                             <div class="col-6 pt-3">
-                                <label class="form-label" for="a"><?= $this->data['RESPONSE']?></label>
-                                <textarea required name="response" id="response" class="form-control" cols="30" rows="5"><?= $items->c_response ?></textarea>
+                                <label class="form-label" for="a"><?= $this->data['RESPONSE'] ?></label>
+                                <textarea required name="response" id="response" class="form-control" cols="30" rows="5" required><?= $items->c_response ?></textarea>
                             </div>
 
                             <div class="col-12 pt-3">
@@ -175,12 +175,12 @@
 
                                                 <div class="col">
 
-                                                    <label class="form-label" for="taisakusho"><?= $this->data['COUNTERMEASURES']?></label>
+                                                    <label class="form-label" for="taisakusho"><?= $this->data['COUNTERMEASURES'] ?></label>
                                                     <input class="form-control" type="file" name="対策書" id="taisakusho" value="<?= $items->c_countermeasure ?>">
                                                 </div>
                                                 <div class="col">
-                                                    <label for="" class="form-label"><?= $this->data['COUNTERMEASURES_OLD']?></label><br>
                                                     <a class="btn btn-outline-secondary card-link" href="<?= base_url() ?>uploads/<?= $items->c_countermeasure ?>" target="_blank" rel="noopener noreferrer" id="old-link"><?= $items->c_countermeasure ?></a>
+                                                    <label for="" class="form-label"><?= $this->data['COUNTERMEASURES_OLD'] ?></label><br>
                                                 </div>
                                             </div>
 
@@ -195,7 +195,7 @@
                             <!-- SPARE PART -->
                             <div class="spare row mt-3">
                                 <div class="col">
-                                    <a href="" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#partsSelect"><?= $this->data['SPARE_LIST_BUTTON'] ?></a>
+                                    <a href="" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#partsSelect_edit"><?= $this->data['SPARE_LIST_BUTTON'] ?></a>
                                 </div>
                                 <div class="col-12 mt-3">
                                     <div class="rounded-2 overflow-hidden p-0">
@@ -231,8 +231,14 @@
                                                             <?= $item->c_quantity ?>
                                                         </td>
 
+
                                                         <td style="display: none;"><a class="btn btn-primary minus">-</a> </td>
                                                     </tr>
+
+                                                    <div class="old_val" hidden>
+                                                        <input type="text" class="id" value="<?= $item->c_t202_id ?>">
+                                                        <input type="text" class="old_amount" value="<?= $item->c_quantity ?>">
+                                                    </div>
 
                                                 <?php } ?>
                                             </tbody>
@@ -292,4 +298,3 @@
 
     }
 </style>
-

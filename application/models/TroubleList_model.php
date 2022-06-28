@@ -175,7 +175,7 @@ class Troublelist_model extends CI_Model
                 // $data = $data_trouble + $data_fmea;
                 break;
 
-               
+
             default:
                 echo 'error';
                 break;
@@ -245,16 +245,15 @@ class Troublelist_model extends CI_Model
         $data = [];
         //$arr expected [[2,2], [2,1]]
         $id = $this->input->post('id');
-        // Get the respective spare part table name.
-        if ($formId == 't203_equipment_fmea'){
+        // Get the respective spare part table name.     
+        if ($formId == 't203_equipment_fmea') {
             $spareTab = 't201_equipment_fmea_used_parts';
             $idTab = 'c_t203_id';
-        }
-        elseif ($formId == 't800_equipment'){
+        } elseif ($formId == 't800_equipment') {
             $spareTab = 't200_equipment_used_parts';
             $idTab = 'c_t800_id';
         }
-
+        $this->db->trans_begin();
         if (!empty($arr)) {
             foreach ($arr as $value) {
                 // $spare_data.array_push([$id, $value[0], $value[1]]);
@@ -268,23 +267,82 @@ class Troublelist_model extends CI_Model
 
                     ];
                 elseif ($formId == 't800_equipment') {
-                    $data[] = [
+                    $old_val = intval($value[2]);
+                    $new_val = intval($value[1]);
 
-                        'c_t800_id' => $id,
-                        'c_t202_id' => $value[0],
-                        'c_amount' => $value[1]
+                    if ($value[3] == 'exist') {
 
-                    ];
+                        if ($old_val != $new_val) {
+                            $amountReal = intval($this->db->where('c_t202_id', $value[0])->get('t202_spareparts')->row()->c_quantity);
+                            //Pretty much adding back then substract that value with new value
+                            $amountReal += $old_val;
+                            $this->db->set('c_quantity', $amountReal - $new_val, false);
+                            $this->db->where('c_t202_id', $value[0]);
+                            $this->db->update('t202_spareparts');
+                            $data[] = [
+
+                                'c_t800_id' => $id,
+                                'c_t202_id' => $value[0],
+                                'c_amount' => $value[1],
+                                // 'c_amount' => $value[2],
+
+                            ];
+                        } else
+                            $data[] = [
+
+                                'c_t800_id' => $id,
+                                'c_t202_id' => $value[0],
+                                'c_amount' => $value[1],
+                                // 'c_amount' => $value[2],
+
+                            ];
+                    }
+
+                    if ($value[3] == 'deleted') {
+                        $amountReal = $this->db->where('c_t202_id', $value[0])->get('t202_spareparts')->row()->c_quantity;
+
+                        //Add back deleted stock
+                        $this->db->set('c_quantity', intval($amountReal) + $new_val, false);
+                        $this->db->where('c_t202_id', $value[0]);
+                        $this->db->update('t202_spareparts');
+                    }
+
+                    if ($value[3] == 'new') {
+
+                        //Minus stock
+                        $amountReal = $this->db->where('c_t202_id', $value[0])->get('t202_spareparts')->row()->c_quantity;
+                        $this->db->set('c_quantity', intval($amountReal) - $new_val, false);
+                        $this->db->where('c_t202_id', $value[0]);
+                        $this->db->update('t202_spareparts');
+                        $data[] = [
+
+                            'c_t800_id' => $id,
+                            'c_t202_id' => $value[0],
+                            'c_amount' => $value[1],
+                            // 'c_amount' => $value[2],
+
+                        ];
+                    }
                 }
             }
-
-            $this->db->where($idTab, $id);
-            $this->db->delete($spareTab);
-
-            $this->db->insert_batch($spareTab, $data);
+            //Check if all data is deleted or not
+            if (!empty($data)) {
+                $this->db->where($idTab, $id);
+                $this->db->delete($spareTab);
+                $this->db->insert_batch($spareTab, $data);
+            } else {
+                $this->db->where($idTab, $id);
+                $this->db->delete($spareTab);
+            }
         } else {
             $this->db->where($idTab, $id);
             $this->db->delete($spareTab);
+        }
+
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+        } else {
+            $this->db->trans_commit();
         }
     }
 
@@ -345,15 +403,15 @@ class Troublelist_model extends CI_Model
         //Update spare part 
         if ($this->input->post('spareParts', true))
             $this->editSpare_used(json_decode($this->input->post('spareParts'), true), 't800_equipment');
-            if ($this->db->trans_status() === FALSE) {
-                $this->db->trans_rollback();
-            } else {
-                $this->db->trans_commit();
-            }
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+        } else {
+            $this->db->trans_commit();
+        }
     }
 
     public function updateData_fmea()
-    {   
+    {
 
         $data = [
             'c_accidentDate' => $this->input->post('発生日', true),
@@ -403,11 +461,11 @@ class Troublelist_model extends CI_Model
         //Update spare part 
         if ($this->input->post('spareParts', true))
             $this->editSpare_used(json_decode($this->input->post('spareParts'), true), 't203_equipment_fmea');
-            if ($this->db->trans_status() === FALSE) {
-                $this->db->trans_rollback();
-            } else {
-                $this->db->trans_commit();
-            }
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+        } else {
+            $this->db->trans_commit();
+        }
     }
     public function deleteData($id, $formID, $head)
     {

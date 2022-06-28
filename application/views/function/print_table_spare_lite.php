@@ -63,7 +63,6 @@ function f_generate_table_select($data)
                             <?php } ?>
                         </td>
 
-
                     </tr>
                 <?php
                 }
@@ -149,13 +148,15 @@ function f_generate_table_select($data)
                 })
             } else {
                 partRow.addClass('table-success')
-                $('#foots:last-child').append('<tr class="' + partDetails[0] + '"><td>' + partDetails[0] + '</td> <td>' + partDetails[1] + '</td> <td>' + partDetails[2] + '</td> <td>' + 1 + '</td> <td><a class="btn btn-primary minus">-</a></td> </tr>')
+                $('#foots:last-child').prepend('<tr class="' + partDetails[0] + '"><td>' + partDetails[0] + '</td> <td>' + partDetails[1] + '</td> <td>' + partDetails[2] + '</td> <td>' + 1 + '</td> <td><a class="btn btn-primary minus">-</a></td> </tr>')
                 if (!$('table').hasClass('nolimit'))
                     if (parseInt(partDetails[3]) == 1 || parseInt(partDetails[3]) == 0) {
                         the_button.addClass('disabled')
                     }
 
             }
+
+            
         }
 
     })
@@ -163,11 +164,15 @@ function f_generate_table_select($data)
     $('#foots').on('click', 'a.minus', function() {
         var id = $(this).parent().siblings('td:first').text().trim()
         check(id)
+
+        
+  
     })
 
     $('.minus').click(function() {
         var id = $(this).parents('tr').find('.ID').text().trim()
         check(id)
+
     })
 
     function check(id) {
@@ -183,8 +188,10 @@ function f_generate_table_select($data)
         if (flag == 1) {
             $('#bodys').find('tr').each(function() {
                 // $(this).find("td:eq(0)").text().trim();
-                if (id == $(this).find("td:eq(0)").text().trim())
+                if (id == $(this).find("td:eq(0)").text().trim()) {
                     $(this).find("td:eq(5)").children('.plus').removeClass('disabled')
+                    // $(this).find("td:eq(3)").html(parseInt($(this).find("td:eq(3)").text().trim()) + 1);
+                }
             })
 
             var amount = $(this).find("td:eq(3)").text().trim();
