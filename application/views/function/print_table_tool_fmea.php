@@ -39,9 +39,9 @@ function f_generate_table_select($data)
                         }
                     }
                     ?>
-                    <th class="kanjifont table-head text-center border-end">
+                    <!-- <th class="kanjifont table-head text-center border-end">
                         ID
-                    </th>
+                    </th> -->
                     <th class="button_column buttons" style="display:none"></th>
                 </tr>
                 
@@ -63,9 +63,9 @@ function f_generate_table_select($data)
                         <td class="kanjifont table-data text-center align-middle border-end pointer col">
                             <?= $item->c_failMode ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-end pointer col ID">
+                        <!-- <td class="kanjifont table-data text-center align-middle border-end pointer col ID">
                             <?= $item->c_t203_id ?>
-                        </td>
+                        </td> -->
                         <td class="kanjifont table-data text-center align-middle border-end pointer col button_column text-nowrap" style="display: none;">
                             <a class="btn btn-primary" href="<?= base_url() ?>editEquipment_fmea/<?= intval($item->c_t203_id) ?>" onclick="event.cancelBubble=true;"><?= $data['UPDATE_BUTTON']?></a>
                             <a class="btn btn-danger " onclick="event.cancelBubble=true; deleteData_tool_fmea(<?= $item->c_t203_id ?>)"><?= $data['DELETE_BUTTON']?></a>

@@ -74,25 +74,6 @@
                     </div>
                 </div>
 
-                <p class=" position-relative sub-header">
-                    &nbsp;<b><?= $this->data['SECTION_2'] ?></b>&nbsp;</p>
-                <div class="row row border-top py-3">
-
-                    <div class="col-12 pt-3">
-                        <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_PHENOMENON_F'] ?></label>
-                        <textarea class="form-control" name="現象" id="gensho" cols="30" rows="5" required><?= $items->c_phenomenon ?></textarea>
-                    </div>
-                    <div class="col-12 pt-3">
-                        <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_REPAIR_DETAIL_F'] ?></label>
-                        <textarea class="form-control" name="修理内容" id="repair_detail" cols="30" rows="5" required><?= $items->c_repairDet ?></textarea>
-                    </div>
-                    <div class="col-12 pt-3">
-                        <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_RESPONSE_F'] ?></label>
-                        <textarea class="form-control" name="対応処置" id="response" cols="30" rows="5" required><?= $items->c_response ?></textarea>
-                    </div>
-
-
-                </div>
 
                 <p class=" position-relative sub-header">
                     &nbsp;<b><?= $this->data['SECTION_3_F'] ?></b>&nbsp;</p>

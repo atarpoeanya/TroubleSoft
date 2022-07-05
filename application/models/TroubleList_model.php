@@ -15,10 +15,15 @@ class Troublelist_model extends CI_Model
     {
         return $this->db->get('t203_equipment_fmea')->result();
     }
-    public function get_trouble_fmea_array()
+    public function get_trouble_fmea_array($department)
     {
-        return  $this->db->select(['c_facility', 'c_unit', 'c_processName', 'c_failMode', 'c_failImpact', 'c_lineEffect', 'c_specialChar', 'c_failMech', 'c_prevention', 'c_period', 'c_month', 'c_detection', 'c_counterPlan', 'c_picSchedule', 'c_measure'])
-            ->get('t203_equipment_fmea');
+        $query = $this->db->select(['c_facility', 'c_unit', 'c_processName', 'c_failMode', 'c_failImpact', 'c_lineEffect', 'c_specialChar', 'c_failMech', 'c_prevention', 'c_period', 'c_month', 'c_detection', 'c_counterPlan', 'c_picSchedule', 'c_measure']);
+
+        if ($department !== '全部') {
+            return $query->where('c_department', $department)->get('t203_equipment_fmea');
+        } else {
+            return $query->get('t203_equipment_fmea');
+        }
     } //Dont need this remember to delete
 
 

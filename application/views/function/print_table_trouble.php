@@ -17,7 +17,7 @@ function f_generate_table_select($data)
                         if ($thead == 'c_processName'  || $thead == 'c_failMode' || $thead == 'c_accidentDate') {
                             switch ($thead) {
                                 case 'c_processName':
-                                    $thead = '工程名・工程機能';
+                                    $thead = '工程';
                                     break;
                                 case 'c_failMode':
                                     $thead = '故障モード';
@@ -39,9 +39,9 @@ function f_generate_table_select($data)
                         }
                     }
                     ?>
-                    <th class=" table-head text-center ">
+                    <!-- <th class=" table-head text-center ">
                         ID
-                    </th>
+                    </th> -->
                     <th class="button_column buttons text-center border-start" style="display:none"></th>
                 </tr>
 
@@ -65,9 +65,9 @@ function f_generate_table_select($data)
                         <td class=" table-data text-center align-middle border-end  pointer col">
                             <?= $item->c_failMode ?>
                         </td>
-                        <td class=" table-data text-center align-middle border-end  pointer col ID">
+                        <!-- <td class=" table-data text-center align-middle border-end  pointer col ID">
                             <?= $item->c_t800_id ?>
-                        </td>
+                        </td> -->
                         <td class=" table-data text-center align-middle border-end  pointer col button_column text-nowrap" style="display: none;">
                             <a class="btn-block btn btn-primary modify-button" href="<?= base_url() ?>editEquipment/<?= intval($item->c_t800_id) ?>" onclick="event.cancelBubble=true;"><?= $data['UPDATE_BUTTON'] ?></a>
                             <a class="btn-block btn btn-danger modify-button" onclick="event.cancelBubble=true; deleteData_tool(<?= $item->c_t800_id ?>)"><?= $data['DELETE_BUTTON'] ?></a>

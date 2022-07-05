@@ -108,9 +108,6 @@
                                 "bSortable": true
                             },
                             {
-                                "bSortable": true
-                            },
-                            {
                                 "bSortable": false
                             },
 
@@ -180,7 +177,7 @@
                         var title = $(this).text().trim();
 
 
-                        
+
                         if (title.length == 0)
                             $('#search-bar').append('<th class="button_column buttons" style="display:none"></th>');
                         else
@@ -200,9 +197,7 @@
                             {
                                 "bSortable": true
                             },
-                            {
-                                "bSortable": true
-                            },
+
                             {
                                 "bSortable": false
                             },
@@ -359,7 +354,7 @@
                     $.ajax({
                         url: "<?= base_url() ?>dashboard/delete_data_tool/" + $id,
                         complete: function() {
-                                get_troubleList()
+                            get_troubleList()
                         }
                     });
                 } else {
@@ -367,6 +362,7 @@
                 }
             });
     }
+
     function deleteData_tool_fmea($id) {
 
         var conf = swal({
@@ -385,7 +381,7 @@
                     $.ajax({
                         url: "<?= base_url() ?>dashboard/delete_data_tool_fmea/" + $id,
                         complete: function() {
-                                get_troubleList_fmea()
+                            get_troubleList_fmea()
                         }
                     });
                 } else {
@@ -393,6 +389,7 @@
                 }
             });
     }
+
     function deleteData_sparepart($id) {
 
         var conf = swal({
@@ -411,7 +408,7 @@
                     $.ajax({
                         url: "<?= base_url() ?>dashboard/delete_data_sparepart/" + $id,
                         complete: function() {
-                                get_sparepartlist()
+                            get_sparepartlist()
                         }
                     });
                 } else {
@@ -472,43 +469,49 @@
                     $('#editPartsModal').modal('hide');
                     $('#form-parts-edit').find("input[type=text],input[type=number], textarea").val("");
                     get_sparepartlist();
-                } 
-                // else {
-                //     var stringNum = response.replace(/[^0-9.]/g, '');
-                //     var arrNum = Array.from(String(stringNum), Number)
-                //     for (let index = 0; index < arrNum.length; index++) {
+                } else {
+                    var stringNum = response.replace(/[^0-9.]/g, '');
+                    console.log(stringNum);
+                    var arrNum = Array.from(String(stringNum), Number)
+                    for (let index = 0; index < arrNum.length; index++) {
 
-                //         switch (arrNum[index]) {
-                //             case 2:
-                //                 $('#purchaseDate_edit').addClass('is-invalid')
-                //                 break;
-                //             case 3:
-                //                 $('#partName_edit').addClass('is-invalid')
-                //                 break;
-                //             case 4:
-                //                 $('#model_edit').addClass('is-invalid')
-                //                 break;
-                //             case 5:
-                //                 $('#maker_edit').addClass('is-invalid')
-                //                 break;
-                //             case 6:
-                //                 $('#quantity_edit').addClass('is-invalid')
-                //                 break;
-                //             case 7:
-                //                 $('#unit_edit').addClass('is-invalid')
-                //                 break;
-                //             case 8:
-                //                 $('#price_edit').addClass('is-invalid')
-                //                 break;
+                        switch (arrNum[index]) {
+                            case 2:
+                                $('#purchaseDate_edit').addClass('is-invalid')
+                                break;
+                            case 3:
+                                $('#partName_edit').addClass('is-invalid')
+                                break;
+                            case 4:
+                                $('#model_edit').addClass('is-invalid')
+                                break;
+                            case 5:
+                                $('#maker_edit').addClass('is-invalid')
+                                break;
+                            case 6:
+                                $('#quantity_edit').addClass('is-invalid')
+                                break;
+                            case 7:
+                                $('#unit_edit').addClass('is-invalid')
+                                break;
+                            case 8:
+                                $('#price_edit').addClass('is-invalid')
+                                break;
+                            case 9:
+                                $('#storage_edit').addClass('is-invalid')
+                                break;
+                            case 0:
+                                $('#arra_edit').addClass('is-invalid')
+                                break;
 
 
-                //             default:
-                //                 break;
-                //         }
+                            default:
+                                break;
+                        }
 
 
-                //     }
-                // }
+                    }
+                }
             },
         });
         event.preventDefault();
@@ -542,44 +545,49 @@
                     $('#form-parts').find("input[type=text],input[type=number], textarea").val("");
                     // $('#form-parts').find("input[type=number], textarea").val("");
                     get_sparepartlist();
-                } 
-                // else {
-                //     var stringNum = response.replace(/[^0-9.]/g, '');
-                //     var arrNum = Array.from(String(stringNum), Number)
-                //     for (let index = 0; index < arrNum.length; index++) {
+                } else {
+                    var stringNum = response.replace(/[^0-9.]/g, '');
+                    var arrNum = Array.from(String(stringNum), Number)
+                    for (let index = 0; index < arrNum.length; index++) {
 
-                //         switch (arrNum[index]) {
-                //             case 1:
-                //                 $('#purchaseDate').addClass('is-invalid')
-                //                 break;
-                //             case 2:
-                //                 $('#partName').addClass('is-invalid')
-                //                 break;
-                //             case 3:
-                //                 $('#model').addClass('is-invalid')
-                //                 break;
-                //             case 4:
-                //                 $('#maker').addClass('is-invalid')
-                //                 break;
-                //             case 5:
-                //                 $('#quantity').addClass('is-invalid')
-                //                 break;
-                //             case 6:
-                //                 $('#unit').addClass('is-invalid')
-                //                 break;
-                //             case 7:
-                //                 $('#price').addClass('is-invalid')
-                //                 break;
+                        switch (arrNum[index]) {
+                            case 1:
+                                $('#purchaseDate').addClass('is-invalid')
+                                break;
+                            case 2:
+                                $('#partName').addClass('is-invalid')
+                                break;
+                            case 3:
+                                $('#model').addClass('is-invalid')
+                                break;
+                            case 4:
+                                $('#maker').addClass('is-invalid')
+                                break;
+                            case 5:
+                                $('#quantity').addClass('is-invalid')
+                                break;
+                            case 6:
+                                $('#unit').addClass('is-invalid')
+                                break;
+                            case 7:
+                                $('#price').addClass('is-invalid')
+                                break;
+                            case 8:
+                                $('#storage').addClass('is-invalid')
+                                break;
+                            case 9:
+                                $('#arra').addClass('is-invalid')
+                                break;
 
 
-                //             default:
-                //                 break;
-                //         }
+                            default:
+                                break;
+                        }
 
 
-                //     }
+                    }
 
-                // }
+                }
             }
         });
         event.preventDefault();
@@ -589,10 +597,38 @@
 
     // ON FOCUS REMOVE CLASS (Probably solution to the double loop)
 
-    // SAVIOOUR
+    // SAVIOOUR //Might be unused
     $('input').on('click', function name(params) {
         $(this).removeClass('is-invalid')
     })
+
+    function getAllFmeaList() {
+        $.ajax({
+            url: "<?php echo base_url(); ?>dashboard/get_all_fmea_list_modular?department=" + $('#busho_fmea').val(),
+            success: function(response) {
+                $("#all_fmea_list").html(response);
+
+            },
+            complete: function() {
+                var table = $('#all_trouble_table').DataTable({
+                    ordering: false,
+                    info: false,
+                    searching: false,
+                    paging: false,
+                    orderCellsTop: true,
+                    scrollY: '60vh',
+                    scrollX: false,
+                    "language": {
+                        "zeroRecords": "該当する記録は見つかりません",
+                    }
+                });
+
+                // var table = $('#all_trouble_table').rowMerge({
+                //     excludedColumns: [1, 2, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+                // });
+            }
+        });
+    }
 
 
 
@@ -600,23 +636,23 @@
 
 
     document.addEventListener("DOMContentLoaded", DATA.onLoad)
-// UNUSED
+    // UNUSED
 
 
     // 送品 search function
-    // function search_all_function() {
-    //     var $rows = $('#gen_table tbody tr');
+    function search_all_function() {
+        var $rows = $('#gen_table tbody tr');
 
-    //     $('#table_input').keyup(function() {
-    //         var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+        $('#table_input').keyup(function() {
+            var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
 
-    //         $rows.show().filter(function() {
-    //             var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-    //             return !~text.indexOf(val);
-    //         }).hide();
-    //         $('#amount-sum').html($('.data-row').not(':hidden').length);
-    //     });
-    // }
+            $rows.show().filter(function() {
+                var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+                return !~text.indexOf(val);
+            }).hide();
+            $('#amount-sum').html($('.data-row').not(':hidden').length);
+        });
+    }
 
     //This function get trigger when clicking a row on equipment, then choose the ID part <td>
     //
@@ -630,9 +666,4 @@
 
     //     window.location.replace(<?php base_url() ?>url)
     // }
-
 </script>
-
-
-
-

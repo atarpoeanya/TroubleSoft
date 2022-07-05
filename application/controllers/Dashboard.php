@@ -37,8 +37,8 @@ class Dashboard extends CI_Controller
             'UPDATE_BUTTON'                         =>  '変更',
             'DELETE_BUTTON'                         =>  '削除',
 
-            'INSERT_BUTTON_TROUBLE'                 =>  '新しトラブル',
-            'INSERT_BUTTON_SPARE'                   =>  '新し予備品',
+            'INSERT_BUTTON_TROUBLE'                 =>  '新規',
+            'INSERT_BUTTON_SPARE'                   =>  '新規',
             'SPARE_LIST_BUTTON'                     =>  '予備品リスト',
 
             'NEW_TROUBLE_BUTTON'                    =>  'NEW_TROUBLE',
@@ -50,7 +50,7 @@ class Dashboard extends CI_Controller
             'RADIO_A_PRODUCT'                       =>  '品質',
             'RADIO_A_SPARE'                         =>  '予備品',
 
-            'RADIO_B_REAL'                          =>  '実',
+            'RADIO_B_REAL'                          =>  'トラブル',
             'RADIO_B_FMEA'                          =>  'FMEA',
 
             //Transition screen
@@ -59,12 +59,12 @@ class Dashboard extends CI_Controller
             'TRANSITION_TOOLS_PROBLEM_BUTTON'       =>  '設備・工程',
             'TRANSITION_PRODUCT_PROBLEM_BUTTON'     =>  '製品',
 
-            'TRANSITION_LABEL_TOP'                  =>  '新しトラブル',
+            'TRANSITION_LABEL_TOP'                  =>  '新規',
             'TRANSITION_LABEL_BOTTOM'               =>  'FMEAのほう',
 
             //Form 
             //Equipment
-            'FMEA_BUTTON_NEED'                      =>  '要',
+            'FMEA_BUTTON_NEED'                      =>  '必要',
             'FMEA_BUTTON_NOT'                       =>  '不要',
 
             'FMEA_SEARCH_BUTTON'                    =>  '検索',
@@ -76,22 +76,22 @@ class Dashboard extends CI_Controller
             //Form (EQUIPMENT)
             'FORM_TITLE'                            =>  '設備トラブル',
             'ACCIDENT_DATE'                         =>  '発生日',
-            'REPAIR_DATE'                           =>  '修理日',
+            'REPAIR_DATE'                           =>  '作業日',
             'HAPPENING_TIME'                        =>  '発生時間',
             'STOP_TIME'                             =>  '停止時間',
-            'DEPARTMENT'                            =>  '部署',
+            'DEPARTMENT'                            =>  '部署名',
             'PIC'                                   =>  '担当者',
-            'FACILITY'                              =>  '設備',
+            'FACILITY'                              =>  '設備名',
             'UNIT'                                  =>  '号機',
             'PROCESS_NAME'                          =>  '工程名',
             'FAIL_MODE'                             =>  '故障モード',
-            'PHENOMENON'                            =>  '現象・不具合要因詳細',
+            'PHENOMENON'                            =>  '現象・発生要因詳細',
             'REPAIR_DETAIL'                         =>  '修理内容',
             'RESPONSE'                              =>  '対応・処置',
             'MECHANISM'                             =>  '故障のメカニズム',
             'COUNTERMEASURES'                       =>  '対策書',
-            'SECTION_1'                             =>  'インフォ',
-            'SECTION_2'                             =>  '設備の内容',
+            'SECTION_1'                             =>  '発生状況',
+            'SECTION_2'                             =>  '設備情報',
             'SECTION_3'                             =>  '修理内容',
             'SECTION_3_F'                           =>  '影響',
 
@@ -124,7 +124,7 @@ class Dashboard extends CI_Controller
 
             'EQUIPMENT_COUNTER_PLAN_F'              =>  '対策案',
             'EQUIPMENT_MEASURE_F'                   =>  '対策',
-            'EQUIPMENT_SECTION_1_F'                 =>  'インフォ',
+            'EQUIPMENT_SECTION_1_F'                 =>  '発生状況',
             'EQUIPMENT_SECTION_2_F'                 =>  '設備の内容',
             'EQUIPMENT_SECTION_3_F'                 =>  '修理内容',
 
@@ -134,10 +134,10 @@ class Dashboard extends CI_Controller
             'MODEL'                                 =>  '型式',
             'MAKER_NAME'                            =>  'メーカー名',
             'QUANTITY'                              =>  '数量',
-            'PRICE'                                 =>  '金額',
+            'PRICE'                                 =>  '単価',
             'UNIT'                                  =>  '単位',
-            'STORAGE'                               =>  '保管',
-            'ARRANGEMENT'                           =>  '必要時の手配先',
+            'STORAGE'                               =>  '保管場所',
+            'ARRANGEMENT'                           =>  '手配先',
 
             // Delete confirm
             'DELETE_CONFIRM'                        =>  'データを削除しますか？',
@@ -540,29 +540,39 @@ class Dashboard extends CI_Controller
         // since this form is in a modal and not a page it need to use ajax
         // not a fun ajax tbh
 
-        // $this->form_validation->set_rules("c_t202_id", '1', 'required');
-        // $this->form_validation->set_rules("c_purchaseDate", '2', 'required');
-        // $this->form_validation->set_rules("c_partName", '3', 'required');
-        // $this->form_validation->set_rules("c_model", '4', 'required');
-        // $this->form_validation->set_rules("c_maker", '5', 'required');
-        // $this->form_validation->set_rules("c_quantity", '6', 'required|is_natural');
-        // $this->form_validation->set_rules("c_unit", '7', 'required');
-        // $this->form_validation->set_rules("c_price", '8', 'required|is_natural');
+        $this->form_validation->set_rules("c_t202_id", '1', 'required');
+        $this->form_validation->set_rules("c_purchaseDate", '2', 'required');
+        $this->form_validation->set_rules("c_partName", '3', 'required');
+        $this->form_validation->set_rules("c_model", '4', 'required');
+        $this->form_validation->set_rules("c_maker", '5', 'required');
+        $this->form_validation->set_rules("c_quantity", '6', 'required|is_natural');
+        $this->form_validation->set_rules("c_unit", '7', 'required');
+        $this->form_validation->set_rules("c_price", '8', 'required|is_natural');
+        $this->form_validation->set_rules("c_storage", '9', 'required');
+        $this->form_validation->set_rules("c_arrangement", '0', 'required');
 
-        // if ($this->form_validation->run() == FALSE) {
-        //     echo validation_errors();
-        // } else {
+        if ($this->form_validation->run() === FALSE) {
+            echo validation_errors();
+        } else {
         $this->Troublelist_model->edit_sparepart();
         echo 1;
-        // }
+        }
     }
     // Need Validation
     public function post_spare()
     {
         $this->form_validation->set_rules("c_purchaseDate", '1', 'required');
+        $this->form_validation->set_rules("c_partName", '2', 'required');
+        $this->form_validation->set_rules("c_model", '3', 'required');
+        $this->form_validation->set_rules("c_maker", '4', 'required');
+        $this->form_validation->set_rules("c_quantity", '5', 'required|is_natural');
+        $this->form_validation->set_rules("c_unit", '6', 'required');
+        $this->form_validation->set_rules("c_price", '7', 'required|is_natural');
+        $this->form_validation->set_rules("c_storage", '8', 'required');
+        $this->form_validation->set_rules("c_arrangement", '9', 'required');
 
 
-        $this->form_validation->set_message('required', '{field}');
+        // $this->form_validation->set_message('required', '{field}');
 
         if ($this->form_validation->run() == FALSE) {
             echo validation_errors();
@@ -572,55 +582,41 @@ class Dashboard extends CI_Controller
         }
     }
 
-
-
-
-    public function get_all_trouble_list_modular()
+    public function all_fmea_list()
     {
         $data = $this->data;
-        $this->load->view('/templates/header', $data);
+        $this->load->view('templates/header', $data);
+        $this->load->view('Pages/all_fmea');
+        $this->load->view('templates/footer');
+        $this->load->view('js/dashboard_js');
+    }
+
+
+
+    public function get_all_fmea_list_modular()
+    {
+        $data = $this->data;
+        // $id = $this->uri->segment(2);
+        // $this->load->view('/templates/header', $data);
         $this->load->library('table');
 
-        // $data = $this->Trouble_model->get_all_equipment_data();
-
-        // // $data['title'] = $this->Troublelist_model->get_title('t202_spareparts');
-        // // $data['sparePart'] = $this->Troublelist_model->getSparepartList();
-        // $this->load->view('Trouble/function/print_table');
-        // f_generate_table_select($data);
-
-
-
-        //========= I DONT UNDERSTAND THIS PART =====================
-        $data = $this->Troublelist_model->getTrouble_fmea_array();
+        $data = $this->Troublelist_model->get_trouble_fmea_array($_GET['department']);
 
         $template = array(
-            'table_open'            => '<table class="table table-sm table-striped-columns table-responsive mt-5" id="all_trouble_table">',
+            'table_open'            => '<table class="table table-sm table-striped-columns table-responsive" id="all_trouble_table">',
 
             'thead_open'            => '<thead class="table-dark">',
-            'thead_close'           => '</thead>',
 
-            'heading_row_start'     => '<tr>',
-            'heading_row_end'       => '</tr>',
             'heading_cell_start'    => '<th style="border-width: 2px;" class="kanjifont table-head text-center border-right border-left text-nowrap ">',
-            'heading_cell_end'      => '</th>',
 
+            'cell_start'            => '<td style="border-width: 2px;" class="kanjifont table-data text-center align-middle border-right border-left pointer col">',
 
-
-            'cell_start'            => '<td style="border-width: 2px;" class="kanjifont table-data text-center align-middle border-right border-left pointer col" onclick="view_record(this)">',
-
-
-
-            'cell_alt_start'        => '<td style="border-width: 2px;" class="kanjifont table-data text-center align-middle border-right border-left pointer col" onclick="view_record(this)"">',
-
-
-            'table_close'           => '</table>'
+            'cell_alt_start'        => '<td style="border-width: 2px;" class="kanjifont table-data text-center align-middle border-right border-left pointer col">',
         );
 
         $this->table->set_template($template);
         $this->table->set_heading('設備', '号機', '工程名・工程機能', '故障モード', '故障の影響', 'ライン停止の可能性', '特殊特性等', '故障の潜在原因メカニズム', '予防', '周期', '月', '検出', '対策案', '担当者日程', '対策');
 
         echo $this->table->generate($data);
-
-        // $this->load->view('Trouble/js/home_js');
     }
 }

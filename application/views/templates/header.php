@@ -11,6 +11,8 @@
 
 <!-- JQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"> </script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 
 
 <!-- JQuery DataTables -->
@@ -45,13 +47,13 @@
     </nav>  -->
 </head>
 
-<body class="pt-3">
-    <header class="mb-5 py-3">
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+<body class="">
+    <header class="mb-4 ">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark ">
             <div class="container-fluid">
                 <a class="navbar-brand kanjifont" href="<?= base_url() ?>">
                     <img src="<?= base_url() ?>public/MEIWA_150_white.png" width="50" height="25" class="d-inline-block align-top mt-1" alt="" style="margin-right: 15px;margin-left: 15px">
-                    <p1>明和工業過去トラブルデータベース</p1>
+                    <p1>過去トラブルデータベース</p1>
                 </a>
             </div>
         </nav>

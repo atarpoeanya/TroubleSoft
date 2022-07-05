@@ -1,9 +1,9 @@
 <main class="container p-sm-2">
-<div class="container mt-4">
+<div class="container">
     <div class="btn-group switch-field text-nowrap">
-        <a name="設備" onclick="buttonSwitch(this);category_switcher(this)" class="btn btn-outline-secondary active topper" aria-current="page"><?= $this->data['RADIO_A_EQUIPMENT']?></a>
-        <a name="品質" onclick="buttonSwitch(this);category_switcher(this)" class="btn  btn-outline-secondary topper bg-white"><?= $this->data['RADIO_A_PRODUCT']?></a>
-        <a name="予備品" onclick="buttonSwitch(this);category_switcher(this)" class="btn  btn-outline-secondary topper bg-white"><?= $this->data['RADIO_A_SPARE']?></a>
+        <a name="設備" onclick="buttonSwitch(this);category_switcher(this)" class="btn btn-white active topper" aria-current="page"><?= $this->data['RADIO_A_EQUIPMENT']?></a>
+        <a name="品質" onclick="buttonSwitch(this);category_switcher(this)" class="btn  btn-white topper bg-white disabled"><?= $this->data['RADIO_A_PRODUCT']?></a>
+        <a name="予備品" onclick="buttonSwitch(this);category_switcher(this)" class="btn  btn-white topper bg-white"><?= $this->data['RADIO_A_SPARE']?></a>
     </div>
 </div>
 </div>
@@ -18,7 +18,9 @@
                     
                     <a id="fmea-s"  onclick="buttonSwitch(this);get_troubleList_fmea()" class="btn  btn-outline-secondary bottm bg-white"><?= $this->data['RADIO_B_FMEA']?></a>
                 </div>
-                <!-- <h1>HELLO</h1> -->
+
+
+                <a href="<?= base_url(); ?>dashboard/all_fmea_list" id="fmea-s" class="btn btn-outline-secondary" >LIST</a>
             </div>
             <div class="col-lg-3 col-md">
     
@@ -69,6 +71,7 @@
 
     .btn.active{
         background-color: #1B3384;
+        color: white;
         box-shadow: 4px 0px 8px -1px rgba(0,0,0,0.5);
     }
 

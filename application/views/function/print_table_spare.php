@@ -33,13 +33,13 @@ function f_generate_table_select($data)
                 array_push($head_name, '単位');
                 break;
             case 'c_price':
-                array_push($head_name, '金額');
+                array_push($head_name, '単価');
                 break;
             case 'c_storage':
-                array_push($head_name, '予備品の保管場所');
+                array_push($head_name, '保管場所');
                 break;
             case 'c_arrangement':
-                array_push($head_name, '必要時の手配先');
+                array_push($head_name, '手配先');
                 break;
 
             default:

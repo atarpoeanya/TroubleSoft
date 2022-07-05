@@ -258,8 +258,8 @@
                                 </div>
 
                                 <div class="d-flex justify-content-center">
-                                    <button type="submit" name="edit_trouble" class="btn btn-primary float-end me-5" value="登録" id="submitTrouble"><?= $this->data['SUBMIT_BUTTON'] ?></button>
-                                    <a class="btn btn-warning float-end me-1" href='<?= base_url(); ?>'><?= $this->data['CANCEL_BUTTON'] ?></a>
+                                    <a class="btn btn-warning float-end me-5" href='<?= base_url(); ?>'><?= $this->data['CANCEL_BUTTON'] ?></a>
+                                    <button type="submit" name="edit_trouble" class="btn btn-primary float-end me-1" value="登録" id="submitTrouble"><?= $this->data['SUBMIT_BUTTON'] ?></button>
 
 
                                 </div>

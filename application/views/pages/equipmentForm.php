@@ -7,7 +7,7 @@
                     <div class="d-flex flex-column justify-content-between pb-2">
                         <!-- <label class="form-label" for="fmea-toggle-btn">FMEA</label> -->
                         <span>FMEA</span>
-                        <small>FMEAの参考が必要と、「<b>要</b>」選んでください。</small>
+                        
                         <div class="btn-group" role="group" aria-label="Basic radio toggle button group" id="fmea-toggle-btn">
 
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
