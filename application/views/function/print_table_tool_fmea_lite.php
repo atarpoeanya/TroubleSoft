@@ -21,7 +21,7 @@ function f_generate_table_select($data)
                                     $thead = '故障モード';
                                     break;
                                 case 'c_accidentDate':
-                                    $thead = '発生日';
+                                    $thead = '設備名';
                                     break;
                                 default:
                                     // $thead = 'missing';
@@ -54,7 +54,7 @@ function f_generate_table_select($data)
                     ?>
                         <tr>
                             <td class=" table-data text-center align-middle border-right border-left pointer col"> 
-                                <?= $item->c_accidentDate ?>
+                                <?= $item->c_facility ?>
                             </td>
                             <td class=" table-data text-center align-middle border-right border-left pointer col">
                                 <?= $item->c_processName ?>

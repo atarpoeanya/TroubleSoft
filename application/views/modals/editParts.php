@@ -56,11 +56,11 @@
                                 </div>
                                 <div class="col pt-3">
                                     <label class="form-label" for="unit"><?= $this->data['STORAGE'] ?></label>
-                                    <input class="form-control " type="text" name="単位" id="storage" required>
+                                    <input class="form-control " type="text" name="保管" id="storage_edit" value="<?= $spare->c_storage ?>" required>
                                 </div>
                                 <div class="col pt-3">
                                     <label class="form-label" for="unit"><?= $this->data['ARRANGEMENT'] ?></label>
-                                    <input class="form-control " type="text" name="単位" id="arra" required>
+                                    <input class="form-control " type="text" name="必要時" id="arra_edit" value="<?= $spare->c_arrangement ?>" required>
                                 </div>
                             </div>
                         </div>

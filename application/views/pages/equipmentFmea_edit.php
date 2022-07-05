@@ -13,34 +13,13 @@
 <div class="pt-3">
     <div class="card">
         <div class="card-body">
-            <form action="" method="post" class="mt-4 p-4 col mainForm" autocomplete="off" id="equipForm" enctype="multipart/form-data">
+            <form action="/edit_Equipment_fmea/" method="post" class="mt-4 p-4 col mainForm" autocomplete="off" id="equipForm" enctype="multipart/form-data">
                 <!-- ID -->
                 <input type="hidden" name="id" id="setsubiId" value="<?= $items->c_t203_id ?>">
                 <!-- For Spare part [Id, Amount] -->
                 <input type="hidden" name="spareParts" id="partinfo" value="">
                 <div class="row">
-                    <div class="col-4">
-                        <label class="form-label" for="">Wreck_date</label>
-                        <input type="date" class="form-control" name="発生日" value="<?= $items->c_accidentDate ?>">
-                    </div>
-                    <div class="col-6">
-                        <label class="form-label" for="">Repair_date</label>
-                        <input type="date" class="form-control" name="修理日" value="<?= $items->c_repairDate ?>">
-                    </div>
-
-                </div>
-                <div class="row">
-
-                    <div class="col">
-                        <label class="form-label" for="">time_start</label>
-                        <input type="time" class="form-control" name="time_start" value="<?= $items->c_repairStart ?>">
-                    </div>
-                    <div class="col"><label class="form-label" for="">time_end</label>
-                        <input type="time" class="form-control" name="time_end" value="<?= $items->c_repairEnd ?>">
-                    </div>
-
-
-                </div>
+                   
 
                 <p class=" position-relative sub-header">
                     &nbsp;<b><?= $this->data['SECTION_1'] ?></b>&nbsp;</p>
@@ -252,8 +231,8 @@
                         <!-- <input type="submit" name="edit_fmea" class="btn btn-primary float-end" value="登録" id="submitTrouble">
                             <button type="button" class="btn btn-primary" onclick="printName()">CLICK ME</button> -->
 
-                        <a class="btn btn-warning float-end me-1" href='<?= base_url(); ?>'><?= $this->data['CANCEL_BUTTON'] ?></a>
-                        <button type="submit" name="edit_fmea" class="btn btn-primary float-end me-5" value="登録" id="submitTrouble"><?= $this->data['SUBMIT_BUTTON']; ?></button>
+                        <a class="btn btn-warning float-end  me-5" href='<?= base_url(); ?>'><?= $this->data['CANCEL_BUTTON'] ?></a>
+                        <button type="submit" name="edit_fmea" class="btn btn-primary float-end me-1" value="登録" id="submitTrouble"><?= $this->data['SUBMIT_BUTTON']; ?></button>
 
 
 

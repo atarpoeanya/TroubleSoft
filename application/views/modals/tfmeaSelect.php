@@ -34,7 +34,7 @@
 <script>
     $('#fmeaLite').on('show.bs.modal', function(event) {
         $.ajax({
-            url: "<?= base_url(); ?>dashboard/get_troubleList_fmea_lite",
+            url: "<?= base_url(); ?>dashboard/get_trouble_list_tool_fmea_lite",
 
             success: function(response) {
                 $("#fmeaUpper").html(response)

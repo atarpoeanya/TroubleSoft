@@ -137,7 +137,7 @@
                 $('#equipment_parts_list tbody, #equipment_parts_list_edit tbody').find('tr').each(function() {
                     $arr.push([$(this).find('td:eq(0)').text().trim(), $(this).find('td:eq(3)').text().trim()])
                 })
-                console.log($arr)
+                
                 $('#partinfo').val(JSON.stringify($arr));
             }
             //ELSE SEND EMPTY STATEMENT
@@ -258,7 +258,7 @@
             });
 
 
-        })
+        })                                                                          
 
         // function search_all_function() {
         //     var $rows = $('#gen_table #bodys tr');
@@ -303,12 +303,12 @@
                             if (data.children('.id').val() == $(this).find('td:eq(0)').text().trim()) {
                                 flag = 'exist';
                                 amount = $(this).find('td:eq(3)').text().trim();
-                                console.log(flag)
+                                
                                 return false;
                             } else
                                 flag = 'deleted';
 
-                            console.log(flag)
+                            
                         })
 
                         if (flag == 'exist') {
@@ -327,7 +327,7 @@
                             if ($(data).find('td:eq(0)').text().trim() == $(this).children('.id').val())
                                 flag = '1';
 
-                            console.log([$(this).children('.id').val(), $(data).find('td:eq(0)').text().trim(), flag])
+                            
                         })
 
                         if (flag == '0')
@@ -341,7 +341,7 @@
 
 
                     $('#partinfo').val(JSON.stringify($arr));
-                    console.log($arr)
+                    
                 }
                 //ELSE SEND EMPTY STATEMENT
                 else {
@@ -375,4 +375,9 @@
         {
 
         }
+
+
+
+        // ================= PRINT FMEA I DONT KNOW
+        
 </script>

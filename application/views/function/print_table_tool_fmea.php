@@ -23,7 +23,7 @@ function f_generate_table_select($data)
                                     $thead = '故障モード';
                                     break;
                                 case 'c_accidentDate':
-                                    $thead = '発生日';
+                                    $thead = '設備名';
                                     break;
                                 default:
                                     // $thead = 'missing';
@@ -55,7 +55,7 @@ function f_generate_table_select($data)
                 ?>
                     <tr class="fmea-tools data-row" onclick="window.location='<?= base_url()?>item_fmea/<?= $item->c_t203_id ?>';">
                         <td class="kanjifont table-data text-center align-middle border-end pointer col">
-                            <?= $item->c_accidentDate ?>
+                            <?= $item->c_facility?>
                         </td>
                         <td class="kanjifont table-data text-center align-middle border-end pointer col">
                             <?= $item->c_processName ?>
@@ -68,7 +68,7 @@ function f_generate_table_select($data)
                         </td>
                         <td class="kanjifont table-data text-center align-middle border-end pointer col button_column text-nowrap" style="display: none;">
                             <a class="btn btn-primary" href="<?= base_url() ?>editEquipment_fmea/<?= intval($item->c_t203_id) ?>" onclick="event.cancelBubble=true;"><?= $data['UPDATE_BUTTON']?></a>
-                            <a class="btn btn-danger " onclick="event.cancelBubble=true; deleteData(<?= $item->c_t203_id ?>, 'equipment_fmea')"><?= $data['DELETE_BUTTON']?></a>
+                            <a class="btn btn-danger " onclick="event.cancelBubble=true; deleteData_tool_fmea(<?= $item->c_t203_id ?>)"><?= $data['DELETE_BUTTON']?></a>
 
                         </td>
                     </tr>

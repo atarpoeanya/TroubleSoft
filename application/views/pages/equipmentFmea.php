@@ -4,29 +4,7 @@
             <form action="/equipment_fmea/2" method="post" class="mt-4 p-4 col mainForm" autocomplete="off" id="equipForm" enctype="multipart/form-data">
                 <!-- For Spare part [Id, Amount] -->
                 <input type="hidden" name="spareParts" id="partinfo" value="">
-                <div class="row">
-                    <div class="col-4">
-                        <label class="form-label" for="">Wreck_date</label>
-                        <input type="date" class="form-control" name="発生日">
-                    </div>
-                    <div class="col-6">
-                        <label class="form-label" for="">Repair_date</label>
-                        <input type="date" class="form-control" name="修理日">
-                    </div>
-
-                </div>
-                <div class="row">
-
-                    <div class="col">
-                        <label class="form-label" for="">time_start</label>
-                        <input type="time" class="form-control" name="time_start" required>
-                    </div>
-                    <div class="col"><label class="form-label" for="">time_end</label>
-                        <input type="time" class="form-control" name="time_end" required>
-                    </div>
-
-
-                </div>
+              
 
                 <p class=" position-relative sub-header">
                     &nbsp;<b><?= $this->data['SECTION_1'] ?></b>&nbsp;</p>
@@ -66,9 +44,9 @@
                     </div>
                 </div>
 
-                <p class=" position-relative sub-header">
-                    &nbsp;<b><?= $this->data['SECTION_2'] ?></b>&nbsp;</p>
-                <div class="row row border-top py-3">
+                <!-- <p class=" position-relative sub-header">
+                    &nbsp;<b><?= $this->data['SECTION_2'] ?></b>&nbsp;</p> -->
+                <!-- <div class="row row border-top py-3">
 
                     <div class="col-12 pt-3">
                         <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_PHENOMENON_F']?></label>
@@ -84,7 +62,7 @@
                     </div>
 
 
-                </div>
+                </div> -->
 
                 <p class=" position-relative sub-header">
                     &nbsp;<b><?= $this->data['SECTION_3_F'] ?></b>&nbsp;</p>
@@ -189,8 +167,8 @@
                 </div>
 
                 <div class="d-flex justify-content-center mt-2">
-                    <a class="btn btn-warning float-end me-1" href='<?= base_url(); ?>as'><?= $this->data['CANCEL_BUTTON']?></a>
-                    <button type="submit" name="add_trouble" class="btn btn-primary float-end me-5" value="登録" id="submitTrouble"><?= $this->data['SUBMIT_BUTTON'];?></button>
+                    <a class="btn btn-warning float-end me-5" href='<?= base_url(); ?>as'><?= $this->data['CANCEL_BUTTON']?></a>
+                    <button type="submit" name="add_trouble" class="btn btn-primary float-end  me-1" value="登録" id="submitTrouble"><?= $this->data['SUBMIT_BUTTON'];?></button>
                     <!-- <input type="submit" name="add_trouble" class="btn btn-primary float-end me-5" value="登録" id="submitTrouble"> -->
 
 

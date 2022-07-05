@@ -75,7 +75,7 @@
         $('#list').children().remove()
 
         $.ajax({
-            url: "<?php echo base_url(); ?>dashboard/get_troubleList",
+            url: "<?php echo base_url(); ?>dashboard/get_trouble_list_tool",
             success: function(response) {
                 $("#list").html(response);
             },
@@ -163,7 +163,7 @@
 
 
         $.ajax({
-            url: "<?php echo base_url(); ?>dashboard/get_troubleList_fmea",
+            url: "<?php echo base_url(); ?>dashboard/get_trouble_list__tool_fmea",
             success: function(response) {
                 $("#list").html(response);
 
@@ -180,9 +180,8 @@
                         var title = $(this).text().trim();
 
 
-                        if (title == '発生日')
-                            $('#search-bar').append('<th><input type="date" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
-                        else if (title.length == 0)
+                        
+                        if (title.length == 0)
                             $('#search-bar').append('<th class="button_column buttons" style="display:none"></th>');
                         else
                             $('#search-bar').append('<th><input type="text" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
@@ -260,7 +259,7 @@
 
 
         $.ajax({
-            url: "<?php echo base_url(); ?>dashboard/get_sparepartList",
+            url: "<?php echo base_url(); ?>dashboard/get_sparepart_list",
             success: function(response) {
                 $("#list").html(response);
             },
@@ -342,7 +341,7 @@
     }
 
 
-    function deleteData($id, $type) {
+    function deleteData_tool($id) {
 
         var conf = swal({
                 title: "データを削除しますか？",
@@ -358,15 +357,61 @@
                         icon: "success",
                     });
                     $.ajax({
-                        url: "<?= base_url() ?>dashboard/deleteDatas/" + $id + "/" + $type,
+                        url: "<?= base_url() ?>dashboard/delete_data_tool/" + $id,
                         complete: function() {
-                            if ($type == 'spareparts')
-                                get_sparepartlist();
-                            if (($type == 'equipment'))
-                                get_troubleList();
-                            else
-                                get_troubleList_fmea()
+                                get_troubleList()
+                        }
+                    });
+                } else {
+                    // DELETE CANCELLED
+                }
+            });
+    }
+    function deleteData_tool_fmea($id) {
 
+        var conf = swal({
+                title: "データを削除しますか？",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal({
+                        // button: false,
+                        title: "データが削除されました",
+                        icon: "success",
+                    });
+                    $.ajax({
+                        url: "<?= base_url() ?>dashboard/delete_data_tool_fmea/" + $id,
+                        complete: function() {
+                                get_troubleList_fmea()
+                        }
+                    });
+                } else {
+                    // DELETE CANCELLED
+                }
+            });
+    }
+    function deleteData_sparepart($id) {
+
+        var conf = swal({
+                title: "データを削除しますか？",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal({
+                        // button: false,
+                        title: "データが削除されました",
+                        icon: "success",
+                    });
+                    $.ajax({
+                        url: "<?= base_url() ?>dashboard/delete_data_sparepart/" + $id,
+                        complete: function() {
+                                get_sparepartlist()
                         }
                     });
                 } else {
@@ -375,38 +420,10 @@
             });
     }
 
-    // 送品 search function
-    // function search_all_function() {
-    //     var $rows = $('#gen_table tbody tr');
-
-    //     $('#table_input').keyup(function() {
-    //         var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
-
-    //         $rows.show().filter(function() {
-    //             var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-    //             return !~text.indexOf(val);
-    //         }).hide();
-    //         $('#amount-sum').html($('.data-row').not(':hidden').length);
-    //     });
-    // }
-
-    //This function get trigger when clicking a row on equipment, then choose the ID part <td>
-    //
-    // function view_record(el) {
-    //     var $id = $(el).children('.ID').text().trim();
-
-    //     if (!$(el).hasClass('fmea-tools'))
-    //         var url = 'item/' + $id;
-    //     else
-    //         var url = 'item_fmea/' + $id;
-
-    //     window.location.replace(<?php base_url() ?>url)
-    // }
-
     function editSpare_populate(el) {
         $id = $(el).parent().siblings('.ID').text().trim()
         $.ajax({
-            url: "<?php echo base_url() ?>dashboard/editSpares_view/" + $id,
+            url: "<?php echo base_url() ?>dashboard/edit_data_sparepart_view/" + $id,
             success: function(response) {
 
                 $('#modalPlaceHolder').append(response)
@@ -440,11 +457,13 @@
             "c_maker": $('#maker_edit').val(),
             "c_quantity": $('#quantity_edit').val(),
             "c_unit": $('#unit_edit').val(),
-            "c_price": $('#price_edit').val()
+            "c_price": $('#price_edit').val(),
+            "c_storage": $('#storage_edit').val(),
+            "c_arrangement": $('#arra_edit').val()
         }
 
         $.ajax({
-            url: "<?= base_url(); ?>dashboard/editSpare",
+            url: "<?= base_url(); ?>dashboard/post_edit_data_sparepart",
             type: 'POST',
             data: spare_data,
             success: function(response) {
@@ -453,46 +472,44 @@
                     $('#editPartsModal').modal('hide');
                     $('#form-parts-edit').find("input[type=text],input[type=number], textarea").val("");
                     get_sparepartlist();
-                } else {
-                    var stringNum = response.replace(/[^0-9.]/g, '');
-                    var arrNum = Array.from(String(stringNum), Number)
-                    for (let index = 0; index < arrNum.length; index++) {
+                } 
+                // else {
+                //     var stringNum = response.replace(/[^0-9.]/g, '');
+                //     var arrNum = Array.from(String(stringNum), Number)
+                //     for (let index = 0; index < arrNum.length; index++) {
 
-                        switch (arrNum[index]) {
-                            case 2:
-                                $('#purchaseDate_edit').addClass('is-invalid')
-                                break;
-                            case 3:
-                                $('#partName_edit').addClass('is-invalid')
-                                break;
-                            case 4:
-                                $('#model_edit').addClass('is-invalid')
-                                break;
-                            case 5:
-                                $('#maker_edit').addClass('is-invalid')
-                                break;
-                            case 6:
-                                $('#quantity_edit').addClass('is-invalid')
-                                break;
-                            case 7:
-                                $('#unit_edit').addClass('is-invalid')
-                                break;
-                            case 8:
-                                $('#price_edit').addClass('is-invalid')
-                                break;
-
-
-                            default:
-                                break;
-                        }
+                //         switch (arrNum[index]) {
+                //             case 2:
+                //                 $('#purchaseDate_edit').addClass('is-invalid')
+                //                 break;
+                //             case 3:
+                //                 $('#partName_edit').addClass('is-invalid')
+                //                 break;
+                //             case 4:
+                //                 $('#model_edit').addClass('is-invalid')
+                //                 break;
+                //             case 5:
+                //                 $('#maker_edit').addClass('is-invalid')
+                //                 break;
+                //             case 6:
+                //                 $('#quantity_edit').addClass('is-invalid')
+                //                 break;
+                //             case 7:
+                //                 $('#unit_edit').addClass('is-invalid')
+                //                 break;
+                //             case 8:
+                //                 $('#price_edit').addClass('is-invalid')
+                //                 break;
 
 
-                    }
-                }
+                //             default:
+                //                 break;
+                //         }
+
+
+                //     }
+                // }
             },
-            complete: function() {
-                console.log('DONNNNNN')
-            }
         });
         event.preventDefault();
 
@@ -515,7 +532,7 @@
         }
 
         $.ajax({
-            url: "<?= base_url(); ?>dashboard/postSpare",
+            url: "<?= base_url(); ?>dashboard/post_spare",
             type: 'POST',
             data: spare_data,
             success: function(response) {
@@ -525,43 +542,44 @@
                     $('#form-parts').find("input[type=text],input[type=number], textarea").val("");
                     // $('#form-parts').find("input[type=number], textarea").val("");
                     get_sparepartlist();
-                } else {
-                    var stringNum = response.replace(/[^0-9.]/g, '');
-                    var arrNum = Array.from(String(stringNum), Number)
-                    for (let index = 0; index < arrNum.length; index++) {
+                } 
+                // else {
+                //     var stringNum = response.replace(/[^0-9.]/g, '');
+                //     var arrNum = Array.from(String(stringNum), Number)
+                //     for (let index = 0; index < arrNum.length; index++) {
 
-                        switch (arrNum[index]) {
-                            case 1:
-                                $('#purchaseDate').addClass('is-invalid')
-                                break;
-                            case 2:
-                                $('#partName').addClass('is-invalid')
-                                break;
-                            case 3:
-                                $('#model').addClass('is-invalid')
-                                break;
-                            case 4:
-                                $('#maker').addClass('is-invalid')
-                                break;
-                            case 5:
-                                $('#quantity').addClass('is-invalid')
-                                break;
-                            case 6:
-                                $('#unit').addClass('is-invalid')
-                                break;
-                            case 7:
-                                $('#price').addClass('is-invalid')
-                                break;
-
-
-                            default:
-                                break;
-                        }
+                //         switch (arrNum[index]) {
+                //             case 1:
+                //                 $('#purchaseDate').addClass('is-invalid')
+                //                 break;
+                //             case 2:
+                //                 $('#partName').addClass('is-invalid')
+                //                 break;
+                //             case 3:
+                //                 $('#model').addClass('is-invalid')
+                //                 break;
+                //             case 4:
+                //                 $('#maker').addClass('is-invalid')
+                //                 break;
+                //             case 5:
+                //                 $('#quantity').addClass('is-invalid')
+                //                 break;
+                //             case 6:
+                //                 $('#unit').addClass('is-invalid')
+                //                 break;
+                //             case 7:
+                //                 $('#price').addClass('is-invalid')
+                //                 break;
 
 
-                    }
+                //             default:
+                //                 break;
+                //         }
 
-                }
+
+                //     }
+
+                // }
             }
         });
         event.preventDefault();
@@ -582,4 +600,39 @@
 
 
     document.addEventListener("DOMContentLoaded", DATA.onLoad)
+// UNUSED
+
+
+    // 送品 search function
+    // function search_all_function() {
+    //     var $rows = $('#gen_table tbody tr');
+
+    //     $('#table_input').keyup(function() {
+    //         var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+    //         $rows.show().filter(function() {
+    //             var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+    //             return !~text.indexOf(val);
+    //         }).hide();
+    //         $('#amount-sum').html($('.data-row').not(':hidden').length);
+    //     });
+    // }
+
+    //This function get trigger when clicking a row on equipment, then choose the ID part <td>
+    //
+    // function view_record(el) {
+    //     var $id = $(el).children('.ID').text().trim();
+
+    //     if (!$(el).hasClass('fmea-tools'))
+    //         var url = 'item/' + $id;
+    //     else
+    //         var url = 'item_fmea/' + $id;
+
+    //     window.location.replace(<?php base_url() ?>url)
+    // }
+
 </script>
+
+
+
+

@@ -15,7 +15,7 @@
                     <div class="card-title">
                         <h2 class="pt-3 mb-3">設備のトラブル</h2>
                     </div>
-                    <form action="" method="post" class="mt-4" autocomplete="off" id="equipForm" enctype="multipart/form-data">
+                    <form action="/edit_Equipment/" method="post" class="mt-4" autocomplete="off" id="equipForm" enctype="multipart/form-data">
                         <!-- ID -->
                         <input type="hidden" name="id" id="setsubiId" value="<?= $items->c_t800_id ?>">
                         <!-- For Spare part [Id, Amount] -->

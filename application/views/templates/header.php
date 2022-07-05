@@ -23,7 +23,7 @@
 <script src="https://cdn.datatables.net/fixedcolumns/4.1.0/js/dataTables.fixedColumns.min.js"></script>
 
 <!-- Sweetalert -->
-<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <style>
     html * {
@@ -45,8 +45,8 @@
     </nav>  -->
 </head>
 
-<body>
-    <header class="mb-4 py-3">
+<body class="pt-3">
+    <header class="mb-5 py-3">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand kanjifont" href="<?= base_url() ?>">

@@ -2,6 +2,7 @@
 function f_generate_table_select($data)
 {
     $head_name = [];
+    // ew
     foreach ($data['title'] as $value) {
         switch ($value) {
             case 'c_t202_id':
@@ -107,7 +108,7 @@ function f_generate_table_select($data)
                         ?>
                         <td class=" table-data text-center align-middle border-right border-left pointer col-md-2 button_column text-nowrap" style="display: none;">
                             <a class="btn-block btn btn-primary modify-button" onclick="editSpare_populate(this)"><?= $data['UPDATE_BUTTON']?></a>
-                            <a class="btn-block btn btn-danger modify-button" onclick="event.cancelBubble=true;deleteData(<?= $item->c_t202_id ?>,'spareparts')"><?= $data['DELETE_BUTTON']?></a>
+                            <a class="btn-block btn btn-danger modify-button" onclick="event.cancelBubble=true;deleteData_sparepart(<?= $item->c_t202_id ?>)"><?= $data['DELETE_BUTTON']?></a>
                         </td>
 
                     </tr>
