@@ -74,7 +74,7 @@
    })
    $('#addPartsModal').on('hidden.bs.modal', function (e) {
        $('input').removeClass('is-invalid');
-       $('input').not(':last').val('')
+       $('input').val('')
 
 
    })

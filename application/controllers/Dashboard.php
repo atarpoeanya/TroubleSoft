@@ -32,10 +32,11 @@ class Dashboard extends CI_Controller
         // this array labels
         $this->data = array(
             // Buttons [
-            'CANCEL_BUTTON'                         =>  'CANCEL',
+            'CANCEL_BUTTON'                         =>  'キャンセル',
             'SUBMIT_BUTTON'                         =>  '登録',
             'UPDATE_BUTTON'                         =>  '変更',
             'DELETE_BUTTON'                         =>  '削除',
+            'BACK_BUTTON'                           =>  '戻る',
 
             'INSERT_BUTTON_TROUBLE'                 =>  '新規',
             'INSERT_BUTTON_SPARE'                   =>  '新規',
@@ -130,9 +131,9 @@ class Dashboard extends CI_Controller
 
             //Form (SPARE_PART)
             'PURCHASE_DATE'                         =>  '購入日',
-            'PARTS_NAME'                            =>  '部品名',
+            'PARTS_NAME'                            =>  '部品',
             'MODEL'                                 =>  '型式',
-            'MAKER_NAME'                            =>  'メーカー名',
+            'MAKER_NAME'                            =>  'メーカー',
             'QUANTITY'                              =>  '数量',
             'PRICE'                                 =>  '単価',
             'UNIT'                                  =>  '単位',

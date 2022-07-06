@@ -23,6 +23,7 @@
         $(".button_column").toggle();
         // $("#search-bar-").hide();
         $('table').DataTable().columns.adjust();
+        $('.dataTables_scrollBody').scrollLeft(300)
     }
 
     // Normal button switched for choosing the displayed table, using class to manipulate the colors
@@ -117,7 +118,7 @@
                         paging: false,
                         orderCellsTop: false,
                         fixedHeader: true,
-                        scrollY: "200px",
+                        scrollY: "650px",
                         scrollCollapse: true,
                         dom: 'lrt',
                         "language": {
@@ -207,7 +208,7 @@
                         paging: false,
                         orderCellsTop: false,
                         fixedHeader: true,
-                        scrollY: "50vh",
+                        scrollY: "650px",
                         scrollCollapse: true,
                         dom: 'lrt',
                         "language": {
@@ -263,7 +264,7 @@
                 var table = $('#gen_table').DataTable({
                     ordering: true,
                     aoColumns: [{
-                            "bSortable": true
+                            "bSortable": false
                         },
                         {
                             "bSortable": true
@@ -300,11 +301,6 @@
                     info: false,
                     searching: true,
                     paging: false,
-                    fixedColumns: {
-
-                        leftColumns: 3,
-
-                    },
                     dom: 'lrt',
                     scrollY: "650px",
                     sScrollX: true,
@@ -616,7 +612,7 @@
                     searching: false,
                     paging: false,
                     orderCellsTop: true,
-                    scrollY: '60vh',
+                    scrollY: '650px',
                     scrollX: false,
                     "language": {
                         "zeroRecords": "該当する記録は見つかりません",

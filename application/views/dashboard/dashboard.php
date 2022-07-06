@@ -10,7 +10,7 @@
 <div class="container">
     <div class="kanjifont  d-flex flex-column" id="dashboard">
     
-        <div class="row pt-3 ps-3">
+        <div class="row pt-3 px-3">
             <div class="col-lg-9 col-md-8 mb-2">
     
                 <div class="btn-group switch-field text-nowrap">
@@ -20,14 +20,16 @@
                 </div>
 
 
-                <a href="<?= base_url(); ?>dashboard/all_fmea_list" id="fmea-s" class="btn btn-outline-secondary" >LIST</a>
+                <a href="<?= base_url(); ?>dashboard/all_fmea_list" id="fmea-s" class="btn btn-primary" >全FMEA一覧表</a>
             </div>
             <div class="col-lg-3 col-md">
     
-                <div class="">
-                    <a href="<?= base_url() ?>as" class=" btn btn-success text-nowrap" id="new_trouble"><?= $this->data['INSERT_BUTTON_TROUBLE']?></a>
-                    <button class="m-1 btn btn-success text-nowrap" id="new_spareparts" onclick="" data-bs-toggle="modal" data-bs-target="#addPartsModal" style="display: none;"><?= $this->data['INSERT_BUTTON_SPARE']?></button>
-                    <a onclick="show_button()" class=" btn btn-primary text-nowrap" id="update_trouble"><?= $this->data['UPDATE_BUTTON']?></a>
+                <div class="d-flex justify-content-end">
+                    <a href="<?= base_url() ?>as" class="me-1 btn btn-success text-nowrap" id="new_trouble"><?= $this->data['INSERT_BUTTON_TROUBLE']?></a>
+
+                    <button class="me-1 btn btn-success text-nowrap" id="new_spareparts" onclick="" data-bs-toggle="modal" data-bs-target="#addPartsModal" style="display: none;"><?= $this->data['INSERT_BUTTON_SPARE']?></button>
+
+                    <button onclick="show_button()" class=" btn btn-primary text-nowrap" id="update_trouble"><?= $this->data['UPDATE_BUTTON']?></button>
                 </div>
     
             </div>

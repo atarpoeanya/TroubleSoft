@@ -18,13 +18,13 @@ function f_generate_table_select($data)
                 array_push($head_name, '使用箇所');
                 break;
             case 'c_partName':
-                array_push($head_name, '部品名');
+                array_push($head_name, '部品');
                 break;
             case 'c_model':
                 array_push($head_name, '型式');
                 break;
             case 'c_maker':
-                array_push($head_name, 'メーカー名');
+                array_push($head_name, 'メーカー');
                 break;
             case 'c_quantity':
                 array_push($head_name, '数量');
@@ -65,16 +65,21 @@ function f_generate_table_select($data)
                 <tr class="border-bottom border-dark bg-light">
                     <?php
                     foreach ($head_name as $thead) {
+                        if ($thead !== '部品NO') {
                     ?>
-                        <th class=" table-head text-center border-start">
-                            <?= $thead ?>
-                        </th>
+                            <th class=" table-head text-center border-start">
+                                <?= $thead ?>
+                            </th>
 
+                        <?php
+
+                        } else {
+                        ?>
+                            <th class="id text-center border-start" style="display:none"></th>
                     <?php
-
+                        }
                     }
                     ?>
-
                     <th class="button_column text-center border-start" style="display:none"></th>
                 </tr>
             </thead>
@@ -92,7 +97,7 @@ function f_generate_table_select($data)
                                 $id = $value;
                         ?>
 
-                                <td class=" table-data text-center align-middle border-end  pointer col ID">
+                                <td class=" table-data text-center align-middle border-end  pointer col ID" style="display:none">
                                     <?= $id ?>
                                 </td>
                             <?php
@@ -107,8 +112,8 @@ function f_generate_table_select($data)
                         }
                         ?>
                         <td class=" table-data text-center align-middle border-right border-left pointer col-md-2 button_column text-nowrap" style="display: none;">
-                            <a class="btn-block btn btn-primary modify-button" onclick="editSpare_populate(this)"><?= $data['UPDATE_BUTTON']?></a>
-                            <a class="btn-block btn btn-danger modify-button" onclick="event.cancelBubble=true;deleteData_sparepart(<?= $item->c_t202_id ?>)"><?= $data['DELETE_BUTTON']?></a>
+                            <a class="btn-block btn btn-primary modify-button" onclick="editSpare_populate(this)"><?= $data['UPDATE_BUTTON'] ?></a>
+                            <a class="btn-block btn btn-danger modify-button" onclick="event.cancelBubble=true;deleteData_sparepart(<?= $item->c_t202_id ?>)"><?= $data['DELETE_BUTTON'] ?></a>
                         </td>
 
                     </tr>
@@ -142,17 +147,17 @@ function f_generate_table_select($data)
     div.dataTables_wrapper {
         width: 100%;
     }
-
-
 </style>
 
 <script>
     $(document).ready(function() {
         $('#gen_table tbody').find('tr').each(function() {
             // debugger;
-            $amount = $(this).find("td:eq(7)").text().trim();
-            if ($amount == 0)
+            $amount = $(this).find("td:eq(5)").text().trim();
+            if ($amount == 0) {
                 $(this).addClass('bg-warning')
+                $(this).find("td:eq(5)").addClass('bg-danger')
+            }
         })
     })
 </script>

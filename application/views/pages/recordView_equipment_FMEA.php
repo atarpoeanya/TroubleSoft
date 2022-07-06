@@ -1,176 +1,220 @@
+<nav class="navbar position-absolute" style="right: 100px;">
 
-
-<nav class="navbar fixed-bottom">
-
-<a class="btn btn-warning ms-5" href='<?= base_url(); ?>'><?= $this->data['CANCEL_BUTTON']?></a>
-<div class="container-fluid justify-content-center">
-</div>
+    <a class="btn btn-warning ms-5 float-right" href='<?= base_url(); ?>'><?= $this->data['BACK_BUTTON'] ?></a>
+    <!-- <div class="container-fluid justify-content-center">
+</div> -->
 
 </nav>
-<p class=" position-relative" style="top: 30px; left: 40px; background-color: white; width: max-content;">
-        &nbsp;SECTION_1_<b>設備の内容</b>&nbsp;</p>
-    <div class="row border border-dark p-3 rounded my-auto">
 
-        <div class="col-6">
-            <label for="start_day" class="form-label">部署 （設備の）</label>
-            <input required type="text" class="form-control col-6" readonly value="<?= $fmea->c_department?>">
-        </div>
-
-        <div class="col-6">
-            <label for="start_day" class="form-label">設備名</label>
-            <input required type="text" class="form-control" readonly value="<?= $fmea->c_facility?>">
-        </div>
-        <div class="col-3">
-            <label for="start_day" class="form-label">工程名</label>
-            <input required type="text" class="form-control" readonly value="<?= $fmea->c_processName?>">
-        </div>
-        <div class="col-3">
-            <label for="start_day" class="form-label">故障モード</label>
-            <input required type="text" class="form-control" readonly value="<?= $fmea->c_failMode?>">
-        </div>
-    </div>
-
-    <p class=" position-relative" style="top: 30px; left: 40px; background-color: white; width: max-content;">
-        &nbsp;SECTION_2_<b>修理内容</b>&nbsp;</p>
-    <div class="row border border-dark p-3 rounded my-auto">
-
-        <div class="col-12">
-            <label for="start_day" class="form-label">現象・不具合要因詳細</label>
-            <textarea class="form-control" cols="30" rows="4" readonly><?= $fmea->c_phenomenon?></textarea>
-        </div>
-        <div class="col-12">
-            <label for="start_day" class="form-label">修理内容</label>
-            <textarea class="form-control" cols="30" rows="4" readonly><?= $fmea->c_repairDet?></textarea>
-        </div>
-        <div class="col-12">
-            <label for="start_day" class="form-label">対応・処置</label>
-            <textarea class="form-control" cols="30" rows="4" readonly><?= $fmea->c_response?></textarea>
-        </div>
-
-
-    </div>
-
-    <p class=" position-relative" style="top: 30px; left: 40px; background-color: white; width: max-content;">
-        &nbsp;SECTION_3_<b>影響</b>&nbsp;</p>
-    <div class="row border border-dark p-3 rounded my-auto">
-
-        <div class="col-6">
-            <label for="start_day" class="form-label">故障のメカニズム</label>
-            <textarea class="form-control" cols="30" rows="6" readonly><?= $fmea->c_failMech?></textarea>
-        </div>
-
-        <div class="col-6">
-            <label for="start_day" class="form-label">故障の影響</label>
-            <textarea class="form-control" cols="30" rows="6" readonly><?= $fmea->c_failImpact?></textarea>
-        </div>
-        <div class="col-6">
-            <label for="start_day" class="form-label">ライン停止の可能性</label>
-            <input required type="text" class="form-control" readonly value="<?= $fmea->c_lineEffect?>">
-        </div>
-        <div class="col-6">
-            <label for="start_day" class="form-label">特 殊 特性等</label>
-            <input required type="text" class="form-control" readonly value="<?= $fmea->c_specialChar?>">
-        </div>
-    </div>
-
-    <p class=" position-relative" style="top: 30px; left: 40px; background-color: white; width: max-content;">
-        &nbsp;SECTION_4_<b>現在の工程管理</b>&nbsp;</p>
-    <div class="row border border-dark p-3 rounded my-auto">
-
-        <div class="col-4">
-            <label for="start_day" class="form-label">担当者 日程</label>
-            <input required type="text" class="form-control" readonly value="<?= $fmea->c_picSchedule?>">
-        </div>
-        <div class="col-2">
-            <label for="start_day" class="form-label">周期</label>
-            <input required type="text" class="form-control" readonly value="<?= $fmea->c_period?>">
-        </div>
-        <div class="col-2">
-            <label for="start_day" class="form-label">月</label>
-            <input required type="text" class="form-control" readonly value="<?= $fmea->c_month?>">
-        </div>
-        <div class="col-12">
-            <div class="col">
-                <label for="start_day" class="form-label">予防</label>
-                <textarea class="form-control" cols="30" rows="6" readonly><?= $fmea->c_prevention?></textarea>
-            </div>
-            <div class="col">
-                <label for="start_day" class="form-label">検出</label>
-                <textarea class="form-control" cols="30" rows="6" readonly><?= $fmea->c_detection?></textarea>
-            </div>
-        </div>
-
-    </div>
-
-
-    <p class=" position-relative" style="top: 30px; left: 40px; background-color: white; width: max-content;">
-        &nbsp;SECTION_5_<b>対策</b>&nbsp;</p>
-    <div class="row border border-dark p-3 rounded my-auto">
-
-        <div class="col-6">
-            <label for="start_day" class="form-label">対策案</label>
-            <textarea class="form-control" cols="30" rows="6" readonly><?= $fmea->c_counterPlan?></textarea>
-        </div>
-
-        <div class="col-6">
-            <label for="start_day" class="form-label">対策</label>
-            <textarea class="form-control" cols="30" rows="6" readonly><?= $fmea->c_measure?></textarea>
-        </div>
-
-    </div>
-
-   <!-- SPARE PART -->
-   <div class="spare row mt-3">
-                <div class="col  p-0 rounded-2 overflow-hidden mb-2">
-                    <table class="table text-center m-0" id="equipment_parts_list_fmea">
-                        <thead>
-
-                            <tr class="table-dark">
-                                <td>部品NO</td>
-                                <td>部品名</td>
-                                <td>型式</td>
-                                <td>数量</td>
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered mb-0 align-middle">
+                        <thead class="table-dark">
+                            <tr class="text-center">
+                                <th colspan="10">
+                                    設備のFMEAレポート
+                                </th>
                             </tr>
                         </thead>
-                        <tbody class="table-striped table-light">
-                            <?php
 
+                        <tbody>
+                            <tr>
+                                <td>部署場所</td>
+                                <td colspan="7"><?= $fmea->c_department ?></td>
+
+                            </tr>
+                            <!-- <tr>
+                                <td class="table-dark" colspan="10">&nbsp;</td>
+                            </tr> -->
+                            <tr class=" table-light">
+                                <td colspan="3"><small> 設備</small><br> <?= $fmea->c_facility ?> - <?= $fmea->c_unit ?></td>
+                                <td colspan="3"><small>工程名・工程機能</small><br> <?= $fmea->c_processName ?></td>
+                                <td colspan="3"><small>故障モード</small><br> <?= $fmea->c_failMode ?></td>
+                            </tr>
+
+                            <tr class="table-dark text-center">
+                                <td colspan="10"><b>トラブルの内容</b></td>
+                            </tr>
+                            <tr>
+                                <td colspan="1" rowspan="2" class="header_title">原因 と 内容</td>
+                                <td colspan="4" class="align-top text">
+                                    <small>Mechanism</small>
+                                    <div class="container">
+                                        <?= $fmea->c_failMech ?>
+                                    </div>
+                                </td>
+                                <td colspan="4" class="align-top text">
+                                    <small>Fail Impact</small>
+                                    <div class="container">
+                                        <?= $fmea->c_failImpact ?>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="align-top text">
+                                    <small>Effect on Line</small>
+                                    <div class="container">
+                                        <?= $fmea->c_lineEffect ?>
+                                    </div>
+                                </td>
+                                <td colspan="4" class="align-top text">
+                                    <small>Special Characteristic</small>
+                                    <div class="container">
+                                        <?= $fmea->c_specialChar ?>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="table-dark text-center">
+                                <td colspan="10"><b>現在の工程管理</b></td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    担当者 日程
+                                </td>
+                                <td colspan="9">
+                                    <?= $fmea->c_picSchedule ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="1">周期</td>
+                                <td colspan="4"><?= $fmea->c_period ?></td>
+                                <td colspan="1">月</td>
+                                <td colspan="4"><?= $fmea->c_month ?></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="1" rowspan="2" class="header_title">予防 と 検出</td>
+                                <td colspan="8" class="align-top text">
+                                    <small>Detection</small>
+                                    <div class="container">
+                                        <?= $fmea->c_detection ?>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td colspan="8" class="align-top text">
+                                    <small>Prevention</small>
+                                    <div class="container">
+                                        <?= $fmea->c_prevention ?>
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td rowspan="2">対策</td>
+                                <td colspan="10">
+                                    <small>Counter_plan</small>
+                                    <div class="container">
+                                        <?= $fmea->c_counterPlan ?>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="10">
+                                    <small>Measure</small>
+                                    <div class="container">
+                                        <?= $fmea->c_measure ?>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered mb-0">
+                        <thead class="table-dark">
+                            <?php
+                            foreach ($title as $thead) {
+                                switch ($thead) {
+                                    case 'c_t202_id':
+
+                                        break;
+                                    case 'c_purchaseDate':
+                                        $thead = '購入日';
+                                        break;
+                                    case 'c_partName':
+                                        $thead = '部品';
+                                        break;
+                                    case 'c_model':
+                                        $thead = '型式';
+                                        break;
+                                    case 'c_maker':
+                                        $thead = 'メーカー';
+                                        break;
+                                    case 'c_quantity':
+                                        $thead = '数量';
+                                        break;
+                                    case 'c_unit':
+                                        $thead = '単位';
+                                        break;
+                                    case 'c_price':
+                                        $thead = '金額';
+                                        break;
+                                    case 'c_storage':
+                                        $thead = '予備品の保管場所';
+                                        break;
+                                    case 'c_arrangement':
+                                        $thead = '必要時の手配先';
+                                        break;
+
+                                    default:
+                                        $thead = 'MISSING';
+                                        break;
+                                }
+                                if ($thead !== 'c_t202_id') {
+                            ?>
+                                    <th class=" table-head text-center border-start">
+                                        <?= $thead ?>
+                                    </th>
+
+                                <?php
+
+                                } else {
+                                ?>
+                                    <th class="id text-center border-start" style="display:none"></th>
+                            <?php
+                                }
+                            }
+                            ?>
+                        </thead>
+                        <tbody class="table-stripped">
+                            <?php
                             if (property_exists($fmea, 'spare'))
-                                foreach ($fmea->spare as $item) {
+                                foreach ($fmea->spare as $num) {
                             ?>
                                 <tr>
-                                    <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 ID">
-                                        <?= $item->c_t202_id ?>
-                                    </td>
-                                    <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 partname">
-                                        <?= $item->c_partName ?>
-                                    </td>
-                                    <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 partmodel">
-                                        <?= $item->c_model ?>
-                                    </td>
-                                    <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 amount">
-                                        <?= $item->c_quantity ?>
-                                    </td>
-
-                                    <td style="display: none;"><a class="btn btn-primary minus">-</a> </td>
+                                    <?php
+                                    foreach ($num as $key => $value) {
+                                        if ($key != 'c_t202_id') {
+                                    ?>
+                                            <td class="text-center  pointer">
+                                                <?= $value ?>
+                                            </td>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
                                 </tr>
                             <?php
                                 }
+                            else {
                             ?>
-                        </tbody>
-                        <tfoot class="table-striped table-light">
-
-                            <?php
-                            if (!property_exists($fmea, 'spare')) :
-                            ?>
-                                <tr>
-                                    <td style="height: 100px;" colspan="4" class="text-center emptyTab">
-                                        <span>EMPTY</span>
-                                    </td>
+                                <tr class="text-center align-middle" style="height: 150px;">
+                                    <td colspan="10">EMPTY</td>
                                 </tr>
-                            <?php endif; ?>
-                        </tfoot>
+                            <?php } ?>
+                        </tbody>
                     </table>
-
                 </div>
             </div>
+        </div>
+    </div>
+</div>
