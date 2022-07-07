@@ -10,39 +10,22 @@ function f_generate_table_select($data)
             <tr id="search-bar">
 
 </tr>
-                <tr class="border-bottom border-dark">
-                    <?php
-                    foreach ($data['title'] as $thead) {
+<tr class="border-bottom border-dark">
+                  <!-- LIST ON DASHBOARD CONTROLLER  get_trouble_list_tool()-->
+                    <th class=" table-head text-center border-end text-nowrap ">
+                        <?= $data['title'][0] ?>
+                    </th>
+                    <th class=" table-head text-center border-end text-nowrap ">
+                        <?= $data['title'][1] ?>
+                    </th>
+                    <th class=" table-head text-center border-end text-nowrap ">
+                        <?= $data['title'][2] ?>
+                    </th>
+                    <th class=" table-head text-center border-end text-nowrap ">
+                        <?= $data['title'][3] ?>
+                    </th>
 
-                        if ($thead == 'c_processName'  || $thead == 'c_failMode' || $thead == 'c_accidentDate') {
-                            switch ($thead) {
-                                case 'c_processName':
-                                    $thead = '工程名・工程機能';
-                                    break;
-                                case 'c_failMode':
-                                    $thead = '故障モード';
-                                    break;
-                                case 'c_accidentDate':
-                                    $thead = '設備名';
-                                    break;
-                                default:
-                                    // $thead = 'missing';
-                                    break;
-                            }
-
-                    ?>
-                            <th class="kanjifont table-head text-center border-end text-nowrap">
-                                <?= $thead ?>
-                            </th>
-
-                    <?php
-                        }
-                    }
-                    ?>
-                    <!-- <th class="kanjifont table-head text-center border-end">
-                        ID
-                    </th> -->
-                    <th class="button_column buttons" style="display:none"></th>
+                    <th class="button_column buttons text-center border-start" style="display:none"></th>
                 </tr>
                 
             </thead>
@@ -63,9 +46,9 @@ function f_generate_table_select($data)
                         <td class="kanjifont table-data text-center align-middle border-end pointer col">
                             <?= $item->c_failMode ?>
                         </td>
-                        <!-- <td class="kanjifont table-data text-center align-middle border-end pointer col ID">
-                            <?= $item->c_t203_id ?>
-                        </td> -->
+                        <td class="kanjifont table-data text-center align-middle border-end pointer col ID">
+                            <?= $item->c_picSchedule ?>
+                        </td>
                         <td class="kanjifont table-data text-center align-middle border-end pointer col button_column text-nowrap" style="display: none;">
                             <a class="btn btn-primary" href="<?= base_url() ?>editEquipment_fmea/<?= intval($item->c_t203_id) ?>" onclick="event.cancelBubble=true;"><?= $data['UPDATE_BUTTON']?></a>
                             <a class="btn btn-danger " onclick="event.cancelBubble=true; deleteData_tool_fmea(<?= $item->c_t203_id ?>)"><?= $data['DELETE_BUTTON']?></a>

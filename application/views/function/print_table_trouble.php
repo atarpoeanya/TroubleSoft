@@ -11,38 +11,24 @@ function f_generate_table_select($data)
 
                 </tr>
                 <tr class="border-bottom border-dark">
-                    <?php
-                    foreach ($data['title'] as $thead) {
+                  <!-- LIST ON DASHBOARD CONTROLLER  get_trouble_list_tool()-->
+                    <th class=" table-head text-center border-end text-nowrap ">
+                        <?= $data['title'][0] ?>
+                    </th>
+                    <th class=" table-head text-center border-end text-nowrap ">
+                        <?= $data['title'][1] ?>
+                    </th>
+                    <th class=" table-head text-center border-end text-nowrap ">
+                        <?= $data['title'][2] ?>
+                    </th>
+                    <th class=" table-head text-center border-end text-nowrap ">
+                        <?= $data['title'][3] ?>
+                    </th>
+                    <th class=" table-head text-center border-end text-nowrap ">
+                        <?= $data['title'][4] ?>
+                    </th>
 
-                        if ($thead == 'c_processName'  || $thead == 'c_failMode' || $thead == 'c_accidentDate') {
-                            switch ($thead) {
-                                case 'c_processName':
-                                    $thead = '工程';
-                                    break;
-                                case 'c_failMode':
-                                    $thead = '故障モード';
-                                    break;
-                                case 'c_accidentDate':
-                                    $thead = '発生日';
-                                    break;
-                                default:
-                                    // $thead = 'missing';
-                                    break;
-                            }
-
-                    ?>
-                            <th class=" table-head text-center border-end text-nowrap ">
-                                <?= $thead ?>
-                            </th>
-
-                    <?php
-                        }
-                    }
-                    ?>
-                    <!-- <th class=" table-head text-center ">
-                        ID
-                    </th> -->
-                    <th class="button_column buttons text-center border-start" style="display:none"></th>
+                    <th class="button_column buttons text-center border-end text-white" style="min-width: 0;">BUTTON</th>
                 </tr>
 
             </thead>
@@ -60,15 +46,21 @@ function f_generate_table_select($data)
                             <?= $item->c_accidentDate ?>
                         </td>
                         <td class=" table-data text-center align-middle border-end  pointer col">
+                            <?= $item->c_facility ?>
+                        </td>
+                        <td class=" table-data text-center align-middle border-end  pointer col">
                             <?= $item->c_processName ?>
                         </td>
                         <td class=" table-data text-center align-middle border-end  pointer col">
                             <?= $item->c_failMode ?>
                         </td>
+                        <td class=" table-data text-center align-middle border-end  pointer col">
+                            <?= $item->c_manager ?>
+                        </td>
                         <!-- <td class=" table-data text-center align-middle border-end  pointer col ID">
                             <?= $item->c_t800_id ?>
                         </td> -->
-                        <td class=" table-data text-center align-middle border-end  pointer col button_column text-nowrap" style="display: none;">
+                        <td class=" table-data text-center align-middle border-end border-top  pointer col button_column text-nowrap" style="width: 150px;">
                             <a class="btn-block btn btn-primary modify-button" href="<?= base_url() ?>editEquipment/<?= intval($item->c_t800_id) ?>" onclick="event.cancelBubble=true;"><?= $data['UPDATE_BUTTON'] ?></a>
                             <a class="btn-block btn btn-danger modify-button" onclick="event.cancelBubble=true; deleteData_tool(<?= $item->c_t800_id ?>)"><?= $data['DELETE_BUTTON'] ?></a>
                         </td>

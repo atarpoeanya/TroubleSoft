@@ -49,11 +49,11 @@
                 url: "<?= base_url(); ?>dashboard/get_sparepartList_lite",
                 success: function(response) {
                     $("#upper").html(response)
-                    if ($('#equipment_parts_list tbody tr, #equipment_parts_list_edit tbody tr').length != 0) {
+                    if ($('#equipment_parts_list tbody tr').length != 0) {
 
 
                         // IF EXIST IN BODY, APPEND
-                        $('#foots').append($('#equipment_parts_list tbody tr, #equipment_parts_list_edit tbody tr').clone())
+                        $('#foots').append($('#equipment_parts_list tbody tr').clone())
 
                         // CHECK ID for button disabling and color success bg
                         var flag = 0;
@@ -68,7 +68,7 @@
                             amount = $(this).find("td:eq(4)").text().trim();
                             $('#bodys').find('tr').each(function() {
                                 id = $(this).find("td:eq(0)").text().trim();
-                                console.log(amount)
+
 
 
                                 if (id == itemId)
@@ -124,24 +124,24 @@
         // Clone from modal to main Form
         $('#insertTool').on('click', function print_checked() {
             if ($('#foots tr').length != 0) {
-                $('#equipment_parts_list tbody tr, #equipment_parts_list_edit tbody tr').remove()
+                $('#equipment_parts_list tbody tr').remove()
                 $('.emptyTab').hide()
             } else {
-                $('#equipment_parts_list tbody tr, #equipment_parts_list_edit tbody tr').remove()
+                $('#equipment_parts_list tbody tr').remove()
                 $('.emptyTab').show()
             }
 
-            $('#equipment_parts_list tbody, #equipment_parts_list_edit tbody').append($('#foots tr')) //Delete the EMPTY placeholder
-            $('#equipment_parts_list tbody, #equipment_parts_list_edit tbody').find('td:last-child').hide(); //Delete minus button
-            $('#equipment_parts_list tbody tr, #equipment_parts_list_edit tbody tr').find('td:eq(3)').each(function() {
+            $('#equipment_parts_list tbody').append($('#foots tr')) //Delete the EMPTY placeholder
+            $('#equipment_parts_list tbody').find('td:last-child').hide(); //Delete minus button
+            $('#equipment_parts_list tbody tr').find('td:eq(3)').each(function() {
                 $(this).hide()
             }) //Delete minus button
 
             //IF NOT EMPTY INSERT ALL ID AND AMOUNT INTO ARRAY
 
-            if ($('#equipment_parts_list tbody, #equipment_parts_list_edit tbody').length != 0) {
+            if ($('#equipment_parts_list tbody').length != 0) {
                 $arr.length = 0;
-                $('#equipment_parts_list tbody, #equipment_parts_list_edit tbody').find('tr').each(function() {
+                $('#equipment_parts_list tbody').find('tr').each(function() {
                     $arr.push([$(this).find('td:eq(0)').text().trim(), $(this).find('td:eq(4)').text().trim()])
                 })
 
@@ -149,7 +149,7 @@
             }
             //ELSE SEND EMPTY STATEMENT
             else {
-                $('#partinfo').val('empty');
+                $('#partinfo').val('');
             }
 
 
@@ -186,7 +186,7 @@
             }
             //ELSE SEND EMPTY STATEMENT
             else {
-                $('#partinfo').val('empty');
+                $('#partinfo').val('');
             }
 
 
@@ -229,8 +229,9 @@
                         var amount = ''
 
                         $('#foots').find('tr').each(function() {
+                            $(this).find("td:eq(3)").show()
                             itemId = $(this).find("td:eq(0)").text().trim();
-                            amount = $(this).find("td:eq(3)").text().trim();
+                            amount = $(this).find("td:eq(4)").text().trim();
                             $('#bodys').find('tr').each(function() {
                                 id = $(this).find("td:eq(0)").text().trim();
 
@@ -242,9 +243,10 @@
 
                                 if (flag == 1) {
                                     $(this).addClass('table-success')
+                                    $(this).find("td:eq(4)").html(amount)
 
                                     if (parseInt($(this).find("td:eq(3)").text().trim()) <= amount)
-                                        $(this).find("td:eq(4)").children('.plus').addClass('disabled')
+                                        $(this).find("td:eq(5)").children('.plus').addClass('disabled')
                                 }
                             })
 
@@ -297,6 +299,9 @@
 
             $('#equipment_parts_list_edit tbody').append($('#foots tr')) //Delete the EMPTY placeholder
             $('#equipment_parts_list_edit tbody').find('td:last-child').hide(); //Delete minus button
+            $('#equipment_parts_list_edit tbody tr').find('td:eq(3)').each(function() {
+                $(this).hide()
+            }) //Delete minus button
 
             //IF NOT EMPTY INSERT ALL ID AND AMOUNT INTO ARRAY
             //CHECK KINDS OF DATA (isExist, isDeleted, isNew)
@@ -309,7 +314,7 @@
                     $('#equipment_parts_list_edit tbody').find('tr').each(function() {
                         if (data.children('.id').val() == $(this).find('td:eq(0)').text().trim()) {
                             flag = 'exist';
-                            amount = $(this).find('td:eq(3)').text().trim();
+                            amount = $(this).find('td:eq(4)').text().trim();
 
                             return false;
                         } else
@@ -338,7 +343,7 @@
                     })
 
                     if (flag == '0')
-                        $arr.push([$(this).find('td:eq(0)').text().trim(), $(this).find('td:eq(3)').text().trim(), '0', 'new'])
+                        $arr.push([$(this).find('td:eq(0)').text().trim(), $(this).find('td:eq(4)').text().trim(), '0', 'new'])
 
                 })
 
@@ -361,7 +366,7 @@
 
                     $('#partinfo').val(JSON.stringify($arr));
                 } else
-                    $('#partinfo').val('empty');
+                    $('#partinfo').val('');
 
                 $('tfoot').html(" <tr> <td style = 'height: 100px;'colspan = '4'class = 'text-center emptyTab'><span>EMPTY</span></td></tr>")
             }

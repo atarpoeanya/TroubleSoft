@@ -163,7 +163,8 @@ class Dashboard extends CI_Controller
     public function index()
     {
         $data = $this->data;
-
+        // Breadcrumb with flashdata (magic)
+        
         // View Load
         $this->load->view('templates/header');
         $this->load->view('dashboard/dashboard', $data);
@@ -174,10 +175,11 @@ class Dashboard extends CI_Controller
         $this->load->view('modals/addParts', $data);
         $this->load->view('modals/delete');
         // $this->load->view('modals/editParts');
-
-
+        
+        
         //other method
         $this->post_spare();
+        $this->session->set_flashdata('crumbs', '0');
     }
 
     // =============== Data Grabbers
@@ -187,7 +189,9 @@ class Dashboard extends CI_Controller
     {
         $data = $this->data;
         $data['troubleList'] = $this->Troublelist_model->get_tool_trouble_list();
-        $data['title'] = $this->Troublelist_model->get_title('t800_equipment');
+        $data['title'] = [
+            '発生日', '設備', '工程', '故障モード',   '担当者'
+        ];
         $this->load->view('function/print_table_trouble', $data);
         f_generate_table_select($data);
     }
@@ -197,7 +201,9 @@ class Dashboard extends CI_Controller
     {
         $data = $this->data;
         $data['tool_Fmea'] = $this->Troublelist_model->get_tool_trouble_fmea_list();
-        $data['title'] = $this->Troublelist_model->get_title('t203_equipment_fmea');
+        $data['title'] = [
+            '設備', '工程', '故障モード',   '担当者'
+        ];
         $this->load->view('function/print_table_tool_fmea', $data);
         f_generate_table_select($data);
     }
@@ -258,6 +264,7 @@ class Dashboard extends CI_Controller
 
     public function tool_form()
     {
+        $this->session->set_flashdata('crumbs', '0');
 
         $data = $this->data;
         $this->load->view('templates/header');
@@ -274,7 +281,7 @@ class Dashboard extends CI_Controller
 
     public function tool_fmea()
     {
-
+        $this->session->set_flashdata('crumbs', '1');
         $data = $this->data;
         $this->load->view('templates/header');
         $this->load->view('Pages/equipmentFmea', $data);
@@ -291,6 +298,8 @@ class Dashboard extends CI_Controller
     // View individual item
     public function view_record_tool()
     {
+        $this->session->set_flashdata('crumbs', '0');
+
         $id = $this->uri->segment(2);
         $data = $this->data;
 
@@ -309,6 +318,7 @@ class Dashboard extends CI_Controller
 
     public function view_record_tool_fmea()
     {
+        $this->session->set_flashdata('crumbs', '1');
         $id = $this->uri->segment(2);
         $data = $this->data;
         $data['fmea'] = $this->Troublelist_model->get_tool_fmea_id($id);
@@ -343,6 +353,7 @@ class Dashboard extends CI_Controller
 
             $pic = $this->do_upload();
             $this->Troublelist_model->add_data_tool($pic);
+            $this->session->set_flashdata('crumbs', '0');
             redirect(base_url(), '/');
         }
 
@@ -353,6 +364,7 @@ class Dashboard extends CI_Controller
         if ($id == 2) { //FMEA
 
             $this->Troublelist_model->add_data_tool_fmea();
+            $this->session->set_flashdata('crumbs', '1');
             redirect(base_url(), '/');
         }
 
@@ -548,15 +560,15 @@ class Dashboard extends CI_Controller
         $this->form_validation->set_rules("c_maker", '5', 'required');
         $this->form_validation->set_rules("c_quantity", '6', 'required|is_natural');
         $this->form_validation->set_rules("c_unit", '7', 'required');
-        $this->form_validation->set_rules("c_price", '8', 'required|is_natural');
+        $this->form_validation->set_rules("c_price", '8', 'required|decimal');
         $this->form_validation->set_rules("c_storage", '9', 'required');
         $this->form_validation->set_rules("c_arrangement", '0', 'required');
 
         if ($this->form_validation->run() === FALSE) {
             echo validation_errors();
         } else {
-        $this->Troublelist_model->edit_sparepart();
-        echo 1;
+            $this->Troublelist_model->edit_sparepart();
+            echo 1;
         }
     }
     // Need Validation
@@ -568,7 +580,7 @@ class Dashboard extends CI_Controller
         $this->form_validation->set_rules("c_maker", '4', 'required');
         $this->form_validation->set_rules("c_quantity", '5', 'required|is_natural');
         $this->form_validation->set_rules("c_unit", '6', 'required');
-        $this->form_validation->set_rules("c_price", '7', 'required|is_natural');
+        $this->form_validation->set_rules("c_price", '7', 'required|decimal');
         $this->form_validation->set_rules("c_storage", '8', 'required');
         $this->form_validation->set_rules("c_arrangement", '9', 'required');
 
@@ -586,6 +598,7 @@ class Dashboard extends CI_Controller
     public function all_fmea_list()
     {
         $data = $this->data;
+        
         $this->load->view('templates/header', $data);
         $this->load->view('Pages/all_fmea');
         $this->load->view('templates/footer');
@@ -597,6 +610,7 @@ class Dashboard extends CI_Controller
     public function get_all_fmea_list_modular()
     {
         $data = $this->data;
+        
         // $id = $this->uri->segment(2);
         // $this->load->view('/templates/header', $data);
         $this->load->library('table');

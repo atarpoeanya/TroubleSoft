@@ -7,15 +7,7 @@ function f_generate_table_select($data)
         &nbsp;SECTION_1_<b>設備の内容</b>&nbsp;</p>
     <div class="row border-top p-3 rounded my-auto">
 
-        <div class="col-6 mt-3">
-            <label for="start_day" class="form-label"><?=$data['EQUIPMENT_ACCIDENT_DATE_F'] ?></label>
-            <input required type="text" class="form-control col-6" readonly value="<?= $data['fmea_tool']->c_department ?>">
-        </div>
 
-        <div class="col-6 mt-3">
-            <label for="start_day" class="form-label"><?=$data['EQUIPMENT_REPAIR_DATE_F'] ?></label>
-            <input required type="text" class="form-control" readonly value="<?= $data['fmea_tool']->c_facility ?>">
-        </div>
         <div class="col mt-3">
             <label for="start_day" class="form-label"><?=$data['EQUIPMENT_PROCESS_NAME_F'] ?></label>
             <input required type="text" class="form-control" readonly value="<?= $data['fmea_tool']->c_processName ?>">
@@ -26,25 +18,6 @@ function f_generate_table_select($data)
         </div>
     </div>
 
-    <p class=" position-relative" style="top: 30px; left: 40px; background-color: white; width: max-content;">
-        &nbsp;SECTION_2_<b>修理内容</b>&nbsp;</p>
-    <div class="row border-top p-3 rounded my-auto">
-
-        <div class="col-12 mt-3">
-            <label for="start_day" class="form-label"><?=$data['EQUIPMENT_PHENOMENON_F'] ?></label>
-            <textarea class="form-control" cols="30" rows="4" readonly><?= $data['fmea_tool']->c_phenomenon ?></textarea>
-        </div>
-        <div class="col-12 mt-3">
-            <label for="start_day" class="form-label"><?=$data['EQUIPMENT_REPAIR_DETAIL_F'] ?></label>
-            <textarea class="form-control" cols="30" rows="4" readonly><?= $data['fmea_tool']->c_repairDet ?></textarea>
-        </div>
-        <div class="col-12 mt-3">
-            <label for="start_day" class="form-label"><?=$data['EQUIPMENT_RESPONSE_F'] ?></label>
-            <textarea class="form-control" cols="30" rows="4" readonly><?= $data['fmea_tool']->c_response ?></textarea>
-        </div>
-
-
-    </div>
 
     <p class=" position-relative" style="top: 30px; left: 40px; background-color: white; width: max-content;">
         &nbsp;SECTION_3_<b>影響</b>&nbsp;</p>
@@ -116,7 +89,7 @@ function f_generate_table_select($data)
     </div>
 
     <!-- SPARE PART -->
-    <div class="spare row mt-3">
+    <div class="spare row my-3">
         <div class="col  p-0 rounded-2 overflow-hidden mb-2">
             <table class="table text-center m-0" id="equipment_parts_list_fmea">
                 <thead>

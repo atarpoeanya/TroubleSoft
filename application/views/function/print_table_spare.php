@@ -58,7 +58,7 @@ function f_generate_table_select($data)
         <table class="table table-striped table-hover m-0 text-nowrap" id="gen_table">
             <thead>
                 <tr>
-                    <div class="p-1 my-2 border-bottom">
+                    <div class="border-bottom p-3">
                         <input class="form-control" type="text" id="search-bar" placeholder="Search">
                     </div>
                 </tr>
@@ -128,6 +128,7 @@ function f_generate_table_select($data)
 }
 ?>
 <style>
+    
     .pointer:hover {
         cursor: pointer;
     }

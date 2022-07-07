@@ -47,9 +47,9 @@
     </nav>  -->
 </head>
 
-<body class="">
-    <header class="mb-4 ">
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark ">
+<body class="py-3">
+    <header class="mb-5" style="z-index: 100;">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand kanjifont" href="<?= base_url() ?>">
                     <img src="<?= base_url() ?>public/MEIWA_150_white.png" width="50" height="25" class="d-inline-block align-top mt-1" alt="" style="margin-right: 15px;margin-left: 15px">

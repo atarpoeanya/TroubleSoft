@@ -4,6 +4,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
+                    <h2 class="card-title">REAL TROUBLE FORM</h2>
                     <div class="d-flex flex-column justify-content-between pb-2">
                         <!-- <label class="form-label" for="fmea-toggle-btn">FMEA</label> -->
                         <span>FMEA</span>
@@ -179,7 +180,7 @@
                         </div>
 
                         <div class="d-flex justify-content-center">
-                            <a class="btn btn-warning float-end me-5" href='<?= base_url(); ?>as'><?= $this->data['CANCEL_BUTTON'] ?></a>
+                            <a class="btn btn-warning float-end me-5" href='<?= base_url(); ?>'><?= $this->data['CANCEL_BUTTON'] ?></a>
                             <button type="submit" name="add_trouble" class="btn btn-primary float-end  me-1" value="登録" id="submitTrouble"><?= $this->data['SUBMIT_BUTTON'] ?></button>
 
 
@@ -209,13 +210,13 @@
 
 
             </div>
-            <div class="card  sticky-top h-50 mt-2">
-                <div class="card-title sticky-top p-3">
+            <div class="card sticky-top h-50 mt-2" style="z-index: 1; top:60px;">
+                <div class="card-title p-3">
                     <div class="">
                         <h2 class="p-1">FMEA</h2>
                     </div>
                 </div>
-                <div class="card-body pt-0 overflow-scroll">
+                <div class="card-body p-2 overflow-scroll">
                     <div class="container" id="fmea_place" style="height: 500px;">
                         <div class="text-center">
 

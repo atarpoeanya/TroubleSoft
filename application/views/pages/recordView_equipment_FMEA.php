@@ -1,8 +1,7 @@
-<nav class="navbar position-absolute" style="right: 100px;">
-
-    <a class="btn btn-warning ms-5 float-right" href='<?= base_url(); ?>'><?= $this->data['BACK_BUTTON'] ?></a>
+<nav class="navbar fixed-top" style="margin-left: 90%; width:130px;">
+    <a class="btn btn-warning me-5" href='<?= base_url(); ?>'><?= $this->data['BACK_BUTTON'] ?></a>
     <!-- <div class="container-fluid justify-content-center">
-</div> -->
+    </div> -->
 
 </nav>
 

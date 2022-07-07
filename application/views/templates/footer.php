@@ -1,6 +1,6 @@
-  <footer class="footer mt-auto py-3 text-center">
-    <div class="container">
-    <span>Copyright &copy; Meiwa Industry 2022, Version 1.0.0</span>
+  <footer class="footer mt-auto py-3 text-end">
+    <div class="container me-0">
+    <span>Version 1.0.0</span>
     </div>
   </footer>
   
@@ -19,9 +19,23 @@
   <style>
     body {
   margin: 0;
+  padding: 10px;
   min-height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
+}
+
+
+.must{
+    display: inline-block;
+    margin: 0 10px 0 0;
+    padding: 3px 3px 1px;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1;
+    vertical-align: 1px;
+	background-color: #da1a1a;
 }
 
   </style>

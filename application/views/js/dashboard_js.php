@@ -4,7 +4,24 @@
 
     // Making sure the first seen table get loaded first.
     DATA.onLoad = function() {
-        get_troubleList();
+        <?php if ($this->session->flashdata('crumbs') == 0) { ?>
+            get_troubleList();
+            $("#real").addClass('active');
+            $("#real").removeClass('bg-white')
+            $("#fmea-s").removeClass('active')
+            $('#new_trouble').attr('href', '<?= base_url() ?>equipment')
+        <?php
+        } else {
+        ?>
+            get_troubleList_fmea()
+            $("#fmea-s").addClass('active')
+            $("#real").removeClass('active');
+            $("#fmea-s").removeClass('bg-white')
+            $('#new_trouble').attr('href', '<?= base_url() ?>equipment_fmea')
+        <?php
+        }
+        ?>
+
     }
 
 
@@ -40,6 +57,7 @@
 
                 $("#real").attr("onclick", "buttonSwitch(this);get_troubleList()");
                 $("#fmea-s").attr("onclick", "buttonSwitch(this);get_troubleList_fmea()");
+                
 
                 $("#real").addClass('active');
                 $("#real").removeClass('bg-white')
@@ -89,8 +107,8 @@
 
                         if (title == '発生日') //
                             $('#search-bar').append('<th><input type="date" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
-                        else if (title.length == 0) //no title column for displaying edit buttons
-                            $('#search-bar').append('<th class="button_column buttons" style="display:none;"></th>');
+                        else if (title === 'BUTTON') //no title column for displaying edit buttons
+                            $('#search-bar').append('<th class="button_column buttons" ></th>');
                         else
                             $('#search-bar').append('<th><input type="text" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
 
@@ -109,6 +127,12 @@
                                 "bSortable": true
                             },
                             {
+                                "bSortable": true
+                            },
+                            {
+                                "bSortable": true
+                            },
+                            {
                                 "bSortable": false
                             },
 
@@ -116,9 +140,11 @@
                         info: false,
                         searching: true,
                         paging: false,
+
                         orderCellsTop: false,
                         fixedHeader: true,
-                        scrollY: "650px",
+                        scrollY: '575px',
+                        pageLength: 5,
                         scrollCollapse: true,
                         dom: 'lrt',
                         "language": {
@@ -198,6 +224,9 @@
                             {
                                 "bSortable": true
                             },
+                            {
+                                "bSortable": true
+                            },
 
                             {
                                 "bSortable": false
@@ -208,7 +237,7 @@
                         paging: false,
                         orderCellsTop: false,
                         fixedHeader: true,
-                        scrollY: "650px",
+                        scrollY: "570px",
                         scrollCollapse: true,
                         dom: 'lrt',
                         "language": {
@@ -308,14 +337,14 @@
                     "language": {
                         "zeroRecords": "該当する記録は見つかりません",
                     },
-                    columnDefs: [{
-                        targets: [1, 2],
-                        render: function(data, type, row) {
-                            return type === 'display' && data.length > 5 ?
-                                data.substr(0, 10) + '...' :
-                                data;
-                        }
-                    }]
+                    // columnDefs: [{
+                    //     targets: [1, 2],
+                    //     render: function(data, type, row) {
+                    //         return type === 'display' && data.length > 5 ?
+                    //             data.substr(0, 10) + '...' :
+                    //             data;
+                    //     }
+                    // }]
                 });
 
                 $('#search-bar').on('keyup change', function() {

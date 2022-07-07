@@ -136,7 +136,7 @@ class Troublelist_model extends CI_Model
         ];
         $this->db->insert('t800_equipment', $data);
 
-        if ($this->input->post('spareParts', true)) {
+        if ($this->input->post('spareParts', true) ) {
             $this->add_spare_used(json_decode($this->input->post('spareParts'), true), 't800_equipment');
         }
 

@@ -1,8 +1,3 @@
-<!-- <?php
-        print_r($items);
-
-
-        ?> -->
 
 <div class="d-flex justify-content-center pt-3" id="mainForm">
 
@@ -15,7 +10,7 @@
                     <div class="card-title">
                         <h2 class="pt-3 mb-3">設備のトラブル</h2>
                     </div>
-                    <form action="/edit_Equipment/" method="post" class="mt-4" autocomplete="off" id="equipForm" enctype="multipart/form-data">
+                    <form action="/edit_Equipment/" method="post" class="mt-4 p-4 col" autocomplete="off" id="equipForm" enctype="multipart/form-data">
                         <!-- ID -->
                         <input type="hidden" name="id" id="setsubiId" value="<?= $items->c_t800_id ?>">
                         <!-- For Spare part [Id, Amount] -->
@@ -217,7 +212,7 @@
                                                 if (property_exists($items, 'spare'))
                                                     foreach ($items->spare as $item) {
                                                 ?>
-                                                    <tr>
+                                                    <tr class="border-0">
                                                         <td class="text-center  pointer">
                                                             <?= $item->c_t202_id ?>
                                                         </td>
@@ -227,12 +222,13 @@
                                                         <td class="text-center  pointer">
                                                             <?= $item->c_model ?>
                                                         </td>
+                                                        <td style="display: none;"></td>
                                                         <td class="text-center  pointer">
                                                             <?= $item->c_quantity ?>
                                                         </td>
 
 
-                                                        <td style="display: none;"><a class="btn btn-primary minus">-</a> </td>
+                                                        <td style="display: none;"><a class="btn btn-primary minus">DELETE</a> </td>
                                                     </tr>
 
                                                     <div class="old_val" hidden>
@@ -257,7 +253,7 @@
                                     </div>
                                 </div>
 
-                                <div class="d-flex justify-content-center">
+                                <div class="d-flex justify-content-center mt-2">
                                     <a class="btn btn-warning float-end me-5" href='<?= base_url(); ?>'><?= $this->data['CANCEL_BUTTON'] ?></a>
                                     <button type="submit" name="edit_trouble" class="btn btn-primary float-end me-1" value="登録" id="submitTrouble"><?= $this->data['SUBMIT_BUTTON'] ?></button>
 

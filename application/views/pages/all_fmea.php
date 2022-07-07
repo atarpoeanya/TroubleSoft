@@ -1,4 +1,10 @@
 <div>
+<nav class="navbar fixed-top" style="margin-left: 90%; width:130px;">
+    <a class="btn btn-warning me-5" href='<?= base_url(); ?>'><?= $this->data['BACK_BUTTON'] ?></a>
+    <!-- <div class="container-fluid justify-content-center">
+    </div> -->
+
+</nav>
     <div class="col-8 m-auto kanjifont">
         <label for="busho_fmea">
             <h5>部署名</h5>

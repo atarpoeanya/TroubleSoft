@@ -47,9 +47,6 @@ function f_generate_table_select($data)
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer partmodel">
                             <?= $item->c_model ?>
                         </td>
-                        <!-- <td class="kanjifont table-data text-center align-middle border-right border-left pointer partstorage">
-                            <?= $item->c_placement ?>
-                        </td> -->
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer  amount">
                             <?= $item->c_quantity ?>
                         </td>

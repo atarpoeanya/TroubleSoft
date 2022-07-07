@@ -7,7 +7,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">予備品</h5>
+                <h5 class="modal-title">予備品更新</h5>
             </div>
 
             <div class="modal-body bg-light">
@@ -17,8 +17,9 @@
 
                             <input type="hidden" name="部品NO_edit" id="partId_edit" value="<?= $spare->c_t202_id ?>">
 
-                            <div class="col pt-3">
+                            <div class="col-6 pt-3">
                                 <label class="form-label" for="purchaseDate"><?= $this->data['PURCHASE_DATE'] ?></label>
+                                <span class="must form-check-label">必須</span>
                                 <input class="form-control" type="date" name="購入日_edit" id="purchaseDate_edit" value="<?= $spare->c_purchaseDate ?>" required>
                             </div>
 
@@ -26,40 +27,53 @@
                             <div class="row">
                                 <div class="col pt-3">
                                     <label class="form-label" for="partName"><?= $this->data['PARTS_NAME'] ?></label>
+                                    <span class="must form-check-label">必須</span>
                                     <input class="form-control" type="text" name="部品名_edit" id="partName_edit" value="<?= $spare->c_partName ?>" required>
                                 </div>
                                 <div class="col pt-3">
                                     <label class="form-label" for="model"><?= $this->data['MODEL'] ?></label>
+                                    <span class="must form-check-label">必須</span>
                                     <input class="form-control" type="text" name="型式_edit" id="model_edit" value="<?= $spare->c_model ?>" required>
                                 </div>
                             </div>
                             <br>
                             <div class="row">
-                                <div class="col pt-3">
-                                    <label class="form-label " for="maker"><?= $this->data['MAKER_NAME'] ?></label>
-                                    <input class="form-control" type="text" name="メーカー名_edit" id="maker_edit" value="<?= $spare->c_maker ?>" required>
-                                </div>
+                                
                                 <div class="col pt-3">
                                     <label class="form-label" for="quantity"><?= $this->data['QUANTITY'] ?></label>
+                                    <span class="must form-check-label">必須</span>
                                     <input class="form-control" type="text" name="数量_edit" id="quantity_edit" value="<?= $spare->c_quantity ?>" required>
+                                </div>
+                                <div class="col pt-3">
+                                    <label class="form-label" for="unit"><?= $this->data['UNIT'] ?></label>
+                                    <span class="must form-check-label">必須</span>
+                                    <input class="form-control" type="text" name="単位_edit" id="unit_edit" value="<?= $spare->c_unit ?>" required>
+                                </div>
+                                <div class="col pt-3">
+                                    <label class="form-label" for="price"><?= $this->data['PRICE'] ?></label>
+                                    <span class="must form-check-label">必須</span>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">￥</span>
+                                        <input class="form-control" type="text" name="金額_edit" id="price_edit" value="<?= $spare->c_price ?>" required>
+                                    </div>
                                 </div>
                             </div>
                             <br>
                             <div class="row">
-                                <div class="col pt-3">
-                                    <label class="form-label" for="price"><?= $this->data['PRICE'] ?></label>
-                                    <input class="form-control" type="text" name="金額_edit" id="price_edit" value="<?= $spare->c_price ?>" required>
+                            <div class="col-6 pt-3">
+                                    <label class="form-label " for="maker"><?= $this->data['MAKER_NAME'] ?></label>
+                                    <span class="must form-check-label">必須</span>
+                                    <input class="form-control" type="text" name="メーカー名_edit" id="maker_edit" value="<?= $spare->c_maker ?>" required>
                                 </div>
-                                <div class="col pt-3">
-                                    <label class="form-label" for="unit"><?= $this->data['UNIT'] ?></label>
-                                    <input class="form-control" type="text" name="単位_edit" id="unit_edit" value="<?= $spare->c_unit ?>" required>
-                                </div>
+                                
                                 <div class="col pt-3">
                                     <label class="form-label" for="unit"><?= $this->data['STORAGE'] ?></label>
+                                    <span class="must form-check-label">必須</span>
                                     <input class="form-control " type="text" name="保管" id="storage_edit" value="<?= $spare->c_storage ?>" required>
                                 </div>
                                 <div class="col pt-3">
                                     <label class="form-label" for="unit"><?= $this->data['ARRANGEMENT'] ?></label>
+                                    <span class="must form-check-label">必須</span>
                                     <input class="form-control " type="text" name="必要時" id="arra_edit" value="<?= $spare->c_arrangement ?>" required>
                                 </div>
                             </div>
