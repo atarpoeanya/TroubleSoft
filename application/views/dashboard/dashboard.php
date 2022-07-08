@@ -1,4 +1,4 @@
-<main class="container-fluid p-sm-2">
+<main class="container-fluid p-2 mb-4">
     <div class="container-fluid">
         <div class="btn-group switch-field text-nowrap">
             <a name="設備" onclick="buttonSwitch(this);category_switcher(this)" class="btn btn-white active topper" aria-current="page"><?= $this->data['RADIO_A_EQUIPMENT'] ?></a>
@@ -7,10 +7,10 @@
         </div>
     </div>
     </div>
-    <div class="container-fluid">
-        <div class="kanjifont  d-flex flex-column" id="dashboard">
+    <div class="container-fluid" style="height: 100%;" id="main-content">
+        <div class="d-flex flex-column" style="height:100%;" id="dashboard" >
 
-            <div class="row pt-3 px-3">
+            <div class="row py-3 px-3">
                 <div class="col-lg-9 col-md-8 mb-2">
 
                     <div class="btn-group switch-field text-nowrap">
@@ -20,7 +20,7 @@
                     </div>
 
 
-                    <a href="<?= base_url(); ?>dashboard/all_fmea_list" id="fmea-s" class="btn btn-primary">全FMEA一覧表</a>
+                    <a href="<?= base_url(); ?>dashboard/all_fmea_list" id="fmea-s" class="btn btn-primary">FMEA一覧表</a>
                 </div>
                 <div class="col-lg-3 col-md">
 
@@ -36,10 +36,11 @@
             </div>
 
 
-
-            <div class="row p-3 ">
-                <div id="list" class="overflow-hidden"></div>
+            <!-- Table goes here -->
+            <div class="row px-3" id="list-wrapper">
+                <div class="container-fluid" id="list"></div>
             </div>
+
             <div id="modalPlaceHolder"></div>
         </div>
     </div>
@@ -56,7 +57,9 @@
 
     <style>
         body {
-            background-color: #F5F5F5
+            background-color: #F5F5F5;
+            min-height: 450px;
+            
         }
 
         .switch-field a {
@@ -85,16 +88,24 @@
 
         main {
             min-width: 0;
+            min-height: 450px;
         }
 
         #dashboard {
             background-color: white;
             border-radius: 5px;
-            height: calc(100% - 200px) !important;
+            min-height: 400px;
+            /* height: calc(100% - 50px) !important;
+             */
         }
 
         .table-data {
             height: 40px;
+        }
+
+        .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody {
+            overflow-y: scroll !important;
+            min-height: 200px;
         }
     </style>
 </main>

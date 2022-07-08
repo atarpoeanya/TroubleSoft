@@ -32,21 +32,21 @@
 
                             <div class="col-6 pt-3">
                                 <label for="start_day" class="form-label"><?= $this->data['ACCIDENT_DATE'] ?></label>
-                                <input required type="date" class="form-control" id="start_day" name="発生日" required>
+                                <input type="date" class="form-control" id="start_day" name="発生日" required>
                             </div>
 
                             <div class="col-6 pt-3">
                                 <label for="repair_day" class="form-label"><?= $this->data['REPAIR_DATE'] ?></label>
-                                <input required type="date" class="form-control" id="repair_day" name="修理日" required>
+                                <input type="date" class="form-control" id="repair_day" name="修理日" required>
                             </div>
 
                             <div class="col-4 pt-3">
                                 <label for="time_start" class="form-label"><?= $this->data['HAPPENING_TIME'] ?></label>
-                                <input required type="time" class="form-control" id="time_start" name="time_start" required>
+                                <input type="time" class="form-control" id="time_start" name="time_start" required>
                             </div>
                             <div class="col-4 pt-3">
                                 <label for="time_end" class="form-label"><?= $this->data['STOP_TIME'] ?></label>
-                                <input required type="time" class="form-control" id="time_end" name="time_end" required>
+                                <input type="time" class="form-control" id="time_end" name="time_end" required>
                             </div>
 
 
@@ -93,12 +93,12 @@
                             </div>
 
                             <div class="col pt-3">
-                                <label for="" class="form-label"><?= $this->data['PROCESS_NAME'] ?></label>
+                                <label for="kouteiNa" class="form-label"><?= $this->data['PROCESS_NAME'] ?></label>
                                 <input required type="text" class="form-control" name="工程名" id="kouteiNa">
                             </div>
 
                             <div class="col pt-3">
-                                <label for="" class="form-label"><?= $this->data['FAIL_MODE'] ?></label>
+                                <label for="mode" class="form-label"><?= $this->data['FAIL_MODE'] ?></label>
                                 <input required type="text" class="form-control" name="故障モード" id="mode">
                             </div>
 
@@ -109,21 +109,21 @@
                             &nbsp;<b><?= $this->data['SECTION_3'] ?></b>&nbsp;</p>
                         <div class="item row border-top py-3">
                             <div class="col-12 pt-3">
-                                <label class="form-label" for="a"><?= $this->data['PHENOMENON'] ?></label>
+                                <label class="form-label" for="gensho"><?= $this->data['PHENOMENON'] ?></label>
                                 <textarea required name="現象" id="gensho" class="form-control" cols="30" rows="10" required></textarea>
                             </div>
                             <div class="col-12 pt-3">
-                                <label class="form-label" for="a"><?= $this->data['REPAIR_DETAIL'] ?></label>
+                                <label class="form-label" for="shuriNaiyou"><?= $this->data['REPAIR_DETAIL'] ?></label>
                                 <textarea required name="修理内容" id="shuriNaiyou" class="form-control" cols="30" rows="10" required></textarea>
                             </div>
 
                             <div class="col-6 pt-3">
-                                <label class="form-label" for="a"><?= $this->data['MECHANISM'] ?></label>
+                                <label class="form-label" for="failMech"><?= $this->data['MECHANISM'] ?></label>
                                 <textarea required name="fail_mech" id="failMech" class="form-control" cols="30" rows="5" required></textarea>
                             </div>
 
                             <div class="col-6 pt-3">
-                                <label class="form-label" for="a"><?= $this->data['RESPONSE'] ?></label>
+                                <label class="form-label" for="response"><?= $this->data['RESPONSE'] ?></label>
                                 <textarea required name="response" id="response" class="form-control" cols="30" rows="5" required></textarea>
                             </div>
 

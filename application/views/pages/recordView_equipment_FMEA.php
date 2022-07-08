@@ -155,13 +155,13 @@
                                         $thead = '単位';
                                         break;
                                     case 'c_price':
-                                        $thead = '金額';
+                                        $thead = '単価';
                                         break;
                                     case 'c_storage':
-                                        $thead = '予備品の保管場所';
+                                        $thead = '保管場所';
                                         break;
                                     case 'c_arrangement':
-                                        $thead = '必要時の手配先';
+                                        $thead = '手配先';
                                         break;
 
                                     default:

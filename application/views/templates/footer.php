@@ -1,4 +1,4 @@
-  <footer class="footer mt-auto py-3 text-end">
+  <footer class="footer mt-auto pt-3 pb-0 text-end">
     <div class="container me-0">
     <span>Version 1.0.0</span>
     </div>
@@ -20,7 +20,9 @@
     body {
   margin: 0;
   padding: 10px;
-  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
+  min-height: 10vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
 }

@@ -60,12 +60,12 @@
                             </div>
                             
                             <div class="col pt-3">
-                                <label class="form-label" for="unit"><?= $this->data['STORAGE'] ?></label>
+                                <label class="form-label" for="storage"><?= $this->data['STORAGE'] ?></label>
                                 <span class="must form-check-label">必須</span>
                                 <input class="form-control " type="text" name="単位" id="storage" required>
                             </div>
                             <div class="col pt-3">
-                                <label class="form-label" for="unit"><?= $this->data['ARRANGEMENT'] ?></label>
+                                <label class="form-label" for="arra"><?= $this->data['ARRANGEMENT'] ?></label>
                                 <span class="must form-check-label">必須</span>
                                 <input class="form-control " type="text" name="単位" id="arra" required>
                             </div>

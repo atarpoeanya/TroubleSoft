@@ -4,6 +4,7 @@
 
     // Making sure the first seen table get loaded first.
     DATA.onLoad = function() {
+
         <?php if ($this->session->flashdata('crumbs') == 0) { ?>
             get_troubleList();
             $("#real").addClass('active');
@@ -22,15 +23,35 @@
         }
         ?>
 
+
+
     }
 
 
     // Responsive hack, can be delete if unedeed
     //PROBLEM: on browser resize the table on dashboard wont resize too making it either smaller or bigger than the actual space.
     //Might be because DataTable
+
+
+
     $(window).resize(function() {
+        // $(window).scrollTop($('#dashboard').height());
         $('table').DataTable().columns.adjust();
+
+        if ($('table').height() <= 190) {
+
+            $('.dataTables_scrollBody').css('height', ($(window).height() - 500));
+            $('.dataTables_scrollBody').css('max-height', $('table tbody').height());
+
+
+            // $('.dataTables_scrollBody, table tbody, #dashboard').css('min-height', 200);
+            // $('#dashboard, #main-content, main').css('min-height', 500);
+
+
+        }
+
     })
+
 
     // 更新 Button toggle
     // Also work as colum resizing,
@@ -39,8 +60,11 @@
     function show_button() {
         $(".button_column").toggle();
         // $("#search-bar-").hide();
-        $('table').DataTable().columns.adjust();
         $('.dataTables_scrollBody').scrollLeft(300)
+        $('table').DataTable().columns.adjust();
+        $('table').DataTable().columns.adjust();
+
+
     }
 
     // Normal button switched for choosing the displayed table, using class to manipulate the colors
@@ -57,7 +81,7 @@
 
                 $("#real").attr("onclick", "buttonSwitch(this);get_troubleList()");
                 $("#fmea-s").attr("onclick", "buttonSwitch(this);get_troubleList_fmea()");
-                
+
 
                 $("#real").addClass('active');
                 $("#real").removeClass('bg-white')
@@ -107,8 +131,8 @@
 
                         if (title == '発生日') //
                             $('#search-bar').append('<th><input type="date" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
-                        else if (title === 'BUTTON') //no title column for displaying edit buttons
-                            $('#search-bar').append('<th class="button_column buttons" ></th>');
+                        else if (title.length == 0) //no title column for displaying edit buttons
+                            $('#search-bar').append('<th class="button_column buttons" style="display:none; width:150px;"></th>');
                         else
                             $('#search-bar').append('<th><input type="text" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
 
@@ -136,28 +160,42 @@
                                 "bSortable": false
                             },
 
+
+
                         ],
                         info: false,
                         searching: true,
                         paging: false,
-
+                        scrollResize: true,
                         orderCellsTop: false,
-                        fixedHeader: true,
-                        scrollY: '575px',
-                        pageLength: 5,
+                        // fixedHeader: true,
+                        scrollY: ($(window).height() - 500),
+
                         scrollCollapse: true,
                         dom: 'lrt',
                         "language": {
                             "zeroRecords": "該当する記録は見つかりません",
                         },
-                        columnDefs: [{
-                            targets: [1, 2],
-                            render: function(data, type, row) {
-                                return type === 'display' && data.length > 5 ?
-                                    data.substr(0, 10) + '...' :
-                                    data;
-                            }
-                        }]
+                        // columnDefs: [{
+                        //     targets: [2, 3],
+                        //     render: function(data, type, row) {
+                        //         return type === 'display' && data.length > 5 ?
+                        //             data.substr(0, 10) + '...' :
+                        //             data;
+                        //     }
+                        // }],
+                        // columns: [{
+                        //         width: "90"
+                        //     },
+                        //     null,
+                        //     null,
+                        //     null,
+                        //     {
+                        //         width: "90"
+                        //     },
+                        //     null,
+                        // ]
+
                     });
 
                     // Apply the search
@@ -206,7 +244,7 @@
 
 
                         if (title.length == 0)
-                            $('#search-bar').append('<th class="button_column buttons" style="display:none"></th>');
+                            $('#search-bar').append('<th class="button_column buttons" style="display:none;width:150px; max-width:150px;"></th>');
                         else
                             $('#search-bar').append('<th><input type="text" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
 
@@ -237,20 +275,24 @@
                         paging: false,
                         orderCellsTop: false,
                         fixedHeader: true,
-                        scrollY: "570px",
+                        scrollResize: true,
+                        scrollY: ($(window).height() - 500),
                         scrollCollapse: true,
                         dom: 'lrt',
                         "language": {
                             "zeroRecords": "該当する記録は見つかりません",
                         },
-                        columnDefs: [{
-                            targets: [1, 2],
-                            render: function(data, type, row) {
-                                return type === 'display' && data.length > 5 ?
-                                    data.substr(0, 10) + '...' :
-                                    data;
-                            }
-                        }]
+                        // columnDefs: [{
+                        //     targets: [1, 2],
+                        //     render: function(data, type, row) {
+                        //         return type === 'display' && data.length > 5 ?
+                        //             data.substr(0, 10) + '...' :
+                        //             data;
+                        //     }
+                        // }],
+
+
+
                     });
 
                     // Apply the search
@@ -287,6 +329,14 @@
             url: "<?php echo base_url(); ?>dashboard/get_sparepart_list",
             success: function(response) {
                 $("#list").html(response);
+
+
+
+
+                $('#search-bar-spare').append('<th colspan="10" class=" pe-3"><input class="form-control border-primary color-primary" type="text" id="search-bar" placeholder="Search"></th>');
+
+
+
             },
             complete: function() {
                 // DataTable
@@ -331,7 +381,8 @@
                     searching: true,
                     paging: false,
                     dom: 'lrt',
-                    scrollY: "650px",
+                    scrollResize: true,
+                    scrollY: ($(window).height() - 500),
                     sScrollX: true,
                     scrollCollapse: true,
                     "language": {
@@ -431,7 +482,7 @@
                         icon: "success",
                     });
                     $.ajax({
-                        url: "<?= base_url() ?>dashboard/delete_data_sparepart/" + $id,
+                        url: "<?= base_url() ?>dashboard/zero_data_sparepart/" + $id,
                         complete: function() {
                             get_sparepartlist()
                         }
@@ -636,17 +687,49 @@
             },
             complete: function() {
                 var table = $('#all_trouble_table').DataTable({
+                    responsive: true,
                     ordering: false,
                     info: false,
                     searching: false,
                     paging: false,
-                    orderCellsTop: true,
-                    scrollY: '650px',
+                    // orderCellsTop: true,
+                    columns: [{
+                        "width": "3%"
+                    }, {
+                        "width": "3%"
+                    }, {
+                        "width": "8%"
+                    }, {
+                        "width": "8%"
+                    }, {
+                        "width": "12%"
+                    }, {
+                        "width": "6%"
+                    }, {
+                        "width": "6%"
+                    }, {
+                        "width": "6%"
+                    }, {
+                        "width": "6%"
+                    }, {
+                        "width": "3%"
+                    }, {
+                        "width": "3%"
+                    }, {
+                        "width": "12%"
+                    }, {
+                        "width": "12%"
+                    }, {
+                        "width": "6%"
+                    }, {
+                        "width": "6%"
+                    }, ],
                     scrollX: false,
                     "language": {
                         "zeroRecords": "該当する記録は見つかりません",
                     }
                 });
+
 
                 // var table = $('#all_trouble_table').rowMerge({
                 //     excludedColumns: [1, 2, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]

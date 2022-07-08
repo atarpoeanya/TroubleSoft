@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <div class="col-12">
 
-                    <label for="recipient-name" class="col-form-label">部署</label>
+                    <label for="departement_select" class="col-form-label">部署</label>
                     <select class="form-control" name="" id="departement_select">
                         <option value="" selected>全て</option>
                         <option value="1" >1</option>

@@ -560,7 +560,7 @@ class Dashboard extends CI_Controller
         $this->form_validation->set_rules("c_maker", '5', 'required');
         $this->form_validation->set_rules("c_quantity", '6', 'required|is_natural');
         $this->form_validation->set_rules("c_unit", '7', 'required');
-        $this->form_validation->set_rules("c_price", '8', 'required|decimal');
+        $this->form_validation->set_rules("c_price", '8', 'required|regex_match[/^[0-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/]');
         $this->form_validation->set_rules("c_storage", '9', 'required');
         $this->form_validation->set_rules("c_arrangement", '0', 'required');
 
@@ -580,7 +580,7 @@ class Dashboard extends CI_Controller
         $this->form_validation->set_rules("c_maker", '4', 'required');
         $this->form_validation->set_rules("c_quantity", '5', 'required|is_natural');
         $this->form_validation->set_rules("c_unit", '6', 'required');
-        $this->form_validation->set_rules("c_price", '7', 'required|decimal');
+        $this->form_validation->set_rules("c_price", '7', 'required|regex_match[/^[0-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/]');
         $this->form_validation->set_rules("c_storage", '8', 'required');
         $this->form_validation->set_rules("c_arrangement", '9', 'required');
 

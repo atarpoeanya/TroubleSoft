@@ -57,10 +57,10 @@ function f_generate_table_select($data)
 
         <table class="table table-striped table-hover m-0 text-nowrap" id="gen_table">
             <thead>
-                <tr>
-                    <div class="border-bottom p-3">
+                <tr id="search-bar-spare">
+                    <!-- <div class="border-bottom p-3">
                         <input class="form-control" type="text" id="search-bar" placeholder="Search">
-                    </div>
+                    </div> -->
                 </tr>
                 <tr class="border-bottom border-dark bg-light">
                     <?php
@@ -80,7 +80,7 @@ function f_generate_table_select($data)
                         }
                     }
                     ?>
-                    <th class="button_column text-center border-start" style="display:none"></th>
+                    <th class="button_column text-center border-start" style="display:none;max-width:150px;width:150px;"></th>
                 </tr>
             </thead>
             <tbody>
@@ -111,7 +111,7 @@ function f_generate_table_select($data)
                             }
                         }
                         ?>
-                        <td class=" table-data text-center align-middle border-right border-left pointer col-md-2 button_column text-nowrap" style="display: none;">
+                        <td class=" table-data text-center align-middle pointer col-md-2 button_column text-nowrap" style="display: none;max-width:150px;width:150px;">
                             <a class="btn-block btn btn-primary modify-button" onclick="editSpare_populate(this)"><?= $data['UPDATE_BUTTON'] ?></a>
                             <a class="btn-block btn btn-danger modify-button" onclick="event.cancelBubble=true;deleteData_sparepart(<?= $item->c_t202_id ?>)"><?= $data['DELETE_BUTTON'] ?></a>
                         </td>

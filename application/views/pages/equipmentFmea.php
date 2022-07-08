@@ -14,7 +14,7 @@
                         <div class="row row border-top py-3">
 
                             <div class="col-6 pt-3">
-                                <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_DEPARTMENT_F'] ?></label>
+                                <label for="busho" class="form-label"><?= $this->data['EQUIPMENT_DEPARTMENT_F'] ?></label>
                                 <select class="form-control" name="部署" id="busho" required>
                                     <option value="" selected>Default</option>
                                     <option value="1">1</option>
@@ -24,26 +24,26 @@
                             </div>
 
                             <div class="col-6 pt-3">
-                                <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_FACILITY_F'] ?></label>
+                                <label for="setsubi" class="form-label"><?= $this->data['EQUIPMENT_FACILITY_F'] ?></label>
                                 <select class="form-control" name="設備" id="setsubi" required>
                                     <option value="" selected>Default</option>
                                     <option value="1">1</option>
                                 </select>
                             </div>
                             <div class="col pt-3">
-                                <label class="form-label" for=""><?= $this->data['EQUIPMENT_UNIT_F'] ?></label>
+                                <label class="form-label" for="gouki"><?= $this->data['EQUIPMENT_UNIT_F'] ?></label>
                                 <select class="form-control" name="号機" id="gouki" required>
                                     <option value="" selected>Default</option>
                                     <option value="1">1</option>
                                 </select>
                             </div>
                             <div class="col-3 pt-3">
-                                <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_PROCESS_NAME_F'] ?></label>
-                                <input type="text" class="form-control" name="工程名" required>
+                                <label for="kouteiNa" class="form-label"><?= $this->data['EQUIPMENT_PROCESS_NAME_F'] ?></label>
+                                <input type="text" class="form-control" name="工程名" id="kouteiNa" required>
                             </div>
                             <div class="col-3 pt-3">
-                                <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_FAIL_MODE_F'] ?></label>
-                                <input type="text" class="form-control" name="故障モード" required>
+                                <label for="mode" class="form-label"><?= $this->data['EQUIPMENT_FAIL_MODE_F'] ?></label>
+                                <input type="text" class="form-control" name="故障モード" id="mode" required>
                             </div>
                         </div>
 
@@ -52,21 +52,21 @@
                         <div class="row row border-top py-3">
 
                             <div class="col-6 pt-3">
-                                <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_MECHANISM_F'] ?></label>
-                                <textarea class="form-control" name="fail_mech" cols="30" rows="5" required></textarea>
+                                <label for="mech" class="form-label"><?= $this->data['EQUIPMENT_MECHANISM_F'] ?></label>
+                                <textarea class="form-control" name="fail_mech" cols="30" rows="5" required id="mech"></textarea>
                             </div>
 
                             <div class="col-6 pt-3">
-                                <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_FAIL_IMPACT_F'] ?></label>
-                                <textarea class="form-control" cols="30" rows="6" name="故障の影響" required></textarea>
+                                <label for="fail_impact" class="form-label"><?= $this->data['EQUIPMENT_FAIL_IMPACT_F'] ?></label>
+                                <textarea class="form-control" cols="30" rows="6" name="故障の影響" required id="fail_impact"></textarea>
                             </div>
                             <div class="col-6 pt-3">
-                                <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_LINE_EFFECT_F'] ?></label>
-                                <textarea name="ライン停止の可能性" class="form-control" cols="30" rows="5" required></textarea>
+                                <label for="line_effect" class="form-label"><?= $this->data['EQUIPMENT_LINE_EFFECT_F'] ?></label>
+                                <textarea name="ライン停止の可能性" class="form-control" cols="30" rows="5" required id="line_effect"></textarea>
                             </div>
                             <div class="col-6 pt-3">
-                                <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_SPECIAL_CHAR_F'] ?></label>
-                                <input type="text" class="form-control" name="特殊特性等" required>
+                                <label for="special_char" class="form-label"><?= $this->data['EQUIPMENT_SPECIAL_CHAR_F'] ?></label>
+                                <input type="text" class="form-control" name="特殊特性等" required id="special_char">
                             </div>
                         </div>
 
@@ -75,28 +75,28 @@
                         <div class="row row border-top py-3">
 
                             <div class="col-4 pt-3">
-                                <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_PIC_SCHEDULE_F'] ?></label>
-                                <select class="form-control" name="担当者日程" required>
+                                <label for="pic" class="form-label"><?= $this->data['EQUIPMENT_PIC_SCHEDULE_F'] ?></label>
+                                <select class="form-control" name="担当者日程" required id="pic">
                                     <option value="" selected>Default</option>
                                     <option value="1">1</option>
                                 </select>
                             </div>
                             <div class="col-2 pt-3">
-                                <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_PERIOD_F'] ?></label>
-                                <input type="text" class="form-control" name="周期" required>
+                                <label for="period" class="form-label"><?= $this->data['EQUIPMENT_PERIOD_F'] ?></label>
+                                <input type="text" class="form-control" name="周期" required id="period">
                             </div>
                             <div class="col-2 pt-3">
-                                <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_MONTH_F'] ?></label>
-                                <input type="text" class="form-control" name="月">
+                                <label for="month" class="form-label"><?= $this->data['EQUIPMENT_MONTH_F'] ?></label>
+                                <input type="text" class="form-control" name="月" id="month">
                             </div>
                             <div class="col-12 pt-3">
                                 <div class="col">
-                                    <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_PREVENTION_F'] ?></label>
-                                    <textarea class="form-control" name="予防" id="" cols="30" rows="5" required></textarea>
+                                    <label for="prevention" class="form-label"><?= $this->data['EQUIPMENT_PREVENTION_F'] ?></label>
+                                    <textarea class="form-control" name="予防" id="" cols="30" rows="5" required id="prevention"></textarea>
                                 </div>
                                 <div class="col pt-3">
-                                    <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_DETECTION_F'] ?></label>
-                                    <input type="text" class="form-control" name="検出" required>
+                                    <label for="detection" class="form-label"><?= $this->data['EQUIPMENT_DETECTION_F'] ?></label>
+                                    <input type="text" class="form-control" name="検出" required id="detection">
                                 </div>
                             </div>
 
@@ -108,13 +108,13 @@
                         <div class="row row border-top py-3">
 
                             <div class="col-6 pt-3">
-                                <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_COUNTER_PLAN_F'] ?></label>
-                                <textarea class="form-control" name="対策案" id="" cols="30" rows="5" required></textarea>
+                                <label for="counter" class="form-label"><?= $this->data['EQUIPMENT_COUNTER_PLAN_F'] ?></label>
+                                <textarea class="form-control" name="対策案" id="counter" cols="30" rows="5" required></textarea>
                             </div>
 
                             <div class="col-6 pt-3">
-                                <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_MEASURE_F'] ?></label>
-                                <textarea class="form-control" name="対策" id="" cols="30" rows="5" required></textarea>
+                                <label for="measure" class="form-label"><?= $this->data['EQUIPMENT_MEASURE_F'] ?></label>
+                                <textarea class="form-control" name="対策" id="measure" cols="30" rows="5" required></textarea>
                             </div>
 
                         </div>

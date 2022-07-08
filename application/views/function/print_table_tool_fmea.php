@@ -11,6 +11,7 @@ function f_generate_table_select($data)
 
 </tr>
 <tr class="border-bottom border-dark">
+                <!-- HEAD HERE -->
                   <!-- LIST ON DASHBOARD CONTROLLER  get_trouble_list_tool()-->
                     <th class=" table-head text-center border-end text-nowrap ">
                         <?= $data['title'][0] ?>
@@ -21,14 +22,15 @@ function f_generate_table_select($data)
                     <th class=" table-head text-center border-end text-nowrap ">
                         <?= $data['title'][2] ?>
                     </th>
-                    <th class=" table-head text-center border-end text-nowrap ">
+                    <th class=" table-head text-center border-end text-nowrap " style="max-width:90px;">
                         <?= $data['title'][3] ?>
                     </th>
 
-                    <th class="button_column buttons text-center border-start" style="display:none"></th>
+                    <th class="button_column buttons text-center border-start border-end" style="display:none;max-width:150px;width: 150px;"></th>
                 </tr>
                 
             </thead>
+            <!-- BODY HERE -->
             <tbody>
                 <?php
 
@@ -46,10 +48,10 @@ function f_generate_table_select($data)
                         <td class="kanjifont table-data text-center align-middle border-end pointer col">
                             <?= $item->c_failMode ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-end pointer col ID">
+                        <td class="kanjifont table-data text-center align-middle border-end pointer col ID" style="max-width:90px;">
                             <?= $item->c_picSchedule ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-end pointer col button_column text-nowrap" style="display: none;">
+                        <td class="kanjifont table-data text-center align-middle border-end pointer col button_column text-nowrap" style="display: none;width:150px;max-width:150px;">
                             <a class="btn btn-primary" href="<?= base_url() ?>editEquipment_fmea/<?= intval($item->c_t203_id) ?>" onclick="event.cancelBubble=true;"><?= $data['UPDATE_BUTTON']?></a>
                             <a class="btn btn-danger " onclick="event.cancelBubble=true; deleteData_tool_fmea(<?= $item->c_t203_id ?>)"><?= $data['DELETE_BUTTON']?></a>
 

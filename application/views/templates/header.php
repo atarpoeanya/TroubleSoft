@@ -23,6 +23,7 @@
 <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.datatables.net/fixedcolumns/4.1.0/js/dataTables.fixedColumns.min.js"></script>
+<script> src="https://cdn.datatables.net/plug-ins/1.12.1/features/scrollResize/dataTables.scrollResize.min.js"</script>
 
 <!-- Sweetalert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -47,7 +48,7 @@
     </nav>  -->
 </head>
 
-<body class="py-3">
+<body class="pt-3 pb-2">
     <header class="mb-5" style="z-index: 100;">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
             <div class="container-fluid">
