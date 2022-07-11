@@ -101,6 +101,12 @@ function f_generate_table_select($data)
                                     <?= $id ?>
                                 </td>
                             <?php
+                            } elseif ($key == 'c_quantity') {
+                            ?>
+                                <td class=" table-data text-center align-middle border-end  pointer col amount">
+                                    <?= $value ?>
+                                </td>
+                            <?php
                             } else {
                             ?>
                                 <td class=" table-data text-center align-middle border-end  pointer col">
@@ -113,7 +119,7 @@ function f_generate_table_select($data)
                         ?>
                         <td class=" table-data text-center align-middle pointer col-md-2 button_column text-nowrap" style="display: none;max-width:150px;width:150px;">
                             <a class="btn-block btn btn-primary modify-button" onclick="editSpare_populate(this)"><?= $data['UPDATE_BUTTON'] ?></a>
-                            <a class="btn-block btn btn-danger modify-button" onclick="event.cancelBubble=true;deleteData_sparepart(<?= $item->c_t202_id ?>)"><?= $data['DELETE_BUTTON'] ?></a>
+                            <a class="btn-block btn btn-danger modify-button delete" onclick="event.cancelBubble=true; deleteData_sparepart(<?= $item->c_t202_id ?>)"><?= $data['DELETE_BUTTON'] ?></a>
                         </td>
 
                     </tr>
@@ -128,7 +134,6 @@ function f_generate_table_select($data)
 }
 ?>
 <style>
-    
     .pointer:hover {
         cursor: pointer;
     }

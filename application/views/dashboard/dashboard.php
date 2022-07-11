@@ -8,10 +8,10 @@
     </div>
     </div>
     <div class="container-fluid" style="height: 100%;" id="main-content">
-        <div class="d-flex flex-column" style="height:100%;" id="dashboard" >
+        <div class="d-flex flex-column pb-5" style="height: 100%;"  id="dashboard" >
 
             <div class="row py-3 px-3">
-                <div class="col-lg-9 col-md-8 mb-2">
+                <div class="col-9 mb-2">
 
                     <div class="btn-group switch-field text-nowrap">
                         <a id="real" onclick="buttonSwitch(this);get_troubleList();$('#new_trouble').attr('href', '<?= base_url() ?>equipment')" class="btn btn-outline-secondary bottm active" aria-current="page"><?= $this->data['RADIO_B_REAL'] ?></a>
@@ -22,7 +22,7 @@
 
                     <a href="<?= base_url(); ?>dashboard/all_fmea_list" id="fmea-s" class="btn btn-primary">FMEA一覧表</a>
                 </div>
-                <div class="col-lg-3 col-md">
+                <div class="col-3">
 
                     <div class="d-flex justify-content-end">
                         <a href="<?= base_url() ?>equipment" class="me-1 btn btn-success text-nowrap" id="new_trouble"><?= $this->data['INSERT_BUTTON_TROUBLE'] ?></a>
@@ -38,7 +38,9 @@
 
             <!-- Table goes here -->
             <div class="row px-3" id="list-wrapper">
-                <div class="container-fluid" id="list"></div>
+                
+                    <div class="container-fluid" id="list"></div>
+                
             </div>
 
             <div id="modalPlaceHolder"></div>
@@ -58,7 +60,7 @@
     <style>
         body {
             background-color: #F5F5F5;
-            min-height: 450px;
+            min-height: 250px;
             
         }
 
@@ -88,13 +90,14 @@
 
         main {
             min-width: 0;
-            min-height: 450px;
+            min-height: 350px;
         }
 
+  
         #dashboard {
             background-color: white;
             border-radius: 5px;
-            min-height: 400px;
+            min-height: 200px;
             /* height: calc(100% - 50px) !important;
              */
         }
@@ -105,7 +108,9 @@
 
         .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody {
             overflow-y: scroll !important;
-            min-height: 200px;
+            min-height: 65px;
+            /* width: 100%; */
         }
+
     </style>
 </main>

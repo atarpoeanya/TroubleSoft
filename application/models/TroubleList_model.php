@@ -15,6 +15,7 @@ class Troublelist_model extends CI_Model
     {
         return $this->db->get('t203_equipment_fmea')->result();
     }
+
     public function get_trouble_fmea_array($department)
     {
         $query = $this->db->select(['c_facility', 'c_unit', 'c_processName', 'c_failMode', 'c_failImpact', 'c_lineEffect', 'c_specialChar', 'c_failMech', 'c_prevention', 'c_period', 'c_month', 'c_detection', 'c_counterPlan', 'c_picSchedule', 'c_measure']);
@@ -32,6 +33,20 @@ class Troublelist_model extends CI_Model
     {
         return $this->db->get('t202_spareparts')->result();
     }
+
+    // Check if sparepart exist as foreign key 
+    public function get_used_sparepart_status($id)
+    {
+        $table_a = $this->db->where('c_t202_id', $id)->get('t200_equipment_used_parts')->row();
+        $table_b = $this->db->where('c_t202_id', $id)->get('t201_equipment_fmea_used_parts')->row();
+
+        if (isset($table_a) || isset($table_b)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     //get_{name}_id mean it only get a single row, use as single item detail grabber
     public function get_tool_id($id)

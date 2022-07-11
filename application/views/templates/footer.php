@@ -1,6 +1,6 @@
   <footer class="footer mt-auto pt-3 pb-0 text-end">
     <div class="container me-0">
-    <span>Version 1.0.0</span>
+    <span>Version 0.0.1</span>
     </div>
   </footer>
   

@@ -164,7 +164,7 @@ class Dashboard extends CI_Controller
     {
         $data = $this->data;
         // Breadcrumb with flashdata (magic)
-        
+
         // View Load
         $this->load->view('templates/header');
         $this->load->view('dashboard/dashboard', $data);
@@ -175,8 +175,8 @@ class Dashboard extends CI_Controller
         $this->load->view('modals/addParts', $data);
         $this->load->view('modals/delete');
         // $this->load->view('modals/editParts');
-        
-        
+
+
         //other method
         $this->post_spare();
         $this->session->set_flashdata('crumbs', '0');
@@ -427,6 +427,15 @@ class Dashboard extends CI_Controller
         redirect('dashboard');
     }
 
+    // Check sparepart status (isUsed/isNot); 
+    public function check_sparepart_status($id)
+    {
+        if ($this->Troublelist_model->get_used_sparepart_status($id)) {
+            echo 'true';
+        } else {
+            echo 'false';
+        }
+    }
 
     public function edit_data_tool_view($id)
     {
@@ -552,6 +561,7 @@ class Dashboard extends CI_Controller
         // FOR SERVER SIDE VALIDATION,
         // since this form is in a modal and not a page it need to use ajax
         // not a fun ajax tbh
+        // regex_match[/^[0-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/]
 
         $this->form_validation->set_rules("c_t202_id", '1', 'required');
         $this->form_validation->set_rules("c_purchaseDate", '2', 'required');
@@ -560,7 +570,7 @@ class Dashboard extends CI_Controller
         $this->form_validation->set_rules("c_maker", '5', 'required');
         $this->form_validation->set_rules("c_quantity", '6', 'required|is_natural');
         $this->form_validation->set_rules("c_unit", '7', 'required');
-        $this->form_validation->set_rules("c_price", '8', 'required|regex_match[/^[0-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/]');
+        $this->form_validation->set_rules("c_price", '8', 'required|numeric');
         $this->form_validation->set_rules("c_storage", '9', 'required');
         $this->form_validation->set_rules("c_arrangement", '0', 'required');
 
@@ -580,7 +590,7 @@ class Dashboard extends CI_Controller
         $this->form_validation->set_rules("c_maker", '4', 'required');
         $this->form_validation->set_rules("c_quantity", '5', 'required|is_natural');
         $this->form_validation->set_rules("c_unit", '6', 'required');
-        $this->form_validation->set_rules("c_price", '7', 'required|regex_match[/^[0-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/]');
+        $this->form_validation->set_rules("c_price", '7', 'required|numeric');
         $this->form_validation->set_rules("c_storage", '8', 'required');
         $this->form_validation->set_rules("c_arrangement", '9', 'required');
 
@@ -598,7 +608,7 @@ class Dashboard extends CI_Controller
     public function all_fmea_list()
     {
         $data = $this->data;
-        
+
         $this->load->view('templates/header', $data);
         $this->load->view('Pages/all_fmea');
         $this->load->view('templates/footer');
@@ -610,7 +620,7 @@ class Dashboard extends CI_Controller
     public function get_all_fmea_list_modular()
     {
         $data = $this->data;
-        
+
         // $id = $this->uri->segment(2);
         // $this->load->view('/templates/header', $data);
         $this->load->library('table');

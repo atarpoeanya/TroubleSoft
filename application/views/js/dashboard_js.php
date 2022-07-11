@@ -40,8 +40,10 @@
 
         if ($('table').height() <= 190) {
 
-            $('.dataTables_scrollBody').css('height', ($(window).height() - 500));
+            $('.dataTables_scrollBody').css('height', ($('#main-content').height() - (300*90/100)));
             $('.dataTables_scrollBody').css('max-height', $('table tbody').height());
+            
+            
 
 
             // $('.dataTables_scrollBody, table tbody, #dashboard').css('min-height', 200);
@@ -61,11 +63,16 @@
         $(".button_column").toggle();
         // $("#search-bar-").hide();
         $('.dataTables_scrollBody').scrollLeft(300)
-        $('table').DataTable().columns.adjust();
-        $('table').DataTable().columns.adjust();
+        // Need to call twice because some weird bootstraps datatable interaction
+        //Refer to https://datatables.net/forums/discussion/66154/how-to-fix-column-adjustment-of-hidden-table-after-showing-it
+        $('table').DataTable().columns.adjust()
+        $('table').DataTable().columns.adjust()
 
 
     }
+    // while(true){
+    //     $('table').DataTable().columns.adjust()
+    // }
 
     // Normal button switched for choosing the displayed table, using class to manipulate the colors
     // Switch the button function around for displaying sub table REAL/FMEA
@@ -169,7 +176,7 @@
                         scrollResize: true,
                         orderCellsTop: false,
                         // fixedHeader: true,
-                        scrollY: ($(window).height() - 500),
+                        scrollY: ($('#main-content').height() - (300*90/100)),
 
                         scrollCollapse: true,
                         dom: 'lrt',
@@ -276,22 +283,12 @@
                         orderCellsTop: false,
                         fixedHeader: true,
                         scrollResize: true,
-                        scrollY: ($(window).height() - 500),
+                        scrollY: ($('#main-content').height() - (300*90/100)),
                         scrollCollapse: true,
                         dom: 'lrt',
                         "language": {
                             "zeroRecords": "該当する記録は見つかりません",
                         },
-                        // columnDefs: [{
-                        //     targets: [1, 2],
-                        //     render: function(data, type, row) {
-                        //         return type === 'display' && data.length > 5 ?
-                        //             data.substr(0, 10) + '...' :
-                        //             data;
-                        //     }
-                        // }],
-
-
 
                     });
 
@@ -382,7 +379,7 @@
                     paging: false,
                     dom: 'lrt',
                     scrollResize: true,
-                    scrollY: ($(window).height() - 500),
+                    scrollY: ($('#main-content').height() - (300*90/100)),
                     sScrollX: true,
                     scrollCollapse: true,
                     "language": {
@@ -397,6 +394,14 @@
                     //     }
                     // }]
                 });
+
+                // INCASE YOU NEED TO DISABLE THE BUTTON ON 0 AMOUNT
+
+                // $('.amount').each(function() {
+                //     if($(this).html().trim() == '0')
+                //         $(this).siblings().last().children('.delete').addClass('disabled')
+                // })
+
 
                 $('#search-bar').on('keyup change', function() {
 
@@ -466,32 +471,76 @@
             });
     }
 
+
     function deleteData_sparepart($id) {
 
-        var conf = swal({
-                title: "データを削除しますか？",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    swal({
-                        // button: false,
-                        title: "データが削除されました",
-                        icon: "success",
-                    });
-                    $.ajax({
-                        url: "<?= base_url() ?>dashboard/zero_data_sparepart/" + $id,
-                        complete: function() {
-                            get_sparepartlist()
-                        }
-                    });
+        var status = $.ajax({
+            url: "<?= base_url() ?>dashboard/check_sparepart_status/" + $id,
+            async: false,
+            success: function(response) {
+
+                if (response.trim() === 'true') {
+
+                    var conf = swal({
+                            title: "数量を0にしますか？",
+                            icon: "warning",
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                swal({
+                                    // button: false,
+                                    title: "数量が0になります",
+                                    icon: "success",
+                                });
+                                $.ajax({
+                                    url: "<?= base_url() ?>dashboard/zero_data_sparepart/" + $id,
+                                    complete: function() {
+                                        get_sparepartlist()
+                                    }
+                                });
+                            } else {
+                                // DELETE CANCELLED
+                            }
+                        });
+
+
                 } else {
-                    // DELETE CANCELLED
+                    // Delete data from table
+                    var conf = swal({
+                            title: "データを削除しますか？",
+                            icon: "warning",
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                swal({
+                                    // button: false,
+                                    title: "データが削除されました",
+                                    icon: "success",
+                                });
+                                $.ajax({
+                                    url: "<?= base_url() ?>dashboard/delete_data_sparepart/" + $id,
+                                    complete: function() {
+                                        get_sparepartlist()
+                                    }
+                                });
+                            } else {
+                                // DELETE CANCELLED
+                            }
+                        });
                 }
-            });
+
+            }
+        });
+
+        // Make stock -> 0
+
+
     }
+
 
     function editSpare_populate(el) {
         $id = $(el).parent().siblings('.ID').text().trim()
