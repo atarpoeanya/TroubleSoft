@@ -40,7 +40,7 @@
 
         if ($('table').height() <= 190) {
 
-            $('.dataTables_scrollBody').css('height', ($('#main-content').height() - (300*90/100)));
+            $('.dataTables_scrollBody').css('height', ($('#main-content').height() - (275*90/100)));
             $('.dataTables_scrollBody').css('max-height', $('table tbody').height());
             
             
@@ -176,7 +176,7 @@
                         scrollResize: true,
                         orderCellsTop: false,
                         // fixedHeader: true,
-                        scrollY: ($('#main-content').height() - (300*90/100)),
+                        scrollY: ($('#main-content').height() - (275*90/100)),
 
                         scrollCollapse: true,
                         dom: 'lrt',
@@ -283,7 +283,7 @@
                         orderCellsTop: false,
                         fixedHeader: true,
                         scrollResize: true,
-                        scrollY: ($('#main-content').height() - (300*90/100)),
+                        scrollY: ($('#main-content').height() - (275*90/100)),
                         scrollCollapse: true,
                         dom: 'lrt',
                         "language": {
@@ -379,8 +379,8 @@
                     paging: false,
                     dom: 'lrt',
                     scrollResize: true,
-                    scrollY: ($('#main-content').height() - (300*90/100)),
-                    sScrollX: true,
+                    scrollY: ($('#main-content').height() - (275*90/100)),
+                    
                     scrollCollapse: true,
                     "language": {
                         "zeroRecords": "該当する記録は見つかりません",

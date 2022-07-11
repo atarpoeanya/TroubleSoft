@@ -8,10 +8,10 @@
     </div>
     </div>
     <div class="container-fluid" style="height: 100%;" id="main-content">
-        <div class="d-flex flex-column pb-5" style="height: 100%;"  id="dashboard" >
+        <div class="d-flex flex-column pb-2" style="height: 100%;"  id="dashboard" >
 
             <div class="row py-3 px-3">
-                <div class="col-9 mb-2">
+                <div class="col-9">
 
                     <div class="btn-group switch-field text-nowrap">
                         <a id="real" onclick="buttonSwitch(this);get_troubleList();$('#new_trouble').attr('href', '<?= base_url() ?>equipment')" class="btn btn-outline-secondary bottm active" aria-current="page"><?= $this->data['RADIO_B_REAL'] ?></a>

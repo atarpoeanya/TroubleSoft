@@ -55,7 +55,7 @@ function f_generate_table_select($data)
         </div>
 
 
-        <table class="table table-striped table-hover m-0 text-nowrap" id="gen_table">
+        <table class="table table-striped table-hover text-nowrap" id="gen_table">
             <thead>
                 <tr id="search-bar-spare">
                     <!-- <div class="border-bottom p-3">
