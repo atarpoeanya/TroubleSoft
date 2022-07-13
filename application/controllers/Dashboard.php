@@ -346,15 +346,66 @@ class Dashboard extends CI_Controller
     public function post_tools()
     {
         $id = $this->uri->segment(2);
+        $data = $this->data;
+
         if (empty($id))
             redirect(base_url(), '/');
 
         if ($id == 1) {
 
-            $pic = $this->do_upload();
-            $this->Troublelist_model->add_data_tool($pic);
-            $this->session->set_flashdata('crumbs', '0');
-            redirect(base_url(), '/');
+
+            $this->form_validation->set_rules('発生日', '1', 'required');
+            $this->form_validation->set_rules('修理日', '2', 'required');
+            $this->form_validation->set_rules('time_start', '3', 'required');
+            $this->form_validation->set_rules('time_end', '4', 'required');
+
+            $this->form_validation->set_rules('担当者', '5', 'required|callback_check_default');
+            $this->form_validation->set_rules('部署', '6', 'required|callback_check_default');
+            $this->form_validation->set_rules('設備', '7', 'required|callback_check_default');
+            $this->form_validation->set_rules('号機', '8', 'required|callback_check_default');
+
+            $this->form_validation->set_rules('工程名', '9', 'required');
+            $this->form_validation->set_rules('故障モード', '10', 'required');
+
+            $this->form_validation->set_rules('現象', '11', 'required');
+            $this->form_validation->set_rules('修理内容', '12', 'required');
+            $this->form_validation->set_rules('fail_mech', '13', 'required');
+            $this->form_validation->set_rules('response', '14', 'required');
+
+            // $this->form_validation->set_rules('spareParts', '20', 'greater_than_equal_to[0]');
+            // $this->form_validation->set_rules('response', '14', 'required');
+
+            if ($this->form_validation->run() == FALSE) {
+                //For data that need to be manually re-populated
+                //Spareparts & fmea
+                $savedata = array(
+                    'error'         =>  validation_errors(),
+                    'fmea_id'       =>  $this->input->post('fmea_id', true),
+                    'part_info'     =>  $this->input->post('spareParts', true)
+
+                );
+                $this->session->set_flashdata($savedata);
+
+                if(strlen($savedata['part_info']) > 0)
+                $data['temp_spare'] = $this->Troublelist_model
+                                           ->get_spareparts_list();
+
+
+                $this->load->view('templates/header');
+                $this->load->view('Pages/equipmentForm', $data);
+                $this->load->view('templates/footer');
+
+                // modal
+                $this->load->view('modals/partsSelect');
+                $this->load->view('modals/tfmeaSelect', $data);
+                //js
+                $this->load->view('js/form_js.php');
+            } else {
+                $pic = $this->do_upload();
+                $this->Troublelist_model->add_data_tool($pic);
+                $this->session->set_flashdata('crumbs', '0');
+                redirect(base_url(), '/');
+            }
         }
 
 
@@ -383,7 +434,7 @@ class Dashboard extends CI_Controller
         // File RULES
         $config['upload_path']          = './uploads/';
         $config['allowed_types']        = 'pdf';
-        $config['max_size']             = 5024;
+        $config['max_size']             = '5024';
 
 
         $this->load->library('upload', $config);

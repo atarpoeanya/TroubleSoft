@@ -109,6 +109,21 @@ class Troublelist_model extends CI_Model
         return $spare_row;
     }
 
+    // For repopulating spare table in
+    public function get_spareparts_list()
+    {
+        $data = array();
+        $arr_decoded = json_decode($this->input->post('spareParts'), true);
+
+
+        foreach ($arr_decoded as $value) {
+
+            array_push($data, $value[0]);
+        }
+
+        return $this->db->where_in('c_t202_id', $data)->get('t202_spareparts')->result();
+    }
+
     // public function getToolsFmeaid($id)
     // {
     //     return $this->db->get_where('t203_equipment_fmea', array("c_t203_id" => $id))->row();
@@ -151,7 +166,7 @@ class Troublelist_model extends CI_Model
         ];
         $this->db->insert('t800_equipment', $data);
 
-        if ($this->input->post('spareParts', true) ) {
+        if ($this->input->post('spareParts', true)) {
             $this->add_spare_used(json_decode($this->input->post('spareParts'), true), 't800_equipment');
         }
 

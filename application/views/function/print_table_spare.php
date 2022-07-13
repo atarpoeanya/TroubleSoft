@@ -62,12 +62,12 @@ function f_generate_table_select($data)
                         <input class="form-control" type="text" id="search-bar" placeholder="Search">
                     </div> -->
                 </tr>
-                <tr class="border-bottom border-dark bg-light">
+                <tr class="border-bottom border-dark">
                     <?php
                     foreach ($head_name as $thead) {
                         if ($thead !== '部品NO') {
                     ?>
-                            <th class=" table-head text-center border-start">
+                            <th class=" table-head text-center  border-end">
                                 <?= $thead ?>
                             </th>
 
@@ -75,12 +75,12 @@ function f_generate_table_select($data)
 
                         } else {
                         ?>
-                            <th class="id text-center border-start" style="display:none"></th>
+                            <th class="id text-center  border-end" style="display:none"></th>
                     <?php
                         }
                     }
                     ?>
-                    <th class="button_column text-center border-start" style="display:none;max-width:150px;width:150px;"></th>
+                    <th class="button_column text-center  border-end" style="display:none;max-width:150px;width:150px;"></th>
                 </tr>
             </thead>
             <tbody>

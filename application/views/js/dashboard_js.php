@@ -596,7 +596,7 @@
                     get_sparepartlist();
                 } else {
                     var stringNum = response.replace(/[^0-9.]/g, '');
-                    console.log(stringNum);
+                    // console.log(stringNum);
                     var arrNum = Array.from(String(stringNum), Number)
                     for (let index = 0; index < arrNum.length; index++) {
 

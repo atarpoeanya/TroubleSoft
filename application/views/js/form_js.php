@@ -32,6 +32,8 @@
 
                 }
             })
+
+           
         })
     }
 
@@ -131,7 +133,9 @@
                 $('.emptyTab').show()
             }
 
-            $('#equipment_parts_list tbody').append($('#foots tr')) //Delete the EMPTY placeholder
+            $('#equipment_parts_list tbody').append($('#foots tr'))
+            
+            
             $('#equipment_parts_list tbody').find('td:last-child').hide(); //Delete minus button
             $('#equipment_parts_list tbody tr').find('td:eq(3)').each(function() {
                 $(this).hide()
@@ -167,6 +171,13 @@
     //From function/print_table_tool_fmea.php
     {
 
+    }
+
+    //FORM Validation
+    
+    {
+        //Repopulate part info
+        
     }
 
 

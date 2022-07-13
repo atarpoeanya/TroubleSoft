@@ -1,3 +1,12 @@
+<?php
+if ($this->session->flashdata('error') != '')
+    // var_dump($temp_spare);
+
+
+// echo $this->session->flashdata('error')
+// echo preg_replace($this->session->flashdata('error'),'',"/[^0-9.]/g")
+
+?>
 <div id="main_body" class="pt-3">
     <div class="row">
         <!-- Main-Form -->
@@ -8,7 +17,7 @@
                     <div class="d-flex flex-column justify-content-between pb-2">
                         <!-- <label class="form-label" for="fmea-toggle-btn">FMEA</label> -->
                         <span>FMEA</span>
-                        
+
                         <div class="btn-group" role="group" aria-label="Basic radio toggle button group" id="fmea-toggle-btn">
 
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
@@ -19,11 +28,11 @@
                         </div>
                     </div>
                     <!-- FORM SECTION -->
-                    <form action="/equipment/1" method="post" class="px-3 col " autocomplete="off" id="equipForm" enctype="multipart/form-data">
-
+                    <form action="/equipment/1" method="post" class="px-3 col " autocomplete="off" id="equipForm" enctype="multipart/form-data" novalidate>
+        
                         <input type="hidden" name="spareParts" id="partinfo" value="">
 
-                        <input type="hidden" name="fmea_id" id="fmea_id" value="">
+                        <input type="hidden" name="fmea_id" id="fmea_id" value="<?= set_value('fmea_id'); ?>">
 
                         <!-- SECTION_1_Identity -->
                         <p class=" position-relative sub-header">
@@ -31,22 +40,27 @@
                         <div class="inspector row border-top py-3">
 
                             <div class="col-6 pt-3">
+
                                 <label for="start_day" class="form-label"><?= $this->data['ACCIDENT_DATE'] ?></label>
-                                <input type="date" class="form-control" id="start_day" name="発生日" required>
+                                <input id="start_day" name="発生日" type="date" required class="form-control
+                                <?php if (form_error('発生日')) echo 'is-invalid' ?>" value="<?= set_value('発生日'); ?>">
                             </div>
 
                             <div class="col-6 pt-3">
                                 <label for="repair_day" class="form-label"><?= $this->data['REPAIR_DATE'] ?></label>
-                                <input type="date" class="form-control" id="repair_day" name="修理日" required>
+                                <input type="date" id="repair_day" name="修理日" required class="form-control
+                                <?php if (form_error('修理日')) echo 'is-invalid' ?>" value="<?= set_value('修理日'); ?>">
                             </div>
 
                             <div class="col-4 pt-3">
                                 <label for="time_start" class="form-label"><?= $this->data['HAPPENING_TIME'] ?></label>
-                                <input type="time" class="form-control" id="time_start" name="time_start" required>
+                                <input type="time" id="time_start" name="time_start" required class="form-control
+                                <?php if (form_error('time_start')) echo 'is-invalid' ?>" value="<?= set_value('time_start'); ?>">
                             </div>
                             <div class="col-4 pt-3">
                                 <label for="time_end" class="form-label"><?= $this->data['STOP_TIME'] ?></label>
-                                <input type="time" class="form-control" id="time_end" name="time_end" required>
+                                <input type="time" id="time_end" name="time_end" required class="form-control
+                                <?php if (form_error('time_end')) echo 'is-invalid' ?>" value="<?= set_value('time_end'); ?>">
                             </div>
 
 
@@ -94,12 +108,14 @@
 
                             <div class="col pt-3">
                                 <label for="kouteiNa" class="form-label"><?= $this->data['PROCESS_NAME'] ?></label>
-                                <input required type="text" class="form-control" name="工程名" id="kouteiNa">
+                                <input required type="text" name="工程名" id="kouteiNa" class="form-control
+                                <?php if (form_error('工程名')) echo 'is-invalid' ?>" value="<?= set_value('工程名'); ?>">
                             </div>
 
                             <div class="col pt-3">
                                 <label for="mode" class="form-label"><?= $this->data['FAIL_MODE'] ?></label>
-                                <input required type="text" class="form-control" name="故障モード" id="mode">
+                                <input required type="text" name="故障モード" id="mode" class="form-control
+                                <?php if (form_error('故障モード')) echo 'is-invalid' ?>" value="<?= set_value('故障モード'); ?>">
                             </div>
 
 
@@ -110,21 +126,25 @@
                         <div class="item row border-top py-3">
                             <div class="col-12 pt-3">
                                 <label class="form-label" for="gensho"><?= $this->data['PHENOMENON'] ?></label>
-                                <textarea required name="現象" id="gensho" class="form-control" cols="30" rows="10" required></textarea>
+                                <textarea required name="現象" id="gensho" class="form-control
+                                <?php if (form_error('現象')) echo 'is-invalid' ?>" cols="30" rows="10" required><?= set_value('現象'); ?></textarea>
                             </div>
                             <div class="col-12 pt-3">
                                 <label class="form-label" for="shuriNaiyou"><?= $this->data['REPAIR_DETAIL'] ?></label>
-                                <textarea required name="修理内容" id="shuriNaiyou" class="form-control" cols="30" rows="10" required></textarea>
+                                <textarea required name="修理内容" id="shuriNaiyou" class="form-control
+                                <?php if (form_error('修理内容')) echo 'is-invalid' ?>" cols="30" rows="10" required><?= set_value('修理内容'); ?></textarea>
                             </div>
 
                             <div class="col-6 pt-3">
                                 <label class="form-label" for="failMech"><?= $this->data['MECHANISM'] ?></label>
-                                <textarea required name="fail_mech" id="failMech" class="form-control" cols="30" rows="5" required></textarea>
+                                <textarea required name="fail_mech" id="failMech" class="form-control
+                                <?php if (form_error('fail_mech')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= set_value('fail_mech'); ?></textarea>
                             </div>
 
                             <div class="col-6 pt-3">
                                 <label class="form-label" for="response"><?= $this->data['RESPONSE'] ?></label>
-                                <textarea required name="response" id="response" class="form-control" cols="30" rows="5" required></textarea>
+                                <textarea required name="response" id="response" class="form-control
+                                <?php if (form_error('response')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= set_value('response'); ?></textarea>
                             </div>
 
                             <div class="col-12 pt-3">
@@ -248,33 +268,57 @@
     }
 </style>
 
-
-
-<!-- REMINDER TO UNIFY THIS
 <script>
-    $(document).ready(function() {
-        var btn_1 = $('#btnradio1')
-        var btn_2 = $('#btnradio2')
+    const DATA = {};
 
-        if (btn_1.prop('checked')) {
-            $('#FMEA_side').hide()
+    // Making sure the first seen table get loaded first.
+    DATA.onLoad = function() {
+        <?php if ($this->session->flashdata('error') != '') {
+            if ($this->session->flashdata('part_info') != '') {
+                
+        ?>
+                var arr_spare = JSON.parse('<?php echo $this->session->flashdata('part_info')?>')
 
-        }
-        if (btn_2.prop('checked')) {
-            $('#FMEA_side').show()
-        }
+                $('#equipment_parts_list tbody tr').remove()
+                $('.emptyTab').hide()
+                <?php 
+                $INDEX = 0;
+                foreach ($temp_spare as $item) { ?>
+                    if (<?= $item->c_t202_id ?> == arr_spare[<?=$INDEX?>][0]) {
+                        
+                    }
+                    $('#equipment_parts_list tbody').append($('#foots tr')).append('<tr class="' + <?= $item->c_t202_id ?> + '"> <td>' + <?= $item->c_t202_id ?> + '</td> <td>' + "<?= $item->c_partName ?>" + '</td> <td>' + "<?= $item->c_model ?>" + '</td><td></td> <td>' + arr_spare[<?=$INDEX?>][1] + '</td> <td><a class="btn btn-primary minus">DELETE</a> </td></tr>')
 
 
-        $('input[type=radio]').change(function() {
-            if (btn_1.prop('checked')) {
-                $('#FMEA_side').hide()
-                $('#fmea_id').val('');
 
+
+
+                <?php $INDEX++; } ?>
+                $('#equipment_parts_list tbody').find('td:last-child').hide(); //Delete minus button
+                $('#equipment_parts_list tbody tr').find('td:eq(3)').each(function() {
+                    $(this).hide()
+                }) //Delete minus button
+                console.log(JSON.stringify(arr_spare))
+                $('#partinfo').val(JSON.stringify(arr_spare))
+                // $('#partinfo').prop('value',JSON.stringify(arr_spare));
+
+                $('#submitTrouble').click(function() {
+                    $('#partinfo').val(JSON.stringify(arr_spare))
+                }) 
+              
+        <?php
             }
-            if (btn_2.prop('checked')) {
-                $('#FMEA_side').show()
+        }
+        ?>
+    }
 
-            }
-        })
+
+    $('input, select, textarea').on('click', function() {
+        $(this).removeClass('is-invalid')
     })
-</script> -->
+    
+
+
+    document.addEventListener("DOMContentLoaded", DATA.onLoad)
+</script>
+
