@@ -101,7 +101,7 @@
                 break;
         }
 
-        // console.log(a)
+        
 
     }
 
@@ -737,6 +737,14 @@
     $('input').on('click', function name(params) {
         $(this).removeClass('is-invalid')
     })
+// Need to investigate
+    function clearSearchBar() {
+        if ($('#real').hasClass('active')) {
+            get_troubleList()
+        } else {
+            get_troubleList_fmea()
+        }
+    }
 
     function getAllFmeaList() {
         $.ajax({
