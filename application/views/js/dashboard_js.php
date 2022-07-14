@@ -40,15 +40,8 @@
 
         if ($('table').height() <= 190) {
 
-            $('.dataTables_scrollBody').css('height', ($('#main-content').height() - (275*90/100)));
+            $('.dataTables_scrollBody').css('height', ($('#main-content').height() - (275 * 90 / 100)));
             $('.dataTables_scrollBody').css('max-height', $('table tbody').height());
-            
-            
-
-
-            // $('.dataTables_scrollBody, table tbody, #dashboard').css('min-height', 200);
-            // $('#dashboard, #main-content, main').css('min-height', 500);
-
 
         }
 
@@ -70,9 +63,6 @@
 
 
     }
-    // while(true){
-    //     $('table').DataTable().columns.adjust()
-    // }
 
     // Normal button switched for choosing the displayed table, using class to manipulate the colors
     // Switch the button function around for displaying sub table REAL/FMEA
@@ -115,6 +105,7 @@
 
     }
 
+
     // 設備 Table Constructor -> Via ajax dashboard/get_troubleList
     // The search bar is dataTables, work on surface level by hiding loaded element
     function get_troubleList() {
@@ -136,38 +127,63 @@
                         var title = $(this).text().trim();
 
 
-                        if (title == '発生日') //
-                            $('#search-bar').append('<th><input type="date" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
+                        if (title == '発生日時') // For date input type
+                            $('#search-bar').append('<th><input type="date" placeholder="検索 =" class="column_search form-control" id="search-bar-' + title + '" /></th>');
+                        else if (title == '修理時間（分）') // For separating search logic by removing column_search class
+                            $('#search-bar').append('<th><input type="text" placeholder="検索 >=" class="form-control" id="search-bar-time" /></th>');
                         else if (title.length == 0) //no title column for displaying edit buttons
                             $('#search-bar').append('<th class="button_column buttons" style="display:none; width:150px;"></th>');
                         else
-                            $('#search-bar').append('<th><input type="text" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
+                            $('#search-bar').append('<th><input type="text" placeholder="検索 =" class="column_search form-control" id="search-bar-' + title + '" /></th>');
 
                     });
 
                     // DataTable
                     var table = $('#trouble_table').DataTable({
-                        ordering: true,
+
+                        order: [
+                            [0, 'desc']
+                        ],
                         aoColumns: [{
-                                "bSortable": true
+                                bSortable: true,
+                                width: "15%"
                             },
                             {
-                                "bSortable": true
+                                bSortable: true,
+                                width: "7%"
                             },
                             {
-                                "bSortable": true
+                                bSortable: true,
+                                width: "7%"
                             },
                             {
-                                "bSortable": true
+                                bSortable: true,
+                                width: "7%"
                             },
                             {
-                                "bSortable": true
+                                bSortable: true,
+                                width: "7%"
                             },
                             {
-                                "bSortable": false
+                                bSortable: true,
+                                width: "15%"
                             },
-
-
+                            {
+                                bSortable: true,
+                                width: "15%"
+                            },
+                            {
+                                bSortable: true,
+                                width: "7%"
+                            },
+                            {
+                                bSortable: true,
+                                width: "7%"
+                            },
+                            {
+                                bSortable: false,
+                                width: "10%"
+                            },
 
                         ],
                         info: false,
@@ -175,33 +191,13 @@
                         paging: false,
                         scrollResize: true,
                         orderCellsTop: false,
-                        // fixedHeader: true,
-                        scrollY: ($('#main-content').height() - (275*90/100)),
+                        scrollY: ($('#main-content').height() - (275 * 90 / 100)),
 
                         scrollCollapse: true,
                         dom: 'lrt',
                         "language": {
                             "zeroRecords": "該当する記録は見つかりません",
                         },
-                        // columnDefs: [{
-                        //     targets: [2, 3],
-                        //     render: function(data, type, row) {
-                        //         return type === 'display' && data.length > 5 ?
-                        //             data.substr(0, 10) + '...' :
-                        //             data;
-                        //     }
-                        // }],
-                        // columns: [{
-                        //         width: "90"
-                        //     },
-                        //     null,
-                        //     null,
-                        //     null,
-                        //     {
-                        //         width: "90"
-                        //     },
-                        //     null,
-                        // ]
 
                     });
 
@@ -213,12 +209,34 @@
                             .search(this.value)
                             .draw();
                         $('#amount-sum').html($('.data-row').not(':hidden').length);
+
+                    });
+                    $('#search-bar-time').on('keyup change', function() {
+                        table.draw();
+                        $('#amount-sum').html($('.data-row').not(':hidden').length);
                     });
 
                 });
             }
         });
     }
+
+    // Special search logic to show all data that greater than inputed value for 修理時間（分
+    $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+        var value = $('#search-bar-time').val().replace(
+            /[\uff01-\uff5e]/g,
+            function(ch) {
+                return String.fromCharCode(ch.charCodeAt(0) - 0xfee0);
+            }
+        );
+        var time = parseInt(data[1]);
+
+        if (isNaN(value) || time >= value) {
+            return true;
+        } else {
+            return false;
+        }
+    });
 
     // 設備 Table Constructor -> Via ajax dashboard/get_troubleList
     // The search bar is dataTables, work on surface level by hiding loaded element
@@ -253,7 +271,7 @@
                         if (title.length == 0)
                             $('#search-bar').append('<th class="button_column buttons" style="display:none;width:150px; max-width:150px;"></th>');
                         else
-                            $('#search-bar').append('<th><input type="text" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
+                            $('#search-bar').append('<th><input type="text" placeholder="検索 =" class="column_search form-control" id="search-bar-' + title + '" /></th>');
 
                     });
 
@@ -261,20 +279,20 @@
                     var table = $('#trouble_fmea_table').DataTable({
                         ordering: true,
                         aoColumns: [{
-                                "bSortable": true
+                                bSortable: true
                             },
                             {
-                                "bSortable": true
+                                bSortable: true
                             },
                             {
-                                "bSortable": true
+                                bSortable: true
                             },
                             {
-                                "bSortable": true
+                                bSortable: true
                             },
 
                             {
-                                "bSortable": false
+                                bSortable: false
                             },
                         ],
                         info: false,
@@ -283,7 +301,7 @@
                         orderCellsTop: false,
                         fixedHeader: true,
                         scrollResize: true,
-                        scrollY: ($('#main-content').height() - (275*90/100)),
+                        scrollY: ($('#main-content').height() - (275 * 90 / 100)),
                         scrollCollapse: true,
                         dom: 'lrt',
                         "language": {
@@ -330,7 +348,7 @@
 
 
 
-                $('#search-bar-spare').append('<th colspan="10" class=" pe-3"><input class="form-control border-primary color-primary" type="text" id="search-bar" placeholder="Search"></th>');
+                $('#search-bar-spare').append('<th colspan="10" class=" pe-3"><input class="form-control border-primary color-primary" type="text" id="search-bar" placeholder="検索 ="></th>');
 
 
 
@@ -340,37 +358,37 @@
                 var table = $('#gen_table').DataTable({
                     ordering: true,
                     aoColumns: [{
-                            "bSortable": false
+                            bSortable: false
                         },
                         {
-                            "bSortable": true
+                            bSortable: true
                         },
                         {
-                            "bSortable": true
+                            bSortable: true
                         },
                         {
-                            "bSortable": true
+                            bSortable: true
                         },
                         {
-                            "bSortable": true
+                            bSortable: true
                         },
                         {
-                            "bSortable": true
+                            bSortable: true
                         },
                         {
-                            "bSortable": true
+                            bSortable: true
                         },
                         {
-                            "bSortable": true
+                            bSortable: true
                         },
                         {
-                            "bSortable": true
+                            bSortable: true
                         },
                         {
-                            "bSortable": true
+                            bSortable: true
                         },
                         {
-                            "bSortable": false
+                            bSortable: false
                         },
 
                     ],
@@ -379,20 +397,13 @@
                     paging: false,
                     dom: 'lrt',
                     scrollResize: true,
-                    scrollY: ($('#main-content').height() - (275*90/100)),
-                    
+                    scrollY: ($('#main-content').height() - (275 * 90 / 100)),
+
                     scrollCollapse: true,
                     "language": {
                         "zeroRecords": "該当する記録は見つかりません",
                     },
-                    // columnDefs: [{
-                    //     targets: [1, 2],
-                    //     render: function(data, type, row) {
-                    //         return type === 'display' && data.length > 5 ?
-                    //             data.substr(0, 10) + '...' :
-                    //             data;
-                    //     }
-                    // }]
+
                 });
 
                 // INCASE YOU NEED TO DISABLE THE BUTTON ON 0 AMOUNT
@@ -482,7 +493,7 @@
                 if (response.trim() === 'true') {
 
                     var conf = swal({
-                            title: "数量を0にしますか？",
+                            title: "数量を 0 にしますか？",
                             icon: "warning",
                             buttons: true,
                             dangerMode: true,
@@ -491,7 +502,7 @@
                             if (willDelete) {
                                 swal({
                                     // button: false,
-                                    title: "数量が0になります",
+                                    title: "数量が 0 になります",
                                     icon: "success",
                                 });
                                 $.ajax({
@@ -506,7 +517,7 @@
                         });
 
 
-                } else {
+                    } else {
                     // Delete data from table
                     var conf = swal({
                             title: "データを削除しますか？",
