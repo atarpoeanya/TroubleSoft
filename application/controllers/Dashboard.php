@@ -35,15 +35,19 @@ class Dashboard extends CI_Controller
             'CANCEL_BUTTON'                         =>  'キャンセル',
             'SUBMIT_BUTTON'                         =>  '登録',
             'UPDATE_BUTTON'                         =>  '変更',
+            'MODIFY_BUTTON'                         =>  '修正',
             'DELETE_BUTTON'                         =>  '削除',
             'BACK_BUTTON'                           =>  '戻る',
+            'CLEAR_BUTTON'                          =>  '検索条件クリア',
 
-            'INSERT_BUTTON_TROUBLE'                 =>  '新規',
-            'INSERT_BUTTON_SPARE'                   =>  '新規',
+            'INSERT_BUTTON_TROUBLE'                 =>  '新規登録',
+            'INSERT_BUTTON_SPARE'                   =>  '新規登録',
             'SPARE_LIST_BUTTON'                     =>  '予備品リスト',
 
             'NEW_TROUBLE_BUTTON'                    =>  'NEW_TROUBLE',
             'NEW_SPARE_BUTTON'                      =>  'NEW_SPARE',
+
+            'EQUIPMENT_FMEA_LIST_BUTTON'            =>  'FMEA一覧表',
 
 
             // Dashboard 
@@ -190,7 +194,7 @@ class Dashboard extends CI_Controller
         $data = $this->data;
         $data['troubleList'] = $this->Troublelist_model->get_tool_trouble_list();
         $data['title'] = [
-            '発生日', '設備', '工程', '故障モード',   '担当者'
+            '発生日時', '修理時間（分）', '部署', '設備', '設備No.', '工程', '故障モード', '担当者', 'FMEA'
         ];
         $this->load->view('function/print_table_trouble', $data);
         f_generate_table_select($data);
