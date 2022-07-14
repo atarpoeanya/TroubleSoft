@@ -20,14 +20,14 @@
                     </div>
 
 
-                    <a href="<?= base_url(); ?>dashboard/all_fmea_list" id="fmea-s" class="btn btn-primary">FMEA一覧表</a>
+                    <a href="<?= base_url(); ?>dashboard/all_fmea_list" id="fmea-s" class="btn btn-primary"><?= $this->data['EQUIPMENT_FMEA_LIST_BUTTON'] ?></a>
                 </div>
                 <div class="col-3">
 
-                    <div class="d-flex justify-content-end">
-                        <a href="<?= base_url() ?>equipment" class="me-1 btn btn-success text-nowrap" id="new_trouble"><?= $this->data['INSERT_BUTTON_TROUBLE'] ?></a>
+                    <div class="d-flex justify-content-end btn-group-a">
+                        <a href="<?= base_url() ?>equipment" class="me-2 btn btn-success text-nowrap" id="new_trouble"><?= $this->data['INSERT_BUTTON_TROUBLE'] ?></a>
 
-                        <button class="me-1 btn btn-success text-nowrap" id="new_spareparts" onclick="" data-bs-toggle="modal" data-bs-target="#addPartsModal" style="display: none;"><?= $this->data['INSERT_BUTTON_SPARE'] ?></button>
+                        <button class="me-2 btn btn-success text-nowrap" id="new_spareparts" onclick="" data-bs-toggle="modal" data-bs-target="#addPartsModal" style="display: none;"><?= $this->data['INSERT_BUTTON_SPARE'] ?></button>
 
                         <button onclick="show_button()" class=" btn btn-primary text-nowrap" id="update_trouble"><?= $this->data['UPDATE_BUTTON'] ?></button>
                     </div>
@@ -67,6 +67,7 @@
         .switch-field a {
             padding-left: 2rem;
             padding-right: 2rem;
+            min-width: 130px;
 
         }
 
@@ -75,12 +76,17 @@
             padding: 0;
             padding-top: 2px;
             height: 30px;
+            min-width: 130px;
         }
 
         .btn.active {
             background-color: #1B3384;
             color: white;
             box-shadow: 4px 0px 8px -1px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-group-a > button {
+            min-width: 90px;
         }
 
         .btn-outline-secondary:not(.active):hover {
