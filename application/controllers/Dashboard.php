@@ -30,6 +30,9 @@ class Dashboard extends CI_Controller
         // $this->lang->load('information', 'japanese'); //If lang become available you can use this instead of the array labels.
 
         // this array labels
+
+        date_default_timezone_set("Asia/Tokyo");
+        
         $this->data = array(
             // Buttons [
             'CANCEL_BUTTON'                         =>  'キャンセル',

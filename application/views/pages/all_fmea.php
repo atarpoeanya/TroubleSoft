@@ -5,7 +5,7 @@
     </div> -->
 
 </nav>
-    <div class="col-8 m-auto kanjifont">
+    <div class="col-8 m-auto kanjifont select-bar">
         <label for="busho_fmea">
             <h5>部署名</h5>
         </label>
@@ -26,3 +26,13 @@
 
     </div>
 </div>
+
+<script>
+    window.addEventListener('beforeprint', (event) => {
+        $('header, nav, .select-bar').hide();
+    });
+    window.addEventListener('afterprint', (event) => {
+        $('header, nav, .select-bar').show();
+        getAllFmeaList();
+    });
+</script>

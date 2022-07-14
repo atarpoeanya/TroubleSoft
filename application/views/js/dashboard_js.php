@@ -48,7 +48,7 @@
     })
 
 
-    // 更新 Button toggle
+    // 変更 Button toggle
     // Also work as colum resizing,
     //PROBLEM: the table head for button parts on table dashboard wont resize when toggled (appear) but will resize when the button inside it is clicked.
     //Might be because DataTable (Smiliar issue with table resize)
@@ -60,6 +60,11 @@
         //Refer to https://datatables.net/forums/discussion/66154/how-to-fix-column-adjustment-of-hidden-table-after-showing-it
         $('table').DataTable().columns.adjust()
         $('table').DataTable().columns.adjust()
+        
+        if($('th button_column').not(':visible'))
+        $('.dataTables_empty').attr('colspan', function(i, rs){return (parseInt(rs) + 1);})
+        if($('th button_column:visible'))
+        $('.dataTables_empty').attr('colspan', function(i, rs){return (parseInt(rs) - 1);})
 
 
     }
@@ -191,6 +196,7 @@
                         paging: false,
                         scrollResize: true,
                         orderCellsTop: false,
+                        fixedHeader: true,
                         scrollY: ($('#main-content').height() - (275 * 90 / 100)),
 
                         scrollCollapse: true,
