@@ -1,12 +1,4 @@
-<?php
-if ($this->session->flashdata('error') != '')
-    // var_dump($temp_spare);
 
-
-// echo $this->session->flashdata('error')
-// echo preg_replace($this->session->flashdata('error'),'',"/[^0-9.]/g")
-
-?>
 <div id="main_body" class="pt-3">
     <div class="row">
         <!-- Main-Form -->
@@ -246,6 +238,7 @@ if ($this->session->flashdata('error') != '')
             </div>
         </div>
     </div>
+    <button id="test_button" class="btn btn-primary">TEST</button>
 </div>
 
 
@@ -269,56 +262,7 @@ if ($this->session->flashdata('error') != '')
 </style>
 
 <script>
-    const DATA = {};
-
-    // Making sure the first seen table get loaded first.
-    DATA.onLoad = function() {
-        <?php if ($this->session->flashdata('error') != '') {
-            if ($this->session->flashdata('part_info') != '') {
-                
-        ?>
-                var arr_spare = JSON.parse('<?php echo $this->session->flashdata('part_info')?>')
-
-                $('#equipment_parts_list tbody tr').remove()
-                $('.emptyTab').hide()
-                <?php 
-                $INDEX = 0;
-                foreach ($temp_spare as $item) { ?>
-                    if (<?= $item->c_t202_id ?> == arr_spare[<?=$INDEX?>][0]) {
-                        
-                    }
-                    $('#equipment_parts_list tbody').append($('#foots tr')).append('<tr class="' + <?= $item->c_t202_id ?> + '"> <td>' + <?= $item->c_t202_id ?> + '</td> <td>' + "<?= $item->c_partName ?>" + '</td> <td>' + "<?= $item->c_model ?>" + '</td><td></td> <td>' + arr_spare[<?=$INDEX?>][1] + '</td> <td><a class="btn btn-primary minus">DELETE</a> </td></tr>')
-
-
-
-
-
-                <?php $INDEX++; } ?>
-                $('#equipment_parts_list tbody').find('td:last-child').hide(); //Delete minus button
-                $('#equipment_parts_list tbody tr').find('td:eq(3)').each(function() {
-                    $(this).hide()
-                }) //Delete minus button
-                console.log(JSON.stringify(arr_spare))
-                $('#partinfo').val(JSON.stringify(arr_spare))
-                // $('#partinfo').prop('value',JSON.stringify(arr_spare));
-
-                $('#submitTrouble').click(function() {
-                    $('#partinfo').val(JSON.stringify(arr_spare))
-                }) 
-              
-        <?php
-            }
-        }
-        ?>
-    }
-
-
-    $('input, select, textarea').on('click', function() {
+    $('input, textarea, select').on('click', function name(params) {
         $(this).removeClass('is-invalid')
     })
-    
-
-
-    document.addEventListener("DOMContentLoaded", DATA.onLoad)
 </script>
-

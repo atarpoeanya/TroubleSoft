@@ -386,9 +386,11 @@ class Dashboard extends CI_Controller
                 );
                 $this->session->set_flashdata($savedata);
 
-                if(strlen($savedata['part_info']) > 0)
-                $data['temp_spare'] = $this->Troublelist_model
-                                           ->get_spareparts_list();
+                if(!empty($savedata['part_info'])) {
+
+                    $data['temp_spare'] = $this->Troublelist_model
+                                                ->get_spareparts_list();
+                }
 
 
                 $this->load->view('templates/header');

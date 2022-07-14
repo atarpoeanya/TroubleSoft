@@ -9,8 +9,34 @@
 
     {
         $(document).ready(function() {
+
             var btn_1 = $('#btnradio1')
             var btn_2 = $('#btnradio2')
+
+
+            <?php if ($this->session->flashdata('error') != '')
+                if ($this->session->flashdata('fmea_id') != '') {
+            ?>
+                btn_2.prop('checked', true);
+                let $id = '<?= $this->session->flashdata('fmea_id') ?>';
+
+
+                $.ajax({
+                    url: "<?= base_url(); ?>dashboard/fmea_tool_print/" + $id,
+
+                    success: function(response) {
+                        $("#fmea_place").html(response);
+                        $('#fmea_id').val($id)
+
+
+
+
+                    },
+
+                })
+            <?php } ?>
+
+
 
             if (btn_1.prop('checked')) {
                 $('#FMEA_side').hide()
@@ -33,7 +59,52 @@
                 }
             })
 
-           
+            // For validation purposes
+            <?php if ($this->session->flashdata('error') != '') {
+                if ($this->session->flashdata('part_info') != '') {
+
+            ?>
+                    // Grab data from flash session data (set in the controller)
+                    $arr_spare = JSON.parse('<?= $this->session->flashdata('part_info') ?>');
+
+                    $('#equipment_parts_list tbody tr').remove()
+                    $('.emptyTab').hide()
+
+                    <?php
+
+                    $INDEX = 0;
+                    foreach ($temp_spare as $item) { ?>
+                        if (<?= $item->c_t202_id ?> == $arr_spare[<?= $INDEX ?>][0]) {
+
+                            $('#equipment_parts_list tbody').append($('#foots tr')).append('<tr class="' + <?= $item->c_t202_id ?> + '"> <td>' + <?= $item->c_t202_id ?> + '</td> <td>' + "<?= $item->c_partName ?>" + '</td> <td>' + "<?= $item->c_model ?>" + '</td><td></td> <td>' + $arr_spare[<?= $INDEX ?>][1] + '</td> <td><a class="btn btn-primary minus">DELETE</a> </td></tr>')
+                        }
+
+
+
+
+
+                    <?php $INDEX++;
+                    } ?>
+                    $('#equipment_parts_list tbody').find('td:last-child').hide(); //Hide minus button
+                    $('#equipment_parts_list tbody tr').find('td:eq(3)').each(function() {
+                        $(this).hide()
+                    }) //hide empty cell 
+
+                    // Input field need to be loaded for .val to work
+                    // Tried on document.ready but value doesnt update
+                    $('#partinfo').load('equipmentForm.php', function() {
+
+                        $('#partinfo').val(JSON.stringify($arr_spare))
+                    })
+
+
+            <?php
+                }
+            }
+            ?>
+
+
+
         })
     }
 
@@ -134,8 +205,8 @@
             }
 
             $('#equipment_parts_list tbody').append($('#foots tr'))
-            
-            
+
+
             $('#equipment_parts_list tbody').find('td:last-child').hide(); //Delete minus button
             $('#equipment_parts_list tbody tr').find('td:eq(3)').each(function() {
                 $(this).hide()
@@ -149,7 +220,12 @@
                     $arr.push([$(this).find('td:eq(0)').text().trim(), $(this).find('td:eq(4)').text().trim()])
                 })
 
-                $('#partinfo').val(JSON.stringify($arr));
+                // console.log($arr)
+
+                $('#partinfo').val(function(index, value) {
+                    // console.log(typeof JSON.stringify($arr));
+                    return JSON.stringify($arr);
+                });
             }
             //ELSE SEND EMPTY STATEMENT
             else {
@@ -174,10 +250,10 @@
     }
 
     //FORM Validation
-    
+
     {
         //Repopulate part info
-        
+
     }
 
 
