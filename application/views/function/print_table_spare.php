@@ -51,16 +51,15 @@ function f_generate_table_select($data)
 ?>
 
     <div class="table-responsive table-wrapper border">
-        <div class="d-flex p-2 border-bottom">件数:&nbsp; <div id="amount-sum"><b><?= count($data['sparePart']) ?></b></div>
+    <div class="d-flex p-2 border-bottom">
+            <div class="my-auto">件数 :&nbsp;</div>
+            <div class="my-auto" id="amount-sum"><b><?= count($data['sparePart']) ?></b></div>
         </div>
 
 
         <table class="table table-striped table-hover text-nowrap" id="gen_table">
             <thead>
                 <tr id="search-bar-spare">
-                    <!-- <div class="border-bottom p-3">
-                        <input class="form-control" type="text" id="search-bar" placeholder="Search">
-                    </div> -->
                 </tr>
                 <tr class="border-bottom border-dark">
                     <?php
@@ -119,6 +118,7 @@ function f_generate_table_select($data)
                         ?>
                         <td class=" table-data text-center align-middle pointer col-md-2 button_column text-nowrap" style="display: none;max-width:150px;width:150px;">
                             <a class="btn-block btn btn-primary modify-button" onclick="editSpare_populate(this)"><?= $data['UPDATE_BUTTON'] ?></a>
+                            
                             <a class="btn-block btn btn-danger modify-button delete" onclick="event.cancelBubble=true; deleteData_sparepart(<?= $item->c_t202_id ?>)"><?= $data['DELETE_BUTTON'] ?></a>
                         </td>
 
