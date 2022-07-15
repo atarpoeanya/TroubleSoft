@@ -7,6 +7,8 @@
 
         <?php if ($this->session->flashdata('crumbs') == 0) { ?>
             get_troubleList();
+            adjust_table();
+
             $("#real").addClass('active');
             $("#real").removeClass('bg-white')
             $("#fmea-s").removeClass('active')
@@ -14,7 +16,9 @@
         <?php
         } else {
         ?>
-            get_troubleList_fmea()
+            get_troubleList_fmea();
+            adjust_table();
+
             $("#fmea-s").addClass('active')
             $("#real").removeClass('active');
             $("#fmea-s").removeClass('bg-white')
@@ -36,7 +40,8 @@
 
     $(window).resize(function() {
         // $(window).scrollTop($('#dashboard').height());
-        $('table').DataTable().columns.adjust();
+        // $('table').DataTable().columns.adjust();
+        adjust_table();
 
         if ($('table').height() <= 190) {
 
@@ -58,13 +63,18 @@
         $('.dataTables_scrollBody').scrollLeft(300)
         // Need to call twice because some weird bootstraps datatable interaction
         //Refer to https://datatables.net/forums/discussion/66154/how-to-fix-column-adjustment-of-hidden-table-after-showing-it
-        $('table').DataTable().columns.adjust()
-        $('table').DataTable().columns.adjust()
-        
-        if($('th button_column').not(':visible'))
-        $('.dataTables_empty').attr('colspan', function(i, rs){return (parseInt(rs) + 1);})
-        if($('th button_column:visible'))
-        $('.dataTables_empty').attr('colspan', function(i, rs){return (parseInt(rs) - 1);})
+        // $('table').DataTable().columns.adjust()
+        // $('table').DataTable().columns.adjust()
+        adjust_table();
+
+        if ($('th button_column').not(':visible'))
+            $('.dataTables_empty').attr('colspan', function(i, rs) {
+                return (parseInt(rs) + 1);
+            })
+        if ($('th button_column:visible'))
+            $('.dataTables_empty').attr('colspan', function(i, rs) {
+                return (parseInt(rs) - 1);
+            })
 
 
     }
@@ -79,6 +89,7 @@
         switch (a) {
             case '設備':
                 get_troubleList();
+
                 $("#real, #fmea-s").show()
 
                 $("#real").attr("onclick", "buttonSwitch(this);get_troubleList()");
@@ -94,6 +105,7 @@
                 break;
             case '予備品':
                 get_sparepartlist();
+
                 $("#real, #fmea-s").hide()
 
 
@@ -106,13 +118,21 @@
                 break;
         }
 
-        
 
+
+    }
+
+    function adjust_table() {
+        $('table').DataTable().columns.adjust();
     }
 
 
     // 設備 Table Constructor -> Via ajax dashboard/get_troubleList
     // The search bar is dataTables, work on surface level by hiding loaded element
+
+
+
+
     function get_troubleList() {
         // Toggle Button
         $('#new_spareparts').hide();
@@ -135,7 +155,7 @@
                         if (title == '発生日時') // For date input type
                             $('#search-bar').append('<th><input type="date" placeholder="検索 =" class="column_search form-control" id="search-bar-' + title + '" /></th>');
                         else if (title == '修理時間（分）') // For separating search logic by removing column_search class
-                            $('#search-bar').append('<th><input type="text" placeholder="検索 >=" class="form-control" id="search-bar-time" /></th>');
+                            $('#search-bar').append('<th><input type="number" min="1" pattern="[0-9]*" placeholder="検索 >=" class="form-control" id="search-bar-time" /></th>');
                         else if (title.length == 0) //no title column for displaying edit buttons
                             $('#search-bar').append('<th class="button_column buttons" style="display:none; width:150px;"></th>');
                         else
@@ -207,8 +227,9 @@
 
                     });
 
+
                     // Apply the search
-                    $('#search-bar').on('keyup change', ".column_search", function() {
+                    $('#search-bar').on('input change', ".column_search", function() {
 
                         table
                             .column($(this).parent().index())
@@ -217,32 +238,42 @@
                         $('#amount-sum').html($('.data-row').not(':hidden').length);
 
                     });
-                    $('#search-bar-time').on('keyup change', function() {
+
+
+
+
+
+                    $('#search-bar-time').on('input change', function() {
+                        if(this.value)
+                        $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+                            var value = $('#search-bar-time').val().replace(
+                                /[\uff01-\uff5e]/g,
+                                function(ch) {
+                                    return String.fromCharCode(ch.charCodeAt(0) - 0xfee0);
+                                }
+                            );
+                            var time = parseInt(data[1]);
+
+                            if (isNaN(value) || time >= value) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        });
+
+
                         table.draw();
                         $('#amount-sum').html($('.data-row').not(':hidden').length);
+                        // Special search logic to show all data that greater than inputed value for 修理時間（分
+
                     });
+
 
                 });
             }
         });
     }
 
-    // Special search logic to show all data that greater than inputed value for 修理時間（分
-    $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
-        var value = $('#search-bar-time').val().replace(
-            /[\uff01-\uff5e]/g,
-            function(ch) {
-                return String.fromCharCode(ch.charCodeAt(0) - 0xfee0);
-            }
-        );
-        var time = parseInt(data[1]);
-
-        if (isNaN(value) || time >= value) {
-            return true;
-        } else {
-            return false;
-        }
-    });
 
     // 設備 Table Constructor -> Via ajax dashboard/get_troubleList
     // The search bar is dataTables, work on surface level by hiding loaded element
@@ -317,7 +348,7 @@
                     });
 
                     // Apply the search
-                    $('#search-bar').on('keyup change', ".column_search", function() {
+                    $('#search-bar').on('input change', ".column_search", function() {
 
                         table
                             .column($(this).parent().index())
@@ -420,7 +451,7 @@
                 // })
 
 
-                $('#search-bar').on('keyup change', function() {
+                $('#search-bar').on('input change', function() {
 
                     table
                         .search(this.value)
@@ -432,6 +463,8 @@
 
         });
     }
+
+
 
 
     function deleteData_tool($id) {
@@ -523,7 +556,7 @@
                         });
 
 
-                    } else {
+                } else {
                     // Delete data from table
                     var conf = swal({
                             title: "データを削除しますか？",
@@ -743,7 +776,7 @@
     $('input').on('click', function name(params) {
         $(this).removeClass('is-invalid')
     })
-// Need to investigate
+    // Need to investigate
     function clearSearchBar() {
         if ($('#real').hasClass('active')) {
             get_troubleList()

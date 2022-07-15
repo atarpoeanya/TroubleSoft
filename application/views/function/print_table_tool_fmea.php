@@ -88,18 +88,3 @@ function f_generate_table_select($data)
     }
 </style>
 
-<!-- <th class=" table-head text-center border-end text-nowrap ">
-<?= $data['title'][0] ?>
-                    </th>
-                    <th class=" table-head text-center border-end text-nowrap ">
-                        <?= $data['title'][1] ?>
-                    </th>
-                    <th class=" table-head text-center border-end text-nowrap ">
-                        <?= $data['title'][2] ?>
-                    </th>
-                    <th class=" table-head text-center border-end text-nowrap " style="max-width:90px;">
-                        <?= $data['title'][3] ?>
-                    </th>
-
-                    <th class="button_column buttons text-center border-start border-end" style="display:none;max-width:150px;width: 150px;"></th>
-                </tr> -->

@@ -7,80 +7,63 @@ function f_generate_table_select($data)
     <div class="">
 
         <table class="table table-striped table-hover" id="trouble_fmea_table_lite">
-            <thead>
+            <thead class="table-light">
+                <tr id="search-bar"></tr>
                 <tr>
+                    <th class=" table-head text-center ID" hidden>
+                    </th>
                     <?php
                     foreach ($data['title'] as $thead) {
 
-                        if ($thead == 'c_processName'  || $thead == 'c_failMode' || $thead == 'c_accidentDate') {
-                            switch ($thead) {
-                                case 'c_processName':
-                                    $thead = '工程名・工程機能';
-                                    break;
-                                case 'c_failMode':
-                                    $thead = '故障モード';
-                                    break;
-                                case 'c_accidentDate':
-                                    $thead = '設備名';
-                                    break;
-                                default:
-                                    // $thead = 'missing';
-                                    break;
-                            }
-
                     ?>
-                            <th class=" table-head text-center border-right border-left"><?= $thead ?></th>
+                        <th class=" table-head text-center "><?= $thead ?></th>
 
                     <?php
-                        }
+
                     }
                     ?>
-                    <th class=" table-head text-center border-right border-left">
-                        ID
-                    </th>
-                    <th class="button_column buttons"></th>
-                    
+
+                    <th class="button_column buttons table-head text-center border-end table-light;"></th>
+
                 </tr>
-                <tr id="search-bar"></tr>
+
             </thead>
-            
-                <tbody >
-                    
-                    <?php
+
+            <tbody>
+
+                <?php
 
 
-                    foreach ($data['tool_Fmea'] as $item) {
+                foreach ($data['tool_Fmea'] as $item) {
 
-                    ?>
-                        <tr>
-                            <td class=" table-data text-center align-middle border-right border-left pointer col"> 
-                                <?= $item->c_facility ?>
-                            </td>
-                            <td class=" table-data text-center align-middle border-right border-left pointer col">
-                                <?= $item->c_processName ?>
-                            </td>
-                            <td class=" table-data text-center align-middle border-right border-left pointer col">
-                                <?= $item->c_failMode ?>
-                            </td>
-                            <td class=" table-data text-center align-middle border-right border-left pointer col ID">
-                                <?= $item->c_t203_id ?>
-                            </td>
-                            <td class=" table-data text-center align-middle border-right border-left pointer col button_column text-nowrap">
-                                <a class="btn btn-primary buttons" data-bs-dismiss="modal"><?= $data['SUBMIT_BUTTON'] ?></a>
-                            </td>
+                ?>
+                    <tr>
+                        <td class=" table-data text-center align-middle  pointer col ID" hidden>
+                            <?= $item->c_t203_id ?>
+                        </td>
 
-                        </tr>
-                    <?php
-                    }
-                    ?>
-                </tbody>
-            
+                        <td class=" table-data text-center align-middle  pointer col">
+                            <?= $item->c_facility ?>
+                        </td>
+                        <td class=" table-data text-center align-middle  pointer col">
+                            <?= $item->c_processName ?>
+                        </td>
+                        <td class=" table-data text-center align-middle  pointer col">
+                            <?= $item->c_failMode ?>
+                        </td>
+
+                        <td class=" table-data text-center align-middle  pointer col button_column text-nowrap">
+                            <a class="btn btn-primary buttons" data-bs-dismiss="modal"><?= $data['SUBMIT_BUTTON'] ?></a>
+                        </td>
+
+                    </tr>
+                <?php
+                }
+                ?>
+            </tbody>
+
         </table>
     </div>
-
-    <?php
-    // } if($data == 'y') {
-    ?>
 
 <?php
     // }
@@ -117,21 +100,21 @@ function f_generate_table_select($data)
 </style>
 
 <script>
-   $('.buttons').on('click', function() {
-            $id = $(this).parent().siblings('.ID').html().trim()
+    $('.buttons').on('click', function() {
+        $id = $(this).parent().siblings('.ID').html().trim()
 
-            $.ajax({
-                url: "<?= base_url(); ?>dashboard/fmea_tool_print/" + $id,
+        $.ajax({
+            url: "<?= base_url(); ?>dashboard/fmea_tool_print/" + $id,
 
-                success: function(response) {
-                    $("#fmea_place").html(response);
-                    $('#fmea_id').val($id)
-
-
+            success: function(response) {
+                $("#fmea_place").html(response);
+                $('#fmea_id').val($id)
 
 
-                },
 
-            })
+
+            },
+
         })
+    })
 </script>

@@ -13,8 +13,8 @@
                     <label for="departement_select" class="col-form-label">部署</label>
                     <select class="form-control" name="" id="departement_select">
                         <option value="" selected>全て</option>
-                        <option value="1" >1</option>
-                        <option value="2" >2</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
                     </select>
 
 
@@ -48,14 +48,15 @@
 
                 $(document).ready(function() {
                     // Setup - add a text input to each cell
-                    $('#trouble_fmea_table_lite thead tr:eq(0) th').each(function() {
+                    $('#trouble_fmea_table_lite thead tr:eq(1) th').each(function() {
                         var title = $(this).text().trim();
+                        console.log($(this).hasClass('button_column'))
 
 
-                        if (title == '発生日')
-                            $('#search-bar').append('<th><input type="date" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
-                        else if (title.length == 0 )
-                            $('#search-bar').append('<th></th>');
+                        if (title.length == 0 && $(this).hasClass('ID'))
+                            $('#search-bar').append('<th style="display:none;></th>');
+                        else if(title.length == 0 && $(this).hasClass('button_column'))
+                        $('#search-bar').append('<th class="table-light"></th>');
                         else
                             $('#search-bar').append('<th><input type="text" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
 
@@ -63,9 +64,9 @@
 
                     // DataTable
                     var table = $('#trouble_fmea_table_lite').DataTable({
-                        ordering: true,
+                        order: [0, 'desc'],
                         aoColumns: [{
-                                "bSortable": true
+                                "bSortable": false
                             },
                             {
                                 "bSortable": true
@@ -84,7 +85,7 @@
                         info: false,
                         // searching:false,
                         paging: false,
-                        orderCellsTop: true,
+                        orderCellsTop: false,
                         fixedHeader: true,
                         pageLength: 100,
                         dom: 't',
@@ -102,7 +103,7 @@
                             .draw();
                     });
 
-                    $('#departement_select').on('change', function () {
+                    $('#departement_select').on('change', function() {
                         table.column($('#department_ref').index()).search($(this).val()).draw();
                     })
 
