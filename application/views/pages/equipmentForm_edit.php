@@ -294,3 +294,9 @@
 
     }
 </style>
+
+<script>
+    $('input, textarea, select').on('click', function() {
+        $(this).removeClass('is-invalid')
+    })
+</script>

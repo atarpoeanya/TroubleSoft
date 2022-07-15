@@ -239,27 +239,32 @@
 
                     });
 
-
+                    // Only permits number [0-9] and backspace/delete
+                    // Not arrow key, shift, ctrl, alphabet
+                    $('#search-bar-time').on('keydown', function() {
+                        return (event.keyCode >= 48 && event.keyCode <= 57) ||
+                            event.keyCode == 8 || event.keyCode == 46 
+                    })
 
 
 
                     $('#search-bar-time').on('input change', function() {
-                        if(this.value)
-                        $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
-                            var value = $('#search-bar-time').val().replace(
-                                /[\uff01-\uff5e]/g,
-                                function(ch) {
-                                    return String.fromCharCode(ch.charCodeAt(0) - 0xfee0);
-                                }
-                            );
-                            var time = parseInt(data[1]);
+                        if (this.value)
+                            $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+                                var value = $('#search-bar-time').val().replace(
+                                    /[\uff01-\uff5e]/g,
+                                    function(ch) {
+                                        return String.fromCharCode(ch.charCodeAt(0) - 0xfee0);
+                                    }
+                                );
+                                var time = parseInt(data[1]);
 
-                            if (isNaN(value) || time >= value) {
-                                return true;
-                            } else {
-                                return false;
-                            }
-                        });
+                                if (isNaN(value) || time >= value) {
+                                    return true;
+                                } else {
+                                    return false;
+                                }
+                            });
 
 
                         table.draw();

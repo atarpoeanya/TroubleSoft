@@ -274,7 +274,7 @@ class Troublelist_model extends CI_Model
                             $data[] = [
                                 'c_t800_id' => $id,
                                 'c_t202_id' => $value[0],
-                                'c_amount'  => $value[1],                             
+                                'c_amount'  => $value[1],
                             ];
                     }
 
@@ -346,7 +346,7 @@ class Troublelist_model extends CI_Model
                 'c_countermeasure'  => $_file
 
             ];
-        // IF NO FILE
+            // IF NO FILE
         } else {
             $data = [
                 'c_accidentDate'    => $this->input->post('発生日', true),

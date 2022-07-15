@@ -108,7 +108,7 @@
         })
     }
 
-    // FMEA part function toggle, also empties the hidden input for fmea_id
+    //Also work on FMEA_form & Equipment_form
     //From modals/partselect.php
     {
         // var _isInit = 0;
@@ -266,7 +266,7 @@
             if ($('#equipment_parts_list_edit tbody').length > 0) {
                 $arr.length = 0;
                 $('#equipment_parts_list_edit tbody').find('tr').each(function() {
-                    $arr.push([$(this).find('td:eq(0)').text().trim(), $(this).find('td:eq(3)').text().trim(), $(this).find('td:eq(3)').text().trim(), 'exist'])
+                    $arr.push([$(this).find('td:eq(0)').text().trim(), $(this).find('td:eq(4)').text().trim(), $(this).find('td:eq(4)').text().trim(), 'exist'])
                 })
 
                 $('#partinfo').val(JSON.stringify($arr));
@@ -281,7 +281,7 @@
     }
 
     // ========== EQUIPMENT FMEA=========
-    //None
+    {}
 
     // ============== EQUIPMENT FMEA EDIT ============
     //None

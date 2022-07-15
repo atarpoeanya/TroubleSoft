@@ -360,6 +360,7 @@ class Dashboard extends CI_Controller
 
         if ($id == 1) {
 
+            $this->session->set_flashdata('crumbs', '0');
 
             $this->form_validation->set_rules('発生日', '1', 'required');
             $this->form_validation->set_rules('修理日', '2', 'required');
@@ -393,10 +394,10 @@ class Dashboard extends CI_Controller
                 );
                 $this->session->set_flashdata($savedata);
 
-                if(!empty($savedata['part_info'])) {
+                if (!empty($savedata['part_info'])) {
 
                     $data['temp_spare'] = $this->Troublelist_model
-                                                ->get_spareparts_list();
+                        ->get_spareparts_list();
                 }
 
 
@@ -412,7 +413,6 @@ class Dashboard extends CI_Controller
             } else {
                 $pic = $this->do_upload();
                 $this->Troublelist_model->add_data_tool($pic);
-                $this->session->set_flashdata('crumbs', '0');
                 redirect(base_url(), '/');
             }
         }
@@ -422,10 +422,55 @@ class Dashboard extends CI_Controller
 
 
         if ($id == 2) { //FMEA
-
-            $this->Troublelist_model->add_data_tool_fmea();
             $this->session->set_flashdata('crumbs', '1');
-            redirect(base_url(), '/');
+
+            $this->form_validation->set_rules('部署', '1', 'required|callback_check_default');
+            $this->form_validation->set_rules('設備', '2', 'required|callback_check_default');
+            $this->form_validation->set_rules('号機', '3', 'required|callback_check_default');
+            $this->form_validation->set_rules('工程名', '4', 'required');
+            $this->form_validation->set_rules('故障モード', '5', 'required');
+            $this->form_validation->set_rules('fail_mech', '6', 'required');
+            $this->form_validation->set_rules('故障の影響', '7', 'required');
+            $this->form_validation->set_rules('ライン停止の可能性', '8', 'required');
+            $this->form_validation->set_rules('特殊特性等', '9', 'required');
+            $this->form_validation->set_rules('担当者日', '10', 'required|callback_check_default');
+            $this->form_validation->set_rules('周期', '11', 'required');
+            $this->form_validation->set_rules('月', '12', 'required');
+            $this->form_validation->set_rules('予防', '13', 'required');
+            $this->form_validation->set_rules('検出', '14', 'required');
+            $this->form_validation->set_rules('対策案', '15', 'required');
+            $this->form_validation->set_rules('対策', '16', 'required');
+
+            if ($this->form_validation->run() == FALSE) {
+                //For data that need to be manually re-populated
+                //Spareparts & fmea
+                $savedata = array(
+                    'error'         =>  validation_errors(),
+                    'part_info'     =>  $this->input->post('spareParts', true)
+
+                );
+                $this->session->set_flashdata($savedata);
+
+                if (!empty($savedata['part_info'])) {
+
+                    $data['temp_spare'] = $this->Troublelist_model
+                        ->get_spareparts_list();
+                }
+
+
+                $this->load->view('templates/header');
+                $this->load->view('Pages/equipmentFmea', $data);
+                $this->load->view('templates/footer');
+
+                // modal
+                $this->load->view('modals/partsSelect');
+                //js
+                $this->load->view('js/form_js.php');
+            } else {
+                $this->Troublelist_model->add_data_tool_fmea();
+
+                redirect(base_url(), '/');
+            }
         }
 
         // Invoke Part list

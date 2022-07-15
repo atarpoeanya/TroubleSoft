@@ -1,10 +1,13 @@
-<div class=" pt-3" id="mainForm" >
+<?php
+ print_r($this->session->flashdata());
+?>
+<div class=" pt-3" id="mainForm">
     <div class="row">
         <div class="col">
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title">FMEA FORM</h2>
-                    <form action="/equipment_fmea/2" method="post" class="mt-4 p-4 col mainForm" autocomplete="off" id="equipForm" enctype="multipart/form-data">
+                    <form action="/equipment_fmea/2" method="post" class="mt-4 p-4 col mainForm" autocomplete="off" id="equipForm" enctype="multipart/form-data" novalidate>
                         <!-- For Spare part [Id, Amount] -->
                         <input type="hidden" name="spareParts" id="partinfo" value="">
 
@@ -39,7 +42,8 @@
                             </div>
                             <div class="col-3 pt-3">
                                 <label for="kouteiNa" class="form-label"><?= $this->data['EQUIPMENT_PROCESS_NAME_F'] ?></label>
-                                <input type="text" class="form-control" name="工程名" id="kouteiNa" required>
+                                <input type="text" name="工程名" id="kouteiNa" class="form-control
+                                <?php if (form_error('工程名')) echo 'is-invalid' ?>" value="<?= set_value('工程名'); ?>" required>
                             </div>
                             <div class="col-3 pt-3">
                                 <label for="mode" class="form-label"><?= $this->data['EQUIPMENT_FAIL_MODE_F'] ?></label>
@@ -176,7 +180,7 @@
         left: 40px;
         background-color: white;
         width: max-content;
-        
+
     }
 
     form .form-control {
@@ -188,5 +192,7 @@
 
 <!-- REMINDIRE TO UNIFY THIS -->
 <script>
-
+    $('input, textarea, select').on('click', function() {
+        $(this).removeClass('is-invalid')
+    })
 </script>
