@@ -161,8 +161,6 @@ class Troublelist_model extends CI_Model
             'c_unit'            => $this->input->post('号機', true),
             'c_processName'     => $this->input->post('工程名', true),
             'c_failMode'        => $this->input->post('故障モード', true),
-            'c_phenomenon'      => $this->input->post('現象', true),
-            'c_repairDet'       => $this->input->post('修理内容', true),
             'c_failMech'        => $this->input->post('fail_mech', true),
             'c_failImpact'      => $this->input->post('故障の影響', true),
             'c_lineEffect'      => $this->input->post('ライン停止の可能性', true),
@@ -173,7 +171,6 @@ class Troublelist_model extends CI_Model
             'c_detection'       => $this->input->post('検出', true),
             'c_counterPlan'     => $this->input->post('対策案', true),
             'c_picSchedule'     => $this->input->post('担当者日程', true),
-            'c_response'        => $this->input->post('対応処置', true),
             'c_measure'         => $this->input->post('対策', true),
         ];
         $this->db->insert('t203_equipment_fmea', $data);

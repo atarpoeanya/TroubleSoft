@@ -32,7 +32,7 @@ class Dashboard extends CI_Controller
         // this array labels
 
         date_default_timezone_set("Asia/Tokyo");
-        
+
         $this->data = array(
             // Buttons [
             'CANCEL_BUTTON'                         =>  'キャンセル',
@@ -90,17 +90,17 @@ class Dashboard extends CI_Controller
             'DEPARTMENT'                            =>  '部署名',
             'PIC'                                   =>  '担当者',
             'FACILITY'                              =>  '設備名',
-            'UNIT'                                  =>  '号機',
+            'UNIT'                                  =>  '設備No.',
             'PROCESS_NAME'                          =>  '工程名',
             'FAIL_MODE'                             =>  '故障モード',
-            'PHENOMENON'                            =>  '現象・発生要因詳細',
-            'REPAIR_DETAIL'                         =>  '修理内容',
-            'RESPONSE'                              =>  '対応・処置',
-            'MECHANISM'                             =>  '故障のメカニズム',
+            'PHENOMENON'                            =>  '発生状況',
+            'REPAIR_DETAIL'                         =>  '発生原因',
+            'RESPONSE'                              =>  '恒久対策',
+            'MECHANISM'                             =>  '暫定対応・処置',
             'COUNTERMEASURES'                       =>  '対策書',
             'SECTION_1'                             =>  '発生状況',
             'SECTION_2'                             =>  '設備情報',
-            'SECTION_3'                             =>  '修理内容',
+            'SECTION_3'                             =>  'トラブル内容',
             'SECTION_3_F'                           =>  '影響',
 
 
@@ -143,7 +143,7 @@ class Dashboard extends CI_Controller
             'MAKER_NAME'                            =>  'メーカー',
             'QUANTITY'                              =>  '数量',
             'PRICE'                                 =>  '単価',
-            'UNIT'                                  =>  '単位',
+            'SPARE_UNIT'                            =>  '単位',
             'STORAGE'                               =>  '保管場所',
             'ARRANGEMENT'                           =>  '手配先',
 

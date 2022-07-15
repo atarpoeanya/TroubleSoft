@@ -5,10 +5,9 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <h2 class="card-title">REAL TROUBLE FORM</h2>
-                    <div class="d-flex flex-column justify-content-between pb-2">
-                        <!-- <label class="form-label" for="fmea-toggle-btn">FMEA</label> -->
-                        <span>FMEA</span>
+                <h2 class="card-title">トラブル報告書 登録</h2>
+                    <span>FMEA</span>
+                    <div class="d-flex justify-content-start pb-2">
 
                         <div class="btn-group" role="group" aria-label="Basic radio toggle button group" id="fmea-toggle-btn">
 
@@ -20,7 +19,7 @@
                         </div>
                     </div>
                     <!-- FORM SECTION -->
-                    <form action="/equipment/1" method="post" class="px-3 col " autocomplete="off" id="equipForm" enctype="multipart/form-data" novalidate>
+                    <form action="<?= base_url() ?>/equipment/1" method="post" class="px-3 col " autocomplete="off" id="equipForm" enctype="multipart/form-data" novalidate>
         
                         <input type="hidden" name="spareParts" id="partinfo" value="">
 
@@ -34,25 +33,41 @@
                             <div class="col-6 pt-3">
 
                                 <label for="start_day" class="form-label"><?= $this->data['ACCIDENT_DATE'] ?></label>
-                                <input id="start_day" name="発生日" type="date" required class="form-control
-                                <?php if (form_error('発生日')) echo 'is-invalid' ?>" value="<?= set_value('発生日'); ?>">
+                                <input id="start_day" name="発生日" type="date" class="form-control
+                                <?php if (form_error('発生日')) echo 'is-invalid' ?>" value="<?= set_value('発生日'); ?>" required>
                             </div>
 
                             <div class="col-6 pt-3">
                                 <label for="repair_day" class="form-label"><?= $this->data['REPAIR_DATE'] ?></label>
-                                <input type="date" id="repair_day" name="修理日" required class="form-control
-                                <?php if (form_error('修理日')) echo 'is-invalid' ?>" value="<?= set_value('修理日'); ?>">
+                                <input type="date" id="repair_day" name="修理日" class="form-control
+                                <?php if (form_error('修理日')) echo 'is-invalid' ?>" value="<?= set_value('修理日'); ?>" required>
                             </div>
 
                             <div class="col-4 pt-3">
                                 <label for="time_start" class="form-label"><?= $this->data['HAPPENING_TIME'] ?></label>
-                                <input type="time" id="time_start" name="time_start" required class="form-control
-                                <?php if (form_error('time_start')) echo 'is-invalid' ?>" value="<?= set_value('time_start'); ?>">
+                                <input type="time" id="time_start" name="time_start"  class="form-control
+                                <?php if (form_error('time_start')) echo 'is-invalid' ?>" value="<?= set_value('time_start'); ?>" required>
+                            </div>
+                            <div class="col-4 pt-3">
+                                <label for="time_end" class="form-label">修理終った時間</label>
+                                <input type="time" id="time_end" name="time_end"  class="form-control
+                                <?php if (form_error('time_end')) echo 'is-invalid' ?>" value="<?= set_value('time_end'); ?>" required>
                             </div>
                             <div class="col-4 pt-3">
                                 <label for="time_end" class="form-label"><?= $this->data['STOP_TIME'] ?></label>
-                                <input type="time" id="time_end" name="time_end" required class="form-control
-                                <?php if (form_error('time_end')) echo 'is-invalid' ?>" value="<?= set_value('time_end'); ?>">
+                                <div class="input-group">
+                                    <span class="input-group-text">日</span>
+                                    <input type="text" class="form-control">
+
+                                    <span class="input-group-text">時間</span>
+                                    <input type="text" class="form-control">
+
+                                    <span class="input-group-text">分</span>
+                                    <input type="text" class="form-control">
+                                </div>
+
+                                <!-- <input type="number" id="time_end" name="time_end"  class="form-control
+                                <?php if (form_error('time_end')) echo 'is-invalid' ?>" value="<?= set_value('time_end'); ?>" required> -->
                             </div>
 
 
@@ -100,14 +115,14 @@
 
                             <div class="col pt-3">
                                 <label for="kouteiNa" class="form-label"><?= $this->data['PROCESS_NAME'] ?></label>
-                                <input required type="text" name="工程名" id="kouteiNa" class="form-control
-                                <?php if (form_error('工程名')) echo 'is-invalid' ?>" value="<?= set_value('工程名'); ?>">
+                                <input  type="text" name="工程名" id="kouteiNa" class="form-control
+                                <?php if (form_error('工程名')) echo 'is-invalid' ?>" value="<?= set_value('工程名'); ?>" required>
                             </div>
 
                             <div class="col pt-3">
                                 <label for="mode" class="form-label"><?= $this->data['FAIL_MODE'] ?></label>
-                                <input required type="text" name="故障モード" id="mode" class="form-control
-                                <?php if (form_error('故障モード')) echo 'is-invalid' ?>" value="<?= set_value('故障モード'); ?>">
+                                <input  type="text" name="故障モード" id="mode" class="form-control
+                                <?php if (form_error('故障モード')) echo 'is-invalid' ?>" value="<?= set_value('故障モード'); ?>" required>
                             </div>
 
 
@@ -118,24 +133,24 @@
                         <div class="item row border-top py-3">
                             <div class="col-12 pt-3">
                                 <label class="form-label" for="gensho"><?= $this->data['PHENOMENON'] ?></label>
-                                <textarea required name="現象" id="gensho" class="form-control
+                                <textarea name="現象" id="gensho" class="form-control
                                 <?php if (form_error('現象')) echo 'is-invalid' ?>" cols="30" rows="10" required><?= set_value('現象'); ?></textarea>
                             </div>
                             <div class="col-12 pt-3">
                                 <label class="form-label" for="shuriNaiyou"><?= $this->data['REPAIR_DETAIL'] ?></label>
-                                <textarea required name="修理内容" id="shuriNaiyou" class="form-control
+                                <textarea  name="修理内容" id="shuriNaiyou" class="form-control
                                 <?php if (form_error('修理内容')) echo 'is-invalid' ?>" cols="30" rows="10" required><?= set_value('修理内容'); ?></textarea>
                             </div>
 
                             <div class="col-6 pt-3">
                                 <label class="form-label" for="failMech"><?= $this->data['MECHANISM'] ?></label>
-                                <textarea required name="fail_mech" id="failMech" class="form-control
+                                <textarea  name="fail_mech" id="failMech" class="form-control
                                 <?php if (form_error('fail_mech')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= set_value('fail_mech'); ?></textarea>
                             </div>
 
                             <div class="col-6 pt-3">
                                 <label class="form-label" for="response"><?= $this->data['RESPONSE'] ?></label>
-                                <textarea required name="response" id="response" class="form-control
+                                <textarea  name="response" id="response" class="form-control
                                 <?php if (form_error('response')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= set_value('response'); ?></textarea>
                             </div>
 
@@ -162,12 +177,7 @@
 
                                     <table class="table table-hover table-striped text-center" id="equipment_parts_list">
                                         <thead>
-                                            <!-- <tr>
-                                       <td class="text-start" style="width: 200px;">
-                                         
-                                       </td>
-                                       <td colspan="3"></td>
-                                   </tr> -->
+                    
                                             <tr class="table-dark">
                                                 <td>部品NO</td>
                                                 <td>部品名</td>
@@ -238,7 +248,6 @@
             </div>
         </div>
     </div>
-    <button id="test_button" class="btn btn-primary">TEST</button>
 </div>
 
 
@@ -254,15 +263,19 @@
         width: max-content;
     }
 
+    .btn-group > label{
+        min-width: 130px;
+    }
+
     form .form-control {
 
-        background-color: #EAECF4;
+        background-color: white;
 
     }
 </style>
 
 <script>
-    $('input, textarea, select').on('click', function name(params) {
+    $('input, textarea, select').on('click', function() {
         $(this).removeClass('is-invalid')
     })
 </script>

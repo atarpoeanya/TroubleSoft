@@ -196,9 +196,9 @@
                         paging: false,
                         scrollResize: true,
                         orderCellsTop: false,
-                        fixedHeader: true,
+                        // fixedHeader: true,
                         scrollY: ($('#main-content').height() - (275 * 90 / 100)),
-
+                        // "sScrollX": "100%",
                         scrollCollapse: true,
                         dom: 'lrt',
                         "language": {
