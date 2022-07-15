@@ -1,4 +1,3 @@
-
 <div class="d-flex justify-content-center pt-3" id="mainForm">
 
 
@@ -174,8 +173,9 @@
                                                     <input class="form-control" type="file" name="対策書" id="taisakusho" value="<?= $items->c_countermeasure ?>">
                                                 </div>
                                                 <div class="col">
-                                                    <a class="btn btn-outline-secondary card-link" href="<?= base_url() ?>uploads/<?= $items->c_countermeasure ?>" target="_blank" rel="noopener noreferrer" id="old-link"><?= $items->c_countermeasure ?></a>
                                                     <label for="" class="form-label"><?= $this->data['COUNTERMEASURES_OLD'] ?></label><br>
+                                                    <a class="btn btn-outline-secondary card-link" href="<?= base_url() ?>uploads/<?= $items->c_countermeasure ?>" target="_blank" rel="noopener noreferrer" id="old-link"><?= $items->c_countermeasure ?></a>
+
                                                 </div>
                                             </div>
 

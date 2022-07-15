@@ -176,6 +176,7 @@
         left: 40px;
         background-color: white;
         width: max-content;
+        
     }
 
     form .form-control {
