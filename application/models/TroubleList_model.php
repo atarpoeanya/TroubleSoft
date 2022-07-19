@@ -125,8 +125,8 @@ class Troublelist_model extends CI_Model
 
         $data = [
             'c_createdDate'     => date("Y-m-d H:i:s"),
-            'c_accidentDate'    => $this->input->post('発生日', true),
-           
+            'c_accidentDate'    => date("Y/m/d H:i", strtotime($this->input->post('発生日', true))),
+            'c_stopTime'        => $this->input->post('duration', true),
             'c_department'      => $this->input->post('部署', true),
             'c_manager'         => $this->input->post('担当者', true),
             'c_facility'        => $this->input->post('設備', true),
@@ -327,8 +327,8 @@ class Troublelist_model extends CI_Model
         if ($_file != 'no_file') {
             unlink('./uploads/' . $this->input->post('oldFile', true));
             $data = [
-                'c_accidentDate'    => $this->input->post('発生日', true),
-              
+                'c_accidentDate'    => date("Y/m/d H:i", strtotime($this->input->post('発生日', true))),
+                'c_stopTime'        => $this->input->post('duration', true),
                 'c_department'      => $this->input->post('部署', true),
                 'c_manager'         => $this->input->post('担当者', true),
                 'c_facility'        => $this->input->post('設備', true),
@@ -345,8 +345,8 @@ class Troublelist_model extends CI_Model
             // IF NO FILE
         } else {
             $data = [
-                'c_accidentDate'    => $this->input->post('発生日', true),
-               
+                'c_accidentDate'    => date("Y/m/d H:i", strtotime($this->input->post('発生日', true))),
+                'c_stopTime'        => $this->input->post('duration', true),
                 'c_department'      => $this->input->post('部署', true),
                 'c_manager'         => $this->input->post('担当者', true),
                 'c_facility'        => $this->input->post('設備', true),

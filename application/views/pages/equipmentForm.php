@@ -41,18 +41,16 @@
                             <div class="col-4 pt-3">
                                 <label for="time_end" class="form-label"><?= $this->data['STOP_TIME'] ?></label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control">
+                                    <input type="number" value="0" class="form-control">
                                     <span class="input-group-text">日</span>
 
-                                    <input type="text" class="form-control">
+                                    <input type="number" value="0" class="form-control">
                                     <span class="input-group-text">時</span>
 
-                                    <input type="text" class="form-control">
+                                    <input type="number" value="0" class="form-control">
                                     <span class="input-group-text">分</span>
                                 </div>
 
-                                <!-- <input type="number" id="time_end" name="time_end"  class="form-control
-                                <?php if (form_error('time_end')) echo 'is-invalid' ?>" value="<?= set_value('time_end'); ?>" required> -->
                             </div>
 
 

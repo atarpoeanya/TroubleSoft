@@ -45,7 +45,7 @@ class Dashboard extends CI_Controller
 
             'INSERT_BUTTON_TROUBLE'                 =>  '新規登録',
             'INSERT_BUTTON_SPARE'                   =>  '新規登録',
-            'SPARE_LIST_BUTTON'                     =>  '予備品リスト',
+            'SPARE_LIST_BUTTON'                     =>  '予備品リスト...',
 
             'NEW_TROUBLE_BUTTON'                    =>  'NEW_TROUBLE',
             'NEW_SPARE_BUTTON'                      =>  'NEW_SPARE',
@@ -75,9 +75,8 @@ class Dashboard extends CI_Controller
 
             //Form (EQUIPMENT)
             'FORM_TITLE'                            =>  '設備トラブル',
-            'ACCIDENT_DATE'                         =>  '発生日',
-            'REPAIR_DATE'                           =>  '作業日',
-            'HAPPENING_TIME'                        =>  '発生時間',
+            'ACCIDENT_DATE'                         =>  '発生日時',
+           
             'STOP_TIME'                             =>  '停止時間',
             'DEPARTMENT'                            =>  '部署名',
             'PIC'                                   =>  '担当者',
@@ -146,7 +145,9 @@ class Dashboard extends CI_Controller
 
             //Modal PartSelect (print_spare_lite)
             'SPARE_ADDED'                           =>  '暫定',
-            'SPARE_SELECTED'                        =>  '恒久'
+            'SPARE_SELECTED'                        =>  '恒久',
+            'EMPTY_PLACEHOLDER'                     =>  '未選択',
+
 
 
             //UNSUSED
@@ -165,6 +166,10 @@ class Dashboard extends CI_Controller
      
                 //  'TRANSITION_LABEL_TOP'                  =>  '新規',
                 //  'TRANSITION_LABEL_BOTTOM'               =>  'FMEAのほう',
+
+                // equipment Form
+                // 'REPAIR_DATE'                           =>  '作業日',
+                // 'HAPPENING_TIME'                        =>  '発生時間',
      
 
 
