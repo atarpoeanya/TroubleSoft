@@ -61,15 +61,7 @@ class Dashboard extends CI_Controller
             'RADIO_B_REAL'                          =>  'トラブル',
             'RADIO_B_FMEA'                          =>  'FMEA',
 
-            //Transition screen
-
-            'TRANSITION_BACK'                       =>  '閉じる',
-            'TRANSITION_TOOLS_PROBLEM_BUTTON'       =>  '設備・工程',
-            'TRANSITION_PRODUCT_PROBLEM_BUTTON'     =>  '製品',
-
-            'TRANSITION_LABEL_TOP'                  =>  '新規',
-            'TRANSITION_LABEL_BOTTOM'               =>  'FMEAのほう',
-
+       
             //Form 
             //Equipment
             'FMEA_BUTTON_NEED'                      =>  '必要',
@@ -152,6 +144,10 @@ class Dashboard extends CI_Controller
             'DELETE_SUCCESS'                        =>  'データが削除されました',
             'DELETE_FAIL'                           =>  '',
 
+            //Modal PartSelect (print_spare_lite)
+            'SPARE_ADDED'                           =>  '暫定',
+            'SPARE_SELECTED'                        =>  '恒久'
+
 
             //UNSUSED
             // 'EQUIPMENT_PHENOMENON_F' => '現象・不具合要因詳細',
@@ -161,6 +157,15 @@ class Dashboard extends CI_Controller
             // 'EQUIPMENT_REPAIR_DATE_F' => '修理日',
             // 'EQUIPMENT_HAPPENING_TIME_F' => '発生時間',
             // 'EQUIPMENT_STOP_TIME_F' => '停止時間',
+
+                 //Transition screen
+                //  'TRANSITION_BACK'                       =>  '閉じる',
+                //  'TRANSITION_TOOLS_PROBLEM_BUTTON'       =>  '設備・工程',
+                //  'TRANSITION_PRODUCT_PROBLEM_BUTTON'     =>  '製品',
+     
+                //  'TRANSITION_LABEL_TOP'                  =>  '新規',
+                //  'TRANSITION_LABEL_BOTTOM'               =>  'FMEAのほう',
+     
 
 
         );

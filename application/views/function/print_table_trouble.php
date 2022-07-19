@@ -107,5 +107,6 @@ function f_generate_table_select($data)
 
     #clear-button {
         min-height: 32px;
+        color: #fff;
     }
 </style>

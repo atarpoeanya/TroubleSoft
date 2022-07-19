@@ -126,9 +126,7 @@ class Troublelist_model extends CI_Model
         $data = [
             'c_createdDate'     => date("Y-m-d H:i:s"),
             'c_accidentDate'    => $this->input->post('発生日', true),
-            'c_repairDate'      => $this->input->post('修理日', true),
-            'c_repairStart'     => $this->input->post('time_start', true),
-            'c_repairEnd'       => $this->input->post('time_end', true),
+           
             'c_department'      => $this->input->post('部署', true),
             'c_manager'         => $this->input->post('担当者', true),
             'c_facility'        => $this->input->post('設備', true),
@@ -330,9 +328,7 @@ class Troublelist_model extends CI_Model
             unlink('./uploads/' . $this->input->post('oldFile', true));
             $data = [
                 'c_accidentDate'    => $this->input->post('発生日', true),
-                'c_repairDate'      => $this->input->post('修理日', true),
-                'c_repairStart'     => $this->input->post('time_start', true),
-                'c_repairEnd'       => $this->input->post('time_end', true),
+              
                 'c_department'      => $this->input->post('部署', true),
                 'c_manager'         => $this->input->post('担当者', true),
                 'c_facility'        => $this->input->post('設備', true),
@@ -350,9 +346,7 @@ class Troublelist_model extends CI_Model
         } else {
             $data = [
                 'c_accidentDate'    => $this->input->post('発生日', true),
-                'c_repairDate'      => $this->input->post('修理日', true),
-                'c_repairStart'     => $this->input->post('time_start', true),
-                'c_repairEnd'       => $this->input->post('time_end', true),
+               
                 'c_department'      => $this->input->post('部署', true),
                 'c_manager'         => $this->input->post('担当者', true),
                 'c_facility'        => $this->input->post('設備', true),

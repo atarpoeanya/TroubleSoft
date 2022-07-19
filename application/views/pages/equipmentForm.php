@@ -30,40 +30,25 @@
                             &nbsp;<b><?= $this->data['SECTION_1'] ?></b>&nbsp;</p>
                         <div class="inspector row border-top py-3">
 
-                            <div class="col-6 pt-3">
+                            <div class="col-4 pt-3">
 
                                 <label for="start_day" class="form-label"><?= $this->data['ACCIDENT_DATE'] ?></label>
                                 <input id="start_day" name="発生日" type="date" class="form-control
                                 <?php if (form_error('発生日')) echo 'is-invalid' ?>" value="<?= set_value('発生日'); ?>" required>
                             </div>
 
-                            <div class="col-6 pt-3">
-                                <label for="repair_day" class="form-label"><?= $this->data['REPAIR_DATE'] ?></label>
-                                <input type="date" id="repair_day" name="修理日" class="form-control
-                                <?php if (form_error('修理日')) echo 'is-invalid' ?>" value="<?= set_value('修理日'); ?>" required>
-                            </div>
 
-                            <div class="col-4 pt-3">
-                                <label for="time_start" class="form-label"><?= $this->data['HAPPENING_TIME'] ?></label>
-                                <input type="time" id="time_start" name="time_start"  class="form-control
-                                <?php if (form_error('time_start')) echo 'is-invalid' ?>" value="<?= set_value('time_start'); ?>" required>
-                            </div>
-                            <div class="col-4 pt-3">
-                                <label for="time_end" class="form-label">修理終った時間</label>
-                                <input type="time" id="time_end" name="time_end"  class="form-control
-                                <?php if (form_error('time_end')) echo 'is-invalid' ?>" value="<?= set_value('time_end'); ?>" required>
-                            </div>
                             <div class="col-4 pt-3">
                                 <label for="time_end" class="form-label"><?= $this->data['STOP_TIME'] ?></label>
                                 <div class="input-group">
+                                    <input type="text" class="form-control">
                                     <span class="input-group-text">日</span>
-                                    <input type="text" class="form-control">
 
-                                    <span class="input-group-text">時間</span>
                                     <input type="text" class="form-control">
+                                    <span class="input-group-text">時</span>
 
+                                    <input type="text" class="form-control">
                                     <span class="input-group-text">分</span>
-                                    <input type="text" class="form-control">
                                 </div>
 
                                 <!-- <input type="number" id="time_end" name="time_end"  class="form-control
@@ -71,8 +56,8 @@
                             </div>
 
 
-                            <div class="col-9 pt-3">
-                                <div class="col-4">
+                            <div class="col-4 pt-3">
+
                                     <label class="form-label" for="tantou"><?= $this->data['PIC'] ?></label><!-- PERSON IN CHARGE-->
                                     <select class=" form-control  <?= (form_error('担当者') ? 'is-invalid' : ''); ?>" name="担当者" id="tantou" required>
                                         <option value="" <?= set_select('担当者', '', true); ?> disabled selected>選び出す</option>
@@ -80,7 +65,7 @@
                                         <option value="新宮" <?= set_select('担当者', '新宮'); ?>>新宮</option>
                                         <option value="齋藤" <?= set_select('担当者', '齋藤'); ?>>齋藤</option>
                                     </select>
-                                </div>
+
 
                             </div>
                         </div>

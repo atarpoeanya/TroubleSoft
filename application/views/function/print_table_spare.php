@@ -153,6 +153,8 @@ function f_generate_table_select($data)
     div.dataTables_wrapper {
         width: 100%;
     }
+
+    
 </style>
 
 <script>

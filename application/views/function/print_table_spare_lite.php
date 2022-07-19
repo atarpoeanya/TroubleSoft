@@ -23,7 +23,7 @@ function f_generate_table_select($data)
                         }
                     }
                     ?>
-                    <th class="kanjifont table-head text-center border-right border-left amount-placeholder">ADDED_AMOUNT</th>
+                    <th class="kanjifont table-head text-center border-right border-left amount-placeholder"><?= $data['SPARE_ADDED'] ?></th>
                     <th class="button_column"></th>
                 </tr>
             </thead>
@@ -71,7 +71,7 @@ function f_generate_table_select($data)
             </tbody>
             <tbody>
                 <tr class="text-center table-dark">
-                    <th colspan="6">SELECTED</th>
+                    <th colspan="6"><?= $data['SPARE_SELECTED'] ?></th>
                 </tr>
 
             </tbody>
