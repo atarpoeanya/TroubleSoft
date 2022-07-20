@@ -153,7 +153,7 @@
 
 
                         if (title == '発生日時') // For date input type
-                            $('#search-bar').append('<th><input type="date" placeholder="検索 =" class="column_search form-control" id="search-bar-' + title + '" /></th>');
+                            $('#search-bar').append('<th><input type="datetime-local" placeholder="検索 =" class="form-control" id="search-bar-' + title + '" /></th>');
                         else if (title == '修理時間（分）') // For separating search logic by removing column_search class
                             $('#search-bar').append('<th><input type="number" min="1" pattern="[0-9]*" placeholder="検索 >=" class="form-control" id="search-bar-time" /></th>');
                         else if (title.length == 0) //no title column for displaying edit buttons
@@ -239,11 +239,21 @@
 
                     });
 
+                    // Search for datetime format
+                    $('#search-bar-発生日時').on('input change', function() {
+                        table
+                            .column(0)
+                            .search(this.value.replace('T', ' ').replace(/-/g, '/'))
+                            .draw();
+                        $('#amount-sum').html($('.data-row').not(':hidden').length);
+                    })
+
+
                     // Only permits number [0-9] and backspace/delete
                     // Not arrow key, shift, ctrl, alphabet
                     $('#search-bar-time').on('keydown', function() {
                         return (event.keyCode >= 48 && event.keyCode <= 57) ||
-                            event.keyCode == 8 || event.keyCode == 46 
+                            event.keyCode == 8 || event.keyCode == 46
                     })
 
 

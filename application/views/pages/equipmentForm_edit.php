@@ -179,7 +179,7 @@
                             </div>
 
                             <!-- SPARE PART -->
-                            <div class="spare row mt-3">
+                            <div class="spare mt-3">
                                 <div class="col">
                                     <a href="" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#partsSelect_edit"><?= $this->data['SPARE_LIST_BUTTON'] ?></a>
                                 </div>
