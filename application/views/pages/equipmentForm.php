@@ -182,7 +182,7 @@
                                         <tfoot class="table-light">
                                             <tr>
                                                 <td style="height: 100px;" colspan="4" class="text-center emptyTab">
-                                                    <span>EMPTY</span>
+                                                    <span><?= $this->data['EMPTY_PLACEHOLDER'] ?></span>
                                                 </td>
                                             </tr>
                                         </tfoot>

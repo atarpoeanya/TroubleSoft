@@ -270,7 +270,9 @@
     //FMEA select
     //From function/print_table_tool_fmea.php
     {
-
+        // $('#btnradio1').on('click', function () {
+        //     $('#fmea_place').empty()
+        // })
     }
 
     //FORM Validation

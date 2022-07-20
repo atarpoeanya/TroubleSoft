@@ -217,7 +217,7 @@
                             else {
                             ?>
                                 <tr class="text-center align-middle" style="height: 150px;">
-                                    <td colspan="10">EMPTY</td>
+                                    <td colspan="10"><?= $this->data['EMPTY_PLACEHOLDER'] ?></td>
                                 </tr>
                             <?php } ?>
                         </tbody>
