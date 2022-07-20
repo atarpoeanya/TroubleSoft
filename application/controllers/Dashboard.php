@@ -376,9 +376,11 @@ class Dashboard extends CI_Controller
         if (empty($id))
             redirect(base_url(), '/');
 
-        if ($id == 1) {
-
-            $this->session->set_flashdata('crumbs', '0');
+            if ($id == 1) {
+                
+                $this->session->set_flashdata('crumbs', '0');
+                $this->form_validation->set_message('required', 'is required');
+                $this->form_validation->set_message('max_length', 'is too long');
 
             $this->form_validation->set_rules('発生日', '1', 'required');
 
@@ -391,13 +393,13 @@ class Dashboard extends CI_Controller
             $this->form_validation->set_rules('設備', '7', 'required|callback_check_default');
             $this->form_validation->set_rules('号機', '8', 'required|callback_check_default');
 
-            $this->form_validation->set_rules('工程名', '9', 'required');
-            $this->form_validation->set_rules('故障モード', '10', 'required');
+            $this->form_validation->set_rules('工程名', '9', 'required|max_length[20]');
+            $this->form_validation->set_rules('故障モード', '10', 'required|max_length[20]');
 
-            $this->form_validation->set_rules('現象', '11', 'required');
-            $this->form_validation->set_rules('修理内容', '12', 'required');
-            $this->form_validation->set_rules('fail_mech', '13', 'required');
-            $this->form_validation->set_rules('response', '14', 'required');
+            $this->form_validation->set_rules('現象', '11', 'required|max_length[140]');
+            $this->form_validation->set_rules('修理内容', '12', 'required|max_length[140]');
+            $this->form_validation->set_rules('fail_mech', '13', 'required|max_length[140]');
+            $this->form_validation->set_rules('response', '14', 'required|max_length[140]');
 
             // $this->form_validation->set_rules('spareParts', '20', 'greater_than_equal_to[0]');
             // $this->form_validation->set_rules('response', '14', 'required');
@@ -442,23 +444,24 @@ class Dashboard extends CI_Controller
 
         if ($id == 2) { //FMEA
             $this->session->set_flashdata('crumbs', '1');
+            
 
             $this->form_validation->set_rules('部署', '1', 'required|callback_check_default');
             $this->form_validation->set_rules('設備', '2', 'required|callback_check_default');
             $this->form_validation->set_rules('号機', '3', 'required|callback_check_default');
-            $this->form_validation->set_rules('工程名', '4', 'required');
-            $this->form_validation->set_rules('故障モード', '5', 'required');
-            $this->form_validation->set_rules('fail_mech', '6', 'required');
-            $this->form_validation->set_rules('故障の影響', '7', 'required');
-            $this->form_validation->set_rules('ライン停止の可能性', '8', 'required');
-            $this->form_validation->set_rules('特殊特性等', '9', 'required');
+            $this->form_validation->set_rules('工程名', '4', 'required|max_length[140]');
+            $this->form_validation->set_rules('故障モード', '5', 'required|max_length[140]');
+            $this->form_validation->set_rules('fail_mech', '6', 'required|max_length[140]');
+            $this->form_validation->set_rules('故障の影響', '7', 'required|max_length[140]');
+            $this->form_validation->set_rules('ライン停止の可能性', '8', 'required|max_length[10]');
+            $this->form_validation->set_rules('特殊特性等', '9', 'required|max_length[10]');
             $this->form_validation->set_rules('担当者日程', '10', 'required|callback_check_default');
-            $this->form_validation->set_rules('周期', '11', 'required');
-            $this->form_validation->set_rules('月', '12', 'required');
-            $this->form_validation->set_rules('予防', '13', 'required');
-            $this->form_validation->set_rules('検出', '14', 'required');
-            $this->form_validation->set_rules('対策案', '15', 'required');
-            $this->form_validation->set_rules('対策', '16', 'required');
+            $this->form_validation->set_rules('周期', '11', 'required|max_length[140]');
+            $this->form_validation->set_rules('月', '12', 'required|max_length[140]');
+            $this->form_validation->set_rules('予防', '13', 'required|max_length[140]');
+            $this->form_validation->set_rules('検出', '14', 'required|max_length[140]');
+            $this->form_validation->set_rules('対策案', '15', 'required|max_length[140]');
+            $this->form_validation->set_rules('対策', '16', 'required|max_length[140]');
 
             if ($this->form_validation->run() == FALSE) {
                 //For data that need to be manually re-populated
