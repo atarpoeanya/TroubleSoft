@@ -1,4 +1,3 @@
-
 <div class=" pt-3" id="mainForm">
     <div class="row">
         <div class="col">
@@ -56,24 +55,24 @@
 
                             <div class="col-6 pt-3">
                                 <label for="mech" class="form-label"><?= $this->data['EQUIPMENT_MECHANISM_F'] ?></label>
-                                <textarea  name="fail_mech" id="mech" cols="30" rows="5" class="form-control
-                                <?php if (form_error('fail_mech')) echo 'is-invalid' ?>" required ><?= set_value('fail_mech')?></textarea>
+                                <textarea name="fail_mech" id="mech" cols="30" rows="5" class="form-control
+                                <?php if (form_error('fail_mech')) echo 'is-invalid' ?>" required><?= set_value('fail_mech') ?></textarea>
                             </div>
 
                             <div class="col-6 pt-3">
                                 <label for="fail_impact" class="form-label"><?= $this->data['EQUIPMENT_FAIL_IMPACT_F'] ?></label>
-                                <textarea cols="30" rows="6" name="故障の影響" id="fail_impact" class="form-control
-                                <?php if (form_error('故障の影響')) echo 'is-invalid' ?>" required><?= set_value('故障の影響')?></textarea>
+                                <textarea cols="30" rows="5" name="故障の影響" id="fail_impact" class="form-control
+                                <?php if (form_error('故障の影響')) echo 'is-invalid' ?>" required><?= set_value('故障の影響') ?></textarea>
                             </div>
                             <div class="col-6 pt-3">
                                 <label for="line_effect" class="form-label"><?= $this->data['EQUIPMENT_LINE_EFFECT_F'] ?></label>
                                 <input name="ライン停止の可能性" id="line_effect" class="form-control
-                                <?php if (form_error('ライン停止の可能性')) echo 'is-invalid' ?>" value="<?= set_value('ライン停止の可能性')?>" required>
+                                <?php if (form_error('ライン停止の可能性')) echo 'is-invalid' ?>" value="<?= set_value('ライン停止の可能性') ?>" required>
                             </div>
                             <div class="col-6 pt-3">
                                 <label for="special_char" class="form-label"><?= $this->data['EQUIPMENT_SPECIAL_CHAR_F'] ?></label>
                                 <input type="text" name="特殊特性等" id="special_char" class="form-control
-                                <?php if (form_error('特殊特性等')) echo 'is-invalid' ?>" required value="<?= set_value('特殊特性等')?>">
+                                <?php if (form_error('特殊特性等')) echo 'is-invalid' ?>" required value="<?= set_value('特殊特性等') ?>">
                             </div>
                         </div>
 
@@ -83,7 +82,7 @@
 
                             <div class="col-4 pt-3">
                                 <label for="pic" class="form-label"><?= $this->data['EQUIPMENT_PIC_SCHEDULE_F'] ?></label>
-                                <select class="form-control" name="担当者日程" required id="pic">
+                                <select class="form-control" id="pic" name="担当者日程" required >
                                     <option value="" selected>Default</option>
                                     <option value="1">1</option>
                                     <option value="3">3</option>
@@ -92,26 +91,25 @@
                             <div class="col-2 pt-3">
                                 <label for="period" class="form-label"><?= $this->data['EQUIPMENT_PERIOD_F'] ?></label>
                                 <input type="text" name="周期" id="period" class="form-control
-                                <?php if (form_error('周期')) echo 'is-invalid' ?>" required value="<?= set_value('周期')?>">
+                                <?php if (form_error('周期')) echo 'is-invalid' ?>" required value="<?= set_value('周期') ?>">
                             </div>
                             <div class="col-2 pt-3">
                                 <label for="month" class="form-label"><?= $this->data['EQUIPMENT_MONTH_F'] ?></label>
                                 <input type="text" name="月" id="month" class="form-control
-                                <?php if (form_error('月')) echo 'is-invalid' ?>" required value="<?= set_value('月')?>">
+                                <?php if (form_error('月')) echo 'is-invalid' ?>" required value="<?= set_value('月') ?>">
                             </div>
-                            <div class="col-12 pt-3">
-                                <div class="col">
-                                    <label for="prevention" class="form-label"><?= $this->data['EQUIPMENT_PREVENTION_F'] ?></label>
-                                    <textarea name="予防" cols="30" rows="5"  id="prevention" class="form-control
-                                <?php if (form_error('予防')) echo 'is-invalid' ?>" required><?= set_value('予防')?></textarea>
-                                </div>
-                                <div class="col pt-3">
-                                    <label for="detection" class="form-label"><?= $this->data['EQUIPMENT_DETECTION_F'] ?></label>
-                                    <input type="text" name="検出" id="detection" class="form-control
-                                <?php if (form_error('検出')) echo 'is-invalid' ?>" required value="<?= set_value('検出')?>">
-                                </div>
+                            <div class="col-6 pt-3">
+                                <label for="prevention" class="form-label"><?= $this->data['EQUIPMENT_PREVENTION_F'] ?></label>
+                                <textarea name="予防" cols="30" rows="5" id="prevention" class="form-control
+                                <?php if (form_error('予防')) echo 'is-invalid' ?>" required><?= set_value('予防') ?></textarea>
                             </div>
-
+                            <div class="col-6 pt-3">
+                                <label for="detection" class="form-label"><?= $this->data['EQUIPMENT_DETECTION_F'] ?></label>
+                                <!-- <input type="text" name="検出" id="detection" class="form-control
+                                <?php if (form_error('検出')) echo 'is-invalid' ?>" required value="<?= set_value('検出') ?>"> -->
+                                <textarea name="検出" cols="30" rows="5" id="detection" class="form-control
+                                <?php if (form_error('検出')) echo 'is-invalid' ?>" required><?= set_value('検出') ?></textarea>
+                            </div>
                         </div>
 
 
@@ -122,13 +120,13 @@
                             <div class="col-6 pt-3">
                                 <label for="counter" class="form-label"><?= $this->data['EQUIPMENT_COUNTER_PLAN_F'] ?></label>
                                 <textarea name="対策案" id="counter" cols="30" rows="5" class="form-control
-                                <?php if (form_error('対策案')) echo 'is-invalid' ?>"  required><?= set_value('対策案')?></textarea>
+                                <?php if (form_error('対策案')) echo 'is-invalid' ?>" required><?= set_value('対策案') ?></textarea>
                             </div>
 
                             <div class="col-6 pt-3">
                                 <label for="measure" class="form-label"><?= $this->data['EQUIPMENT_MEASURE_F'] ?></label>
                                 <textarea name="対策" id="measure" cols="30" rows="5" required class="form-control
-                                <?php if (form_error('対策')) echo 'is-invalid' ?>"><?=set_value('対策')?></textarea>
+                                <?php if (form_error('対策')) echo 'is-invalid' ?>"><?= set_value('対策') ?></textarea>
                             </div>
 
                         </div>
