@@ -34,19 +34,10 @@ function f_generate_table_select($data)
 
 
                     <tr class="data-row" onclick="window.location='<?= base_url() ?>item/<?= $item->c_t800_id ?>';">
-                        <td class=" table-data text-center align-middle border-end  pointer col" style="max-width:90px;">
-                            <?= $item->c_accidentDate . ' ' . date("H:i", strtotime($item->c_repairStart)) ?>
-                        </td>
+                    <td class=" table-data text-center align-middle border-end  pointer col" style="max-width:90px;">
+                            <?= date("Y/m/d H:i", strtotime($item->c_accidentDate)) ?>
                         <td class=" table-data text-center align-middle border-end  pointer col">
-                            <!-- calculate minutes that elapsed-->
-                            <?php
-                            $a = new DateTime($item->c_repairStart);
-                            $b = new DateTime($item->c_repairEnd);
-                            $res =  $a->diff($b);
-                            $minutes = $res->h * 60;
-                            $minutes += $res->i;
-                            echo $minutes;
-                            ?>
+                        <?= $item->c_stopTime ?>
                         </td>
                         <td class=" table-data text-center align-middle border-end  pointer col">
                             <?= $item->c_department ?>

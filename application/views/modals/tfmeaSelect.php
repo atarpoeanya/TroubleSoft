@@ -7,14 +7,14 @@
 
 
             </div>
-            <div class="modal-body">
+            <div class="modal-body" >
                 <div class="col-12">
 
                     <label for="departement_select" class="col-form-label">部署</label>
                     <select class="form-control" name="" id="departement_select">
-                        <option value="" selected>全て</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
+                        <option value="" selected>全部</option>
+                        <option value="生技">生技</option>
+                        <option value="塗装">塗装</option>
                     </select>
 
 
@@ -31,7 +31,42 @@
     </div>
 </div>
 
+<style>
+    #details {
+        margin: 0;
+    }
+
+    .shown tr td {
+        padding: 0;
+    }
+</style>
+
 <script>
+    function format(d) {
+        return (
+            '<table class="table" id="details">' +
+            '<tbody>' +
+            '   <tr><td>&nbsp;&nbsp;<b>予防</b> :' + d.c_prevention + '</td></tr>' +
+            '   <tr><td>&nbsp;&nbsp;<b>検出</b> :' + d.c_detection + '</td></tr>' +
+            '   <tr><td>&nbsp;&nbsp;<b>対策案</b> :' + d.c_counterPlan + '</td></tr>' +
+            '   <tr><td>&nbsp;&nbsp;<b>故障の潜在原因メカニズム</b> :' + d.c_failImpact + '</td></tr>' +
+            '</tbody>' +
+            '</table>'
+        );
+    }
+
+    function show($id) {
+        $.ajax({
+            url: "<?= base_url(); ?>dashboard/fmea_tool_print/" + $id,
+
+            success: function(response) {
+                $("#fmea_place").html(response);
+                $('#fmea_id').val($id)
+            },
+        })
+    }
+
+    // List loader
     $('#fmeaLite').on('show.bs.modal', function(event) {
         $.ajax({
             url: "<?= base_url(); ?>dashboard/get_trouble_list_tool_fmea_lite",
@@ -48,15 +83,15 @@
 
                 $(document).ready(function() {
                     // Setup - add a text input to each cell
-                    $('#trouble_fmea_table_lite thead tr:eq(1) th').each(function() {
+                    $('#trouble_fmea_table_lite thead tr:eq(0) th').each(function() {
                         var title = $(this).text().trim();
-                        console.log($(this).hasClass('button_column'))
 
 
-                        if (title.length == 0 && $(this).hasClass('ID'))
-                            $('#search-bar').append('<th style="display:none;></th>');
-                        else if(title.length == 0 && $(this).hasClass('button_column'))
-                        $('#search-bar').append('<th class="table-light"></th>');
+
+                        if (title.length == 0)
+                            $('#search-bar').append('<th></th>');
+                        else if (title.length == 0 && $(this).hasClass('button_column'))
+                            $('#search-bar').append('<th class="table-light"></th>');
                         else
                             $('#search-bar').append('<th><input type="text" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
 
@@ -64,33 +99,76 @@
 
                     // DataTable
                     var table = $('#trouble_fmea_table_lite').DataTable({
-                        order: [0, 'desc'],
-                        aoColumns: [{
-                                "bSortable": false
-                            },
-                            {
-                                "bSortable": true
-                            },
-                            {
-                                "bSortable": true
-                            },
-                            {
-                                "bSortable": true
-                            },
-                            {
-                                "bSortable": false
-                            },
-
-                        ],
+                        ajax: {
+                            url: '<?= base_url() ?>dashboard/get_trouble_list_data',
+                            dataSrc: ''
+                        },
+                        ordering: true,
                         info: false,
-                        // searching:false,
                         paging: false,
-                        orderCellsTop: false,
-                        fixedHeader: true,
-                        pageLength: 100,
+                        orderCellsTop: true,
                         dom: 't',
+                        scrollX: false,
                         "language": {
                             "zeroRecords": "該当する記録は見つかりません",
+                        },
+                        "columnDefs": [{
+                            "className": "dt-center",
+                            "targets": "_all"
+                        }],
+                        columns: [{
+                                className: 'dt-control',
+                                orderable: false,
+                                data: null,
+                                defaultContent: '',
+                                "bSortable": false
+                            },
+                            {
+
+                                data: 'c_facility',
+                                width: '30%'
+                            },
+                            {
+
+                                data: 'c_processName',
+                                width: '30%'
+                            },
+                            {
+
+                                data: 'c_failMode',
+                                width: '35%'
+                            },
+                            {
+
+                                data: null,
+                                "bSortable": false,
+                                render: function(data, type, row) {
+
+                                    return '<button class="btn btn-primary text-nowrap" onclick="show(' + data.c_t203_id + ')" data-bs-dismiss="modal" >登録</button>';
+                                }
+                            },
+                            {
+                                data: 'c_department',
+                                visible: false
+                            }
+                        ]
+                     
+
+                    });
+
+                    // Show and hide function for
+                    $('#trouble_fmea_table_lite tbody').on('click', 'td.dt-control', function() {
+                        var tr = $(this).closest('tr');
+                        var row = table.row(tr);
+
+                        if (row.child.isShown()) {
+
+                            row.child.hide();
+                            tr.removeClass('shown');
+                        } else {
+
+                            row.child(format(row.data())).show();
+                            tr.addClass('shown');
                         }
                     });
 
@@ -103,8 +181,9 @@
                             .draw();
                     });
 
+                    // Div selector
                     $('#departement_select').on('change', function() {
-                        table.column($('#department_ref').index()).search($(this).val()).draw();
+                        table.search($(this).val()).draw();
                     })
 
                 });

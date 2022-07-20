@@ -8,10 +8,11 @@ function f_generate_table_select($data)
 
         <table class="table table-striped table-hover" id="trouble_fmea_table_lite">
             <thead class="table-light">
-                <tr id="search-bar"></tr>
+
                 <tr>
-                    <th class=" table-head text-center ID" hidden>
-                    </th>
+                    <!-- <th class=" table-head text-center ID" hidden> -->
+                    <!-- </th> -->
+                    <th></th>
                     <?php
                     foreach ($data['title'] as $thead) {
 
@@ -23,10 +24,12 @@ function f_generate_table_select($data)
                     }
                     ?>
 
-                    <th class="button_column buttons table-head text-center border-end table-light;"></th>
+                    <!-- <th class="button_column buttons table-head text-center border-end table-light;"></th -->
+                    <th></th>
 
                 </tr>
 
+                <tr id="search-bar"></tr>
             </thead>
 
             <tbody>

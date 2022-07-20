@@ -230,9 +230,14 @@ class Dashboard extends CI_Controller
     {
         $data = $this->data;
         $data['tool_Fmea'] = $this->Troublelist_model->get_tool_trouble_fmea_list();
-        $data['title'] = ['設備名', '工程名・工程機能', '故障モード'];
+        $data['title'] = ['設備名', '工程名', '故障モード'];
         $this->load->view('function/print_table_tool_fmea_lite', $data);
         f_generate_table_select($data);
+    }
+
+    public function get_trouble_list_data()
+    {
+        echo json_encode($this->Troublelist_model->get_tool_trouble_fmea_list());
     }
 
     public function get_sparepart_list()
