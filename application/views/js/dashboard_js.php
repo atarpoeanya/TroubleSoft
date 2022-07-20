@@ -153,9 +153,9 @@
 
 
                         if (title == '発生日時') // For date input type
-                            $('#search-bar').append('<th><input type="datetime-local" placeholder="検索 =" class="form-control" id="search-bar-' + title + '" /></th>');
+                            $('#search-bar').append('<th><input type="date" placeholder="検索 =" class="form-control" id="search-bar-' + title + '" /></th>');
                         else if (title == '修理時間（分）') // For separating search logic by removing column_search class
-                            $('#search-bar').append('<th><input type="number" min="1" pattern="[0-9]*" placeholder="検索 >=" class="form-control" id="search-bar-time" /></th>');
+                            $('#search-bar').append('<th><input type="number" min="1" pattern="[0-9]*" placeholder="検索 >=" class="column_search form-control" id="search-bar-time" /></th>');
                         else if (title.length == 0) //no title column for displaying edit buttons
                             $('#search-bar').append('<th class="button_column buttons" style="display:none; width:150px;"></th>');
                         else
@@ -175,7 +175,14 @@
                             },
                             {
                                 bSortable: true,
-                                width: "7%"
+                                width: "7%",
+                                render: function(data, type, row) {
+                                    var days = Math.floor(data / 1440)
+                                    var rem_days = data % 1440
+                                    var hours = Math.floor(rem_days / 60)
+                                    var minutes = data - days * 1440 - hours * 60
+                                    return days + '日 ' + hours + '時間 ' + minutes + '分';
+                                }
                             },
                             {
                                 bSortable: true,
@@ -243,7 +250,7 @@
                     $('#search-bar-発生日時').on('input change', function() {
                         table
                             .column(0)
-                            .search(this.value.replace('T', ' ').replace(/-/g, '/'))
+                            .search(this.value.replace(/-/g, '/'), true, false)
                             .draw();
                         $('#amount-sum').html($('.data-row').not(':hidden').length);
                     })
@@ -268,6 +275,7 @@
                                     }
                                 );
                                 var time = parseInt(data[1]);
+                                console.log(time)
 
                                 if (isNaN(value) || time >= value) {
                                     return true;
@@ -396,13 +404,7 @@
             url: "<?php echo base_url(); ?>dashboard/get_sparepart_list",
             success: function(response) {
                 $("#list").html(response);
-
-
-
-
                 $('#search-bar-spare').append('<th colspan="10" class=" pe-3"><input class="form-control border-primary color-primary" type="text" id="search-bar" placeholder="検索 ="></th>');
-
-
 
             },
             complete: function() {

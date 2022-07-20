@@ -18,7 +18,7 @@
                         <input type="hidden" name="fmea_id" id="fmea_id" value="">
                         <div class=" d-flex justify-content-md-start">
 
-                        <input type="hidden" name="duration" id="duration" value="<?= $items->c_stopTime ?>">
+                            <input type="hidden" name="duration" id="duration" value="<?= $items->c_stopTime ?>">
 
                         </div>
                         <!-- SECTION_1_Identity -->
@@ -39,7 +39,7 @@
                                     <span class="input-group-text" id="">日</span>
 
                                     <input type="number" class="form-control  ?>" value="" onchange="durToMin()" name="hours" id="hours" min="0">
-                                    <span class="input-group-text" id="">時</span>
+                                    <span class="input-group-text" id="">時間</span>
 
                                     <input type="number" class="form-control  ?>" value="" onchange="durToMin()" name="minutes" id="minutes" min="0">
                                     <span class="input-group-text" id="days">分</span>
@@ -51,7 +51,7 @@
                             <div class="col-4 pt-3">
                                 <div class="col">
                                     <label class="form-label" for="tantou"><?= $this->data['PIC'] ?></label>
-                                    <select class=" form-control  <?= (form_error('担当者') ? 'is-invalid' : ''); ?>" name="担当者" id="tantou" required>
+                                    <select class="form-select  <?= (form_error('担当者') ? 'is-invalid' : ''); ?>" name="担当者" id="tantou" required>
                                         <?php
                                         foreach ($inspector_ as $i) :
                                             if ($i == $items->c_manager) : ?>
@@ -71,7 +71,7 @@
                         <div class="item row border-top py-3">
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="busho"><?= $this->data['DEPARTMENT'] ?></label>
-                                <select class="form-control <?= (form_error('部署') ? 'is-invalid' : ''); ?>" name="部署" id="busho" required>
+                                <select class="form-select <?= (form_error('部署') ? 'is-invalid' : ''); ?>" name="部署" id="busho" required>
 
                                     <?php
                                     foreach ($division as $d) :
@@ -86,7 +86,7 @@
                             <!-- Probably connect with each other -->
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="setsubi"><?= $this->data['PROCESS_NAME'] ?></label>
-                                <select class="form-control <?= (form_error('設備') ? 'is-invalid' : ''); ?>" name="設備" id="setsubi" required>
+                                <select class="form-select <?= (form_error('設備') ? 'is-invalid' : ''); ?>" name="設備" id="setsubi" required>
                                     <?php
                                     foreach ($tools_name as $t) :
                                         if ($t == $items->c_facility) : ?>
@@ -99,7 +99,7 @@
                             </div>
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="gouki"><?= $this->data['UNIT'] ?></label>
-                                <select class="form-control <?= (form_error('号機') ? 'is-invalid' : ''); ?>" name="号機" id="gouki" required>
+                                <select class="form-select <?= (form_error('号機') ? 'is-invalid' : ''); ?>" name="号機" id="gouki" required>
                                     <?php
                                     foreach ($unit as $u) :
                                         if ($u == $items->c_unit) : ?>
@@ -271,17 +271,21 @@
         background-color: #F5F5F5;
     }
 
+    .card-body {
+        background-color: #F4F5F6;
+    }
+
     .sub-header {
         top: 30px;
         left: 40px;
-        background-color: white;
+        background-color: #F4F5F6;
         width: max-content;
     }
 
 
     form .form-control {
 
-        background-color: #EAECF4;
+        /* background-color: #EAECF4; */
 
     }
 </style>
@@ -291,7 +295,7 @@
         $(this).removeClass('is-invalid')
     })
 
-    
+
 
     $(document).ready(function() {
         minToDur()

@@ -19,7 +19,7 @@
                                 <div class="col-4 pt-3">
                                     <label for="busho" class="form-label"><?= $this->data['EQUIPMENT_DEPARTMENT_F'] ?></label>
                                     <span class="must form-check-label">必須</span>
-                                    <select class="form-control" name="部署" id="busho" required>
+                                    <select class="form-select" name="部署" id="busho" required>
                                         <?php
                                         foreach ($division as $d) :
                                             if ($d == $items->c_department) : ?>
@@ -33,7 +33,7 @@
 
                                 <div class="col-4 pt-3">
                                     <label for="setsubi" class="form-label"><?= $this->data['EQUIPMENT_FACILITY_F'] ?></label>
-                                    <select class="form-control" name="設備" id="setsubi" required>
+                                    <select class="form-select" name="設備" id="setsubi" required>
                                         <?php
                                         foreach ($tools_name as $t) :
                                             if ($t == $items->c_facility) : ?>
@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="col-4 pt-3">
                                     <label class="form-label" for="gouki"><?= $this->data['EQUIPMENT_UNIT_F'] ?></label>
-                                    <select class="form-control" name="号機" id="gouki" required>
+                                    <select class="form-select" name="号機" id="gouki" required>
                                         <?php
                                         foreach ($unit as $u) :
                                             if ($u == $items->c_unit) : ?>
@@ -97,7 +97,7 @@
 
                                 <div class="col-4 pt-3">
                                     <label for="pic" class="form-label"><?= $this->data['EQUIPMENT_PIC_SCHEDULE_F'] ?></label>
-                                    <select class="form-control" id="pic" name="担当者日程" required>
+                                    <select class="form-select" id="pic" name="担当者日程" required>
                                         <?php
                                         foreach ($inspector_ as $i) :
                                             if ($i == $items->c_picSchedule) : ?>
@@ -226,16 +226,20 @@
         background-color: #F5F5F5
     }
 
+    .card-body{
+        background-color: #F4F5F6;
+    }
+
     .sub-header {
         top: 30px;
         left: 40px;
-        background-color: white;
+        background-color: #F4F5F6;
         width: max-content;
     }
 
     form .form-control {
 
-        background-color: #EAECF4;
+        /* background-color: #EAECF4; */
 
     }
 </style>
