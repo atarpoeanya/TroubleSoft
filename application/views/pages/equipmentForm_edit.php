@@ -18,7 +18,7 @@
                         <input type="hidden" name="fmea_id" id="fmea_id" value="">
                         <div class=" d-flex justify-content-md-start">
 
-                        <input type="hidden" name="duration" id="duration" value="<?= $items->c_stopTime ?>">
+                            <input type="hidden" name="duration" id="duration" value="<?= $items->c_stopTime ?>">
 
                         </div>
                         <!-- SECTION_1_Identity -->
@@ -39,7 +39,7 @@
                                     <span class="input-group-text" id="">日</span>
 
                                     <input type="number" class="form-control  ?>" value="" onchange="durToMin()" name="hours" id="hours" min="0">
-                                    <span class="input-group-text" id="">時</span>
+                                    <span class="input-group-text" id="">時間</span>
 
                                     <input type="number" class="form-control  ?>" value="" onchange="durToMin()" name="minutes" id="minutes" min="0">
                                     <span class="input-group-text" id="days">分</span>
@@ -271,10 +271,14 @@
         background-color: #F5F5F5;
     }
 
+    .card-body {
+        background-color: #F4F5F6;
+    }
+
     .sub-header {
         top: 30px;
         left: 40px;
-        background-color: white;
+        background-color: #F4F5F6;
         width: max-content;
     }
 
@@ -291,7 +295,7 @@
         $(this).removeClass('is-invalid')
     })
 
-    
+
 
     $(document).ready(function() {
         minToDur()

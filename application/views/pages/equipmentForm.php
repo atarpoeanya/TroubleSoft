@@ -1,11 +1,10 @@
-
 <div id="main_body" class="pt-3">
     <div class="row">
         <!-- Main-Form -->
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                <h2 class="card-title">トラブル報告書 登録</h2>
+                    <h2 class="card-title">トラブル報告書 登録</h2>
                     <span>FMEA</span>
                     <div class="d-flex justify-content-start pb-2">
 
@@ -20,7 +19,7 @@
                     </div>
                     <!-- FORM SECTION -->
                     <form action="<?= base_url() ?>/equipment/1" method="post" class="px-3 col " autocomplete="off" id="equipForm" enctype="multipart/form-data" novalidate>
-        
+
                         <input type="hidden" name="spareParts" id="partinfo" value="">
 
                         <input type="hidden" name="fmea_id" id="fmea_id" value="<?= set_value('fmea_id'); ?>">
@@ -47,7 +46,7 @@
                                     <span class="input-group-text" id="">日</span>
 
                                     <input type="number" class="form-control  <?php if (form_error('hours')) echo 'is-invalid' ?>" value="<?= set_value('hours', '0'); ?>" onchange="durToMin()" name="hours" id="hours" min="0">
-                                    <span class="input-group-text" id="">時</span>
+                                    <span class="input-group-text" id="">時間</span>
 
                                     <input type="number" class="form-control  <?php if (form_error('minutes')) echo 'is-invalid' ?>" value="<?= set_value('minutes', '0'); ?>" onchange="durToMin()" name="minutes" id="minutes" min="0">
                                     <span class="input-group-text" id="days">分</span>
@@ -58,13 +57,13 @@
 
                             <div class="col-4 pt-3">
 
-                                    <label class="form-label" for="tantou"><?= $this->data['PIC'] ?></label><!-- PERSON IN CHARGE-->
-                                    <select class="form-select"  <?= (form_error('担当者') ? 'is-invalid' : ''); ?>" name="担当者" id="tantou" required>
-                                        <option value="" <?= set_select('担当者', '', true); ?> disabled selected>選び出す</option>
-                                        <option value="水上" <?= set_select('担当者', '水上'); ?>>水上</option>
-                                        <option value="新宮" <?= set_select('担当者', '新宮'); ?>>新宮</option>
-                                        <option value="齋藤" <?= set_select('担当者', '齋藤'); ?>>齋藤</option>
-                                    </select>
+                                <label class="form-label" for="tantou"><?= $this->data['PIC'] ?></label><!-- PERSON IN CHARGE-->
+                                <select class="form-select <?= (form_error('担当者') ? 'is-invalid' : ''); ?>" name="担当者" id="tantou" required>
+                                    <option value="" <?= set_select('担当者', '', true); ?> disabled selected>選び出す</option>
+                                    <option value="水上" <?= set_select('担当者', '水上'); ?>>水上</option>
+                                    <option value="新宮" <?= set_select('担当者', '新宮'); ?>>新宮</option>
+                                    <option value="齋藤" <?= set_select('担当者', '齋藤'); ?>>齋藤</option>
+                                </select>
 
 
                             </div>
@@ -75,7 +74,7 @@
                         <div class="item row border-top py-3">
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="busho"><?= $this->data['DEPARTMENT'] ?></label>
-                                <select class="form-select" <?= (form_error('部署') ? 'is-invalid' : ''); ?>" name="部署" id="busho" required>
+                                <select class="form-select <?= (form_error('部署') ? 'is-invalid' : ''); ?>" name="部署" id="busho" required>
 
                                     <option value="" <?= set_select('部署', '', true); ?>disabled selected>選び出す</option>
                                     <option value="塗装" <?= set_select('部署', '塗装'); ?>>塗装</option>
@@ -84,14 +83,14 @@
                             <!-- Probably connect with each other -->
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="setsubi"><?= $this->data['FACILITY'] ?></label>
-                                <select class="form-select" <?= (form_error('設備') ? 'is-invalid' : ''); ?>" name="設備" id="setsubi" required>
+                                <select class="form-select <?= (form_error('設備') ? 'is-invalid' : ''); ?>" name="設備" id="setsubi" required>
                                     <option value="" <?= set_select('設備', '', true); ?> disabled selected>選び出す</option>
                                     <option value="プレス" <?= set_select('設備', 'プレス'); ?>>プレス</option>
                                 </select>
                             </div>
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="gouki"><?= $this->data['UNIT'] ?></label>
-                                <select class="form-select" <?= (form_error('号機') ? 'is-invalid' : ''); ?>" name="号機" id="gouki" required>
+                                <select class="form-select <?= (form_error('号機') ? 'is-invalid' : ''); ?>" name="号機" id="gouki" required>
                                     <option value="" <?= set_select('号機', '', true); ?> disabled selected>選び出す</option>
                                     <option value="1号機" <?= set_select('号機', '1号機'); ?>>1号機</option>
                                     <option value="2号機" <?= set_select('号機', '2号機'); ?>>2号機</option>
@@ -100,13 +99,13 @@
 
                             <div class="col pt-3">
                                 <label for="kouteiNa" class="form-label"><?= $this->data['PROCESS_NAME'] ?></label>
-                                <input  type="text" name="工程名" id="kouteiNa" class="form-control
+                                <input type="text" name="工程名" id="kouteiNa" class="form-control
                                 <?php if (form_error('工程名')) echo 'is-invalid' ?>" value="<?= set_value('工程名'); ?>" required>
                             </div>
 
                             <div class="col pt-3">
                                 <label for="mode" class="form-label"><?= $this->data['FAIL_MODE'] ?></label>
-                                <input  type="text" name="故障モード" id="mode" class="form-control
+                                <input type="text" name="故障モード" id="mode" class="form-control
                                 <?php if (form_error('故障モード')) echo 'is-invalid' ?>" value="<?= set_value('故障モード'); ?>" required>
                             </div>
 
@@ -119,23 +118,23 @@
                             <div class="col-12 pt-3">
                                 <label class="form-label" for="gensho"><?= $this->data['PHENOMENON'] ?></label>
                                 <textarea name="現象" id="gensho" class="form-control
-                                <?php if (form_error('現象')) echo 'is-invalid' ?>" cols="30" rows="10" required><?= set_value('現象'); ?></textarea>
+                                <?php if (form_error('現象')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= set_value('現象'); ?></textarea>
                             </div>
                             <div class="col-12 pt-3">
                                 <label class="form-label" for="shuriNaiyou"><?= $this->data['REPAIR_DETAIL'] ?></label>
-                                <textarea  name="修理内容" id="shuriNaiyou" class="form-control
-                                <?php if (form_error('修理内容')) echo 'is-invalid' ?>" cols="30" rows="10" required><?= set_value('修理内容'); ?></textarea>
+                                <textarea name="修理内容" id="shuriNaiyou" class="form-control
+                                <?php if (form_error('修理内容')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= set_value('修理内容'); ?></textarea>
                             </div>
 
-                            <div class="col-6 pt-3">
+                            <div class="col-12 pt-3">
                                 <label class="form-label" for="failMech"><?= $this->data['MECHANISM'] ?></label>
-                                <textarea  name="fail_mech" id="failMech" class="form-control
+                                <textarea name="fail_mech" id="failMech" class="form-control
                                 <?php if (form_error('fail_mech')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= set_value('fail_mech'); ?></textarea>
                             </div>
 
-                            <div class="col-6 pt-3">
+                            <div class="col-12 pt-3">
                                 <label class="form-label" for="response"><?= $this->data['RESPONSE'] ?></label>
-                                <textarea  name="response" id="response" class="form-control
+                                <textarea name="response" id="response" class="form-control
                                 <?php if (form_error('response')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= set_value('response'); ?></textarea>
                             </div>
 
@@ -143,7 +142,7 @@
                                 <!-- FILE input required -->
                                 <div class="row gy-4 ">
                                     <div class="col-12">
-                                    <label class="form-label" for="file_upload"><?= $this->data['COUNTERMEASURES'] ?></label>
+                                        <label class="form-label" for="file_upload"><?= $this->data['COUNTERMEASURES'] ?></label>
                                         <br>
                                         <!-- Questionable -->
                                         <div class="input-group">
@@ -168,7 +167,7 @@
 
                                     <table class="table table-hover table-striped text-center" id="equipment_parts_list">
                                         <thead>
-                    
+
                                             <tr class="table-dark">
                                                 <td>部品NO</td>
                                                 <td>部品名</td>
@@ -225,9 +224,7 @@
             </div>
             <div class="card sticky-top h-50 mt-2" style="z-index: 1; top:60px;">
                 <div class="card-title p-3">
-                    <div class="">
-                        <h2 class="p-1">FMEA</h2>
-                    </div>
+                    <h2 class="p-1">FMEA</h2>
                 </div>
                 <div class="card-body p-2 overflow-scroll">
                     <div class="container" id="fmea_place" style="height: 500px;">
@@ -250,13 +247,22 @@
     .sub-header {
         top: 30px;
         left: 40px;
-        background-color: white;
+        background-color: #F4F5F6;
         width: max-content;
-        
     }
 
-    .btn-group > label{
+
+
+    .btn-group>label {
         min-width: 130px;
+    }
+
+    .card-title {
+        background-color: #F4F5F6;
+    }
+
+    .card-body {
+        background-color: #F4F5F6;
     }
 
     form .form-control {

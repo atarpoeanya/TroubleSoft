@@ -568,7 +568,6 @@ class Dashboard extends CI_Controller
         // NEED DATA LIST THIS PART
         //This use as
         $data['division'] = [
-            '選び出す',
             '塗装',
             '生技',
             '組付',
@@ -593,7 +592,9 @@ class Dashboard extends CI_Controller
         ];
 
         $data['unit'] = [
-            '1号機', '2号機', '3号機'
+            '1号機', 
+            '2号機', 
+            '3号機'
         ];
 
         $this->load->view('templates/header');
@@ -625,7 +626,6 @@ class Dashboard extends CI_Controller
         $id = $this->uri->segment(2);
         $data['items'] = $this->Troublelist_model->get_tool_fmea_id(intval($id));
         $data['division'] = [
-            '選び出す',
             '塗装',
             '生技',
             '組付',

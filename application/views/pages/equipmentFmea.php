@@ -82,7 +82,7 @@
 
                             <div class="col-4 pt-3">
                                 <label for="pic" class="form-label"><?= $this->data['EQUIPMENT_PIC_SCHEDULE_F'] ?></label>
-                                <select class="form-select" id="pic" name="担当者日程" required >
+                                <select class="form-select" id="pic" name="担当者日程" required>
                                     <option value="" selected>Default</option>
                                     <option value="1">1</option>
                                     <option value="3">3</option>
@@ -183,10 +183,14 @@
         background-color: #F5F5F5
     }
 
+    .card-body {
+        background-color: #F4F5F6;
+    }
+
     .sub-header {
         top: 30px;
         left: 40px;
-        background-color: white;
+        background-color: #F4F5F6;
         width: max-content;
 
     }

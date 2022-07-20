@@ -226,10 +226,14 @@
         background-color: #F5F5F5
     }
 
+    .card-body{
+        background-color: #F4F5F6;
+    }
+
     .sub-header {
         top: 30px;
         left: 40px;
-        background-color: white;
+        background-color: #F4F5F6;
         width: max-content;
     }
 
