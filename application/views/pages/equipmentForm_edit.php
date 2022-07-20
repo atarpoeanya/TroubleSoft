@@ -281,7 +281,7 @@
 
     form .form-control {
 
-        background-color: #EAECF4;
+        /* background-color: #EAECF4; */
 
     }
 </style>
