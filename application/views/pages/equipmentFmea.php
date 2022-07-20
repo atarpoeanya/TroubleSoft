@@ -4,7 +4,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <h2 class="card-title">FMEA FORM</h2>
+                    <h2 class="card-title ps-2 pt-2">FMEA FORM</h2>
                     <form action="/equipment_fmea/2" method="post" class="mt-4 p-4 col mainForm" autocomplete="off" id="equipForm" enctype="multipart/form-data" novalidate>
                         <!-- For Spare part [Id, Amount] -->
                         <input type="hidden" name="spareParts" id="partinfo" value="">
@@ -14,7 +14,7 @@
                             &nbsp;<b><?= $this->data['SECTION_1'] ?></b>&nbsp;</p>
                         <div class="row border-top py-3">
 
-                            <div class="col-6 pt-3">
+                            <div class="col-4 pt-3">
                                 <label for="busho" class="form-label"><?= $this->data['EQUIPMENT_DEPARTMENT_F'] ?></label>
                                 <select class="form-control" name="部署" id="busho" required>
                                     <option value="" selected>Default</option>
@@ -24,26 +24,26 @@
                                 </select>
                             </div>
 
-                            <div class="col-6 pt-3">
+                            <div class="col-4 pt-3">
                                 <label for="setsubi" class="form-label"><?= $this->data['EQUIPMENT_FACILITY_F'] ?></label>
                                 <select class="form-control" name="設備" id="setsubi" required>
                                     <option value="" selected>Default</option>
                                     <option value="1">1</option>
                                 </select>
                             </div>
-                            <div class="col pt-3">
+                            <div class="col-4 pt-3">
                                 <label class="form-label" for="gouki"><?= $this->data['EQUIPMENT_UNIT_F'] ?></label>
                                 <select class="form-control" name="号機" id="gouki" required>
                                     <option value="" selected>Default</option>
                                     <option value="1">1</option>
                                 </select>
                             </div>
-                            <div class="col-3 pt-3">
+                            <div class="col-6 pt-3">
                                 <label for="kouteiNa" class="form-label"><?= $this->data['EQUIPMENT_PROCESS_NAME_F'] ?></label>
                                 <input type="text" name="工程名" id="kouteiNa" class="form-control
                                 <?php if (form_error('工程名')) echo 'is-invalid' ?>" value="<?= set_value('工程名'); ?>" required>
                             </div>
-                            <div class="col-3 pt-3">
+                            <div class="col-6 pt-3">
                                 <label for="mode" class="form-label"><?= $this->data['EQUIPMENT_FAIL_MODE_F'] ?></label>
                                 <input type="text" name="故障モード" id="mode" class="form-control
                                 <?php if (form_error('故障モード')) echo 'is-invalid' ?>" value="<?= set_value('故障モード'); ?>" required>
@@ -67,8 +67,8 @@
                             </div>
                             <div class="col-6 pt-3">
                                 <label for="line_effect" class="form-label"><?= $this->data['EQUIPMENT_LINE_EFFECT_F'] ?></label>
-                                <textarea name="ライン停止の可能性"  cols="30" rows="5"  id="line_effect" class="form-control
-                                <?php if (form_error('ライン停止の可能性')) echo 'is-invalid' ?>" required><?= set_value('ライン停止の可能性')?></textarea>
+                                <input name="ライン停止の可能性" id="line_effect" class="form-control
+                                <?php if (form_error('ライン停止の可能性')) echo 'is-invalid' ?>" value="<?= set_value('ライン停止の可能性')?>" required>
                             </div>
                             <div class="col-6 pt-3">
                                 <label for="special_char" class="form-label"><?= $this->data['EQUIPMENT_SPECIAL_CHAR_F'] ?></label>

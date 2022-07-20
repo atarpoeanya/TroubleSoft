@@ -15,7 +15,7 @@
         <div class="card p-3 m-auto mb-3">
             <div class="card-body ">
                 <div class="table-responsive">
-                    <table class="table table-bordered mb-0 align-middle">
+                    <table class="table table-bordered mb-0 align-middle text-nowrap">
                         <thead class="table-dark">
                             <tr class="text-center">
                                 <th colspan="10">設備のトラブルレポート</th>
@@ -33,25 +33,37 @@
                             </tr>
                             <tr>
                                 <td>発生日</td>
-                                <td><b><?= date("Y年m月d日", strtotime($item->c_accidentDate)) ?>&nbsp; - <?= date("H:i 分頃", strtotime($item->c_repairStart)) ?></b></td>
-                                <td>修理日</td>
-                                <td colspan="3"><b><?= date("Y年m月d日", strtotime($item->c_repairDate)) ?>&nbsp; - <?= date("H:i 分頃", strtotime($item->c_repairEnd)) ?></b></td>
-
+                                <td><b><?= date("Y年m月d日", strtotime($item->c_accidentDate)) ?>&nbsp;</b></td>
+                                <!-- Change this to line stop -->
                                 <td>修理所要時間</td>
-                                <td><b><?= date("h", strtotime($item->c_repairEnd) - strtotime($item->c_repairStart)) ?> 時間</b></td>
+                                <td colspan="5"><b><?= $item->c_stopTime ?> 分</th></b></td>
                             </tr>
                             <tr>
                                 <td>部署場所</td>
-                                <td colspan="7"><?= $item->c_department ?></td>
+                                <td colspan="7">
+                                    <?= $item->c_department ?>
+                                </td>
 
                             </tr>
                             <!-- <tr>
                                 <td class="table-dark" colspan="10">&nbsp;</td>
                             </tr> -->
                             <tr class=" table-light">
-                                <td colspan="3"><small> 設備</small><br> <?= $item->c_facility ?> - <?= $item->c_unit ?></td>
-                                <td colspan="3"><small>工程名・工程機能</small><br> <?= $item->c_processName ?></td>
-                                <td colspan="3"><small>故障モード</small><br> <?= $item->c_failMode ?></td>
+                                <td colspan="3"><small> 設備</small><br>
+                                    <div class="container">
+                                        <?= $item->c_facility ?> - <?= $item->c_unit ?>
+                                    </div>
+                                </td>
+                                <td colspan="3"><small>工程名・工程機能</small><br>
+                                    <div class="container">
+                                        <?= $item->c_processName ?>
+                                    </div>
+                                </td>
+                                <td colspan="3"><small>故障モード</small><br>
+                                    <div class="container">
+                                        <?= $item->c_failMode ?>
+                                    </div>
+                                </td>
                             </tr>
                             <tr class="table-dark text-center">
                                 <td colspan="10"><b>トラブルの内容</b></td>
@@ -59,13 +71,13 @@
                             <tr>
                                 <td colspan="1" rowspan="2" class="header_title">原因 と 内容</td>
                                 <td colspan="4" class="align-top text">
-                                    <small>Phenomena</small>
+                                    <small>現象・不具合要因詳細</small>
                                     <div class="container">
                                         <?= $item->c_phenomenon ?>
                                     </div>
                                 </td>
                                 <td colspan="4" class="align-top text">
-                                    <small>Repair Detail</small>
+                                    <small>修理内容</small>
                                     <div class="container">
                                         <?= $item->c_repairDet ?>
                                     </div>
@@ -73,13 +85,13 @@
                             </tr>
                             <tr>
                                 <td colspan="4" class="align-top text">
-                                    <small>Response</small>
+                                    <small>対応・処置</small>
                                     <div class="container">
                                         <?= $item->c_response ?>
                                     </div>
                                 </td>
                                 <td colspan="4" class="align-top text">
-                                    <small>Fail Mech</small>
+                                    <small>故障の潜在原因 メカニズム</small>
                                     <div class="container">
                                         <?= $item->c_failMech ?>
                                     </div>
@@ -192,8 +204,7 @@
                                                 <?= $value ?>
                                             </td>
                                         <?php
-                                        }
-                                        elseif ($key == 'c_price') {
+                                        } elseif ($key == 'c_price') {
                                         ?>
                                             <td class="text-center  pointer">
                                                 <?= $value ?>
@@ -355,6 +366,7 @@
                                         <div class="table-responsive">
                                             <table class="table table-bordered mb-0">
                                                 <thead class="table-dark">
+                                                    <!-- Fix this part -->
                                                     <?php
                                                     foreach ($title as $thead) {
                                                         switch ($thead) {
@@ -461,7 +473,11 @@
             min-height: 150px;
             height: 150px;
         }
+        small {
+            font-weight: bold;
+        }
 
+       
         .header_title {
             width: 50px;
         }

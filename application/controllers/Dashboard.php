@@ -52,7 +52,8 @@ class Dashboard extends CI_Controller
 
             'EQUIPMENT_FMEA_LIST_BUTTON'            =>  'FMEA一覧表',
 
-
+            // Custom Taisaku button
+            'FILE_BUTTON'                           => '選択...',
             // Dashboard 
             'RADIO_A_EQUIPMENT'                     =>  '設備',
             'RADIO_A_PRODUCT'                       =>  '品質',
@@ -61,7 +62,7 @@ class Dashboard extends CI_Controller
             'RADIO_B_REAL'                          =>  'トラブル',
             'RADIO_B_FMEA'                          =>  'FMEA',
 
-       
+
             //Form 
             //Equipment
             'FMEA_BUTTON_NEED'                      =>  '必要',
@@ -73,10 +74,12 @@ class Dashboard extends CI_Controller
 
             // Labels[
 
+
+
             //Form (EQUIPMENT)
             'FORM_TITLE'                            =>  '設備トラブル',
             'ACCIDENT_DATE'                         =>  '発生日時',
-           
+
             'STOP_TIME'                             =>  '停止時間',
             'DEPARTMENT'                            =>  '部署名',
             'PIC'                                   =>  '担当者',
@@ -159,18 +162,18 @@ class Dashboard extends CI_Controller
             // 'EQUIPMENT_HAPPENING_TIME_F' => '発生時間',
             // 'EQUIPMENT_STOP_TIME_F' => '停止時間',
 
-                 //Transition screen
-                //  'TRANSITION_BACK'                       =>  '閉じる',
-                //  'TRANSITION_TOOLS_PROBLEM_BUTTON'       =>  '設備・工程',
-                //  'TRANSITION_PRODUCT_PROBLEM_BUTTON'     =>  '製品',
-     
-                //  'TRANSITION_LABEL_TOP'                  =>  '新規',
-                //  'TRANSITION_LABEL_BOTTOM'               =>  'FMEAのほう',
+            //Transition screen
+            //  'TRANSITION_BACK'                       =>  '閉じる',
+            //  'TRANSITION_TOOLS_PROBLEM_BUTTON'       =>  '設備・工程',
+            //  'TRANSITION_PRODUCT_PROBLEM_BUTTON'     =>  '製品',
 
-                // equipment Form
-                // 'REPAIR_DATE'                           =>  '作業日',
-                // 'HAPPENING_TIME'                        =>  '発生時間',
-     
+            //  'TRANSITION_LABEL_TOP'                  =>  '新規',
+            //  'TRANSITION_LABEL_BOTTOM'               =>  'FMEAのほう',
+
+            // equipment Form
+            // 'REPAIR_DATE'                           =>  '作業日',
+            // 'HAPPENING_TIME'                        =>  '発生時間',
+
 
 
         );
@@ -378,9 +381,10 @@ class Dashboard extends CI_Controller
             $this->session->set_flashdata('crumbs', '0');
 
             $this->form_validation->set_rules('発生日', '1', 'required');
-            $this->form_validation->set_rules('修理日', '2', 'required');
-            $this->form_validation->set_rules('time_start', '3', 'required');
-            $this->form_validation->set_rules('time_end', '4', 'required');
+
+            $this->form_validation->set_rules('days', '2', 'required');
+            $this->form_validation->set_rules('hours', '3', 'required');
+            $this->form_validation->set_rules('minutes', '4', 'required');
 
             $this->form_validation->set_rules('担当者', '5', 'required|callback_check_default');
             $this->form_validation->set_rules('部署', '6', 'required|callback_check_default');

@@ -17,22 +17,8 @@
 
                         <input type="hidden" name="fmea_id" id="fmea_id" value="">
                         <div class=" d-flex justify-content-md-start">
-                            <!-- FMEA TOGGLE -->
-                            <div class="row bg-light px-3 pb-2 rounded">
 
-                                <!-- <label class="form-label" for="fmea-toggle-btn">FMEA</label> -->
-                                <!-- <span>FMEA</span>
-                                <small>FMEAの参考が必要と、「<b>要</b>」選んでください。</small>
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group" id="fmea-toggle-btn">
-
-                                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-                                    <label class="btn btn-outline-primary mt-0" for="btnradio1">不要</label>
-
-                                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-                                    <label class="btn btn-outline-primary mt-0" for="btnradio2">要</label>
-
-                                </div> -->
-                            </div>
+                        <input type="hidden" name="duration" id="duration" value="<?= $items->c_stopTime ?>">
 
                         </div>
                         <!-- SECTION_1_Identity -->
@@ -40,29 +26,30 @@
                             &nbsp;<b><?= $this->data['SECTION_1'] ?></b>&nbsp;</p>
                         <div class="inspector row border-top py-3">
 
-                            <div class="col-6 pt-3">
-                                <label for="start_day" class="form-label"><?= $this->data['ACCIDENT_DATE'] ?></label>
-                                <input required type="date" class="form-control" id="start_day" name="発生日" value="<?= $items->c_accidentDate ?>" required>
-                            </div>
-
-                            <div class="col-6 pt-3">
-                                <label for="repair_day" class="form-label"><?= $this->data['REPAIR_DATE'] ?></label>
-                                <input required type="date" class="form-control" id="repair_day" name="修理日" value="<?= $items->c_repairDate ?>" required>
-                            </div>
-
                             <div class="col-4 pt-3">
-                                <label for="time_start" class="form-label"><?= $this->data['HAPPENING_TIME'] ?></label>
-                                <input required type="time" class="form-control" id="time_start" name="time_start" value="<?= $items->c_repairStart ?>" required>
+                                <label for="start_day" class="form-label"><?= $this->data['ACCIDENT_DATE'] ?></label>
+                                <input required type="datetime-local" class="form-control" id="start_day" name="発生日" value="<?= $items->c_accidentDate ?>" required>
                             </div>
+
+
                             <div class="col-4 pt-3">
                                 <label for="time_end" class="form-label"><?= $this->data['STOP_TIME'] ?></label>
-                                <input required type="time" class="form-control" id="time_end" name="time_end" value="<?= $items->c_repairEnd ?>" required>
+                                <div class="input-group">
+                                    <input type="number" class="form-control  ?>" value="" onchange="durToMin()" name="days" id="days" min="0">
+                                    <span class="input-group-text" id="">日</span>
+
+                                    <input type="number" class="form-control  ?>" value="" onchange="durToMin()" name="hours" id="hours" min="0">
+                                    <span class="input-group-text" id="">時</span>
+
+                                    <input type="number" class="form-control  ?>" value="" onchange="durToMin()" name="minutes" id="minutes" min="0">
+                                    <span class="input-group-text" id="days">分</span>
+                                </div>
                             </div>
 
 
 
-                            <div class="col-9 pt-3">
-                                <div class="col-4">
+                            <div class="col-4 pt-3">
+                                <div class="col">
                                     <label class="form-label" for="tantou"><?= $this->data['PIC'] ?></label>
                                     <select class=" form-control  <?= (form_error('担当者') ? 'is-invalid' : ''); ?>" name="担当者" id="tantou" required>
                                         <?php
@@ -170,7 +157,11 @@
                                                 <div class="col">
 
                                                     <label class="form-label" for="taisakusho"><?= $this->data['COUNTERMEASURES'] ?></label>
-                                                    <input class="form-control" type="file" name="対策書" id="taisakusho" value="<?= $items->c_countermeasure ?>">
+                                                    <div class="input-group">
+                                                        <input class="form-control" type="file" name="対策書" id="taisakusho" onchange="fileUpload()" style="display: none;">
+                                                        <button id="file_upload" class="btn btn-secondary" type="button" onclick="$('#taisakusho').click();" style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;"><?= $this->data['FILE_BUTTON'] ?></button>
+                                                        <textarea class="form-control" name="" id="taisakusho_file" cols="30" rows="1" style="resize: none;" disabled></textarea>
+                                                    </div>
                                                 </div>
                                                 <div class="col">
                                                     <label for="" class="form-label"><?= $this->data['COUNTERMEASURES_OLD'] ?></label><br>
@@ -299,4 +290,10 @@
     $('input, textarea, select').on('click', function() {
         $(this).removeClass('is-invalid')
     })
+
+    
+
+    $(document).ready(function() {
+        minToDur()
+    });
 </script>

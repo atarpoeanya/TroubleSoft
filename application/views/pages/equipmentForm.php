@@ -25,6 +25,8 @@
 
                         <input type="hidden" name="fmea_id" id="fmea_id" value="<?= set_value('fmea_id'); ?>">
 
+                        <input type="hidden" name="duration" id="duration" onchange="minToDur()" value="<?= set_value('duration'); ?>">
+
                         <!-- SECTION_1_Identity -->
                         <p class=" position-relative sub-header">
                             &nbsp;<b><?= $this->data['SECTION_1'] ?></b>&nbsp;</p>
@@ -33,7 +35,7 @@
                             <div class="col-4 pt-3">
 
                                 <label for="start_day" class="form-label"><?= $this->data['ACCIDENT_DATE'] ?></label>
-                                <input id="start_day" name="発生日" type="date" class="form-control
+                                <input id="start_day" name="発生日" type="datetime-local" class="form-control
                                 <?php if (form_error('発生日')) echo 'is-invalid' ?>" value="<?= set_value('発生日'); ?>" required>
                             </div>
 
@@ -41,14 +43,14 @@
                             <div class="col-4 pt-3">
                                 <label for="time_end" class="form-label"><?= $this->data['STOP_TIME'] ?></label>
                                 <div class="input-group">
-                                    <input type="number" value="0" class="form-control">
-                                    <span class="input-group-text">日</span>
+                                    <input type="number" class="form-control  <?php if (form_error('days')) echo 'is-invalid' ?>" value="<?= set_value('days', '0') ?>" onchange="durToMin()" name="days" id="days" min="0">
+                                    <span class="input-group-text" id="">日</span>
 
-                                    <input type="number" value="0" class="form-control">
-                                    <span class="input-group-text">時</span>
+                                    <input type="number" class="form-control  <?php if (form_error('hours')) echo 'is-invalid' ?>" value="<?= set_value('hours', '0'); ?>" onchange="durToMin()" name="hours" id="hours" min="0">
+                                    <span class="input-group-text" id="">時</span>
 
-                                    <input type="number" value="0" class="form-control">
-                                    <span class="input-group-text">分</span>
+                                    <input type="number" class="form-control  <?php if (form_error('minutes')) echo 'is-invalid' ?>" value="<?= set_value('minutes', '0'); ?>" onchange="durToMin()" name="minutes" id="minutes" min="0">
+                                    <span class="input-group-text" id="days">分</span>
                                 </div>
 
                             </div>
@@ -141,8 +143,14 @@
                                 <!-- FILE input required -->
                                 <div class="row gy-4 ">
                                     <div class="col-12">
-                                        <label class="form-label" for="taisakusho"><?= $this->data['COUNTERMEASURES'] ?></label>
-                                        <input class="form-control" type="file" name="対策書" id="taisakusho">
+                                    <label class="form-label" for="file_upload"><?= $this->data['COUNTERMEASURES'] ?></label>
+                                        <br>
+                                        <!-- Questionable -->
+                                        <div class="input-group">
+                                            <input class="form-control" type="file" name="対策書" id="taisakusho" onchange="fileUpload()" style="display: none;">
+                                            <button id="file_upload" class="btn btn-secondary" type="button" onclick="$('#taisakusho').click();" style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;"><?= $this->data['FILE_BUTTON'] ?></button>
+                                            <textarea class="form-control" name="" id="taisakusho_file" cols="30" rows="1" style="resize: none;" disabled></textarea>
+                                        </div>
                                     </div>
 
                                 </div>

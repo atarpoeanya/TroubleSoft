@@ -108,6 +108,30 @@
         })
     }
 
+    // DAY:HOURS to minute converter
+    {
+        function durToMin() {
+            var days = $('#days').val()
+            var hours = $('#hours').val()
+            var minutes = $('#minutes').val()
+
+            console.log(days + '  ' + hours + '  ' + minutes)
+
+            var duration = parseInt(days) * 1440 + parseInt(hours) * 60 + parseInt(minutes) * 1
+
+            $('#duration').val(duration)
+        }
+    }
+
+    // FILE TEXT GRABBER
+    {
+        function fileUpload() {
+            console.log('uploaded')
+            var text = $('#taisakusho').val()
+            text = text.substring(text.lastIndexOf("\\") + 1, text.length)
+            $('#taisakusho_file').val(text)
+        }
+    }
     //Also work on FMEA_form & Equipment_form
     //From modals/partselect.php
     {
@@ -278,6 +302,22 @@
 
 
         })
+    }
+
+    {
+        function minToDur() {
+            var duration = parseInt($('#duration').val())
+
+            var days = Math.floor(duration / 1440)
+            var rem_days = duration % 1440
+            var hours = Math.floor(rem_days / 60)
+            var minutes = duration - days * 1440 - hours * 60
+
+            $('#days').val(days)
+            $('#hours').val(hours)
+            $('#minutes').val(minutes)
+            // console.log('Hari : ' + days + ' Jam : ' + hours + ' Menit : ' + minutes)
+        }
     }
 
     // ========== EQUIPMENT FMEA=========

@@ -55,8 +55,6 @@ class Troublelist_model extends CI_Model
         $used_part = new stdClass();
 
         $equipment_row = $this->db->get_where('t800_equipment', array("c_t800_id" => $id))->row();
-        $equipment_row->c_repairStart = date("H:i", strtotime($equipment_row->c_repairStart));
-        $equipment_row->c_repairEnd = date("H:i", strtotime($equipment_row->c_repairEnd));
 
         if ($used_part_id) {
             $itemNum = 1;

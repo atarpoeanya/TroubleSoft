@@ -25,13 +25,23 @@
                                 <td colspan="7"><?= $fmea->c_department ?></td>
 
                             </tr>
-                            <!-- <tr>
-                                <td class="table-dark" colspan="10">&nbsp;</td>
-                            </tr> -->
+
                             <tr class=" table-light">
-                                <td colspan="3"><small> 設備</small><br> <?= $fmea->c_facility ?> - <?= $fmea->c_unit ?></td>
-                                <td colspan="3"><small>工程名・工程機能</small><br> <?= $fmea->c_processName ?></td>
-                                <td colspan="3"><small>故障モード</small><br> <?= $fmea->c_failMode ?></td>
+                                <td colspan="3"><small> 設備</small><br>
+                                    <div class="container">
+                                        <?= $fmea->c_facility ?> - <?= $fmea->c_unit ?>
+                                    </div>
+                                </td>
+                                <td colspan="3"><small>工程名・工程機能</small><br>
+                                    <div class="container">
+                                        <?= $fmea->c_processName ?>
+                                    </div>
+                                </td>
+                                <td colspan="3"><small>故障モード</small><br>
+                                    <div class="container">
+                                        <?= $fmea->c_failMode ?>
+                                    </div>
+                                </td>
                             </tr>
 
                             <tr class="table-dark text-center">
@@ -40,13 +50,13 @@
                             <tr>
                                 <td colspan="1" rowspan="2" class="header_title">原因 と 内容</td>
                                 <td colspan="4" class="align-top text">
-                                    <small>Mechanism</small>
+                                    <small>故障の潜在原因 メカニズム</small>
                                     <div class="container">
                                         <?= $fmea->c_failMech ?>
                                     </div>
                                 </td>
                                 <td colspan="4" class="align-top text">
-                                    <small>Fail Impact</small>
+                                    <small>故障の影響</small>
                                     <div class="container">
                                         <?= $fmea->c_failImpact ?>
                                     </div>
@@ -54,13 +64,13 @@
                             </tr>
                             <tr>
                                 <td colspan="4" class="align-top text">
-                                    <small>Effect on Line</small>
+                                    <small>ライン停止の可能性</small>
                                     <div class="container">
                                         <?= $fmea->c_lineEffect ?>
                                     </div>
                                 </td>
                                 <td colspan="4" class="align-top text">
-                                    <small>Special Characteristic</small>
+                                    <small>特 殊 特性等</small>
                                     <div class="container">
                                         <?= $fmea->c_specialChar ?>
                                     </div>
@@ -89,7 +99,7 @@
                             <tr>
                                 <td colspan="1" rowspan="2" class="header_title">予防 と 検出</td>
                                 <td colspan="8" class="align-top text">
-                                    <small>Detection</small>
+                                    <small>検出</small>
                                     <div class="container">
                                         <?= $fmea->c_detection ?>
                                     </div>
@@ -98,7 +108,7 @@
                             </tr>
                             <tr>
                                 <td colspan="8" class="align-top text">
-                                    <small>Prevention</small>
+                                    <small>予防</small>
                                     <div class="container">
                                         <?= $fmea->c_prevention ?>
                                     </div>
@@ -109,7 +119,7 @@
                             <tr>
                                 <td rowspan="2">対策</td>
                                 <td colspan="10">
-                                    <small>Counter_plan</small>
+                                    <small>対策案</small>
                                     <div class="container">
                                         <?= $fmea->c_counterPlan ?>
                                     </div>
@@ -117,7 +127,7 @@
                             </tr>
                             <tr>
                                 <td colspan="10">
-                                    <small>Measure</small>
+                                    <small>対策</small>
                                     <div class="container">
                                         <?= $fmea->c_measure ?>
                                     </div>
@@ -217,3 +227,9 @@
         </div>
     </div>
 </div>
+
+<style>
+    small {
+        font-weight: bold;
+    }
+</style>

@@ -3,6 +3,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
+                <h2 class="card-title ps-2 pt-2">FMEA FORM</h2>
                     <form action="/edit_Equipment_fmea/" method="post" class="mt-4 p-4 col mainForm" autocomplete="off" id="equipForm" enctype="multipart/form-data">
                         <!-- ID -->
                         <input type="hidden" name="id" id="setsubiId" value="<?= $items->c_t203_id ?>">
@@ -15,7 +16,7 @@
                                 &nbsp;<b><?= $this->data['SECTION_1'] ?></b>&nbsp;</p>
                             <div class="row row border-top py-3">
     
-                                <div class="col-6 pt-3">
+                                <div class="col-4 pt-3">
                                     <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_DEPARTMENT_F'] ?></label>
                                     <span class="must form-check-label">必須</span>
                                     <select class="form-control" name="部署" id="busho" required>
@@ -30,7 +31,7 @@
                                     </select>
                                 </div>
     
-                                <div class="col-6 pt-3">
+                                <div class="col-4 pt-3">
                                     <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_FACILITY_F'] ?></label>
                                     <select class="form-control" name="設備" id="setsubi" required>
                                         <?php
@@ -43,7 +44,7 @@
                                         endforeach; ?>
                                     </select>
                                 </div>
-                                <div class="col pt-3"><label class="form-label" for=""><?= $this->data['EQUIPMENT_UNIT_F'] ?></label>
+                                <div class="col-4 pt-3"><label class="form-label" for=""><?= $this->data['EQUIPMENT_UNIT_F'] ?></label>
                                     <select class="form-control" name="号機" id="gouki" required>
                                         <?php
                                         foreach ($unit as $u) :
@@ -55,11 +56,11 @@
                                         endforeach; ?>
                                     </select>
                                 </div>
-                                <div class="col-3 pt-3">
+                                <div class="col-6 pt-3">
                                     <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_PROCESS_NAME_F'] ?></label>
                                     <input type="text" class="form-control" name="工程名" value="<?= $items->c_processName ?>" required>
                                 </div>
-                                <div class="col-3 pt-3">
+                                <div class="col-6 pt-3">
                                     <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_FAIL_MODE_F'] ?></label>
                                     <input type="text" class="form-control" name="故障モード" value="<?= $items->c_failMode ?>" required>
                                 </div>
@@ -81,7 +82,7 @@
                                 </div>
                                 <div class="col-6 pt-3">
                                     <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_LINE_EFFECT_F'] ?></label>
-                                    <textarea name="ライン停止の可能性" class="form-control" cols="30" rows="5" required><?= $items->c_lineEffect ?></textarea>
+                                    <input name="ライン停止の可能性" class="form-control" required value="<?= $items->c_lineEffect ?>">
                                 </div>
                                 <div class="col-6 pt-3">
                                     <label for="start_day" class="form-label"><?= $this->data['EQUIPMENT_SPECIAL_CHAR_F'] ?></label>
