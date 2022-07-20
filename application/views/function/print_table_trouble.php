@@ -2,46 +2,27 @@
 function f_generate_table_select($data)
 {
 ?>
-    <div class="table-responsive table-wrapper table-wrapper-scroll overflow-hidden">
+    <div class="table-responsive table-wrapper border ">
+        <div class="d-flex p-2 border-bottom justify-content-center">
+            <div class="my-auto">件数 :&nbsp;</div>
+            <div class="my-auto" id="amount-sum"><b><?= count($data['troubleList']) ?></b></div>
+            <button id="clear-button" class="btn btn-sm btn-info ms-auto align-items-end" onclick="clearSearchBar()"><?= $data['CLEAR_BUTTON'] ?></button>
+        </div>
         <table class="table table-striped table-hover" id="trouble_table">
-            <thead>
-                <tr>
-                    <?php
-                    foreach ($data['title'] as $thead) {
-
-                        if ($thead == 'c_processName'  || $thead == 'c_failMode' || $thead == 'c_accidentDate') {
-                            switch ($thead) {
-                                case 'c_processName':
-                                    $thead = '工程名・工程機能';
-                                    break;
-                                case 'c_failMode':
-                                    $thead = '故障モード';
-                                    break;
-                                case 'c_accidentDate':
-                                    $thead = '発生日';
-                                    break;
-                                default:
-                                // $thead = 'missing';
-                                    break;
-                            }
-
-                    ?>
-                            <th class="kanjifont table-head text-center border-right border-left">
-                                <?= $thead ?>
-                            </th>
-
-                    <?php
-                        }
-                    }
-                    ?>
-                    <th class="kanjifont table-head text-center border-right border-left">
-                                ID
-                            </th>
-                    <th class="button_column buttons" style="display:none"></th>
-                </tr>
+            <thead class="">
                 <tr id="search-bar">
 
                 </tr>
+                <tr class="border-bottom border-dark">
+                    <?php foreach ($data['title'] as $title) { ?>
+                        <th class=" table-head text-center border-end text-nowrap ">
+                            <?= $title ?>
+                        </th>
+                    <?php } ?>
+
+                    <th class="button_column buttons border-end" style="display:none"></th>
+                </tr>
+
             </thead>
             <tbody>
                 <?php
@@ -50,24 +31,44 @@ function f_generate_table_select($data)
                 foreach ($data['troubleList'] as $item) {
 
                 ?>
-                    <tr onclick="view_record(this)" >
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col">
-                            <?= $item->c_accidentDate ?>
+
+
+                    <tr class="data-row" onclick="window.location='<?= base_url() ?>item/<?= $item->c_t800_id ?>';">
+                    <td class=" table-data text-center align-middle border-end  pointer col" style="max-width:90px;">
+                          <?= date("Y/m/d H:i", strtotime($item->c_accidentDate)) ?>
+                        <td class=" table-data text-center align-middle border-end  pointer col">
+                        <?= $item->c_stopTime ?>
+                        </td> 
+                        <td class=" table-data text-center align-middle border-end  pointer col">
+                            <?= $item->c_department ?>
+                        <td class=" table-data text-center align-middle border-end  pointer col" style="max-width:100px;">
+                            <?= $item->c_facility ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col">
+                        <td class=" table-data text-center align-middle border-end  pointer col">
+                            <?= $item->c_unit ?>
+                        </td>
+                        <td class=" table-data text-center align-middle border-end  pointer col" style="max-width:200px;">
                             <?= $item->c_processName ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col">
+                        <td class=" table-data text-center align-middle border-end  pointer col" style="max-width:200px;">
                             <?= $item->c_failMode ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col ID">
-                            <?= $item->c_t800_id ?>
+                        <td class=" table-data text-center align-middle border-end  pointer col" style="max-width: 90px;">
+                            <?= $item->c_manager ?>
                         </td>
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col button_column text-nowrap" style="display: none;">
-                            <a class="btn-block btn btn-primary modify-button" href="<?=base_url()?>editEquipment/<?=intval($item->c_t800_id)?>" onclick="event.cancelBubble=true;">更新</a>
-                            <a class="btn-block btn btn-danger modify-button"  onclick="event.cancelBubble=true; deleteData(<?=$item->c_t800_id?>, 'equipment')">削除</a>
+
+                        <td class=" table-data text-center align-middle border-end  pointer col">
+                            <?php if (isset($item->c_t203_id)) {
+                                echo '●';
+                            } ?>
+                        </td>
+                        <td class=" table-data text-center align-middle border-end pointer col button_column text-nowrap" style="display: none;">
+                            <a class="btn-block btn btn-primary modify-button" href="<?= base_url() ?>editEquipment/<?= intval($item->c_t800_id) ?>" onclick="event.cancelBubble=true;"><?= $data['MODIFY_BUTTON'] ?></a>
+
+                            <a class="btn-block btn btn-danger modify-button" onclick="event.cancelBubble=true; deleteData_tool(<?= $item->c_t800_id ?>)"><?= $data['DELETE_BUTTON'] ?></a>
                         </td>
                     </tr>
+
                 <?php
                 }
                 ?>
@@ -83,27 +84,20 @@ function f_generate_table_select($data)
         cursor: pointer;
     }
 
-    .table-title {
-        background: #435d7d;
-        color: #fff;
-        padding: 6px 6px;
-        border-radius: 3px 3px 0 0;
-    }
-
     .table-wrapper {
         background: #fff;
         border-radius: 5px;
         box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
     }
 
-    .table-wrapper-scrolls {
-        width: auto;
-        height: 70vh;
-        overflow-y: scroll;
-        
+
+    .table-head {
+        z-index: 5;
+        box-shadow: 10px 5px rgba(0, 0, 0, .05);
     }
 
-    .text-nowrap {
-        white-space: nowrap;
+    #clear-button {
+        min-height: 32px;
+        color: #fff;
     }
 </style>

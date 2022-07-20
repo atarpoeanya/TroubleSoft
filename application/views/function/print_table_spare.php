@@ -2,6 +2,7 @@
 function f_generate_table_select($data)
 {
     $head_name = [];
+    // ew
     foreach ($data['title'] as $value) {
         switch ($value) {
             case 'c_t202_id':
@@ -17,13 +18,13 @@ function f_generate_table_select($data)
                 array_push($head_name, '使用箇所');
                 break;
             case 'c_partName':
-                array_push($head_name, '部品名');
+                array_push($head_name, '部品');
                 break;
             case 'c_model':
                 array_push($head_name, '型式');
                 break;
             case 'c_maker':
-                array_push($head_name, 'メーカー名');
+                array_push($head_name, 'メーカー');
                 break;
             case 'c_quantity':
                 array_push($head_name, '数量');
@@ -32,7 +33,13 @@ function f_generate_table_select($data)
                 array_push($head_name, '単位');
                 break;
             case 'c_price':
-                array_push($head_name, '金額');
+                array_push($head_name, '単価');
+                break;
+            case 'c_storage':
+                array_push($head_name, '保管場所');
+                break;
+            case 'c_arrangement':
+                array_push($head_name, '手配先');
                 break;
 
             default:
@@ -42,24 +49,37 @@ function f_generate_table_select($data)
     }
 
 ?>
-    <div class="sticky-top mb-2"><input class="sticky-top form-control" type="text" id="table_input" oninput="search_all_function()" placeholder="Search"></div>
-    <div class="table-responsive table-wrapper table-wrapper-scroll">
-        <table class="table table-striped table-hover" id="gen_table">
+
+    <div class="table-responsive table-wrapper border">
+    <div class="d-flex p-2 border-bottom">
+            <div class="my-auto">件数 :&nbsp;</div>
+            <div class="my-auto" id="amount-sum"><b><?= count($data['sparePart']) ?></b></div>
+        </div>
+
+
+        <table class="table table-striped table-hover text-nowrap" id="gen_table">
             <thead>
-                <tr>
+                <tr id="search-bar-spare">
+                </tr>
+                <tr class="border-bottom border-dark">
                     <?php
                     foreach ($head_name as $thead) {
+                        if ($thead !== '部品NO') {
                     ?>
-                        <th class="kanjifont table-head text-center border-right border-left">
-                            <?= $thead ?>
-                        </th>
+                            <th class=" table-head text-center  border-end">
+                                <?= $thead ?>
+                            </th>
 
+                        <?php
+
+                        } else {
+                        ?>
+                            <th class="id text-center  border-end" style="display:none"></th>
                     <?php
-
+                        }
                     }
                     ?>
-
-                    <th class="button_column" style="display:none"></th>
+                    <th class="button_column text-center  border-end" style="display:none;max-width:150px;width:150px;"></th>
                 </tr>
             </thead>
             <tbody>
@@ -69,20 +89,26 @@ function f_generate_table_select($data)
                 foreach ($data['sparePart'] as $item) {
                 ?>
 
-                    <tr>
+                    <tr class="data-row">
                         <?php
                         foreach ($item as $key => $value) {
                             if ($key == 'c_t202_id') {
                                 $id = $value;
                         ?>
 
-                                <td class="kanjifont table-data text-center align-middle border-right border-left pointer col ID">
+                                <td class=" table-data text-center align-middle border-end  pointer col ID" style="display:none">
                                     <?= $id ?>
+                                </td>
+                            <?php
+                            } elseif ($key == 'c_quantity') {
+                            ?>
+                                <td class=" table-data text-center align-middle border-end  pointer col amount">
+                                    <?= $value ?>
                                 </td>
                             <?php
                             } else {
                             ?>
-                                <td class="kanjifont table-data text-center align-middle border-right border-left pointer col">
+                                <td class=" table-data text-center align-middle border-end  pointer col">
                                     <?= $value ?>
                                 </td>
 
@@ -90,9 +116,10 @@ function f_generate_table_select($data)
                             }
                         }
                         ?>
-                        <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-2 button_column text-nowrap" style="display: none;">
-                            <a class="btn-block btn btn-primary modify-button" onclick="editSpare_populate(this)">更新</a>
-                            <a class="btn-block btn btn-danger modify-button" onclick="event.cancelBubble=true;deleteData(<?= $item->c_t202_id ?>,'spareparts')">削除</a>
+                        <td class=" table-data text-center align-middle pointer col-md-2 button_column text-nowrap" style="display: none;max-width:150px;width:150px;">
+                            <a class="btn-block btn btn-primary modify-button" onclick="editSpare_populate(this)"><?= $data['UPDATE_BUTTON'] ?></a>
+                            
+                            <a class="btn-block btn btn-danger modify-button delete" onclick="event.cancelBubble=true; deleteData_sparepart(<?= $item->c_t202_id ?>)"><?= $data['DELETE_BUTTON'] ?></a>
                         </td>
 
                     </tr>
@@ -107,17 +134,38 @@ function f_generate_table_select($data)
 }
 ?>
 <style>
+    .pointer:hover {
+        cursor: pointer;
+    }
 
+    .table-wrapper {
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    }
 
+    .table-head {
+        background-color: #fff;
+        box-shadow: 10px 5px rgba(0, 0, 0, .05);
+        width: 800px;
+    }
+
+    div.dataTables_wrapper {
+        width: 100%;
+    }
+
+    
 </style>
 
 <script>
     $(document).ready(function() {
         $('#gen_table tbody').find('tr').each(function() {
             // debugger;
-            $amount = $(this).find("td:eq(7)").text().trim();
-            if($amount == 0)
+            $amount = $(this).find("td:eq(5)").text().trim();
+            if ($amount == 0) {
                 $(this).addClass('bg-warning')
+                $(this).find("td:eq(5)").addClass('bg-danger')
+            }
         })
     })
 </script>

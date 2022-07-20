@@ -1,105 +1,122 @@
-
-
-
-<div class="container kanjifont mt-4 d-flex flex-column" id="dashboard">
-
-    <div class="row my-2 pt-3 ps-3">
-        <div class="col-lg-9 col-md-12 mb-2">
-
-            <div class="btn-group switch-field text-nowrap">
-                <a onclick="buttonSwitch(this);get_troubleList()" class="btn btn-outline-primary active" aria-current="page">設備トラブルリースト</a>
-                <a onclick="buttonSwitch(this);get_troubleList()" class="btn  btn-outline-secondary">品質トラブルリースト</a>
-                <a onclick="buttonSwitch(this);get_sparepartlist()" class="btn  btn-outline-secondary">予備品リスト</a>
-            </div>
+<main class="container-fluid p-2 mb-4">
+    <div class="container-fluid">
+        <div class="btn-group switch-field text-nowrap">
+            <a name="設備" onclick="buttonSwitch(this);category_switcher(this)" class="btn btn-white active topper" aria-current="page"><?= $this->data['RADIO_A_EQUIPMENT'] ?></a>
+            <a name="品質" onclick="buttonSwitch(this);category_switcher(this)" class="btn  btn-white topper bg-white disabled"><?= $this->data['RADIO_A_PRODUCT'] ?></a>
+            <a name="予備品" onclick="buttonSwitch(this);category_switcher(this)" class="btn  btn-white topper bg-white"><?= $this->data['RADIO_A_SPARE'] ?></a>
         </div>
-        <div class="col-lg-3 col-md">
+    </div>
+    </div>
+    <div class="container-fluid" style="height: 100%;" id="main-content">
+        <div class="d-flex flex-column pb-2" style="height: 100%;"  id="dashboard" >
 
-            <div class="">
-                <a href="<?= base_url() ?>as" class=" btn btn-success text-nowrap" id="new_trouble">新しトラブル</a>
-                <button class="m-1 btn btn-success text-nowrap" id="new_spareparts" onclick="" data-bs-toggle="modal" data-bs-target="#addPartsModal" style="display: none;">新し予備品</button>
-                <a onclick="show_button()" class=" btn btn-primary text-nowrap" id="update_trouble">変更</a>
+            <div class="row py-3 px-3">
+                <div class="col-9">
+
+                    <div class="btn-group switch-field text-nowrap">
+                        <a id="real" onclick="buttonSwitch(this);get_troubleList();$('#new_trouble').attr('href', '<?= base_url() ?>equipment')" class="btn btn-outline-secondary bottm active" aria-current="page"><?= $this->data['RADIO_B_REAL'] ?></a>
+
+                        <a id="fmea-s" onclick="buttonSwitch(this);get_troubleList_fmea();$('#new_trouble').attr('href', '<?= base_url() ?>equipment_fmea')" class="btn  btn-outline-secondary bottm bg-white"><?= $this->data['RADIO_B_FMEA'] ?></a>
+                    </div>
+
+
+                    <a href="<?= base_url(); ?>dashboard/all_fmea_list" id="fmea-s" class="btn btn-primary"><?= $this->data['EQUIPMENT_FMEA_LIST_BUTTON'] ?></a>
+                </div>
+                <div class="col-3">
+
+                    <div class="d-flex justify-content-end btn-group-a">
+                        <a href="<?= base_url() ?>equipment" class="me-2 btn btn-success text-nowrap" id="new_trouble"><?= $this->data['INSERT_BUTTON_TROUBLE'] ?></a>
+
+                        <button class="me-2 btn btn-success text-nowrap" id="new_spareparts" onclick="" data-bs-toggle="modal" data-bs-target="#addPartsModal" style="display: none;"><?= $this->data['INSERT_BUTTON_SPARE'] ?></button>
+
+                        <button onclick="show_button()" class=" btn btn-primary text-nowrap" id="update_trouble"><?= $this->data['UPDATE_BUTTON'] ?></button>
+                    </div>
+
+                </div>
             </div>
 
+
+            <!-- Table goes here -->
+            <div class="row px-3" id="list-wrapper">
+                
+                    <div class="container-fluid" id="list"></div>
+                
+            </div>
+
+            <div id="modalPlaceHolder"></div>
         </div>
     </div>
 
-    
-    
-    <div class="row py-2">
-        <div id="trouble_list"></div>
-        <div id="spare_part_list"></div>
-    </div>
-    <div id="modalPlaceHolder"></div>
-</div>
+    <script>
+        function buttonSwitch(el) {
+            $(el).siblings().removeClass('active')
+            $(el).addClass('active')
 
-<script>
-    function buttonSwitch (el){
-        $(el).siblings().removeClass('active')
-        $(el).siblings().removeClass('btn-outline-primary')
-        $(el).siblings().addClass('btn-outline-secondary')
+            $(el).siblings().addClass('bg-white')
+            $(el).removeClass('bg-white')
+        }
+    </script>
 
-        $(el).removeClass('btn-outline-secondary')
-        $(el).addClass('btn-outline-primary')
-        $(el).addClass('active')
-    }
-</script>
+    <style>
+        body {
+            background-color: #F5F5F5;
+            min-height: 250px;
+            
+        }
 
-<style>
-    .switch-field a{
-        padding-left: 2rem;
-        padding-right: 2rem;
+        .switch-field a {
+            padding-left: 2rem;
+            padding-right: 2rem;
+            min-width: 130px;
 
-    }
+        }
 
-/*
-    
+        .topper {
+            border-radius: 10px 10px 0px 0px/ 10px;
+            padding: 0;
+            padding-top: 2px;
+            height: 30px;
+            min-width: 130px;
+        }
 
-    .switch-field {
-        background-color: #e4e4e4;
-        color: rgba(0, 0, 0, 0.6);
-        font-size: 15px;
-        line-height: 1;
-        text-align: center;
-        padding: 8px 16px;
-        margin-right: -1px;
-        border: 1px solid rgba(0, 0, 0, 0.2);
-        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
-        transition: all 0.1s ease-in-out;
-         width: 20vw; 
-    }
-    */
-     /* .switch-field a:not(.active) {
-        cursor: pointer;
-    } */
+        .btn.active {
+            background-color: #1B3384;
+            color: white;
+            box-shadow: 4px 0px 8px -1px rgba(0, 0, 0, 0.5);
+        }
 
-    /* .switch-field input:checked+label {
-        background-color: #435d7d;
-        color: white;
-        box-shadow: none;
-    }
+        .btn-group-a > button {
+            min-width: 90px;
+        }
 
-    .switch-field label:first-of-type {
-        border-radius: 4px 0 0 4px;
-    }
+        .btn-outline-secondary:not(.active):hover {
+            color: lightgrey;
+            filter: brightness(85%);
+        }
 
-    .switch-field label:last-of-type {
-        border-radius: 0 4px 4px 0;
-    }  */
+        main {
+            min-width: 0;
+            min-height: 350px;
+        }
 
-    .kanjifont {
-        font-family: BIZ UDGothic;
-        size: 22;
-    }
+  
+        #dashboard {
+            background-color: white;
+            border-radius: 5px;
+            min-height: 200px;
+            /* height: calc(100% - 50px) !important;
+             */
+        }
 
-    .dataTables_filter {
-        display: none;
-    }
+        .table-data {
+            height: 40px;
+        }
 
-    #dashboard {
-        background-color: #E5E5E5;
-        border-radius: 5px;
-        height: calc(100% - 200px) !important;
-    }
+        .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody {
+            overflow-y: scroll !important;
+            min-height: 65px;
+            /* width: 100%; */
+        }
 
-    /* .column-search {} */
-</style>
+    </style>
+</main>

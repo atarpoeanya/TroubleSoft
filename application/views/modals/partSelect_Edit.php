@@ -1,4 +1,4 @@
-<div class="modal kanjifont" id="partsSelect" data-bs-backdrop="static" tabindex="-1">
+<div class="modal kanjifont" id="partsSelect_edit" data-bs-backdrop="static" tabindex="-1">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,7 +6,7 @@
             </div>
 
             <div class="modal-body bg-light" id="partBody">
-                <div id="upper"></div>
+                <div id="upper_edit"></div>
                 <div id="lower">
                     <table>
                         <tbody id="sendhere"></tbody>
@@ -15,7 +15,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> <?= $this->data['CANCEL_BUTTON'] ?></button>
-                <a id="insertTool" class="btn btn-primary" data-bs-dismiss="modal"> <?= $this->data['SUBMIT_BUTTON'] ?></a>
+                <a id="insertTool_edit" class="btn btn-primary" data-bs-dismiss="modal"> <?= $this->data['SUBMIT_BUTTON'] ?></a>
 
             </div>
         </div>

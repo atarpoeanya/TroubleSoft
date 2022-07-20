@@ -59,16 +59,28 @@ $route['uploads/error'] = 'errors/page_missing';
 
 
 // Main Pages Routing
-$route['as'] = 'dashboard/transition';
-$route['equipment'] = 'dashboard/equipmentform';
-$route['equipment/(:num)'] = 'dashboard/postequipment/$type';
+$route['as'] = 'dashboard/transition_form_select';
+// Form
+$route['equipment'] = 'dashboard/tool_form';
+$route['equipment_fmea'] = 'dashboard/tool_fmea';
+// action on post
+$route['equipment_fmea/(:num)'] = 'dashboard/post_tools/$type'; //surface level masking
+$route['equipment/(:num)'] = 'dashboard/post_tools/$type';      //used on form action in the pages
+
 $route['product'] = 'dashboard/productForm';
+
 $route['dashboard'] = 'dashboard';
 
 //Equipment editing
-$route['editEquipment/(:num)'] = 'dashboard/editdata_view/$id';
+$route['editEquipment/(:num)'] = 'dashboard/edit_data_tool_view/$id';
+$route['editEquipment_fmea/(:num)'] = 'dashboard/edit_data_tool_fmea_view/$id';
+
+$route['edit_Equipment'] = 'dashboard/post_edit_data_tool';
+$route['edit_Equipment_fmea'] = 'dashboard/post_edit_data_tool_fmea';
 
 
 //Record Routing
-$route['item/(:num)'] = 'dashboard/viewRecord/$id';
+$route['item/(:num)'] = 'dashboard/view_record_tool/$id';
+
+$route['item_fmea/(:num)'] = 'dashboard/view_record_tool_fmea/$id';
 
