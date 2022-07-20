@@ -51,7 +51,7 @@
                             <div class="col-4 pt-3">
                                 <div class="col">
                                     <label class="form-label" for="tantou"><?= $this->data['PIC'] ?></label>
-                                    <select class=" form-control  <?= (form_error('担当者') ? 'is-invalid' : ''); ?>" name="担当者" id="tantou" required>
+                                    <select class="form-select  <?= (form_error('担当者') ? 'is-invalid' : ''); ?>" name="担当者" id="tantou" required>
                                         <?php
                                         foreach ($inspector_ as $i) :
                                             if ($i == $items->c_manager) : ?>
@@ -71,7 +71,7 @@
                         <div class="item row border-top py-3">
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="busho"><?= $this->data['DEPARTMENT'] ?></label>
-                                <select class="form-control <?= (form_error('部署') ? 'is-invalid' : ''); ?>" name="部署" id="busho" required>
+                                <select class="form-select <?= (form_error('部署') ? 'is-invalid' : ''); ?>" name="部署" id="busho" required>
 
                                     <?php
                                     foreach ($division as $d) :
@@ -86,7 +86,7 @@
                             <!-- Probably connect with each other -->
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="setsubi"><?= $this->data['PROCESS_NAME'] ?></label>
-                                <select class="form-control <?= (form_error('設備') ? 'is-invalid' : ''); ?>" name="設備" id="setsubi" required>
+                                <select class="form-select <?= (form_error('設備') ? 'is-invalid' : ''); ?>" name="設備" id="setsubi" required>
                                     <?php
                                     foreach ($tools_name as $t) :
                                         if ($t == $items->c_facility) : ?>
@@ -99,7 +99,7 @@
                             </div>
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="gouki"><?= $this->data['UNIT'] ?></label>
-                                <select class="form-control <?= (form_error('号機') ? 'is-invalid' : ''); ?>" name="号機" id="gouki" required>
+                                <select class="form-select <?= (form_error('号機') ? 'is-invalid' : ''); ?>" name="号機" id="gouki" required>
                                     <?php
                                     foreach ($unit as $u) :
                                         if ($u == $items->c_unit) : ?>

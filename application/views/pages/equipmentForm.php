@@ -59,7 +59,7 @@
                             <div class="col-4 pt-3">
 
                                     <label class="form-label" for="tantou"><?= $this->data['PIC'] ?></label><!-- PERSON IN CHARGE-->
-                                    <select class=" form-control  <?= (form_error('担当者') ? 'is-invalid' : ''); ?>" name="担当者" id="tantou" required>
+                                    <select class="form-select"  <?= (form_error('担当者') ? 'is-invalid' : ''); ?>" name="担当者" id="tantou" required>
                                         <option value="" <?= set_select('担当者', '', true); ?> disabled selected>選び出す</option>
                                         <option value="水上" <?= set_select('担当者', '水上'); ?>>水上</option>
                                         <option value="新宮" <?= set_select('担当者', '新宮'); ?>>新宮</option>
@@ -75,7 +75,7 @@
                         <div class="item row border-top py-3">
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="busho"><?= $this->data['DEPARTMENT'] ?></label>
-                                <select class="form-control <?= (form_error('部署') ? 'is-invalid' : ''); ?>" name="部署" id="busho" required>
+                                <select class="form-select" <?= (form_error('部署') ? 'is-invalid' : ''); ?>" name="部署" id="busho" required>
 
                                     <option value="" <?= set_select('部署', '', true); ?>disabled selected>選び出す</option>
                                     <option value="塗装" <?= set_select('部署', '塗装'); ?>>塗装</option>
@@ -84,14 +84,14 @@
                             <!-- Probably connect with each other -->
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="setsubi"><?= $this->data['FACILITY'] ?></label>
-                                <select class="form-control <?= (form_error('設備') ? 'is-invalid' : ''); ?>" name="設備" id="setsubi" required>
+                                <select class="form-select" <?= (form_error('設備') ? 'is-invalid' : ''); ?>" name="設備" id="setsubi" required>
                                     <option value="" <?= set_select('設備', '', true); ?> disabled selected>選び出す</option>
                                     <option value="プレス" <?= set_select('設備', 'プレス'); ?>>プレス</option>
                                 </select>
                             </div>
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="gouki"><?= $this->data['UNIT'] ?></label>
-                                <select class="form-control <?= (form_error('号機') ? 'is-invalid' : ''); ?>" name="号機" id="gouki" required>
+                                <select class="form-select" <?= (form_error('号機') ? 'is-invalid' : ''); ?>" name="号機" id="gouki" required>
                                     <option value="" <?= set_select('号機', '', true); ?> disabled selected>選び出す</option>
                                     <option value="1号機" <?= set_select('号機', '1号機'); ?>>1号機</option>
                                     <option value="2号機" <?= set_select('号機', '2号機'); ?>>2号機</option>
@@ -261,7 +261,7 @@
 
     form .form-control {
 
-        background-color: white;
+        /* background-color: white; */
 
     }
 </style>

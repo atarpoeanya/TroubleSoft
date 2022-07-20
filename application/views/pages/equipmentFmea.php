@@ -15,7 +15,7 @@
 
                             <div class="col-4 pt-3">
                                 <label for="busho" class="form-label"><?= $this->data['EQUIPMENT_DEPARTMENT_F'] ?></label>
-                                <select class="form-control" name="部署" id="busho" required>
+                                <select class="form-select" name="部署" id="busho" required>
                                     <option value="" selected>Default</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -25,14 +25,14 @@
 
                             <div class="col-4 pt-3">
                                 <label for="setsubi" class="form-label"><?= $this->data['EQUIPMENT_FACILITY_F'] ?></label>
-                                <select class="form-control" name="設備" id="setsubi" required>
+                                <select class="form-select" name="設備" id="setsubi" required>
                                     <option value="" selected>Default</option>
                                     <option value="1">1</option>
                                 </select>
                             </div>
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="gouki"><?= $this->data['EQUIPMENT_UNIT_F'] ?></label>
-                                <select class="form-control" name="号機" id="gouki" required>
+                                <select class="form-select" name="号機" id="gouki" required>
                                     <option value="" selected>Default</option>
                                     <option value="1">1</option>
                                 </select>
@@ -82,7 +82,7 @@
 
                             <div class="col-4 pt-3">
                                 <label for="pic" class="form-label"><?= $this->data['EQUIPMENT_PIC_SCHEDULE_F'] ?></label>
-                                <select class="form-control" id="pic" name="担当者日程" required >
+                                <select class="form-select" id="pic" name="担当者日程" required >
                                     <option value="" selected>Default</option>
                                     <option value="1">1</option>
                                     <option value="3">3</option>
