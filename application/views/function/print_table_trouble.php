@@ -26,19 +26,14 @@ function f_generate_table_select($data)
             </thead>
             <tbody>
                 <?php
-
-
                 foreach ($data['troubleList'] as $item) {
-
                 ?>
-
-
                     <tr class="data-row" onclick="window.location='<?= base_url() ?>item/<?= $item->c_t800_id ?>';">
-                    <td class=" table-data text-center align-middle border-end  pointer col" style="max-width:90px;">
-                          <?= date("Y/m/d H:i", strtotime($item->c_accidentDate)) ?>
+                        <td class=" table-data text-center align-middle border-end  pointer col" style="max-width:90px;">
+                            <?= date("Y/m/d H:i", strtotime($item->c_accidentDate)) ?>
                         <td class=" table-data text-center align-middle border-end  pointer col">
-                        <?= $item->c_stopTime ?>
-                        </td> 
+                            <?= $item->c_stopTime ?>
+                        </td>
                         <td class=" table-data text-center align-middle border-end  pointer col">
                             <?= $item->c_department ?>
                         <td class=" table-data text-center align-middle border-end  pointer col" style="max-width:100px;">

@@ -129,19 +129,19 @@
                         <div class="detail row border-top py-3">
                             <div class="col-12 pt-3">
                                 <label class="form-label" for="gensho"><?= $this->data['PHENOMENON'] ?></label>
-                                <textarea required name="現象" id="gensho" class="form-control" cols="30" rows="10" required><?= $items->c_phenomenon ?></textarea>
+                                <textarea required name="現象" id="gensho" class="form-control" cols="30" rows="5" required><?= $items->c_phenomenon ?></textarea>
                             </div>
                             <div class="col-12 pt-3">
                                 <label class="form-label" for="shuriNaiyou"><?= $this->data['REPAIR_DETAIL'] ?></label>
-                                <textarea required name="修理内容" id="shuriNaiyou" class="form-control" cols="30" rows="10" required><?= $items->c_repairDet ?></textarea>
+                                <textarea required name="修理内容" id="shuriNaiyou" class="form-control" cols="30" rows="5" required><?= $items->c_repairDet ?></textarea>
                             </div>
 
-                            <div class="col-6 pt-3">
+                            <div class="col-12 pt-3">
                                 <label class="form-label" for="failMech"><?= $this->data['MECHANISM'] ?></label>
                                 <textarea required name="fail_mech" id="failMech" class="form-control" cols="30" rows="5" required><?= $items->c_failMech ?></textarea>
                             </div>
 
-                            <div class="col-6 pt-3">
+                            <div class="col-12 pt-3">
                                 <label class="form-label" for="response"><?= $this->data['RESPONSE'] ?></label>
                                 <textarea required name="response" id="response" class="form-control" cols="30" rows="5" required><?= $items->c_response ?></textarea>
                             </div>

@@ -102,7 +102,7 @@ class Dashboard extends CI_Controller
             'SECTION_5'                             =>  '対策',
             ''                                      =>  '',
 
-            'COUNTERMEASURES_OLD'                   =>  '今＿ファイル',
+            'COUNTERMEASURES_OLD'                   =>  '登録 対策書',
             //Form (FMEA)
             'FORM_TITLE'                            =>  '設備トラブル',
             'EQUIPMENT_DEPARTMENT_F'                =>  '部署',

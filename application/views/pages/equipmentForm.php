@@ -223,7 +223,7 @@
 
             </div>
             <div class="card sticky-top h-50 mt-2" style="z-index: 1; top:60px;">
-                <div class="card-title p-3">
+                <div class="card-title p-3 m-0">
                     <h2 class="p-1">FMEA</h2>
                 </div>
                 <div class="card-body p-2 overflow-scroll">
@@ -266,9 +266,7 @@
     }
 
     form .form-control {
-
         /* background-color: white; */
-
     }
 </style>
 

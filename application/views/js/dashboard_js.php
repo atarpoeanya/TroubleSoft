@@ -176,27 +176,29 @@
                             {
                                 bSortable: true,
                                 width: "7%",
-                                render: function(data, type, row) {
-                                    var result = ''
+                                render: {
+                                    "display": function(data, type, row) {
+                                        var result = ''
 
-                                    var days = Math.floor(data / 1440)
-                                    var rem_days = data % 1440
-                                    var hours = Math.floor(rem_days / 60)
-                                    var minutes = data - days * 1440 - hours * 60
+                                        var days = Math.floor(data / 1440)
+                                        var rem_days = data % 1440
+                                        var hours = Math.floor(rem_days / 60)
+                                        var minutes = data - days * 1440 - hours * 60
 
-                                    if (days != 0) {
-                                        result += days + '日 '
+                                        if (days != 0) {
+                                            result += days + '日 '
+                                        }
+
+                                        if (hours != 0) {
+                                            result += hours + '時間 '
+                                        }
+
+                                        if (minutes != 0) {
+                                            result += minutes + '分'
+                                        }
+                                        // Use '|' for spliting indicator
+                                        return result + '<p style="display:none">|' + data + '</p>';
                                     }
-
-                                    if (hours != 0) {
-                                        result += hours + '時間 '
-                                    }
-
-                                    if (minutes != 0) {
-                                        result += minutes + '分'
-                                    }
-                                    // Use '|' for spliting indicator
-                                    return result + '<p style="display:none">|' + data + '</p>';
                                 }
                             },
                             {
@@ -416,7 +418,7 @@
             url: "<?php echo base_url(); ?>dashboard/get_sparepart_list",
             success: function(response) {
                 $("#list").html(response);
-                $('#search-bar-spare').append('<th colspan="10" class=" pe-3"><input class="form-control border-primary color-primary" type="text" id="search-bar" placeholder="検索 ="></th>');
+                $('#search-bar-spare').append('<th colspan="10" class=" pe-3"><input class="form-control color-primary" type="text" id="search-bar" placeholder="検索 ="></th>');
 
             },
             complete: function() {

@@ -4,7 +4,8 @@ function f_generate_table_select($data)
 ?>
     <!-- Probably generate this with function -->
     <p class="sub-header-2 position-relative">
-        &nbsp;SECTION_1_<b>設備の内容</b>&nbsp;</p>
+        <b>設備の内容</b>&nbsp;
+    </p>
     <div class="row border-top p-3 rounded my-auto">
 
 
@@ -20,7 +21,8 @@ function f_generate_table_select($data)
 
 
     <p class="sub-header-2 position-relative">
-        &nbsp;SECTION_3_<b>影響</b>&nbsp;</p>
+        <b>影響</b>&nbsp;
+    </p>
     <div class="row border-top p-3 rounded my-auto">
 
         <div class="col-6 mt-3">
@@ -43,7 +45,8 @@ function f_generate_table_select($data)
     </div>
 
     <p class="sub-header-2 position-relative">
-        &nbsp;SECTION_4_<b>現在の工程管理</b>&nbsp;</p>
+        <b>現在の工程管理</b>&nbsp;
+    </p>
     <div class="row border-top p-3 rounded my-auto">
 
         <div class="col-lg-5 col-5 mt-3">
@@ -73,7 +76,8 @@ function f_generate_table_select($data)
 
 
     <p class="sub-header-2 position-relative">
-        &nbsp;SECTION_5_<b>対策</b>&nbsp;</p>
+        <b>対策</b>&nbsp;
+    </p>
     <div class="row border-top p-3 rounded my-auto">
 
         <div class="col-6 mt-3">
@@ -134,7 +138,7 @@ function f_generate_table_select($data)
                     ?>
                         <tr>
                             <td style="height: 100px;" colspan="4" class="text-center emptyTab">
-                                <span>EMPTY</span>
+                                <span><?= $data['EMPTY_PLACEHOLDER'] ?></span>
                             </td>
                         </tr>
                     <?php endif; ?>

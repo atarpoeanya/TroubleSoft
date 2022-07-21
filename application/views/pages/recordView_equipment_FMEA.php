@@ -202,10 +202,16 @@
                                 <tr>
                                     <?php
                                     foreach ($num as $key => $value) {
-                                        if ($key != 'c_t202_id') {
+                                        if ($key != 'c_t202_id' && $key != 'c_price') {
                                     ?>
-                                            <td class="text-center  pointer">
+                                            <td class="text-center">
                                                 <?= $value ?>
+                                            </td>
+                                        <?php
+                                        } elseif ($key == 'c_price') {
+                                        ?>
+                                            <td class="text-center">
+                                                <?= floatval($value).' 円'?>
                                             </td>
                                     <?php
                                         }
