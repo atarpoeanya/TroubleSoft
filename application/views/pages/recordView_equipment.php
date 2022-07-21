@@ -15,12 +15,11 @@
         <div class="card p-3 m-auto mb-3">
             <div class="card-body ">
                 <div class="table-responsive">
-                    <table class="table table-bordered mb-0 align-middle text-nowrap">
+                    <table class="table table-bordered mb-0 align-middle">
                         <thead class="table-dark">
                             <tr class="text-center">
                                 <th colspan="10">設備のトラブルレポート</th>
                             </tr>
-
                         </thead>
                         <tbody>
                             <tr class="table-light">
@@ -35,8 +34,8 @@
                                 <td>発生日</td>
                                 <td><b><?= date("Y年m月d日", strtotime($item->c_accidentDate)) ?>&nbsp;</b></td>
                                 <!-- Change this to line stop -->
-                                <td>修理所要時間</td>
-                                <td colspan="5"><b><?= $item->c_stopTime ?> 分</th></b></td>
+                                <td>修理時間</td>
+                                <td colspan="5"><b id="stopTime"><?= $item->c_stopTime ?></b></td>
                             </tr>
                             <tr>
                                 <td>部署場所</td>
@@ -48,7 +47,7 @@
                             <!-- <tr>
                                 <td class="table-dark" colspan="10">&nbsp;</td>
                             </tr> -->
-                            <tr class=" table-light">
+                            <tr class=" table-light text-nowrap">
                                 <td colspan="3"><small> 設備</small><br>
                                     <div class="container">
                                         <?= $item->c_facility ?> - <?= $item->c_unit ?>
@@ -515,6 +514,8 @@
         $(document).ready(function() {
             // $('.fmea').hide();
 
+            renderTime()
+
             if ($('.fmea').length == 0) {
                 $('#fmea-toggle').addClass('disabled')
             }
@@ -529,4 +530,28 @@
                 $('.fmea').show();
             }
         })
+
+        function renderTime() {
+            var data = $('#stopTime').html()
+            var result = ''
+
+            var days = Math.floor(data / 1440)
+            var rem_days = data % 1440
+            var hours = Math.floor(rem_days / 60)
+            var minutes = data - days * 1440 - hours * 60
+
+            if (days != 0) {
+                result += days + '日 '
+            }
+
+            if (hours != 0) {
+                result += hours + '時間 '
+            }
+
+            if (minutes != 0) {
+                result += minutes + '分'
+            }
+
+            $('#stopTime').html(result)
+        }
     </script>

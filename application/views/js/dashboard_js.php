@@ -442,10 +442,13 @@
                             bSortable: true
                         },
                         {
-                            bSortable: true
+                            bSortable: true,
                         },
                         {
-                            bSortable: true
+                            bSortable: true,
+                            render: function(data, type, row) {
+                                return parseFloat(data) + ' 円';
+                            }
                         },
                         {
                             bSortable: true
