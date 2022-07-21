@@ -155,6 +155,7 @@ class Dashboard extends CI_Controller
             //Validation message
             'IS_REQUIRED'                           =>  '<i><b>＊空であってはならない</b></i>',
             'IS_TOO_LONG'                           =>  '<i><b>＊長すぎ</b></i>',
+            'NO_ZERO'                               =>  '<i><b>＊0であってはない</b></i>',
 
 
             //UNSUSED
@@ -388,9 +389,10 @@ class Dashboard extends CI_Controller
 
             $this->form_validation->set_rules('発生日', '1', 'required');
 
-            $this->form_validation->set_rules('days', '2', 'required');
+            $this->form_validation->set_rules('days', '2', 'required|');
             $this->form_validation->set_rules('hours', '3', 'required');
             $this->form_validation->set_rules('minutes', '4', 'required');
+            $this->form_validation->set_rules('duration', '20', 'required|greater_than[0]');
 
             $this->form_validation->set_rules('担当者', '5', 'required|callback_check_default');
             $this->form_validation->set_rules('部署', '6', 'required|callback_check_default');
@@ -624,12 +626,14 @@ class Dashboard extends CI_Controller
         $this->session->set_flashdata('crumbs', '0');
         $this->form_validation->set_message('required', $this->data['IS_REQUIRED']);
         $this->form_validation->set_message('max_length', $this->data['IS_TOO_LONG']);
+        $this->form_validation->set_message('greater_than[0', $this->data['NO_ZERO']);
 
         $this->form_validation->set_rules('発生日', '1', 'required');
 
         $this->form_validation->set_rules('days', '2', 'required');
         $this->form_validation->set_rules('hours', '3', 'required');
         $this->form_validation->set_rules('minutes', '4', 'required');
+        $this->form_validation->set_rules('duration', '20', 'required|greater_than[0]');
 
         $this->form_validation->set_rules('担当者', '5', 'required|callback_check_default');
         $this->form_validation->set_rules('部署', '6', 'required|callback_check_default');

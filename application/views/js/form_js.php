@@ -115,9 +115,9 @@
             var hours = $('#hours').val()
             var minutes = $('#minutes').val()
 
-            days == '' ? 0 : $('#days').val();
-            hours == '' ? 0 : $('#hours').val();
-            minuts == '' ? 0 : $('#minutes').val();
+            isNaN(parseFloat(days)) ? 0 : $('#days').val();
+            isNaN(parseFloat(hours)) ? 0 : $('#hours').val();
+            isNaN(parseFloat(minutes))  ? 0 : $('#minutes').val();
 
             console.log(days + '  ' + hours + '  ' + minutes)
 
@@ -312,8 +312,8 @@
 
     {
         function minToDur() {
-            var duration = parseInt($('#duration').val())
-
+            var duration = isNaN(parseInt($('#duration').val())) || $('#duration').val() == 0 ? 0 : $('#duration').val()
+            
             var days = Math.floor(duration / 1440)
             var rem_days = duration % 1440
             var hours = Math.floor(rem_days / 60)
