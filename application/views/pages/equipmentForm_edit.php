@@ -1,9 +1,10 @@
 <?php
-if($this->session->flashdata() != '')
-echo validation_errors();
-else
-echo "test"
+if ($this->session->flashdata() != '')
+    echo validation_errors();
 
+echo $items->c_processName;
+echo '<br>';
+echo set_value('工程名');
 ?>
 <div class="d-flex justify-content-center pt-3" id="mainForm">
 
@@ -23,25 +24,36 @@ echo "test"
                         <input type="hidden" name="spareParts" id="partinfo" value="">
 
                         <input type="hidden" name="fmea_id" id="fmea_id" value="">
-                        <div class=" d-flex justify-content-md-start">
+                        <!-- For time -->
+                        <input type="hidden" name="duration" id="duration" value="<?= set_value('duration') != '' ? trim(set_value('duration')) :  trim($items->c_stopTime) ?>">
 
-                            <input type="hidden" name="duration" id="duration" value="<?= $items->c_stopTime ?>">
 
-                        </div>
+
+
                         <!-- SECTION_1_Identity -->
                         <p class=" position-relative sub-header">
                             &nbsp;<b><?= $this->data['SECTION_1'] ?></b>&nbsp;</p>
                         <div class="inspector row border-top py-3">
 
                             <div class="col-4 pt-3">
-                                <label for="start_day" class="form-label"><?= $this->data['ACCIDENT_DATE'] ?></label>
+                                <div class="d-flex">
+                                    <label for="start_day" class="form-label"><?= $this->data['ACCIDENT_DATE'] ?></label>
+                                    <?php if (form_error('発生日') != '') { ?>
+                                        <span class="invalid-feedback form-label"><?= trim(form_error('発生日')) ?></span>
+                                    <?php } ?>
+                                </div>
                                 <input required type="datetime-local" class="form-control
-                                <?php if (form_error('発生日')) echo 'is-invalid' ?>" id="start_day" name="発生日" value="<?= $items->c_accidentDate ?>" required>
+                                <?php if (form_error('発生日')) echo 'is-invalid' ?>" id="start_day" name="発生日" value="<?= set_value('発生日') != '' ? trim(set_value('発生日')) :  trim($items->c_accidentDate) ?>" required>
                             </div>
 
 
                             <div class="col-4 pt-3">
-                                <label for="time_end" class="form-label"><?= $this->data['STOP_TIME'] ?></label>
+                                <div class="d-flex">
+                                    <label for="time_end" class="form-label"><?= $this->data['STOP_TIME'] ?></label>
+                                    <?php if (form_error('duration') != '' || form_error('days') != '' || form_error('hours')  != '' || form_error('minutes') != '') { ?>
+                                        <span class="invalid-feedback form-label"><?= $this->data['IS_REQUIRED'] ?></span>
+                                    <?php } ?>
+                                </div>
                                 <div class="input-group">
                                     <input type="number" class="form-control <?php if (form_error('days')) echo 'is-invalid' ?>" value="" onchange="durToMin()" name="days" id="days" min="0">
                                     <span class="input-group-text" id="">日</span>
@@ -120,13 +132,27 @@ echo "test"
                             </div>
 
                             <div class="col pt-3">
+
                                 <label for="kouteiNa" class="form-label"><?= $this->data['PROCESS_NAME'] ?></label>
-                                <input required type="text" class="form-control <?php if (form_error('工程名')) echo 'is-invalid' ?>" name="工程名" id="kouteiNa" value="<?= $items->c_processName ?>" required>
+                                <span class="must form-check-label">必須</span>
+                                <?php if (trim(set_value('工程名')) != trim($items->c_processName) && set_value('工程名') != '') { ?>
+                                    <span class="edited form-check-label">更新しました</span>
+                                <?php } ?>
+                                <?php if (form_error('工程名') != '') { ?>
+                                    <span class="invalid-feedback form-label"><?= trim(form_error('工程名')) ?></span>
+                                <?php } ?>
+
+                                <input required type="text" class="form-control <?php if (form_error('工程名')) echo 'is-invalid'; ?>" name="工程名" id="kouteiNa" value="<?= set_value('工程名') != '' ? trim(set_value('工程名')) :  trim($items->c_processName) ?>" required>
                             </div>
 
                             <div class="col pt-3">
-                                <label for="mode" class="form-label"><?= $this->data['FAIL_MODE'] ?></label>
-                                <input required type="text" class="form-control <?php if (form_error('故障モード')) echo 'is-invalid' ?>" name="故障モード" id="mode" value="<?= $items->c_failMode ?>" required>
+                                <div class="d-flex">
+                                    <label for="mode" class="form-label "><?= $this->data['FAIL_MODE'] ?></label>
+                                    <?php if (form_error('故障モード') != '') { ?>
+                                        <span class="invalid-feedback form-label"><?= trim(form_error('故障モード')) ?></span>
+                                    <?php } ?>
+                                </div>
+                                <input required type="text" class="form-control <?php if (form_error('故障モード')) echo 'is-invalid' ?>" name="故障モード" id="mode" value="<?= set_value('故障モード') != '' ? trim(set_value('故障モード')) :  trim($items->c_failMode) ?>" required>
                             </div>
 
 
@@ -136,22 +162,42 @@ echo "test"
                             &nbsp;<b><?= $this->data['SECTION_3'] ?></b>&nbsp;</p>
                         <div class="detail row border-top py-3">
                             <div class="col-12 pt-3">
-                                <label class="form-label" for="gensho"><?= $this->data['PHENOMENON'] ?></label>
-                                <textarea required name="現象" id="gensho" class="form-control <?php if (form_error('現象')) echo 'is-invalid' ?>" cols="30" rows="10" required><?= $items->c_phenomenon ?></textarea>
+                                <div class="d-flex">
+                                    <label class="form-label flex-grow" for="gensho"><?= $this->data['PHENOMENON'] ?></label>
+                                    <?php if (form_error('現象') != '') { ?>
+                                        <span class="invalid-feedback form-label"><?= trim(form_error('現象')) ?></span>
+                                    <?php } ?>
+                                </div>
+                                <textarea required name="現象" id="gensho" class="form-control <?php if (form_error('現象')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= set_value('現象') != '' ? trim(set_value('現象')) :  trim($items->c_phenomenon) ?></textarea>
                             </div>
                             <div class="col-12 pt-3">
-                                <label class="form-label" for="shuriNaiyou"><?= $this->data['REPAIR_DETAIL'] ?></label>
-                                <textarea required name="修理内容" id="shuriNaiyou" class="form-control <?php if (form_error('修理内容')) echo 'is-invalid' ?>" cols="30" rows="10" required><?= $items->c_repairDet ?></textarea>
+                                <div class="d-flex">
+                                    <label class="form-label " for="shuriNaiyou"><?= $this->data['REPAIR_DETAIL'] ?></label>
+                                    <?php if (form_error('修理内容') != '') { ?>
+                                        <span class="invalid-feedback form-label"><?= trim(form_error('修理内容')) ?></span>
+                                    <?php } ?>
+                                </div>
+                                <textarea required name="修理内容" id="shuriNaiyou" class="form-control <?php if (form_error('修理内容')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= set_value('修理内容') != '' ? trim(set_value('修理内容')) :  trim($items->c_repairDet) ?></textarea>
                             </div>
 
-                            <div class="col-6 pt-3">
-                                <label class="form-label" for="failMech"><?= $this->data['MECHANISM'] ?></label>
-                                <textarea required name="fail_mech" id="failMech" class="form-control <?php if (form_error('fail_mech')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= $items->c_failMech ?></textarea>
+                            <div class="col-12 pt-3">
+                                <div class="d-flex">
+                                    <label class="form-label " for="failMech"><?= $this->data['MECHANISM'] ?></label>
+                                    <?php if (form_error('fail_mech') != '') { ?>
+                                        <span class="invalid-feedback form-label"><?= trim(form_error('fail_mech')) ?></span>
+                                    <?php } ?>
+                                </div>
+                                <textarea required name="fail_mech" id="failMech" class="form-control <?php if (form_error('fail_mech')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= set_value('fail_mech') != '' ? trim(set_value('fail_mech')) :  trim($items->c_failMech) ?></textarea>
                             </div>
 
-                            <div class="col-6 pt-3">
-                                <label class="form-label" for="response"><?= $this->data['RESPONSE'] ?></label>
-                                <textarea required name="response" id="response" class="form-control <?php if (form_error('response')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= $items->c_response ?></textarea>
+                            <div class="col-12 pt-3">
+                                <div class="d-flex ">
+                                    <label class="form-label " for="response"><?= $this->data['RESPONSE'] ?></label>
+                                    <?php if (form_error('response') != '') { ?>
+                                        <span class="invalid-feedback form-label"><?= trim(form_error('response')) ?></span>
+                                    <?php } ?>
+                                </div>
+                                <textarea required name="response" id="response" class="form-control <?php if (form_error('response')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= set_value('response') != '' ? trim(set_value('response')) :  trim($items->c_response) ?></textarea>
                             </div>
 
                             <div class="col-12 pt-3">
@@ -166,7 +212,7 @@ echo "test"
 
                                                     <label class="form-label" for="taisakusho"><?= $this->data['COUNTERMEASURES'] ?></label>
                                                     <div class="input-group">
-                                                        <input class="form-control <?php if (form_error('response')) echo 'is-invalid' ?>" type="file" name="対策書" id="taisakusho" onchange="fileUpload()" style="display: none;">
+                                                        <input class="form-control" type="file" name="対策書" id="taisakusho" onchange="fileUpload()" style="display: none;">
                                                         <button id="file_upload" class="btn btn-secondary" type="button" onclick="$('#taisakusho').click();" style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;"><?= $this->data['FILE_BUTTON'] ?></button>
                                                         <textarea class="form-control" name="" id="taisakusho_file" cols="30" rows="1" style="resize: none;" disabled></textarea>
                                                     </div>
@@ -301,6 +347,7 @@ echo "test"
 <script>
     $('input, textarea, select').on('click', function() {
         $(this).removeClass('is-invalid')
+        $(this).parent().find('.invalid-feedback').hide()
     })
 
 

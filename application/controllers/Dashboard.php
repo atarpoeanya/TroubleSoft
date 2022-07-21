@@ -152,6 +152,10 @@ class Dashboard extends CI_Controller
             'EMPTY_PLACEHOLDER'                     =>  '未選択',
 
 
+            //Validation message
+            'IS_REQUIRED'                           =>  '<i><b>＊空であってはならない</b></i>',
+            'IS_TOO_LONG'                           =>  '<i><b>＊長すぎ</b></i>',
+
 
             //UNSUSED
             // 'EQUIPMENT_PHENOMENON_F' => '現象・不具合要因詳細',
@@ -618,8 +622,8 @@ class Dashboard extends CI_Controller
 
 
         $this->session->set_flashdata('crumbs', '0');
-        $this->form_validation->set_message('required', 'is required');
-        $this->form_validation->set_message('max_length', 'is too long');
+        $this->form_validation->set_message('required', $this->data['IS_REQUIRED']);
+        $this->form_validation->set_message('max_length', $this->data['IS_TOO_LONG']);
 
         $this->form_validation->set_rules('発生日', '1', 'required');
 
