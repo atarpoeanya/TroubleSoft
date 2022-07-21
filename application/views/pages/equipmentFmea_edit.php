@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title ps-2 pt-2">FMEA FORM</h2>
-                    <form action="/edit_Equipment_fmea/" method="post" class="mt-4 p-4 col mainForm" autocomplete="off" id="equipForm" enctype="multipart/form-data">
+                    <form action="/edit_Equipment_fmea/" method="post" class="mt-4 p-4 col mainForm" autocomplete="off" id="equipForm" enctype="multipart/form-data" novalidate>
                         <!-- ID -->
                         <input type="hidden" name="id" id="setsubiId" value="<?= $items->c_t203_id ?>">
                         <!-- For Spare part [Id, Amount] -->

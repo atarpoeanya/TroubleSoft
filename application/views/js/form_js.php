@@ -115,6 +115,10 @@
             var hours = $('#hours').val()
             var minutes = $('#minutes').val()
 
+            days == '' ? 0 : $('#days').val();
+            hours == '' ? 0 : $('#hours').val();
+            minuts == '' ? 0 : $('#minutes').val();
+
             console.log(days + '  ' + hours + '  ' + minutes)
 
             var duration = parseInt(days) * 1440 + parseInt(hours) * 60 + parseInt(minutes) * 1
@@ -315,6 +319,7 @@
             var hours = Math.floor(rem_days / 60)
             var minutes = duration - days * 1440 - hours * 60
 
+            
             $('#days').val(days)
             $('#hours').val(hours)
             $('#minutes').val(minutes)

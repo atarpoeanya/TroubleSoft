@@ -58,7 +58,7 @@ function f_generate_table_select($data)
                             } ?>
                         </td>
                         <td class=" table-data text-center align-middle border-end pointer col button_column text-nowrap" style="display: none;">
-                            <a class="btn-block btn btn-primary modify-button" href="<?= base_url() ?>editEquipment/<?= intval($item->c_t800_id) ?>" onclick="event.cancelBubble=true;"><?= $data['MODIFY_BUTTON'] ?></a>
+                            <a class="btn-block btn btn-primary modify-button" href="<?= base_url() ?>edit_Equipment/<?= intval($item->c_t800_id) ?>" onclick="event.cancelBubble=true;"><?= $data['MODIFY_BUTTON'] ?></a>
 
                             <a class="btn-block btn btn-danger modify-button" onclick="event.cancelBubble=true; deleteData_tool(<?= $item->c_t800_id ?>)"><?= $data['DELETE_BUTTON'] ?></a>
                         </td>

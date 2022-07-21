@@ -152,6 +152,10 @@ class Dashboard extends CI_Controller
             'EMPTY_PLACEHOLDER'                     =>  '未選択',
 
 
+            //Validation message
+            'IS_REQUIRED'                           =>  '<i><b>＊空であってはならない</b></i>',
+            'IS_TOO_LONG'                           =>  '<i><b>＊長すぎ</b></i>',
+
 
             //UNSUSED
             // 'EQUIPMENT_PHENOMENON_F' => '現象・不具合要因詳細',
@@ -376,11 +380,11 @@ class Dashboard extends CI_Controller
         if (empty($id))
             redirect(base_url(), '/');
 
-            if ($id == 1) {
-                
-                $this->session->set_flashdata('crumbs', '0');
-                $this->form_validation->set_message('required', 'is required');
-                $this->form_validation->set_message('max_length', 'is too long');
+        if ($id == 1) {
+
+            $this->session->set_flashdata('crumbs', '0');
+            $this->form_validation->set_message('required', $this->data['IS_REQUIRED']);
+            $this->form_validation->set_message('max_length', $this->data['IS_TOO_LONG']);
 
             $this->form_validation->set_rules('発生日', '1', 'required');
 
@@ -444,7 +448,7 @@ class Dashboard extends CI_Controller
 
         if ($id == 2) { //FMEA
             $this->session->set_flashdata('crumbs', '1');
-            
+
 
             $this->form_validation->set_rules('部署', '1', 'required|callback_check_default');
             $this->form_validation->set_rules('設備', '2', 'required|callback_check_default');
@@ -564,7 +568,7 @@ class Dashboard extends CI_Controller
         }
     }
 
-    public function edit_data_tool_view($id)
+    public function edit_data_tool_view()
     {
         $id = $this->uri->segment(2);
         $data['items'] = $this->Troublelist_model->get_tool_id(intval($id));
@@ -595,8 +599,8 @@ class Dashboard extends CI_Controller
         ];
 
         $data['unit'] = [
-            '1号機', 
-            '2号機', 
+            '1号機',
+            '2号機',
             '3号機'
         ];
 
@@ -615,9 +619,42 @@ class Dashboard extends CI_Controller
 
     public function post_edit_data_tool()
     {
-        $data = $this->do_upload();
-        $this->Troublelist_model->update_data_tool($data);
-        redirect(base_url(), '/');
+
+
+        $this->session->set_flashdata('crumbs', '0');
+        $this->form_validation->set_message('required', $this->data['IS_REQUIRED']);
+        $this->form_validation->set_message('max_length', $this->data['IS_TOO_LONG']);
+
+        $this->form_validation->set_rules('発生日', '1', 'required');
+
+        $this->form_validation->set_rules('days', '2', 'required');
+        $this->form_validation->set_rules('hours', '3', 'required');
+        $this->form_validation->set_rules('minutes', '4', 'required');
+
+        $this->form_validation->set_rules('担当者', '5', 'required|callback_check_default');
+        $this->form_validation->set_rules('部署', '6', 'required|callback_check_default');
+        $this->form_validation->set_rules('設備', '7', 'required|callback_check_default');
+        $this->form_validation->set_rules('号機', '8', 'required|callback_check_default');
+
+        $this->form_validation->set_rules('工程名', '9', 'required|max_length[20]');
+        $this->form_validation->set_rules('故障モード', '10', 'required|max_length[20]');
+
+        $this->form_validation->set_rules('現象', '11', 'required|max_length[140]');
+        $this->form_validation->set_rules('修理内容', '12', 'required|max_length[140]');
+        $this->form_validation->set_rules('fail_mech', '13', 'required|max_length[140]');
+        $this->form_validation->set_rules('response', '14', 'required|max_length[140]');
+
+        
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->edit_data_tool_view();
+        } else {
+            $data = $this->do_upload();
+            $this->Troublelist_model->update_data_tool($data);
+            redirect(base_url(), '/');
+        }
+
+
 
 
         //js
@@ -670,6 +707,7 @@ class Dashboard extends CI_Controller
 
     public function post_edit_data_tool_fmea()
     {
+
 
         $this->Troublelist_model->update_data_tool_fmea();
         redirect(base_url(), '/');

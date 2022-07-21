@@ -34,6 +34,9 @@
                             <div class="col-4 pt-3">
 
                                 <label for="start_day" class="form-label"><?= $this->data['ACCIDENT_DATE'] ?></label>
+                                <?php if (form_error('発生日') != '') { ?>
+                                    <span class="invalid-feedback form-label"><?= trim(form_error('発生日')) ?></span>
+                                <?php } ?>
                                 <input id="start_day" name="発生日" type="datetime-local" class="form-control
                                 <?php if (form_error('発生日')) echo 'is-invalid' ?>" value="<?= set_value('発生日'); ?>" required>
                             </div>
