@@ -1,11 +1,4 @@
-<?php
-if ($this->session->flashdata() != '')
-    echo validation_errors();
 
-echo $items->c_processName;
-echo '<br>';
-echo set_value('工程名');
-?>
 <div class="d-flex justify-content-center pt-3" id="mainForm">
 
 
@@ -119,11 +112,18 @@ echo set_value('工程名');
                             </div>
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="gouki"><?= $this->data['UNIT'] ?></label>
+                                <?php if (trim(set_value('号機')) != trim($items->c_unit) && set_value('号機') != '') { ?>
+                                    <span class="edited form-check-label">更新しました</span>
+                                <?php } ?>
                                 <select class="form-select <?= (form_error('号機') ? 'is-invalid' : ''); ?>" name="号機" id="gouki" required>
                                     <?php
                                     foreach ($unit as $u) :
-                                        if ($u == $items->c_unit) : ?>
+                                        if ($u == $items->c_unit && ($items->c_unit == set_value('号機') || set_value('号機') == '')) : ?>
                                             <option value="<?= $u ?>" selected><?= $u ?></option>
+
+                                        <?php elseif ($u == set_value('号機') && ($items->c_unit != set_value('号機') || set_value('号機') != '')) : ?>
+                                            <option value="<?= $u ?>" selected><?= $u ?></option>
+
                                         <?php else : ?>
                                             <option value="<?= $u ?>"><?= $u ?></option>
                                     <?php endif;

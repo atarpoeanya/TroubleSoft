@@ -383,8 +383,8 @@ class Dashboard extends CI_Controller
         if ($id == 1) {
 
             $this->session->set_flashdata('crumbs', '0');
-            $this->form_validation->set_message('required', 'is required');
-            $this->form_validation->set_message('max_length', 'is too long');
+            $this->form_validation->set_message('required', $this->data['IS_REQUIRED']);
+            $this->form_validation->set_message('max_length', $this->data['IS_TOO_LONG']);
 
             $this->form_validation->set_rules('発生日', '1', 'required');
 
