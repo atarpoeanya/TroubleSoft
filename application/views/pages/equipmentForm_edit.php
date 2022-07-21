@@ -1,3 +1,10 @@
+<?php
+if($this->session->flashdata() != '')
+echo validation_errors();
+else
+echo "test"
+
+?>
 <div class="d-flex justify-content-center pt-3" id="mainForm">
 
 
@@ -9,7 +16,7 @@
                     <div class="card-title">
                         <h2 class="pt-3 mb-3">設備のトラブル</h2>
                     </div>
-                    <form action="/edit_Equipment/" method="post" class="mt-4 p-4 col" autocomplete="off" id="equipForm" enctype="multipart/form-data">
+                    <form action="/edit_Equipment/<?= $items->c_t800_id ?>/post" method="post" class="mt-4 p-4 col" autocomplete="off" id="equipForm" enctype="multipart/form-data" novalidate>
                         <!-- ID -->
                         <input type="hidden" name="id" id="setsubiId" value="<?= $items->c_t800_id ?>">
                         <!-- For Spare part [Id, Amount] -->
@@ -28,20 +35,21 @@
 
                             <div class="col-4 pt-3">
                                 <label for="start_day" class="form-label"><?= $this->data['ACCIDENT_DATE'] ?></label>
-                                <input required type="datetime-local" class="form-control" id="start_day" name="発生日" value="<?= $items->c_accidentDate ?>" required>
+                                <input required type="datetime-local" class="form-control
+                                <?php if (form_error('発生日')) echo 'is-invalid' ?>" id="start_day" name="発生日" value="<?= $items->c_accidentDate ?>" required>
                             </div>
 
 
                             <div class="col-4 pt-3">
                                 <label for="time_end" class="form-label"><?= $this->data['STOP_TIME'] ?></label>
                                 <div class="input-group">
-                                    <input type="number" class="form-control  ?>" value="" onchange="durToMin()" name="days" id="days" min="0">
+                                    <input type="number" class="form-control <?php if (form_error('days')) echo 'is-invalid' ?>" value="" onchange="durToMin()" name="days" id="days" min="0">
                                     <span class="input-group-text" id="">日</span>
 
-                                    <input type="number" class="form-control  ?>" value="" onchange="durToMin()" name="hours" id="hours" min="0">
+                                    <input type="number" class="form-control <?php if (form_error('hours')) echo 'is-invalid' ?>" value="" onchange="durToMin()" name="hours" id="hours" min="0">
                                     <span class="input-group-text" id="">時間</span>
 
-                                    <input type="number" class="form-control  ?>" value="" onchange="durToMin()" name="minutes" id="minutes" min="0">
+                                    <input type="number" class="form-control <?php if (form_error('minutes')) echo 'is-invalid' ?>" value="" onchange="durToMin()" name="minutes" id="minutes" min="0">
                                     <span class="input-group-text" id="days">分</span>
                                 </div>
                             </div>
@@ -113,12 +121,12 @@
 
                             <div class="col pt-3">
                                 <label for="kouteiNa" class="form-label"><?= $this->data['PROCESS_NAME'] ?></label>
-                                <input required type="text" class="form-control" name="工程名" id="kouteiNa" value="<?= $items->c_processName ?>" required>
+                                <input required type="text" class="form-control <?php if (form_error('工程名')) echo 'is-invalid' ?>" name="工程名" id="kouteiNa" value="<?= $items->c_processName ?>" required>
                             </div>
 
                             <div class="col pt-3">
                                 <label for="mode" class="form-label"><?= $this->data['FAIL_MODE'] ?></label>
-                                <input required type="text" class="form-control" name="故障モード" id="mode" value="<?= $items->c_failMode ?>" required>
+                                <input required type="text" class="form-control <?php if (form_error('故障モード')) echo 'is-invalid' ?>" name="故障モード" id="mode" value="<?= $items->c_failMode ?>" required>
                             </div>
 
 
@@ -129,21 +137,21 @@
                         <div class="detail row border-top py-3">
                             <div class="col-12 pt-3">
                                 <label class="form-label" for="gensho"><?= $this->data['PHENOMENON'] ?></label>
-                                <textarea required name="現象" id="gensho" class="form-control" cols="30" rows="10" required><?= $items->c_phenomenon ?></textarea>
+                                <textarea required name="現象" id="gensho" class="form-control <?php if (form_error('現象')) echo 'is-invalid' ?>" cols="30" rows="10" required><?= $items->c_phenomenon ?></textarea>
                             </div>
                             <div class="col-12 pt-3">
                                 <label class="form-label" for="shuriNaiyou"><?= $this->data['REPAIR_DETAIL'] ?></label>
-                                <textarea required name="修理内容" id="shuriNaiyou" class="form-control" cols="30" rows="10" required><?= $items->c_repairDet ?></textarea>
+                                <textarea required name="修理内容" id="shuriNaiyou" class="form-control <?php if (form_error('修理内容')) echo 'is-invalid' ?>" cols="30" rows="10" required><?= $items->c_repairDet ?></textarea>
                             </div>
 
                             <div class="col-6 pt-3">
                                 <label class="form-label" for="failMech"><?= $this->data['MECHANISM'] ?></label>
-                                <textarea required name="fail_mech" id="failMech" class="form-control" cols="30" rows="5" required><?= $items->c_failMech ?></textarea>
+                                <textarea required name="fail_mech" id="failMech" class="form-control <?php if (form_error('fail_mech')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= $items->c_failMech ?></textarea>
                             </div>
 
                             <div class="col-6 pt-3">
                                 <label class="form-label" for="response"><?= $this->data['RESPONSE'] ?></label>
-                                <textarea required name="response" id="response" class="form-control" cols="30" rows="5" required><?= $items->c_response ?></textarea>
+                                <textarea required name="response" id="response" class="form-control <?php if (form_error('response')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= $items->c_response ?></textarea>
                             </div>
 
                             <div class="col-12 pt-3">
@@ -158,7 +166,7 @@
 
                                                     <label class="form-label" for="taisakusho"><?= $this->data['COUNTERMEASURES'] ?></label>
                                                     <div class="input-group">
-                                                        <input class="form-control" type="file" name="対策書" id="taisakusho" onchange="fileUpload()" style="display: none;">
+                                                        <input class="form-control <?php if (form_error('response')) echo 'is-invalid' ?>" type="file" name="対策書" id="taisakusho" onchange="fileUpload()" style="display: none;">
                                                         <button id="file_upload" class="btn btn-secondary" type="button" onclick="$('#taisakusho').click();" style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;"><?= $this->data['FILE_BUTTON'] ?></button>
                                                         <textarea class="form-control" name="" id="taisakusho_file" cols="30" rows="1" style="resize: none;" disabled></textarea>
                                                     </div>

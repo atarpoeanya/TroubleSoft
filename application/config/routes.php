@@ -72,11 +72,11 @@ $route['product'] = 'dashboard/productForm';
 $route['dashboard'] = 'dashboard';
 
 //Equipment editing
-$route['editEquipment/(:num)'] = 'dashboard/edit_data_tool_view/$id';
-$route['editEquipment_fmea/(:num)'] = 'dashboard/edit_data_tool_fmea_view/$id';
+$route['edit_Equipment/(:num)'] = 'dashboard/edit_data_tool_view/$id';
+$route['edit_Equipment_fmea/(:num)'] = 'dashboard/edit_data_tool_fmea_view/$id';
 
-$route['edit_Equipment'] = 'dashboard/post_edit_data_tool';
-$route['edit_Equipment_fmea'] = 'dashboard/post_edit_data_tool_fmea';
+$route['edit_Equipment/(:num)/post'] = 'dashboard/post_edit_data_tool/$id';
+$route['edit_Equipment_fmea'] = 'dashboard/post_edit_data_tool_fmea/$id';
 
 
 //Record Routing

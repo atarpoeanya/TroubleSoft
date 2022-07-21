@@ -49,7 +49,7 @@ function f_generate_table_select($data)
                             <?= $item->c_picSchedule ?>
                         </td>
                         <td class="kanjifont table-data text-center align-middle border-end pointer col button_column text-nowrap" style="display: none;width:150px;max-width:150px;">
-                            <a class="btn btn-primary" href="<?= base_url() ?>editEquipment_fmea/<?= intval($item->c_t203_id) ?>" onclick="event.cancelBubble=true;"><?= $data['MODIFY_BUTTON'] ?></a>
+                            <a class="btn btn-primary" href="<?= base_url() ?>edit_Equipment_fmea/<?= intval($item->c_t203_id) ?>" onclick="event.cancelBubble=true;"><?= $data['MODIFY_BUTTON'] ?></a>
                             <a class="btn btn-danger " onclick="event.cancelBubble=true; deleteData_tool_fmea(<?= $item->c_t203_id ?>)"><?= $data['DELETE_BUTTON'] ?></a>
 
                         </td>
