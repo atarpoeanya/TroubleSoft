@@ -196,8 +196,8 @@
                                         if (minutes != 0) {
                                             result += minutes + '分'
                                         }
-                                        // Use '|' for spliting indicator
-                                        return result + '<p style="display:none">|' + data + '</p>';
+
+                                        return result;
                                     }
                                 }
                             },
@@ -287,9 +287,7 @@
                             $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
                                 var value = parseInt($('#search-bar-time').val())
 
-                                var time = data[1].split("|").pop();
-
-                                console.log(value)
+                                var time = data[1];
 
                                 if (isNaN(value) || time >= value) {
                                     return true;
