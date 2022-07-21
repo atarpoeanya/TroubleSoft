@@ -226,7 +226,7 @@
         background-color: #F5F5F5
     }
 
-    .card-body{
+    .card-body {
         background-color: #F4F5F6;
     }
 
@@ -235,12 +235,6 @@
         left: 40px;
         background-color: #F4F5F6;
         width: max-content;
-    }
-
-    form .form-control {
-
-        /* background-color: #EAECF4; */
-
     }
 </style>
 

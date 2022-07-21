@@ -9,7 +9,7 @@
                     <div class="card-title">
                         <h2 class="pt-3 mb-3">設備のトラブル</h2>
                     </div>
-                    <form action="<?= base_url()?>/edit_Equipment/<?= $items->c_t800_id ?>/post" method="post" class="mt-4 p-4 col" autocomplete="off" id="equipForm" enctype="multipart/form-data" novalidate>
+                    <form action="/edit_Equipment/<?= $items->c_t800_id ?>/post" method="post" class="mt-4 p-4 col" autocomplete="off" id="equipForm" enctype="multipart/form-data" novalidate>
                         <!-- ID -->
                         <input type="hidden" name="id" id="setsubiId" value="<?= $items->c_t800_id ?>">
                         <!-- For Spare part [Id, Amount] -->
@@ -335,12 +335,6 @@
         width: max-content;
     }
 
-
-    form .form-control {
-
-        /* background-color: #EAECF4; */
-
-    }
 </style>
 
 <script>

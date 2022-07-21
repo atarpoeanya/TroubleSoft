@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <!-- FORM SECTION -->
-                    <form action="<?= base_url() ?>/equipment/1" method="post" class="px-3 col " autocomplete="off" id="equipForm" enctype="multipart/form-data" novalidate>
+                    <form action="/equipment/1" method="post" class="px-3 col " autocomplete="off" id="equipForm" enctype="multipart/form-data" novalidate>
 
                         <input type="hidden" name="spareParts" id="partinfo" value="">
 
@@ -301,9 +301,6 @@
         background-color: #F4F5F6;
     }
 
-    form .form-control {
-        /* background-color: white; */
-    }
 </style>
 
 <script>
