@@ -155,7 +155,8 @@ class Dashboard extends CI_Controller
             //Validation message
             'IS_REQUIRED'                           =>  '<i><b>＊空であってはならない</b></i>',
             'IS_TOO_LONG'                           =>  '<i><b>＊長すぎ</b></i>',
-            'NO_ZERO'                               =>  '<i><b>＊0であってはない</b></i>',
+            'NO_ZERO'                               =>  '<i><b>＊合計を0にすることはできません</b></i>',
+            'NOT_PICK'                              =>  '<i><b>＊何か選んでください</b></i>',
 
 
             //UNSUSED
@@ -378,18 +379,21 @@ class Dashboard extends CI_Controller
         $id = $this->uri->segment(2);
         $data = $this->data;
 
+        $this->form_validation->set_message('required', $this->data['IS_REQUIRED']);
+        $this->form_validation->set_message('max_length', $this->data['IS_TOO_LONG']);
+        $this->form_validation->set_message('greater_than', $this->data['NO_ZERO']);
+        $this->form_validation->set_message('check_default', $this->data['NOT_PICK']);
+
         if (empty($id))
             redirect(base_url(), '/');
 
         if ($id == 1) {
 
             $this->session->set_flashdata('crumbs', '0');
-            $this->form_validation->set_message('required', $this->data['IS_REQUIRED']);
-            $this->form_validation->set_message('max_length', $this->data['IS_TOO_LONG']);
 
             $this->form_validation->set_rules('発生日', '1', 'required');
 
-            $this->form_validation->set_rules('days', '2', 'required|');
+            $this->form_validation->set_rules('days', '2', 'required');
             $this->form_validation->set_rules('hours', '3', 'required');
             $this->form_validation->set_rules('minutes', '4', 'required');
             $this->form_validation->set_rules('duration', '20', 'required|greater_than[0]');
@@ -626,7 +630,8 @@ class Dashboard extends CI_Controller
         $this->session->set_flashdata('crumbs', '0');
         $this->form_validation->set_message('required', $this->data['IS_REQUIRED']);
         $this->form_validation->set_message('max_length', $this->data['IS_TOO_LONG']);
-        $this->form_validation->set_message('greater_than[0', $this->data['NO_ZERO']);
+        $this->form_validation->set_message('greater_than', $this->data['NO_ZERO']);
+        $this->form_validation->set_message('check_default', $this->data['NOT_PICK']);
 
         $this->form_validation->set_rules('発生日', '1', 'required');
 
@@ -648,7 +653,7 @@ class Dashboard extends CI_Controller
         $this->form_validation->set_rules('fail_mech', '13', 'required|max_length[140]');
         $this->form_validation->set_rules('response', '14', 'required|max_length[140]');
 
-        
+
 
         if ($this->form_validation->run() == FALSE) {
             $this->edit_data_tool_view();

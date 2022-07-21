@@ -44,14 +44,17 @@
 
                             <div class="col-4 pt-3">
                                 <label for="time_end" class="form-label"><?= $this->data['STOP_TIME'] ?></label>
+                                <?php if (form_error('duration') != '' || form_error('days') != '' || form_error('hours')  != '' || form_error('minutes') != '') { ?>
+                                    <span class="invalid-feedback form-label"><?= $this->data['NO_ZERO'] ?></span>
+                                <?php } ?>
                                 <div class="input-group">
-                                    <input type="number" class="form-control  <?php if (form_error('days')) echo 'is-invalid' ?>" value="<?= set_value('days', '0') ?>" onchange="durToMin()" name="days" id="days" min="0">
+                                    <input type="number" class="form-control  <?php if (form_error('duration')) echo 'is-invalid' ?>" value="<?= set_value('days', '0') ?>" onchange="durToMin()" name="days" id="days" min="0">
                                     <span class="input-group-text" id="">日</span>
 
-                                    <input type="number" class="form-control  <?php if (form_error('hours')) echo 'is-invalid' ?>" value="<?= set_value('hours', '0'); ?>" onchange="durToMin()" name="hours" id="hours" min="0">
+                                    <input type="number" class="form-control  <?php if (form_error('duration')) echo 'is-invalid' ?>" value="<?= set_value('hours', '0'); ?>" onchange="durToMin()" name="hours" id="hours" min="0">
                                     <span class="input-group-text" id="">時間</span>
 
-                                    <input type="number" class="form-control  <?php if (form_error('minutes')) echo 'is-invalid' ?>" value="<?= set_value('minutes', '0'); ?>" onchange="durToMin()" name="minutes" id="minutes" min="0">
+                                    <input type="number" class="form-control  <?php if (form_error('duration')) echo 'is-invalid' ?>" value="<?= set_value('minutes', '0'); ?>" onchange="durToMin()" name="minutes" id="minutes" min="0">
                                     <span class="input-group-text" id="days">分</span>
                                 </div>
 
@@ -61,6 +64,9 @@
                             <div class="col-4 pt-3">
 
                                 <label class="form-label" for="tantou"><?= $this->data['PIC'] ?></label><!-- PERSON IN CHARGE-->
+                                <?php if (form_error('担当者') != '') { ?>
+                                    <span class="invalid-feedback form-label"><?= trim(form_error('担当者')) ?></span>
+                                <?php } ?>
                                 <select class="form-select <?= (form_error('担当者') ? 'is-invalid' : ''); ?>" name="担当者" id="tantou" required>
                                     <option value="" <?= set_select('担当者', '', true); ?> disabled selected>選び出す</option>
                                     <option value="水上" <?= set_select('担当者', '水上'); ?>>水上</option>
@@ -77,6 +83,9 @@
                         <div class="item row border-top py-3">
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="busho"><?= $this->data['DEPARTMENT'] ?></label>
+                                <?php if (form_error('部署') != '') { ?>
+                                    <span class="invalid-feedback form-label"><?= trim(form_error('部署')) ?></span>
+                                <?php } ?>
                                 <select class="form-select <?= (form_error('部署') ? 'is-invalid' : ''); ?>" name="部署" id="busho" required>
 
                                     <option value="" <?= set_select('部署', '', true); ?>disabled selected>選び出す</option>
@@ -86,6 +95,9 @@
                             <!-- Probably connect with each other -->
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="setsubi"><?= $this->data['FACILITY'] ?></label>
+                                <?php if (form_error('設備') != '') { ?>
+                                    <span class="invalid-feedback form-label"><?= trim(form_error('設備')) ?></span>
+                                <?php } ?>
                                 <select class="form-select <?= (form_error('設備') ? 'is-invalid' : ''); ?>" name="設備" id="setsubi" required>
                                     <option value="" <?= set_select('設備', '', true); ?> disabled selected>選び出す</option>
                                     <option value="プレス" <?= set_select('設備', 'プレス'); ?>>プレス</option>
@@ -93,6 +105,9 @@
                             </div>
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="gouki"><?= $this->data['UNIT'] ?></label>
+                                <?php if (form_error('号機') != '') { ?>
+                                    <span class="invalid-feedback form-label"><?= trim(form_error('号機')) ?></span>
+                                <?php } ?>
                                 <select class="form-select <?= (form_error('号機') ? 'is-invalid' : ''); ?>" name="号機" id="gouki" required>
                                     <option value="" <?= set_select('号機', '', true); ?> disabled selected>選び出す</option>
                                     <option value="1号機" <?= set_select('号機', '1号機'); ?>>1号機</option>
@@ -102,12 +117,18 @@
 
                             <div class="col pt-3">
                                 <label for="kouteiNa" class="form-label"><?= $this->data['PROCESS_NAME'] ?></label>
+                                <?php if (form_error('工程名') != '') { ?>
+                                    <span class="invalid-feedback form-label"><?= trim(form_error('工程名')) ?></span>
+                                <?php } ?>
                                 <input type="text" name="工程名" id="kouteiNa" class="form-control
                                 <?php if (form_error('工程名')) echo 'is-invalid' ?>" value="<?= set_value('工程名'); ?>" required>
                             </div>
 
                             <div class="col pt-3">
                                 <label for="mode" class="form-label"><?= $this->data['FAIL_MODE'] ?></label>
+                                <?php if (form_error('故障モード') != '') { ?>
+                                    <span class="invalid-feedback form-label"><?= trim(form_error('故障モード')) ?></span>
+                                <?php } ?>
                                 <input type="text" name="故障モード" id="mode" class="form-control
                                 <?php if (form_error('故障モード')) echo 'is-invalid' ?>" value="<?= set_value('故障モード'); ?>" required>
                             </div>
@@ -120,23 +141,35 @@
                         <div class="item row border-top py-3">
                             <div class="col-12 pt-3">
                                 <label class="form-label" for="gensho"><?= $this->data['PHENOMENON'] ?></label>
+                                <?php if (form_error('現象') != '') { ?>
+                                    <span class="invalid-feedback form-label"><?= trim(form_error('現象')) ?></span>
+                                <?php } ?>
                                 <textarea name="現象" id="gensho" class="form-control
                                 <?php if (form_error('現象')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= set_value('現象'); ?></textarea>
                             </div>
                             <div class="col-12 pt-3">
                                 <label class="form-label" for="shuriNaiyou"><?= $this->data['REPAIR_DETAIL'] ?></label>
+                                <?php if (form_error('修理内容') != '') { ?>
+                                    <span class="invalid-feedback form-label"><?= trim(form_error('修理内容')) ?></span>
+                                <?php } ?>
                                 <textarea name="修理内容" id="shuriNaiyou" class="form-control
                                 <?php if (form_error('修理内容')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= set_value('修理内容'); ?></textarea>
                             </div>
 
                             <div class="col-12 pt-3">
                                 <label class="form-label" for="failMech"><?= $this->data['MECHANISM'] ?></label>
+                                <?php if (form_error('fail_mech') != '') { ?>
+                                    <span class="invalid-feedback form-label"><?= trim(form_error('fail_mech')) ?></span>
+                                <?php } ?>
                                 <textarea name="fail_mech" id="failMech" class="form-control
                                 <?php if (form_error('fail_mech')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= set_value('fail_mech'); ?></textarea>
                             </div>
 
                             <div class="col-12 pt-3">
                                 <label class="form-label" for="response"><?= $this->data['RESPONSE'] ?></label>
+                                <?php if (form_error('response') != '') { ?>
+                                    <span class="invalid-feedback form-label"><?= trim(form_error('response')) ?></span>
+                                <?php } ?>
                                 <textarea name="response" id="response" class="form-control
                                 <?php if (form_error('response')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= set_value('response'); ?></textarea>
                             </div>

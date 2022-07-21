@@ -1,4 +1,3 @@
-
 <div class="d-flex justify-content-center pt-3" id="mainForm">
 
 
@@ -10,7 +9,7 @@
                     <div class="card-title">
                         <h2 class="pt-3 mb-3">設備のトラブル</h2>
                     </div>
-                    <form action="/edit_Equipment/<?= $items->c_t800_id ?>/post" method="post" class="mt-4 p-4 col" autocomplete="off" id="equipForm" enctype="multipart/form-data" novalidate>
+                    <form action="<?= base_url()?>/edit_Equipment/<?= $items->c_t800_id ?>/post" method="post" class="mt-4 p-4 col" autocomplete="off" id="equipForm" enctype="multipart/form-data" novalidate>
                         <!-- ID -->
                         <input type="hidden" name="id" id="setsubiId" value="<?= $items->c_t800_id ?>">
                         <!-- For Spare part [Id, Amount] -->
@@ -44,17 +43,17 @@
                                 <div class="d-flex">
                                     <label for="time_end" class="form-label"><?= $this->data['STOP_TIME'] ?></label>
                                     <?php if (form_error('duration') != '' || form_error('days') != '' || form_error('hours')  != '' || form_error('minutes') != '') { ?>
-                                        <span class="invalid-feedback form-label"><?= $this->data['IS_REQUIRED'] ?></span>
+                                        <span class="invalid-feedback form-label"><?= $this->data['NO_ZERO'] ?></span>
                                     <?php } ?>
                                 </div>
                                 <div class="input-group">
-                                    <input type="number" class="form-control <?php if (form_error('days')) echo 'is-invalid' ?>" value="<?= set_value('days', 0)?>" onchange="durToMin()" name="days" id="days" min="0">
+                                    <input type="number" class="form-control <?php if (form_error('duration')) echo 'is-invalid' ?>" value="<?= set_value('days', 0) ?>" onchange="durToMin()" name="days" id="days" min="0">
                                     <span class="input-group-text" id="">日</span>
 
-                                    <input type="number" class="form-control <?php if (form_error('hours')) echo 'is-invalid' ?>" value=" <?= set_value('hours', 0)?>" onchange="durToMin()" name="hours" id="hours" min="0">
+                                    <input type="number" class="form-control <?php if (form_error('duration')) echo 'is-invalid' ?>" value=" <?= set_value('hours', 0) ?>" onchange="durToMin()" name="hours" id="hours" min="0">
                                     <span class="input-group-text" id="">時間</span>
 
-                                    <input type="number" class="form-control <?php if (form_error('minutes')) echo 'is-invalid' ?>" value="<?= set_value('minutes', 0)?>" onchange="durToMin()" name="minutes" id="minutes" min="0">
+                                    <input type="number" class="form-control <?php if (form_error('duration')) echo 'is-invalid' ?>" value="<?= set_value('minutes', 0) ?>" onchange="durToMin()" name="minutes" id="minutes" min="0">
                                     <span class="input-group-text" id="days">分</span>
                                 </div>
                             </div>
