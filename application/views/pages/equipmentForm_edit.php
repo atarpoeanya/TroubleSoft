@@ -305,7 +305,7 @@
                                                         </td>
 
 
-                                                        <td style="display: none;"><a class="btn btn-primary minus">DELETE</a> </td>
+                                                        <td style="display: none;"><a class="btn btn-primary minus"><?= $this->data['DELETE_BUTTON'] ?></a> </td>
                                                     </tr>
 
                                                     <div class="old_val" hidden>
@@ -333,8 +333,6 @@
                                 <div class="d-flex justify-content-center mt-2">
                                     <a class="btn btn-warning float-end me-5" href='<?= base_url(); ?>'><?= $this->data['CANCEL_BUTTON'] ?></a>
                                     <button type="submit" name="edit_trouble" class="btn btn-primary float-end me-1" value="登録" id="submitTrouble"><?= $this->data['SUBMIT_BUTTON'] ?></button>
-
-
                                 </div>
                     </form>
                 </div>

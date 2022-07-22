@@ -27,10 +27,6 @@
                     success: function(response) {
                         $("#fmea_place").html(response);
                         $('#fmea_id').val($id)
-
-
-
-
                     },
 
                 })
@@ -79,10 +75,6 @@
                             $('#equipment_parts_list tbody').append($('#foots tr')).append('<tr class="' + <?= $item->c_t202_id ?> + '"> <td>' + <?= $item->c_t202_id ?> + '</td> <td>' + "<?= $item->c_partName ?>" + '</td> <td>' + "<?= $item->c_model ?>" + '</td><td></td> <td>' + $arr_spare[<?= $INDEX ?>][1] + '</td> <td><a class="btn btn-primary minus">DELETE</a> </td></tr>')
                         }
 
-
-
-
-
                     <?php $INDEX++;
                     } ?>
                     $('#equipment_parts_list tbody').find('td:last-child').hide(); //Hide minus button
@@ -96,15 +88,10 @@
 
                         $('#partinfo').val(JSON.stringify($arr_spare))
                     })
-
-
             <?php
                 }
             }
             ?>
-
-
-
         })
     }
 
@@ -326,6 +313,8 @@
             // console.log('Hari : ' + days + ' Jam : ' + hours + ' Menit : ' + minutes)
         }
     }
+
+    
 
     // ========== EQUIPMENT FMEA=========
     {}

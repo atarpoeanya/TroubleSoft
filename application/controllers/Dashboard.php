@@ -693,7 +693,7 @@ class Dashboard extends CI_Controller
 
     public function post_edit_data_tool_fmea()
     {
-        $this->session->set_flashdata('crumbs', '0');
+        $this->session->set_flashdata('crumbs', '1');
         $this->form_validation->set_message('required', $this->data['IS_REQUIRED']);
         $this->form_validation->set_message('max_length', $this->data['IS_TOO_LONG']);
         $this->form_validation->set_message('check_default', $this->data['NOT_PICK']);

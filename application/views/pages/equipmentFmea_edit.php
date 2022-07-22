@@ -278,7 +278,7 @@
                                                             <?= $num->c_quantity ?>
                                                         </td>
 
-                                                        <td style="display: none;"><a class="btn btn-primary minus">DELETE</a> </td>
+                                                        <td style="display: none;"><a class="btn btn-primary minus"><?= $this->data['DELETE_BUTTON']; ?></a> </td>
                                                     </tr>
                                             </tbody>
 
