@@ -6,22 +6,6 @@ header("Access-Control-Allow-Methods: GET, OPTIONS");
 
 class Dashboard extends CI_Controller
 {
-
-    /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     * 		http://example.com/index.php/welcome
-     *	- or -
-     * 		http://example.com/index.php/welcome/index
-     *	- or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
-     * @see https://codeigniter.com/userguide3/general/urls.html
-     */
     public function __construct()
     {
         parent::__construct();
@@ -79,8 +63,10 @@ class Dashboard extends CI_Controller
             //Form (EQUIPMENT)
             'FORM_TITLE'                            =>  '設備トラブル',
             'ACCIDENT_DATE'                         =>  '発生日時',
-
             'STOP_TIME'                             =>  '停止時間',
+            'DAYS'                                  =>  '日',
+            'HOURS'                                 =>  '時間',
+            'MINUTES'                               =>  '分',
             'DEPARTMENT'                            =>  '部署名',
             'PIC'                                   =>  '担当者',
             'FACILITY'                              =>  '設備名',
@@ -96,8 +82,6 @@ class Dashboard extends CI_Controller
             'SECTION_2'                             =>  '設備情報',
             'SECTION_3'                             =>  'トラブル内容',
             'SECTION_3_F'                           =>  '影響',
-
-
             'SECTION_4'                             =>  '現在の工程管理',
             'SECTION_5'                             =>  '対策',
             ''                                      =>  '',
@@ -625,8 +609,6 @@ class Dashboard extends CI_Controller
 
     public function post_edit_data_tool()
     {
-
-
         $this->session->set_flashdata('crumbs', '0');
         $this->form_validation->set_message('required', $this->data['IS_REQUIRED']);
         $this->form_validation->set_message('max_length', $this->data['IS_TOO_LONG']);
@@ -662,14 +644,9 @@ class Dashboard extends CI_Controller
             $this->Troublelist_model->update_data_tool($data);
             redirect(base_url(), '/');
         }
-
-
-
-
-        //js
-
     }
-    public function edit_data_tool_fmea_view($id)
+
+    public function edit_data_tool_fmea_view()
     {
         $data = $this->data;
         $id = $this->uri->segment(2);
@@ -716,10 +693,34 @@ class Dashboard extends CI_Controller
 
     public function post_edit_data_tool_fmea()
     {
+        $this->session->set_flashdata('crumbs', '0');
+        $this->form_validation->set_message('required', $this->data['IS_REQUIRED']);
+        $this->form_validation->set_message('max_length', $this->data['IS_TOO_LONG']);
+        $this->form_validation->set_message('check_default', $this->data['NOT_PICK']);
 
+        $this->form_validation->set_rules('部署', '1', 'required|callback_check_default');
+        $this->form_validation->set_rules('設備', '2', 'required|callback_check_default');
+        $this->form_validation->set_rules('号機', '3', 'required|callback_check_default');
+        $this->form_validation->set_rules('工程名', '4', 'required|max_length[140]');
+        $this->form_validation->set_rules('故障モード', '5', 'required|max_length[140]');
+        $this->form_validation->set_rules('fail_mech', '6', 'required|max_length[140]');
+        $this->form_validation->set_rules('故障の影響', '7', 'required|max_length[140]');
+        $this->form_validation->set_rules('ライン停止の可能性', '8', 'required|max_length[10]');
+        $this->form_validation->set_rules('特殊特性等', '9', 'required|max_length[10]');
+        $this->form_validation->set_rules('担当者日程', '10', 'required|callback_check_default');
+        $this->form_validation->set_rules('周期', '11', 'required|max_length[140]');
+        $this->form_validation->set_rules('月', '12', 'required|max_length[140]');
+        $this->form_validation->set_rules('予防', '13', 'required|max_length[140]');
+        $this->form_validation->set_rules('検出', '14', 'required|max_length[140]');
+        $this->form_validation->set_rules('対策案', '15', 'required|max_length[140]');
+        $this->form_validation->set_rules('対策', '16', 'required|max_length[140]');
 
-        $this->Troublelist_model->update_data_tool_fmea();
-        redirect(base_url(), '/');
+        if ($this->form_validation->run() == FALSE) {
+            $this->edit_data_tool_fmea_view();
+        } else {
+            $this->Troublelist_model->update_data_tool_fmea();
+            redirect(base_url(), '/');
+        }
     }
 
     public function edit_data_sparepart_view($id)
@@ -806,7 +807,7 @@ class Dashboard extends CI_Controller
 
             'thead_open'            => '<thead class="table-dark">',
 
-            'heading_cell_start'    => '<th style="border-width: 2px;" class="kanjifont table-head text-center border-right border-left text-nowrap ">',
+            'heading_cell_start'    => '<th style="border-width: 2px;" class="kanjifont table-head text-center border-right border-left">',
 
             'cell_start'            => '<td style="border-width: 2px;" class="kanjifont table-data text-center align-middle border-right border-left pointer col">',
 

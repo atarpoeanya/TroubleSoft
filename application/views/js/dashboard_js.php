@@ -27,16 +27,12 @@
         }
         ?>
 
-
-
     }
 
 
     // Responsive hack, can be delete if unedeed
     //PROBLEM: on browser resize the table on dashboard wont resize too making it either smaller or bigger than the actual space.
     //Might be because DataTable
-
-
 
     $(window).resize(function() {
         // $(window).scrollTop($('#dashboard').height());
@@ -51,7 +47,6 @@
         }
 
     })
-
 
     // 変更 Button toggle
     // Also work as colum resizing,
@@ -75,8 +70,6 @@
             $('.dataTables_empty').attr('colspan', function(i, rs) {
                 return (parseInt(rs) - 1);
             })
-
-
     }
 
     // Normal button switched for choosing the displayed table, using class to manipulate the colors
@@ -84,7 +77,6 @@
     function category_switcher(el) {
         // Get selected A
         var a = $(el).prop('name')
-
 
         switch (a) {
             case '設備':
@@ -100,14 +92,11 @@
                 $("#real").removeClass('bg-white')
                 $("#fmea-s").removeClass('active')
 
-
-
                 break;
             case '予備品':
                 get_sparepartlist();
 
                 $("#real, #fmea-s").hide()
-
 
                 break;
             case '品質':
@@ -117,21 +106,14 @@
             default:
                 break;
         }
-
-
-
     }
 
     function adjust_table() {
         $('table').DataTable().columns.adjust();
     }
 
-
     // 設備 Table Constructor -> Via ajax dashboard/get_troubleList
     // The search bar is dataTables, work on surface level by hiding loaded element
-
-
-
 
     function get_troubleList() {
         // Toggle Button
@@ -248,13 +230,10 @@
                         "language": {
                             "zeroRecords": "該当する記録は見つかりません",
                         },
-
                     });
-
 
                     // Apply the search
                     $('#search-bar').on('input change', ".column_search", function() {
-
                         table
                             .column($(this).parent().index())
                             .search(this.value)
@@ -280,8 +259,6 @@
                             event.keyCode == 8 || event.keyCode == 46
                     })
 
-
-
                     $('#search-bar-time').on('input change', function() {
                         if (this.value)
                             $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
@@ -296,14 +273,11 @@
                                 }
                             });
 
-
                         table.draw();
                         $('#amount-sum').html($('.data-row').not(':hidden').length);
                         // Special search logic to show all data that greater than inputed value for 修理時間（分
 
                     });
-
-
                 });
             }
         });
@@ -316,29 +290,18 @@
         // Toggle Button
         $('#new_spareparts').hide();
         $('#new_trouble').show();
-
         $('#list').children().remove()
-
-
 
         $.ajax({
             url: "<?php echo base_url(); ?>dashboard/get_trouble_list__tool_fmea",
             success: function(response) {
                 $("#list").html(response);
-
-
             },
             complete: function() {
-
-
-
-
                 $(document).ready(function() {
                     // Setup - add a text input to each cell
                     $('#trouble_fmea_table thead tr:eq(1) th').each(function() {
                         var title = $(this).text().trim();
-
-
 
                         if (title.length == 0)
                             $('#search-bar').append('<th class="button_column buttons" style="display:none;width:150px; max-width:150px;"></th>');
@@ -393,10 +356,6 @@
                     });
 
                 });
-
-
-
-
             }
         });
     }
@@ -408,9 +367,7 @@
         $('#new_trouble').hide();
         $('#new_spareparts').show();
         // Toggle Div
-
         $('#list').children().remove()
-
 
         $.ajax({
             url: "<?php echo base_url(); ?>dashboard/get_sparepart_list",
@@ -439,15 +396,22 @@
                             bSortable: true
                         },
                         {
-                            bSortable: true
+                            bSortable: true,
+                            render: {
+                                "display": function(data, type, row) {
+                                    return parseFloat(data);
+                                }
+                            }
                         },
                         {
                             bSortable: true,
                         },
                         {
                             bSortable: true,
-                            render: function(data, type, row) {
-                                return parseFloat(data) + ' 円';
+                            render: {
+                                "display": function(data, type, row) {
+                                    return parseFloat(data).toLocaleString('ja-JP-u-ca-japanese') + ' 円';
+                                }
                             }
                         },
                         {
@@ -495,9 +459,6 @@
 
         });
     }
-
-
-
 
     function deleteData_tool($id) {
 
@@ -553,7 +514,6 @@
             });
     }
 
-
     function deleteData_sparepart($id) {
 
         var status = $.ajax({
@@ -586,8 +546,6 @@
                                 // DELETE CANCELLED
                             }
                         });
-
-
                 } else {
                     // Delete data from table
                     var conf = swal({
@@ -620,9 +578,7 @@
 
         // Make stock -> 0
 
-
     }
-
 
     function editSpare_populate(el) {
         $id = $(el).parent().siblings('.ID').text().trim()
@@ -715,8 +671,6 @@
                             default:
                                 break;
                         }
-
-
                     }
                 }
             },
@@ -736,7 +690,6 @@
             "c_quantity": $('#quantity').val(),
             "c_unit": $('#unit').val(),
             "c_price": $('#price').val(),
-
             'c_storage': $('#storage').val(),
             'c_arrangement': $('#arra').val(),
         }
@@ -785,22 +738,15 @@
                             case 9:
                                 $('#arra').addClass('is-invalid')
                                 break;
-
-
                             default:
                                 break;
                         }
-
-
                     }
-
                 }
             }
         });
         event.preventDefault();
-
     }
-
 
     // ON FOCUS REMOVE CLASS (Probably solution to the double loop)
 
@@ -869,15 +815,12 @@
                     }
                 });
 
-
                 // var table = $('#all_trouble_table').rowMerge({
                 //     excludedColumns: [1, 2, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
                 // });
             }
         });
     }
-
-
 
 
 

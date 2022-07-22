@@ -87,7 +87,6 @@ class Troublelist_model extends CI_Model
             }
             $equipment_row->{'spare'} = $used_part;
         }
-
         return $equipment_row;
     }
 
@@ -180,7 +179,6 @@ class Troublelist_model extends CI_Model
     //Inserting spare part entries to new tool
     public function add_spare_used($arr, $formId)
     {
-
         $data = [];
         //$arr expected [[2,2], [2,1]]
         $id = $this->db->query("SELECT IDENT_CURRENT('$formId') as last_id")->result();
@@ -314,7 +312,6 @@ class Troublelist_model extends CI_Model
             $this->db->where($idTab, $id);
             $this->db->delete($spareTab);
         }
-
         $this->db->trans_complete();
     }
 
@@ -370,7 +367,6 @@ class Troublelist_model extends CI_Model
 
     public function update_data_tool_fmea()
     {
-
         $data = [
 
             'c_department'      => $this->input->post('部署', true),
@@ -391,7 +387,6 @@ class Troublelist_model extends CI_Model
             'c_measure'         => $this->input->post('対策', true),
 
         ];
-
 
         $this->db->trans_start();
         $this->db->where('c_t203_id', $this->input->post('id'));
@@ -420,28 +415,22 @@ class Troublelist_model extends CI_Model
 
     public function delete_tool_fmea($id)
     {
-        $this->db->trans_start();
         $this->db->where('c_t203_id', $id);
         $this->db->delete('t203_equipment_fmea');
-        $this->db->trans_complete();
     }
 
     //Doesnt delete but zero the spare part
     public function delete_sparepart($id)
     {
-        $this->db->trans_start();
         $ZERO  = ['c_quantity' => 0];
         $this->db->where('c_t202_id', $id);
         $this->db->update('t202_spareparts', $ZERO);
-        $this->db->trans_complete();
     }
 
     public function real_delete_sparepart($id)
     {
-        $this->db->trans_start();
         $this->db->where('c_t202_id', $id);
         $this->db->delete('t202_spareparts');
-        $this->db->trans_complete();
     }
 
     public function edit_sparepart()
@@ -457,15 +446,15 @@ class Troublelist_model extends CI_Model
             'c_storage'             => $this->input->post('c_storage'),
             'c_arrangement'         => $this->input->post('c_arrangement'),
         ];
-        $this->db->trans_start();
+
         $this->db->where('c_t202_id', $this->input->post('c_t202_id'));
         $this->db->update('t202_spareParts', $data);
-        $this->db->trans_complete();
     }
 
     public function add_sparepart()
     {
         $data = [
+            'c_createdDate'         => date("Y-m-d H:i:s"),
             'c_purchaseDate'        => $this->input->post('c_purchaseDate'),
             'c_partName'            => $this->input->post('c_partName'),
             'c_model'               => $this->input->post('c_model'),
@@ -477,9 +466,7 @@ class Troublelist_model extends CI_Model
             'c_arrangement'         => $this->input->post('c_arrangement'),
         ];
 
-        $this->db->trans_start();
         $this->db->insert('t202_spareParts', $data);
-        $this->db->trans_complete();
     }
 }
 

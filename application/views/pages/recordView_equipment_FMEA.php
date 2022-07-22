@@ -211,7 +211,7 @@
                                         } elseif ($key == 'c_price') {
                                         ?>
                                             <td class="text-center">
-                                                <?= floatval($value).' 円'?>
+                                                <?= preg_replace("/\B(?=(\d{3})+(?!\d))/", ",", floatval($value)) . ' 円' ?>
                                             </td>
                                     <?php
                                         }
@@ -237,5 +237,24 @@
 <style>
     small {
         font-weight: bold;
+    }
+
+    @media print {
+        table {
+            page-break-inside: auto
+        }
+
+        tr {
+            page-break-inside: avoid;
+            page-break-after: auto
+        }
+
+        thead {
+            display: table-header-group
+        }
+
+        tfoot {
+            display: table-footer-group
+        }
     }
 </style>

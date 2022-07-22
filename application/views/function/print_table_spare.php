@@ -43,7 +43,7 @@ function f_generate_table_select($data)
                 break;
 
             default:
-                array_push($head_name, 'MISSING');
+                // array_push($head_name, 'MISSING');
                 break;
         }
     }
@@ -99,6 +99,10 @@ function f_generate_table_select($data)
                                 <td class=" table-data text-center align-middle border-end   col ID" style="display:none">
                                     <?= $id ?>
                                 </td>
+                            <?php
+                            } elseif ($key == 'c_createdDate') {
+                            ?>
+                                <!-- do nothing -->
                             <?php
                             } elseif ($key == 'c_quantity') {
                             ?>

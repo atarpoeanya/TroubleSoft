@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <!-- FORM SECTION -->
-                    <form action="/equipment/1" method="post" class="px-3 col " autocomplete="off" id="equipForm" enctype="multipart/form-data" novalidate>
+                    <form action="<?= base_url() ?>equipment/1" method="post" class="px-3 col " autocomplete="off" id="equipForm" enctype="multipart/form-data" novalidate>
 
                         <input type="hidden" name="spareParts" id="partinfo" value="">
 
@@ -48,14 +48,14 @@
                                     <span class="invalid-feedback form-label"><?= $this->data['NO_ZERO'] ?></span>
                                 <?php } ?>
                                 <div class="input-group">
-                                    <input type="number" class="form-control  <?php if (form_error('duration')) echo 'is-invalid' ?>" value="<?= set_value('days', '0') ?>" onchange="durToMin()" name="days" id="days" min="0">
-                                    <span class="input-group-text" id="">日</span>
+                                    <input type="number" class="form-control  <?php if (form_error('duration') || form_error('days')) echo 'is-invalid' ?>" value="<?= set_value('days', '0') ?>" onchange="durToMin()" name="days" id="days" min="0">
+                                    <span class="input-group-text" id=""><?= $this->data['DAYS'] ?></span>
 
-                                    <input type="number" class="form-control  <?php if (form_error('duration')) echo 'is-invalid' ?>" value="<?= set_value('hours', '0'); ?>" onchange="durToMin()" name="hours" id="hours" min="0">
-                                    <span class="input-group-text" id="">時間</span>
+                                    <input type="number" class="form-control  <?php if (form_error('duration') || form_error('hours')) echo 'is-invalid' ?>" value="<?= set_value('hours', '0'); ?>" onchange="durToMin()" name="hours" id="hours" min="0">
+                                    <span class="input-group-text" id=""><?= $this->data['HOURS'] ?></span>
 
-                                    <input type="number" class="form-control  <?php if (form_error('duration')) echo 'is-invalid' ?>" value="<?= set_value('minutes', '0'); ?>" onchange="durToMin()" name="minutes" id="minutes" min="0">
-                                    <span class="input-group-text" id="days">分</span>
+                                    <input type="number" class="form-control  <?php if (form_error('duration') || form_error('minutes')) echo 'is-invalid' ?>" value="<?= set_value('minutes', '0'); ?>" onchange="durToMin()" name="minutes" id="minutes" min="0">
+                                    <span class="input-group-text" id="days"><?= $this->data['MINUTES'] ?></span>
                                 </div>
 
                             </div>
@@ -300,7 +300,6 @@
     .card-body {
         background-color: #F4F5F6;
     }
-
 </style>
 
 <script>
