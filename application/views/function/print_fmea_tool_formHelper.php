@@ -60,16 +60,16 @@ function f_generate_table_select($data)
             <label for="start_day" class="form-label"><?= $data['EQUIPMENT_MONTH_F'] ?></label>
             <input required type="text" class="form-control" readonly value="<?= $data['fmea_tool']->c_month ?>">
         </div>
-        <div class="col-12">
-            <div class="col mt-3">
-                <label for="start_day" class="form-label"><?= $data['EQUIPMENT_PREVENTION_F'] ?></label>
-                <textarea class="form-control" cols="30" rows="6" readonly><?= $data['fmea_tool']->c_prevention ?></textarea>
-            </div>
-            <div class="col mt-3">
-                <label for="start_day" class="form-label"><?= $data['EQUIPMENT_DETECTION_F'] ?></label>
-                <textarea class="form-control" cols="30" rows="6" readonly><?= $data['fmea_tool']->c_detection ?></textarea>
-            </div>
+
+        <div class="col-6 mt-3">
+            <label for="start_day" class="form-label"><?= $data['EQUIPMENT_PREVENTION_F'] ?></label>
+            <textarea class="form-control" cols="30" rows="6" readonly><?= $data['fmea_tool']->c_prevention ?></textarea>
         </div>
+        <div class="col-6 mt-3">
+            <label for="start_day" class="form-label"><?= $data['EQUIPMENT_DETECTION_F'] ?></label>
+            <textarea class="form-control" cols="30" rows="6" readonly><?= $data['fmea_tool']->c_detection ?></textarea>
+        </div>
+
 
     </div>
 
