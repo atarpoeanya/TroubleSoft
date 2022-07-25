@@ -115,6 +115,31 @@
     // 設備 Table Constructor -> Via ajax dashboard/get_troubleList
     // The search bar is dataTables, work on surface level by hiding loaded element
 
+    function durToMinDash() {
+        var days = $('#days').val()
+        var hours = $('#hours').val()
+        var minutes = $('#minutes').val()
+
+        if (minutes >= 60){
+            $('#minutes').val(0)
+            $('#hours').val(parseInt(hours)+1)
+        } else if( hours >= 24) {
+            $('#hours').val(0)
+            $('#days').val(parseInt(days)+1)
+        }
+
+        days= isNaN(parseInt(days)) ? 0 : $('#days').val();
+        hours= isNaN(parseInt(hours)) ? 0 : $('#hours').val();
+        minutes= isNaN(parseInt(minutes)) ? 0 : $('#minutes').val();
+
+        console.log(days + '  ' + hours + '  ' + minutes)
+
+        var duration = parseInt(days) * 1440 + parseInt(hours) * 60 + parseInt(minutes) * 1
+
+        $('#search-bar-time').val(duration)
+        $('#search-bar-time').click()
+    }
+
     function get_troubleList() {
         // Toggle Button
         $('#new_spareparts').hide();
@@ -137,7 +162,7 @@
                         if (title == '発生日時') // For date input type
                             $('#search-bar').append('<th><input type="date" placeholder="検索 =" class="form-control" id="search-bar-' + title + '" /></th>');
                         else if (title == '修理時間（分）') // For separating search logic by removing column_search class
-                            $('#search-bar').append('<th><input type="number" min="1"  placeholder="検索 >=" class="form-control" id="search-bar-time" /></th>');
+                            $('#search-bar').append('<th><input type="number" min="1"  placeholder="検索 >=" class="form-control" id="search-bar-time" /hidden><div class="input-group"><input type="number" class="form-control" oninput="durToMinDash()" name="days" id="days" value="0" min="0"><span class="input-group-text p-1" id="">日</span><input type="number" class="form-control" oninput="durToMinDash()" name="hours" id="hours" value="0" min="0"><span class="input-group-text p-1" id="">時間</span><input type="number" class="form-control" oninput="durToMinDash()" name="minutes" id="minutes" value="0" min="0"><span class="input-group-text p-1" id="days">分</span></div></th>');
                         else if (title.length == 0) //no title column for displaying edit buttons
                             $('#search-bar').append('<th class="button_column buttons" style="display:none; width:150px;"></th>');
                         else
@@ -157,7 +182,7 @@
                             },
                             {
                                 bSortable: true,
-                                width: "7%",
+                                width: "15%",
                                 render: {
                                     "display": function(data, type, row) {
                                         var result = ''
@@ -185,19 +210,15 @@
                             },
                             {
                                 bSortable: true,
-                                width: "7%"
+                                width: "6%"
                             },
                             {
                                 bSortable: true,
-                                width: "7%"
+                                width: "6%"
                             },
                             {
                                 bSortable: true,
-                                width: "7%"
-                            },
-                            {
-                                bSortable: true,
-                                width: "15%"
+                                width: "6%"
                             },
                             {
                                 bSortable: true,
@@ -205,11 +226,15 @@
                             },
                             {
                                 bSortable: true,
-                                width: "7%"
+                                width: "15%"
                             },
                             {
                                 bSortable: true,
-                                width: "7%"
+                                width: "6%"
+                            },
+                            {
+                                bSortable: true,
+                                width: "6%"
                             },
                             {
                                 bSortable: false,
@@ -259,7 +284,7 @@
                             event.keyCode == 8 || event.keyCode == 46
                     })
 
-                    $('#search-bar-time').on('input change', function() {
+                    $('#search-bar-time').on('click', function() {
                         if (this.value)
                             $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
                                 var value = parseInt($('#search-bar-time').val())
