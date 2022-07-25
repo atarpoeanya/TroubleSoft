@@ -34,7 +34,7 @@ echo $this->session->flashdata('part_info')
                                     <span class="invalid-feedback form-label"><?= trim(form_error('発生日')) ?></span>
                                 <?php } ?>
                                 <?php if (trim(set_value('発生日')) != trim($items->c_accidentDate) && set_value('発生日') != '') { ?>
-                                    <span class="edited form-check-label">更新しました</span>
+                                    <span class="badge bg-primary">更新しました</span>
                                 <?php } ?>
                                 <input required type="datetime-local" class="form-control
                                 <?php if (form_error('発生日')) echo 'is-invalid' ?>" id="start_day" name="発生日" value="<?= set_value('発生日') != '' ? trim(set_value('発生日')) :  trim($items->c_accidentDate) ?>" required>
@@ -45,7 +45,7 @@ echo $this->session->flashdata('part_info')
 
                                 <label for="time_end" class="form-label"><?= $this->data['STOP_TIME'] ?></label>
                                 <?php if (trim(set_value('duration')) != trim($items->c_stopTime) && set_value('duration') != '') { ?>
-                                    <span class="edited form-check-label">更新しました</span>
+                                    <span class="badge bg-primary">更新しました</span>
                                 <?php } ?>
                                 <?php if (form_error('duration') != '' || form_error('days') != '' || form_error('hours')  != '' || form_error('minutes') != '') { ?>
                                     <span class="invalid-feedback form-label"><?= $this->data['NO_ZERO'] ?></span>
@@ -69,7 +69,7 @@ echo $this->session->flashdata('part_info')
                                 <div class="col">
                                     <label class="form-label" for="tantou"><?= $this->data['PIC'] ?></label>
                                     <?php if (trim(set_value('担当者')) != trim($items->c_manager) && set_value('担当者') != '') { ?>
-                                        <span class="edited form-check-label">更新しました</span>
+                                        <span class="badge bg-primary">更新しました</span>
                                     <?php } ?>
                                     <select class="form-select <?= (form_error('担当者') ? 'is-invalid' : ''); ?>" name="担当者" id="tantou" required>
                                         <?php
@@ -96,7 +96,7 @@ echo $this->session->flashdata('part_info')
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="busho"><?= $this->data['DEPARTMENT'] ?></label>
                                 <?php if (trim(set_value('部署')) != trim($items->c_department) && set_value('部署') != '') { ?>
-                                    <span class="edited form-check-label">更新しました</span>
+                                    <span class="badge bg-primary">更新しました</span>
                                 <?php } ?>
                                 <select class="form-select <?= (form_error('部署') ? 'is-invalid' : ''); ?>" name="部署" id="busho" required>
                                     <?php
@@ -117,7 +117,7 @@ echo $this->session->flashdata('part_info')
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="setsubi"><?= $this->data['FACILITY'] ?></label>
                                 <?php if (trim(set_value('設備')) != trim($items->c_facility) && set_value('設備') != '') { ?>
-                                    <span class="edited form-check-label">更新しました</span>
+                                    <span class="badge bg-primary">更新しました</span>
                                 <?php } ?>
                                 <select class="form-select <?= (form_error('設備') ? 'is-invalid' : ''); ?>" name="設備" id="setsubi" required>
                                     <?php
@@ -137,7 +137,7 @@ echo $this->session->flashdata('part_info')
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="gouki"><?= $this->data['UNIT'] ?></label>
                                 <?php if (trim(set_value('号機')) != trim($items->c_unit) && set_value('号機') != '') { ?>
-                                    <span class="edited form-check-label">更新しました</span>
+                                    <span class="badge bg-primary">更新しました</span>
                                 <?php } ?>
                                 <select class="form-select <?= (form_error('号機') ? 'is-invalid' : ''); ?>" name="号機" id="gouki" required>
                                     <?php
@@ -159,7 +159,7 @@ echo $this->session->flashdata('part_info')
                                 <label for="kouteiNa" class="form-label"><?= $this->data['PROCESS_NAME'] ?></label>
                                 <!-- <span class="must form-check-label">必須</span> -->
                                 <?php if (trim(set_value('工程名')) != trim($items->c_processName) && set_value('工程名') != '') { ?>
-                                    <span class="edited form-check-label">更新しました</span>
+                                    <span class="badge bg-primary">更新しました</span>
                                 <?php } ?>
                                 <?php if (form_error('工程名') != '') { ?>
                                     <span class="invalid-feedback form-label"><?= trim(form_error('工程名')) ?></span>
@@ -170,7 +170,7 @@ echo $this->session->flashdata('part_info')
                             <div class="col pt-3">
                                 <label for="mode" class="form-label "><?= $this->data['FAIL_MODE'] ?></label>
                                 <?php if (trim(set_value('故障モード')) != trim($items->c_failMode) && set_value('故障モード') != '') { ?>
-                                    <span class="edited form-check-label">更新しました</span>
+                                    <span class="badge bg-primary">更新しました</span>
                                 <?php } ?>
                                 <?php if (form_error('故障モード') != '') { ?>
                                     <span class="invalid-feedback form-label"><?= trim(form_error('故障モード')) ?></span>
@@ -188,7 +188,7 @@ echo $this->session->flashdata('part_info')
 
                                 <label class="form-label flex-grow" for="gensho"><?= $this->data['PHENOMENON'] ?></label>
                                 <?php if (trim(set_value('現象')) != trim($items->c_phenomenon) && set_value('現象') != '') { ?>
-                                    <span class="edited form-check-label">更新しました</span>
+                                    <span class="badge bg-primary">更新しました</span>
                                 <?php } ?>
                                 <?php if (form_error('現象') != '') { ?>
                                     <span class="invalid-feedback form-label"><?= trim(form_error('現象')) ?></span>
@@ -200,7 +200,7 @@ echo $this->session->flashdata('part_info')
 
                                 <label class="form-label " for="shuriNaiyou"><?= $this->data['REPAIR_DETAIL'] ?></label>
                                 <?php if (trim(set_value('修理内容')) != trim($items->c_repairDet) && set_value('修理内容') != '') { ?>
-                                    <span class="edited form-check-label">更新しました</span>
+                                    <span class="badge bg-primary">更新しました</span>
                                 <?php } ?>
                                 <?php if (form_error('修理内容') != '') { ?>
                                     <span class="invalid-feedback form-label"><?= trim(form_error('修理内容')) ?></span>
@@ -213,7 +213,7 @@ echo $this->session->flashdata('part_info')
 
                                 <label class="form-label " for="failMech"><?= $this->data['MECHANISM'] ?></label>
                                 <?php if (trim(set_value('fail_mech')) != trim($items->c_failMech) && set_value('fail_mech') != '') { ?>
-                                    <span class="edited form-check-label">更新しました</span>
+                                    <span class="badge bg-primary">更新しました</span>
                                 <?php } ?>
                                 <?php if (form_error('fail_mech') != '') { ?>
                                     <span class="invalid-feedback form-label"><?= trim(form_error('fail_mech')) ?></span>
@@ -226,7 +226,7 @@ echo $this->session->flashdata('part_info')
 
                                 <label class="form-label " for="response"><?= $this->data['RESPONSE'] ?></label>
                                 <?php if (trim(set_value('response')) != trim($items->c_response) && set_value('response') != '') { ?>
-                                    <span class="edited form-check-label">更新しました</span>
+                                    <span class="badge bg-primary">更新しました</span>
                                 <?php } ?>
                                 <?php if (form_error('response') != '') { ?>
                                     <span class="invalid-feedback form-label"><?= trim(form_error('response')) ?></span>

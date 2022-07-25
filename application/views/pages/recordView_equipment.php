@@ -133,249 +133,16 @@
                 </div>
 
                 <div class="table-responsive">
-                    <table class="table table-bordered mb-0">
-                        <thead class="table-dark">
-                            <?php
-                            foreach ($title as $thead) {
-                                switch ($thead) {
-                                    case 'c_t202_id':
-
-                                        break;
-                                    case 'c_purchaseDate':
-                                        $thead = '購入日';
-                                        break;
-                                    case 'c_partName':
-                                        $thead = '部品';
-                                        break;
-                                    case 'c_model':
-                                        $thead = '型式';
-                                        break;
-                                    case 'c_maker':
-                                        $thead = 'メーカー';
-                                        break;
-                                    case 'c_quantity':
-                                        $thead = '数量';
-                                        break;
-                                    case 'c_unit':
-                                        $thead = '単位';
-                                        break;
-                                    case 'c_price':
-                                        $thead = '単価';
-                                        break;
-                                    case 'c_storage':
-                                        $thead = '保管場所';
-                                        break;
-                                    case 'c_arrangement':
-                                        $thead = '手配先';
-                                        break;
-
-                                    default:
-                                        $thead = 'MISSING';
-                                        break;
-                                }
-                                if ($thead !== 'c_t202_id') {
-                            ?>
-                                    <th class=" table-head text-center border-start">
-                                        <?= $thead ?>
-                                    </th>
-
-                                <?php
-
-                                } else {
-                                ?>
-                                    <th class="id text-center border-start" style="display:none"></th>
-                            <?php
-                                }
-                            }
-                            ?>
-                        </thead>
-                        <tbody class="table-stripped">
-                            <?php
-                            if (property_exists($item, 'spare'))
-                                foreach ($item->spare as $num) {
-                            ?>
-                                <tr>
-                                    <?php
-                                    foreach ($num as $key => $value) {
-                                        if ($key != 'c_t202_id' && $key != 'c_price') {
-                                    ?>
-                                            <td class="text-center">
-                                                <?= $value ?>
-                                            </td>
-                                        <?php
-                                        } elseif ($key == 'c_price') {
-                                        ?>
-                                            <td class="text-center">
-                                                <?= preg_replace("/\B(?=(\d{3})+(?!\d))/", ",", floatval($value)) . ' 円' ?>
-                                            </td>
-                                    <?php
-                                        }
-                                    }
-                                    ?>
-                                </tr>
-                            <?php
-                                }
-                            else {
-                            ?>
-                                <tr class="text-center align-middle" style="height: 150px;">
-                                    <td colspan="10"><?= $this->data['EMPTY_PLACEHOLDER'] ?></td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                </div>
-
-
-            </div>
-        </div>
-
-    </div>
-
-    <div class="col-12">
-        <?php
-        if ($fmea != '') {
-        ?>
-
-
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered mb-0 align-middle text-nowrap">
-                            <thead class="table-dark">
-                                <tr class="text-center">
-                                    <th colspan="10">
-                                        設備のFMEAレポート
-                                    </th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr>
-                                    <td>部署場所</td>
-                                    <td colspan="7"><?= $fmea->c_department ?></td>
-
-                                </tr>
-
-                                <tr class=" table-light">
-                                    <td colspan="3"><small> 設備</small><br>
-                                        <div class="container">
-                                            <?= $fmea->c_facility ?> - <?= $fmea->c_unit ?>
-                                        </div>
-                                    </td>
-                                    <td colspan="3"><small>工程名・工程機能</small><br>
-                                        <div class="container">
-                                            <?= $fmea->c_processName ?>
-                                        </div>
-                                    </td>
-                                    <td colspan="3"><small>故障モード</small><br>
-                                        <div class="container">
-
-                                            <?= $fmea->c_failMode ?>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr class="table-dark text-center">
-                                    <td colspan="10"><b>トラブルの内容</b></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="1" rowspan="2" class="header_title">原因 と 内容</td>
-                                    <td colspan="4" class="align-top text">
-                                        <small> 故障の潜在原因 メカニズム</small>
-                                        <div class="container">
-                                            <?= $fmea->c_failMech ?>
-                                        </div>
-                                    </td>
-                                    <td colspan="4" class="align-top text">
-                                        <small>故障の影響</small>
-                                        <div class="container">
-                                            <?= $fmea->c_failImpact ?>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4" class="align-top text">
-                                        <small>ライン停止の可能性</small>
-                                        <div class="container">
-                                            <?= $fmea->c_lineEffect ?>
-                                        </div>
-                                    </td>
-                                    <td colspan="4" class="align-top text">
-                                        <small>特 殊 特性等</small>
-                                        <div class="container">
-                                            <?= $fmea->c_specialChar ?>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr class="table-dark text-center">
-                                    <td colspan="10"><b>現在の工程管理</b></td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        担当者 日程
-                                    </td>
-                                    <td colspan="9">
-                                        <?= $fmea->c_picSchedule ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="1">周期</td>
-                                    <td colspan="4"><?= $fmea->c_period ?></td>
-                                    <td colspan="1">月</td>
-                                    <td colspan="4"><?= $fmea->c_month ?></td>
-                                </tr>
-
-                                <tr>
-                                    <td colspan="1" rowspan="2" class="header_title">予防 と 検出</td>
-                                    <td colspan="8" class="align-top text">
-                                        <small>検出</small>
-                                        <div class="container">
-                                            <?= $fmea->c_detection ?>
-                                        </div>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td colspan="8" class="align-top text">
-                                        <small>予防</small>
-                                        <div class="container">
-                                            <?= $fmea->c_prevention ?>
-                                        </div>
-                                    </td>
-
-                                </tr>
-
-                                <tr>
-                                    <td rowspan="2">対策</td>
-                                    <td colspan="10">
-                                        <small>対策案</small>
-                                        <div class="container">
-                                            <?= $fmea->c_counterPlan ?>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="10">
-                                        <small>対策</small>
-                                        <div class="container">
-                                            <?= $fmea->c_measure ?>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
                     <div class="table-responsive">
                         <table class="table table-bordered mb-0">
                             <thead class="table-dark">
-                                <!-- Fix this part -->
                                 <?php
                                 foreach ($title as $thead) {
                                     switch ($thead) {
                                         case 'c_t202_id':
+
+                                            break;
+                                        case 'c_createdDate':
 
                                             break;
                                         case 'c_purchaseDate':
@@ -397,20 +164,20 @@
                                             $thead = '単位';
                                             break;
                                         case 'c_price':
-                                            $thead = '金額';
+                                            $thead = '単価';
                                             break;
                                         case 'c_storage':
-                                            $thead = '予備品の保管場所';
+                                            $thead = '保管場所';
                                             break;
                                         case 'c_arrangement':
-                                            $thead = '必要時の手配先';
+                                            $thead = '手配先';
                                             break;
 
                                         default:
                                             $thead = 'MISSING';
                                             break;
                                     }
-                                    if ($thead !== 'c_t202_id') {
+                                    if ($thead != 'c_t202_id' && $thead != 'c_createdDate') {
                                 ?>
                                         <th class=" table-head text-center border-start">
                                             <?= $thead ?>
@@ -420,7 +187,7 @@
 
                                     } else {
                                     ?>
-                                        <th class="id text-center border-start" style="display:none"></th>
+                                        <th class="text-center border-start" style="display:none"></th>
                                 <?php
                                     }
                                 }
@@ -428,22 +195,26 @@
                             </thead>
                             <tbody class="table-stripped">
                                 <?php
-                                if (property_exists($fmea, 'spare'))
-                                    foreach ($fmea->spare as $num) {
+                                if (property_exists($item, 'spare'))
+                                    foreach ($item->spare as $num) {
                                 ?>
                                     <tr>
                                         <?php
                                         foreach ($num as $key => $value) {
-                                            if ($key != 'c_t202_id' && $key != 'c_price') {
+                                            if ($key == 'c_createdDate') {
                                         ?>
-                                                <td class="text-center">
-                                                    <?= $value ?>
-                                                </td>
                                             <?php
                                             } elseif ($key == 'c_price') {
                                             ?>
                                                 <td class="text-center">
+                                                    <!-- add "," each 3 digits-->
                                                     <?= preg_replace("/\B(?=(\d{3})+(?!\d))/", ",", floatval($value)) . ' 円' ?>
+                                                </td>
+                                            <?php
+                                            } elseif ($key != 'c_t202_id' && $key != 'c_price') {
+                                            ?>
+                                                <td class="text-center">
+                                                    <?= $value ?>
                                                 </td>
                                         <?php
                                             }
@@ -461,103 +232,342 @@
                             </tbody>
                         </table>
                     </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-12">
+            <?php
+            if ($fmea != '') {
+            ?>
+
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered mb-0 align-middle text-nowrap">
+                                <thead class="table-dark">
+                                    <tr class="text-center">
+                                        <th colspan="10">
+                                            設備のFMEAレポート
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <td>部署場所</td>
+                                        <td colspan="7"><?= $fmea->c_department ?></td>
+
+                                    </tr>
+
+                                    <tr class=" table-light">
+                                        <td colspan="3"><small> 設備</small><br>
+                                            <div class="container">
+                                                <?= $fmea->c_facility ?> - <?= $fmea->c_unit ?>
+                                            </div>
+                                        </td>
+                                        <td colspan="3"><small>工程名・工程機能</small><br>
+                                            <div class="container">
+                                                <?= $fmea->c_processName ?>
+                                            </div>
+                                        </td>
+                                        <td colspan="3"><small>故障モード</small><br>
+                                            <div class="container">
+
+                                                <?= $fmea->c_failMode ?>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="table-dark text-center">
+                                        <td colspan="10"><b>トラブルの内容</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="1" rowspan="2" class="header_title">原因 と 内容</td>
+                                        <td colspan="4" class="align-top text">
+                                            <small> 故障の潜在原因 メカニズム</small>
+                                            <div class="container">
+                                                <?= $fmea->c_failMech ?>
+                                            </div>
+                                        </td>
+                                        <td colspan="4" class="align-top text">
+                                            <small>故障の影響</small>
+                                            <div class="container">
+                                                <?= $fmea->c_failImpact ?>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" class="align-top text">
+                                            <small>ライン停止の可能性</small>
+                                            <div class="container">
+                                                <?= $fmea->c_lineEffect ?>
+                                            </div>
+                                        </td>
+                                        <td colspan="4" class="align-top text">
+                                            <small>特 殊 特性等</small>
+                                            <div class="container">
+                                                <?= $fmea->c_specialChar ?>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="table-dark text-center">
+                                        <td colspan="10"><b>現在の工程管理</b></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            担当者 日程
+                                        </td>
+                                        <td colspan="9">
+                                            <?= $fmea->c_picSchedule ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="1">周期</td>
+                                        <td colspan="4"><?= $fmea->c_period ?></td>
+                                        <td colspan="1">月</td>
+                                        <td colspan="4"><?= $fmea->c_month ?></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="1" rowspan="2" class="header_title">予防 と 検出</td>
+                                        <td colspan="8" class="align-top text">
+                                            <small>検出</small>
+                                            <div class="container">
+                                                <?= $fmea->c_detection ?>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8" class="align-top text">
+                                            <small>予防</small>
+                                            <div class="container">
+                                                <?= $fmea->c_prevention ?>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td rowspan="2">対策</td>
+                                        <td colspan="10">
+                                            <small>対策案</small>
+                                            <div class="container">
+                                                <?= $fmea->c_counterPlan ?>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="10">
+                                            <small>対策</small>
+                                            <div class="container">
+                                                <?= $fmea->c_measure ?>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-responsive">
+                            <div class="table-responsive">
+                                <table class="table table-bordered mb-0">
+                                    <thead class="table-dark">
+                                        <?php
+                                        foreach ($title as $thead) {
+                                            switch ($thead) {
+                                                case 'c_t202_id':
+
+                                                    break;
+                                                case 'c_createdDate':
+
+                                                    break;
+                                                case 'c_purchaseDate':
+                                                    $thead = '購入日';
+                                                    break;
+                                                case 'c_partName':
+                                                    $thead = '部品';
+                                                    break;
+                                                case 'c_model':
+                                                    $thead = '型式';
+                                                    break;
+                                                case 'c_maker':
+                                                    $thead = 'メーカー';
+                                                    break;
+                                                case 'c_quantity':
+                                                    $thead = '数量';
+                                                    break;
+                                                case 'c_unit':
+                                                    $thead = '単位';
+                                                    break;
+                                                case 'c_price':
+                                                    $thead = '単価';
+                                                    break;
+                                                case 'c_storage':
+                                                    $thead = '保管場所';
+                                                    break;
+                                                case 'c_arrangement':
+                                                    $thead = '手配先';
+                                                    break;
+
+                                                default:
+                                                    $thead = 'MISSING';
+                                                    break;
+                                            }
+                                            if ($thead != 'c_t202_id' && $thead != 'c_createdDate') {
+                                        ?>
+                                                <th class=" table-head text-center border-start">
+                                                    <?= $thead ?>
+                                                </th>
+
+                                            <?php
+
+                                            } else {
+                                            ?>
+                                                <th class="text-center border-start" style="display:none"></th>
+                                        <?php
+                                            }
+                                        }
+                                        ?>
+                                    </thead>
+                                    <tbody class="table-stripped">
+                                        <?php
+                                        if (property_exists($fmea, 'spare'))
+                                            foreach ($fmea->spare as $num) {
+                                        ?>
+                                            <tr>
+                                                <?php
+                                                foreach ($num as $key => $value) {
+                                                    if ($key == 'c_createdDate') {
+                                                ?>
+                                                    <?php
+                                                    } elseif ($key == 'c_price') {
+                                                    ?>
+                                                        <td class="text-center">
+                                                            <?= preg_replace("/\B(?=(\d{3})+(?!\d))/", ",", floatval($value)) . ' 円' ?>
+                                                        </td>
+                                                    <?php
+                                                    } elseif ($key != 'c_t202_id' && $key != 'c_price') {
+                                                    ?>
+                                                        <td class="text-center">
+                                                            <?= $value ?>
+                                                        </td>
+                                                <?php
+                                                    }
+                                                }
+                                                ?>
+                                            </tr>
+                                        <?php
+                                            }
+                                        else {
+                                        ?>
+                                            <tr class="text-center align-middle" style="height: 150px;">
+                                                <td colspan="10"><?= $this->data['EMPTY_PLACEHOLDER'] ?></td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    <?php
+                }
+                    ?>
+                    </div>
                 </div>
 
+                <style>
+                    .text {
 
-            <?php
-        }
-            ?>
-            </div>
-    </div>
+                        min-height: 150px;
+                        height: 150px;
+                    }
 
-
-
-
-
-    <style>
-        .text {
-
-            min-height: 150px;
-            height: 150px;
-        }
-
-        small {
-            font-weight: bold;
-        }
+                    small {
+                        font-weight: bold;
+                    }
 
 
-        .header_title {
-            width: 50px;
-        }
+                    .header_title {
+                        width: 50px;
+                    }
 
-        .wrapper-inner {
-            height: 1080px;
-        }
+                    .wrapper-inner {
+                        height: 1080px;
+                    }
 
-        .main-content {
-            padding-bottom: 50px;
-        }
+                    .main-content {
+                        padding-bottom: 50px;
+                    }
 
-        .fmea {
-            height: inherit;
-        }
+                    .fmea {
+                        height: inherit;
+                    }
 
-        .vertical-text {
-            /* width:1px; */
-            word-wrap: break-word;
-            white-space: pre-wrap;
-        }
+                    .vertical-text {
+                        /* width:1px; */
+                        word-wrap: break-word;
+                        white-space: pre-wrap;
+                    }
 
-        .sub-header {
-            top: 30px;
-            left: 40px;
-            background-color: white;
-            width: max-content;
-        }
-    </style>
+                    .sub-header {
+                        top: 30px;
+                        left: 40px;
+                        background-color: white;
+                        width: max-content;
+                    }
+                </style>
 
-    <script>
-        $(document).ready(function() {
-            // $('.fmea').hide();
+                <script>
+                    $(document).ready(function() {
+                        // $('.fmea').hide();
 
-            renderTime()
+                        renderTime()
 
-            if ($('.fmea').length == 0) {
-                $('#fmea-toggle').addClass('disabled')
-            }
-        })
+                        if ($('.fmea').length == 0) {
+                            $('#fmea-toggle').addClass('disabled')
+                        }
+                    })
 
-        $('#fmea-toggle').on('click', function() {
-            if ($('.fmea').hasClass('active')) {
-                $('.fmea').hide();
-                $('.fmea').removeClass('active')
-            } else {
-                $('.fmea').addClass('active')
-                $('.fmea').show();
-            }
-        })
+                    $('#fmea-toggle').on('click', function() {
+                        if ($('.fmea').hasClass('active')) {
+                            $('.fmea').hide();
+                            $('.fmea').removeClass('active')
+                        } else {
+                            $('.fmea').addClass('active')
+                            $('.fmea').show();
+                        }
+                    })
 
-        function renderTime() {
-            var data = $('#stopTime').html()
-            var result = ''
+                    function renderTime() {
+                        var data = $('#stopTime').html()
+                        var result = ''
 
-            var days = Math.floor(data / 1440)
-            var rem_days = data % 1440
-            var hours = Math.floor(rem_days / 60)
-            var minutes = data - days * 1440 - hours * 60
+                        var days = Math.floor(data / 1440)
+                        var rem_days = data % 1440
+                        var hours = Math.floor(rem_days / 60)
+                        var minutes = data - days * 1440 - hours * 60
 
-            if (days != 0) {
-                result += days + '日 '
-            }
+                        if (days != 0) {
+                            result += days + '日 '
+                        }
 
-            if (hours != 0) {
-                result += hours + '時間 '
-            }
+                        if (hours != 0) {
+                            result += hours + '時間 '
+                        }
 
-            if (minutes != 0) {
-                result += minutes + '分'
-            }
+                        if (minutes != 0) {
+                            result += minutes + '分'
+                        }
 
-            $('#stopTime').html(result)
-        }
-    </script>
+                        $('#stopTime').html(result)
+                    }
+                </script>

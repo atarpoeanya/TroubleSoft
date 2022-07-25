@@ -19,7 +19,7 @@
                                 <div class="col-4 pt-3">
                                     <label class="form-label" for="busho"><?= $this->data['EQUIPMENT_DEPARTMENT_F'] ?></label>
                                     <?php if (trim(set_value('部署')) != trim($items->c_department) && set_value('部署') != '') { ?>
-                                        <span class="edited form-check-label">更新しました</span>
+                                        <span class="badge bg-primary">更新しました</span>
                                     <?php } ?>
                                     <select class="form-select <?= (form_error('部署') ? 'is-invalid' : ''); ?>" name="部署" id="busho" required>
                                         <?php
@@ -40,7 +40,7 @@
                                 <div class="col-4 pt-3">
                                     <label class="form-label" for="setsubi"><?= $this->data['EQUIPMENT_FACILITY_F'] ?></label>
                                     <?php if (trim(set_value('設備')) != trim($items->c_facility) && set_value('設備') != '') { ?>
-                                        <span class="edited form-check-label">更新しました</span>
+                                        <span class="badge bg-primary">更新しました</span>
                                     <?php } ?>
                                     <select class="form-select <?= (form_error('設備') ? 'is-invalid' : ''); ?>" name="設備" id="setsubi" required>
                                         <?php
@@ -60,7 +60,7 @@
                                 <div class="col-4 pt-3">
                                     <label class="form-label" for="gouki"><?= $this->data['EQUIPMENT_UNIT_F'] ?></label>
                                     <?php if (trim(set_value('号機')) != trim($items->c_unit) && set_value('号機') != '') { ?>
-                                        <span class="edited form-check-label">更新しました</span>
+                                        <span class="badge bg-primary">更新しました</span>
                                     <?php } ?>
                                     <select class="form-select <?= (form_error('号機') ? 'is-invalid' : ''); ?>" name="号機" id="gouki" required>
                                         <?php
@@ -80,7 +80,7 @@
                                 <div class="col-6 pt-3">
                                     <label for="kouteiNa" class="form-label"><?= $this->data['EQUIPMENT_PROCESS_NAME_F'] ?></label>
                                     <?php if (trim(set_value('工程名')) != trim($items->c_processName) && trim(set_value('工程名')) != '') { ?>
-                                        <span class="edited form-check-label">更新しました</span>
+                                        <span class="badge bg-primary">更新しました</span>
                                     <?php } ?>
                                     <?php if (form_error('工程名') != '') { ?>
                                         <span class="invalid-feedback form-label"><?= trim(form_error('工程名')) ?></span>
@@ -90,7 +90,7 @@
                                 <div class="col-6 pt-3">
                                     <label for="mode" class="form-label"><?= $this->data['EQUIPMENT_FAIL_MODE_F'] ?></label>
                                     <?php if (trim(set_value('故障モード')) != trim($items->c_failMode) && set_value('故障モード') != '') { ?>
-                                        <span class="edited form-check-label">更新しました</span>
+                                        <span class="badge bg-primary">更新しました</span>
                                     <?php } ?>
                                     <?php if (form_error('故障モード') != '') { ?>
                                         <span class="invalid-feedback form-label"><?= trim(form_error('故障モード')) ?></span>
@@ -107,7 +107,7 @@
                                 <div class="col-6 pt-3">
                                     <label for="mech" class="form-label"><?= $this->data['EQUIPMENT_MECHANISM_F'] ?></label>
                                     <?php if (trim(set_value('fail_mech')) != trim($items->c_failMech) && set_value('fail_mech') != '') { ?>
-                                        <span class="edited form-check-label">更新しました</span>
+                                        <span class="badge bg-primary">更新しました</span>
                                     <?php } ?>
                                     <?php if (form_error('fail_mech') != '') { ?>
                                         <span class="invalid-feedback form-label"><?= trim(form_error('fail_mech')) ?></span>
@@ -118,7 +118,7 @@
                                 <div class="col-6 pt-3">
                                     <label for="fail_impact" class="form-label"><?= $this->data['EQUIPMENT_FAIL_IMPACT_F'] ?></label>
                                     <?php if (trim(set_value('故障の影響')) != trim($items->c_failImpact) && set_value('故障の影響') != '') { ?>
-                                        <span class="edited form-check-label">更新しました</span>
+                                        <span class="badge bg-primary">更新しました</span>
                                     <?php } ?>
                                     <?php if (form_error('故障の影響') != '') { ?>
                                         <span class="invalid-feedback form-label"><?= trim(form_error('故障の影響')) ?></span>
@@ -128,7 +128,7 @@
                                 <div class="col-6 pt-3">
                                     <label for="line_effect" class="form-label"><?= $this->data['EQUIPMENT_LINE_EFFECT_F'] ?></label>
                                     <?php if (trim(set_value('ライン停止の可能性')) != trim($items->c_lineEffect) && set_value('ライン停止の可能性') != '') { ?>
-                                        <span class="edited form-check-label">更新しました</span>
+                                        <span class="badge bg-primary">更新しました</span>
                                     <?php } ?>
                                     <?php if (form_error('ライン停止の可能性') != '') { ?>
                                         <span class="invalid-feedback form-label"><?= trim(form_error('ライン停止の可能性')) ?></span>
@@ -138,7 +138,7 @@
                                 <div class="col-6 pt-3">
                                     <label for="special_char" class="form-label"><?= $this->data['EQUIPMENT_SPECIAL_CHAR_F'] ?></label>
                                     <?php if (trim(set_value('特殊特性等')) != trim($items->c_specialChar) && set_value('特殊特性等') != '') { ?>
-                                        <span class="edited form-check-label">更新しました</span>
+                                        <span class="badge bg-primary">更新しました</span>
                                     <?php } ?>
                                     <?php if (form_error('特殊特性等') != '') { ?>
                                         <span class="invalid-feedback form-label"><?= trim(form_error('特殊特性等')) ?></span>
@@ -154,7 +154,7 @@
                                 <div class="col-4 pt-3">
                                     <label class="form-label" for="pic"><?= $this->data['EQUIPMENT_PIC_SCHEDULE_F'] ?></label>
                                     <?php if (trim(set_value('担当者日程')) != trim($items->c_picSchedule) && set_value('担当者日程') != '') { ?>
-                                        <span class="edited form-check-label">更新しました</span>
+                                        <span class="badge bg-primary">更新しました</span>
                                     <?php } ?>
                                     <select class="form-select <?= (form_error('担当者日程') ? 'is-invalid' : ''); ?>" name="担当者日程" id="pic" required>
                                         <?php
@@ -174,7 +174,7 @@
                                 <div class="col-2 pt-3">
                                     <label for="period" class="form-label"><?= $this->data['EQUIPMENT_PERIOD_F'] ?></label>
                                     <?php if (trim(set_value('周期')) != trim($items->c_period) && set_value('周期') != '') { ?>
-                                        <span class="edited form-check-label">更新しました</span>
+                                        <span class="badge bg-primary">更新しました</span>
                                     <?php } ?>
                                     <?php if (form_error('周期') != '') { ?>
                                         <span class="invalid-feedback form-label"><?= trim(form_error('周期')) ?></span>
@@ -184,7 +184,7 @@
                                 <div class="col-2 pt-3">
                                     <label for="month" class="form-label"><?= $this->data['EQUIPMENT_MONTH_F'] ?></label>
                                     <?php if (trim(set_value('月')) != trim($items->c_month) && set_value('月') != '') { ?>
-                                        <span class="edited form-check-label">更新しました</span>
+                                        <span class="badge bg-primary">更新しました</span>
                                     <?php } ?>
                                     <?php if (form_error('月') != '') { ?>
                                         <span class="invalid-feedback form-label"><?= trim(form_error('月')) ?></span>
@@ -194,7 +194,7 @@
                                 <div class="col-6 pt-3">
                                     <label for="prevention" class="form-label"><?= $this->data['EQUIPMENT_PREVENTION_F'] ?></label>
                                     <?php if (trim(set_value('予防')) != trim($items->c_prevention) && set_value('予防') != '') { ?>
-                                        <span class="edited form-check-label">更新しました</span>
+                                        <span class="badge bg-primary">更新しました</span>
                                     <?php } ?>
                                     <?php if (form_error('予防') != '') { ?>
                                         <span class="invalid-feedback form-label"><?= trim(form_error('予防')) ?></span>
@@ -204,7 +204,7 @@
                                 <div class="col-6 pt-3">
                                     <label for="detection" class="form-label"><?= $this->data['EQUIPMENT_DETECTION_F'] ?></label>
                                     <?php if (trim(set_value('検出')) != trim($items->c_detection) && set_value('検出') != '') { ?>
-                                        <span class="edited form-check-label">更新しました</span>
+                                        <span class="badge bg-primary">更新しました</span>
                                     <?php } ?>
                                     <?php if (form_error('検出') != '') { ?>
                                         <span class="invalid-feedback form-label"><?= trim(form_error('検出')) ?></span>
@@ -222,7 +222,7 @@
                                 <div class="col-6 pt-3">
                                     <label for="counter" class="form-label"><?= $this->data['EQUIPMENT_COUNTER_PLAN_F'] ?></label>
                                     <?php if (trim(set_value('対策案')) != trim($items->c_counterPlan) && set_value('対策案') != '') { ?>
-                                        <span class="edited form-check-label">更新しました</span>
+                                        <span class="badge bg-primary">更新しました</span>
                                     <?php } ?>
                                     <?php if (form_error('対策案') != '') { ?>
                                         <span class="invalid-feedback form-label"><?= trim(form_error('対策案')) ?></span>
@@ -233,7 +233,7 @@
                                 <div class="col-6 pt-3">
                                     <label for="measure" class="form-label"><?= $this->data['EQUIPMENT_MEASURE_F'] ?></label>
                                     <?php if (trim(set_value('対策')) != trim($items->c_measure) && set_value('対策') != '') { ?>
-                                        <span class="edited form-check-label">更新しました</span>
+                                        <span class="badge bg-primary">更新しました</span>
                                     <?php } ?>
                                     <?php if (form_error('対策') != '') { ?>
                                         <span class="invalid-feedback form-label"><?= trim(form_error('対策')) ?></span>

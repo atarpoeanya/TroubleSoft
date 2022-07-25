@@ -178,11 +178,6 @@
                             $(this).find('td:last-child').show();
                         })
                         // IN BODY
-
-
-
-
-
                     }
                 },
 
