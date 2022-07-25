@@ -56,7 +56,7 @@
             })
 
             // For validation purposes
-            <?php if ($this->session->flashdata('error') != '') {
+            <?php if ($this->session->flashdata('error') != '' &&  $this->session->flashdata('isEdit') != true) {
                 if ($this->session->flashdata('part_info') != '') {
 
             ?>
@@ -104,7 +104,7 @@
 
             isNaN(parseFloat(days)) ? 0 : $('#days').val();
             isNaN(parseFloat(hours)) ? 0 : $('#hours').val();
-            isNaN(parseFloat(minutes))  ? 0 : $('#minutes').val();
+            isNaN(parseFloat(minutes)) ? 0 : $('#minutes').val();
 
             console.log(days + '  ' + hours + '  ' + minutes)
 
@@ -293,6 +293,45 @@
                 $('#partinfo').val('');
             }
 
+            // For validation purposes
+            <?php if ($this->session->flashdata('error') != '' &&  $this->session->flashdata('isEdit') == true) {
+                if ($this->session->flashdata('part_info') != '') {
+
+            ?>
+                    // Grab data from flash session data (set in the controller)
+                    $arr_spare = JSON.parse('<?= $this->session->flashdata('part_info') ?>');
+
+                    $('#equipment_parts_list_edit tbody tr').remove()
+                    $('.emptyTab').hide()
+
+                    <?php
+
+                    $INDEX = 0;
+                    foreach ($temp_spare as $item) { ?>
+                        if (<?= $item->c_t202_id ?> == $arr_spare[<?= $INDEX ?>][0] && ($arr_spare[<?= $INDEX ?>][3] != 'deleted')) {
+
+                            $('#equipment_parts_list_edit tbody').append($('#foots tr')).append('<tr class="' + <?= $item->c_t202_id ?> + '"> <td>' + <?= $item->c_t202_id ?> + '</td> <td>' + "<?= $item->c_partName ?>" + '</td> <td>' + "<?= $item->c_model ?>" + '</td><td></td> <td>' + $arr_spare[<?= $INDEX ?>][1] + '</td> <td><a class="btn btn-primary minus">DELETE</a> </td></tr>')
+                        }
+
+
+                    <?php $INDEX++;
+                    } ?>
+                    $('#equipment_parts_list_edit tbody').find('td:last-child').hide(); //Hide minus button
+                    $('#equipment_parts_list_edit tbody tr').find('td:eq(3)').each(function() {
+                        $(this).hide()
+                    }) //hide empty cell 
+
+                    // Input field need to be loaded for .val to work
+                    // Tried on document.ready but value doesnt update
+                    $('#partinfo').load('equipmentForm.php', function() {
+
+                        $('#partinfo').val(JSON.stringify($arr_spare))
+                    })
+            <?php
+                }
+            }
+            ?>
+
 
         })
     }
@@ -300,13 +339,13 @@
     {
         function minToDur() {
             var duration = isNaN(parseInt($('#duration').val())) || $('#duration').val() == 0 ? 0 : $('#duration').val()
-            
+
             var days = Math.floor(duration / 1440)
             var rem_days = duration % 1440
             var hours = Math.floor(rem_days / 60)
             var minutes = duration - days * 1440 - hours * 60
 
-            
+
             $('#days').val(days)
             $('#hours').val(hours)
             $('#minutes').val(minutes)
@@ -314,7 +353,7 @@
         }
     }
 
-    
+
 
     // ========== EQUIPMENT FMEA=========
     {}

@@ -454,7 +454,7 @@ class Troublelist_model extends CI_Model
     public function add_sparepart()
     {
         $data = [
-            'c_createdDate'         => date("Y-m-d H:i:s"),
+            // 'c_createdDate'         => date("Y-m-d H:i:s"),
             'c_purchaseDate'        => $this->input->post('c_purchaseDate'),
             'c_partName'            => $this->input->post('c_partName'),
             'c_model'               => $this->input->post('c_model'),

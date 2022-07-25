@@ -558,8 +558,11 @@ class Dashboard extends CI_Controller
         }
     }
 
-    public function edit_data_tool_view()
-    {
+    public function edit_data_tool_view($spare_part)
+    {   
+        if(isset($spare_part))
+        $data['temp_spare'] = $spare_part;
+        
         $id = $this->uri->segment(2);
         $data['items'] = $this->Troublelist_model->get_tool_id(intval($id));
         // NEED DATA LIST THIS PART
@@ -638,7 +641,21 @@ class Dashboard extends CI_Controller
 
 
         if ($this->form_validation->run() == FALSE) {
-            $this->edit_data_tool_view();
+            $savedata = array(
+                'error'         =>  validation_errors(),
+                'isEdit'       =>  true,
+                'part_info'     =>  $this->input->post('spareParts', true)
+
+            );
+            $this->session->set_flashdata($savedata);
+
+            if (!empty($savedata['part_info'])) {
+
+                $data['temp_spare'] = $this->Troublelist_model
+                    ->get_spareparts_list();
+            }
+
+            $this->edit_data_tool_view($data['temp_spare']);
         } else {
             $data = $this->do_upload();
             $this->Troublelist_model->update_data_tool($data);

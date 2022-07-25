@@ -1,3 +1,6 @@
+<?php 
+echo $this->session->flashdata('part_info')
+?>
 <div class="d-flex justify-content-center pt-3" id="mainForm">
 
 
