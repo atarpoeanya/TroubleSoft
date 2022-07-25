@@ -439,7 +439,6 @@ class Dashboard extends CI_Controller
         if ($id == 2) { //FMEA
             $this->session->set_flashdata('crumbs', '1');
 
-
             $this->form_validation->set_rules('部署', '1', 'required|callback_check_default');
             $this->form_validation->set_rules('設備', '2', 'required|callback_check_default');
             $this->form_validation->set_rules('号機', '3', 'required|callback_check_default');

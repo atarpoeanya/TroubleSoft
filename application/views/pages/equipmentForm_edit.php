@@ -1,4 +1,4 @@
-<?php 
+<?php
 echo $this->session->flashdata('part_info')
 ?>
 <div class="d-flex justify-content-center pt-3" id="mainForm">
@@ -33,7 +33,7 @@ echo $this->session->flashdata('part_info')
                                 <?php if (form_error('発生日') != '') { ?>
                                     <span class="invalid-feedback form-label"><?= trim(form_error('発生日')) ?></span>
                                 <?php } ?>
-                                <?php if (trim(set_value('発生日')) != trim($items->c_accidentDate) && set_value('発生日') != '') { ?>
+                                <?php if (str_replace('T', ' ', set_value('発生日')) != date('Y-m-d H:i', strtotime($items->c_accidentDate)) && set_value('発生日') != '') { ?>
                                     <span class="badge bg-primary">更新しました</span>
                                 <?php } ?>
                                 <input required type="datetime-local" class="form-control

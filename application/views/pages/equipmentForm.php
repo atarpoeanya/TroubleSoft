@@ -90,6 +90,14 @@
 
                                     <option value="" <?= set_select('部署', '', true); ?>disabled selected>選び出す</option>
                                     <option value="塗装" <?= set_select('部署', '塗装'); ?>>塗装</option>
+                                    <option value="生技" <?= set_select('部署', '生技'); ?>>生技</option>
+                                    <option value="組付" <?= set_select('部署', '組付'); ?>>組付</option>
+                                    <option value="生管" <?= set_select('部署', '生管'); ?>>生管</option>
+                                    <option value="品証" <?= set_select('部署', '品証'); ?>>品証</option>
+                                    <option value="溶接" <?= set_select('部署', '溶接'); ?>>溶接</option>
+                                    <option value="プレス・溶接" <?= set_select('部署', 'プレス・溶接'); ?>>プレス・溶接</option>
+                                    <option value="営業" <?= set_select('部署', '営業'); ?>>営業</option>
+                                    <option value="その他" <?= set_select('部署', 'その他'); ?>>その他</option>
                                 </select>
                             </div>
                             <!-- Probably connect with each other -->
@@ -101,6 +109,8 @@
                                 <select class="form-select <?= (form_error('設備') ? 'is-invalid' : ''); ?>" name="設備" id="setsubi" required>
                                     <option value="" <?= set_select('設備', '', true); ?> disabled selected>選び出す</option>
                                     <option value="プレス" <?= set_select('設備', 'プレス'); ?>>プレス</option>
+                                    <option value="洗浄機" <?= set_select('設備', '洗浄機'); ?>>洗浄機</option>
+                                    <option value="塗装設備" <?= set_select('設備', '塗装設備'); ?>>塗装設備</option>
                                 </select>
                             </div>
                             <div class="col-4 pt-3">
@@ -112,6 +122,7 @@
                                     <option value="" <?= set_select('号機', '', true); ?> disabled selected>選び出す</option>
                                     <option value="1号機" <?= set_select('号機', '1号機'); ?>>1号機</option>
                                     <option value="2号機" <?= set_select('号機', '2号機'); ?>>2号機</option>
+                                    <option value="3号機" <?= set_select('号機', '3号機'); ?>>3号機</option>
                                 </select>
                             </div>
 
