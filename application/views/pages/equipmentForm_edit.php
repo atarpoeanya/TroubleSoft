@@ -52,13 +52,13 @@ echo $this->session->flashdata('part_info')
                                 <?php } ?>
 
                                 <div class="input-group">
-                                    <input type="number" class="form-control <?php if (form_error('duration') || form_error('days')) echo 'is-invalid' ?>" value="<?= set_value('days', 0) ?>" onchange="durToMin()" name="days" id="days" min="0">
+                                    <input type="number" class="form-control <?php if (form_error('duration') || form_error('days')) echo 'is-invalid' ?>" value="<?= set_value('days', '0') ?>" onchange="durToMin()" name="days" id="days" min="0">
                                     <span class="input-group-text" id=""><?= $this->data['DAYS'] ?></span>
 
-                                    <input type="number" class="form-control <?php if (form_error('duration') || form_error('hours')) echo 'is-invalid' ?>" value=" <?= set_value('hours', 0) ?>" onchange="durToMin()" name="hours" id="hours" min="0">
+                                    <input type="number" class="form-control <?php if (form_error('duration') || form_error('hours')) echo 'is-invalid' ?>" value="<?= set_value('hours', '0') ?>" onchange="durToMin()" name="hours" id="hours" min="0">
                                     <span class="input-group-text" id=""><?= $this->data['HOURS'] ?></span>
 
-                                    <input type="number" class="form-control <?php if (form_error('duration') || form_error('minutes')) echo 'is-invalid' ?>" value="<?= set_value('minutes', 0) ?>" onchange="durToMin()" name="minutes" id="minutes" min="0">
+                                    <input type="number" class="form-control <?php if (form_error('duration') || form_error('minutes')) echo 'is-invalid' ?>" value="<?= set_value('minutes', '0') ?>" onchange="durToMin()" name="minutes" id="minutes" min="0">
                                     <span class="input-group-text" id="days"><?= $this->data['MINUTES'] ?></span>
                                 </div>
                             </div>
@@ -362,8 +362,4 @@ echo $this->session->flashdata('part_info')
         $(this).removeClass('is-invalid')
         $(this).parent().find('.invalid-feedback').hide()
     })
-
-    $(document).ready(function() {
-        minToDur()
-    });
 </script>

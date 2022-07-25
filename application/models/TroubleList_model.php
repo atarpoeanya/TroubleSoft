@@ -101,14 +101,18 @@ class Troublelist_model extends CI_Model
     // Not tobe confused with get_sparepart(NO S)_list()
     public function get_spareparts_list()
     {
-        $data = array();
+        $data = [];
         $arr_decoded = json_decode($this->input->post('spareParts'), true);
 
         foreach ($arr_decoded as $value) {
             array_push($data, $value[0]);
         }
 
-        return $this->db->where_in('c_t202_id', $data)->get('t202_spareparts')->result();
+        if ($data) {
+            return $this->db->where_in('c_t202_id', $data)->get('t202_spareparts')->result();
+        } else {
+            // return nothing
+        }
     }
 
     public function add_data_tool($filename)
@@ -454,7 +458,7 @@ class Troublelist_model extends CI_Model
     public function add_sparepart()
     {
         $data = [
-            // 'c_createdDate'         => date("Y-m-d H:i:s"),
+            'c_createdDate'         => date("Y-m-d H:i:s"), 
             'c_purchaseDate'        => $this->input->post('c_purchaseDate'),
             'c_partName'            => $this->input->post('c_partName'),
             'c_model'               => $this->input->post('c_model'),

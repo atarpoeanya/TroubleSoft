@@ -648,7 +648,7 @@ class Dashboard extends CI_Controller
 
             );
             $this->session->set_flashdata($savedata);
-
+            $data['temp_spare'] = [];
             if (!empty($savedata['part_info'])) {
 
                 $data['temp_spare'] = $this->Troublelist_model

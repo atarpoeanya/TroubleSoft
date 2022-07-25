@@ -106,7 +106,7 @@
             isNaN(parseFloat(hours)) ? 0 : $('#hours').val();
             isNaN(parseFloat(minutes)) ? 0 : $('#minutes').val();
 
-            console.log(days + '  ' + hours + '  ' + minutes)
+            // console.log(days + '  ' + hours + '  ' + minutes)
 
             var duration = parseInt(days) * 1440 + parseInt(hours) * 60 + parseInt(minutes) * 1
 
@@ -117,7 +117,7 @@
     // FILE TEXT GRABBER
     {
         function fileUpload() {
-            console.log('uploaded')
+            // console.log('uploaded')
             var text = $('#taisakusho').val()
             text = text.substring(text.lastIndexOf("\\") + 1, text.length)
             $('#taisakusho_file').val(text)
@@ -333,7 +333,7 @@
 
     {
         function minToDur() {
-            var duration = isNaN(parseInt($('#duration').val())) || $('#duration').val() == 0 ? 0 : $('#duration').val()
+            var duration = isNaN(parseInt($('#duration').val())) || parseInt($('#duration').val()) == 0 ? 0 : $('#duration').val()
 
             var days = Math.floor(duration / 1440)
             var rem_days = duration % 1440
@@ -346,6 +346,10 @@
             $('#minutes').val(minutes)
             // console.log('Hari : ' + days + ' Jam : ' + hours + ' Menit : ' + minutes)
         }
+
+        $(document).ready(function() {
+            minToDur()
+        });
     }
 
 
