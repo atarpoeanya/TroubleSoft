@@ -1,6 +1,27 @@
 <?php
-echo $this->session->flashdata('part_info')
+echo $this->session->flashdata('part_info');
 ?>
+
+<?php
+if ($this->session->flashdata('error') != '') {
+?>
+    <div class="toast start-1 bottom-0 position-fixed fade" role="alert" id="errorNotif" aria-live="assertive" aria-atomic="true" style="z-index: 100;" data-bs-delay="3000">
+        <div class="toast-header text-white bg-danger">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+            </svg>
+            <strong class="me-auto fs-5">&nbsp;過去トラブルデータベース</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body fs-5">
+            登録に失敗しました
+        </div>
+    </div>
+<?php
+}
+?>
+
 <div class="d-flex justify-content-center pt-3" id="mainForm">
 
 
@@ -31,10 +52,10 @@ echo $this->session->flashdata('part_info')
 
                                 <label for="start_day" class="form-label"><?= $this->data['ACCIDENT_DATE'] ?></label>
                                 <?php if (form_error('発生日') != '') { ?>
-                                    <span class="invalid-feedback form-label"><?= trim(form_error('発生日')) ?></span>
+                                    <span class="badge bg-danger"><?= trim(form_error('発生日')) ?></span>
                                 <?php } ?>
                                 <?php if (str_replace('T', ' ', set_value('発生日')) != date('Y-m-d H:i', strtotime($items->c_accidentDate)) && set_value('発生日') != '') { ?>
-                                    <span class="badge bg-primary">更新しました</span>
+                                    <span class="badge bg-success">更新</span>
                                 <?php } ?>
                                 <input required type="datetime-local" class="form-control
                                 <?php if (form_error('発生日')) echo 'is-invalid' ?>" id="start_day" name="発生日" value="<?= set_value('発生日') != '' ? trim(set_value('発生日')) :  trim($items->c_accidentDate) ?>" required>
@@ -45,10 +66,10 @@ echo $this->session->flashdata('part_info')
 
                                 <label for="time_end" class="form-label"><?= $this->data['STOP_TIME'] ?></label>
                                 <?php if (trim(set_value('duration')) != trim($items->c_stopTime) && set_value('duration') != '') { ?>
-                                    <span class="badge bg-primary">更新しました</span>
+                                    <span class="badge bg-success">更新</span>
                                 <?php } ?>
                                 <?php if (form_error('duration') != '' || form_error('days') != '' || form_error('hours')  != '' || form_error('minutes') != '') { ?>
-                                    <span class="invalid-feedback form-label"><?= $this->data['NO_ZERO'] ?></span>
+                                    <span class="badge bg-danger"><?= $this->data['NO_ZERO'] ?></span>
                                 <?php } ?>
 
                                 <div class="input-group">
@@ -69,7 +90,7 @@ echo $this->session->flashdata('part_info')
                                 <div class="col">
                                     <label class="form-label" for="tantou"><?= $this->data['PIC'] ?></label>
                                     <?php if (trim(set_value('担当者')) != trim($items->c_manager) && set_value('担当者') != '') { ?>
-                                        <span class="badge bg-primary">更新しました</span>
+                                        <span class="badge bg-success">更新</span>
                                     <?php } ?>
                                     <select class="form-select <?= (form_error('担当者') ? 'is-invalid' : ''); ?>" name="担当者" id="tantou" required>
                                         <?php
@@ -96,7 +117,7 @@ echo $this->session->flashdata('part_info')
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="busho"><?= $this->data['DEPARTMENT'] ?></label>
                                 <?php if (trim(set_value('部署')) != trim($items->c_department) && set_value('部署') != '') { ?>
-                                    <span class="badge bg-primary">更新しました</span>
+                                    <span class="badge bg-success">更新</span>
                                 <?php } ?>
                                 <select class="form-select <?= (form_error('部署') ? 'is-invalid' : ''); ?>" name="部署" id="busho" required>
                                     <?php
@@ -117,7 +138,7 @@ echo $this->session->flashdata('part_info')
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="setsubi"><?= $this->data['FACILITY'] ?></label>
                                 <?php if (trim(set_value('設備')) != trim($items->c_facility) && set_value('設備') != '') { ?>
-                                    <span class="badge bg-primary">更新しました</span>
+                                    <span class="badge bg-success">更新</span>
                                 <?php } ?>
                                 <select class="form-select <?= (form_error('設備') ? 'is-invalid' : ''); ?>" name="設備" id="setsubi" required>
                                     <?php
@@ -137,7 +158,7 @@ echo $this->session->flashdata('part_info')
                             <div class="col-4 pt-3">
                                 <label class="form-label" for="gouki"><?= $this->data['UNIT'] ?></label>
                                 <?php if (trim(set_value('号機')) != trim($items->c_unit) && set_value('号機') != '') { ?>
-                                    <span class="badge bg-primary">更新しました</span>
+                                    <span class="badge bg-success">更新</span>
                                 <?php } ?>
                                 <select class="form-select <?= (form_error('号機') ? 'is-invalid' : ''); ?>" name="号機" id="gouki" required>
                                     <?php
@@ -159,10 +180,10 @@ echo $this->session->flashdata('part_info')
                                 <label for="kouteiNa" class="form-label"><?= $this->data['PROCESS_NAME'] ?></label>
                                 <!-- <span class="must form-check-label">必須</span> -->
                                 <?php if (trim(set_value('工程名')) != trim($items->c_processName) && set_value('工程名') != '') { ?>
-                                    <span class="badge bg-primary">更新しました</span>
+                                    <span class="badge bg-success">更新</span>
                                 <?php } ?>
                                 <?php if (form_error('工程名') != '') { ?>
-                                    <span class="invalid-feedback form-label"><?= trim(form_error('工程名')) ?></span>
+                                    <span class="badge bg-danger"><?= trim(form_error('工程名')) ?></span>
                                 <?php } ?>
                                 <input required type="text" class="form-control <?php if (form_error('工程名')) echo 'is-invalid'; ?>" name="工程名" id="kouteiNa" value="<?= set_value('工程名') != '' ? trim(set_value('工程名')) :  trim($items->c_processName) ?>" required>
                             </div>
@@ -170,10 +191,10 @@ echo $this->session->flashdata('part_info')
                             <div class="col pt-3">
                                 <label for="mode" class="form-label "><?= $this->data['FAIL_MODE'] ?></label>
                                 <?php if (trim(set_value('故障モード')) != trim($items->c_failMode) && set_value('故障モード') != '') { ?>
-                                    <span class="badge bg-primary">更新しました</span>
+                                    <span class="badge bg-success">更新</span>
                                 <?php } ?>
                                 <?php if (form_error('故障モード') != '') { ?>
-                                    <span class="invalid-feedback form-label"><?= trim(form_error('故障モード')) ?></span>
+                                    <span class="badge bg-danger"><?= trim(form_error('故障モード')) ?></span>
                                 <?php } ?>
                                 <input required type="text" class="form-control <?php if (form_error('故障モード')) echo 'is-invalid' ?>" name="故障モード" id="mode" value="<?= set_value('故障モード') != '' ? trim(set_value('故障モード')) :  trim($items->c_failMode) ?>" required>
                             </div>
@@ -188,10 +209,10 @@ echo $this->session->flashdata('part_info')
 
                                 <label class="form-label flex-grow" for="gensho"><?= $this->data['PHENOMENON'] ?></label>
                                 <?php if (trim(set_value('現象')) != trim($items->c_phenomenon) && set_value('現象') != '') { ?>
-                                    <span class="badge bg-primary">更新しました</span>
+                                    <span class="badge bg-success">更新</span>
                                 <?php } ?>
                                 <?php if (form_error('現象') != '') { ?>
-                                    <span class="invalid-feedback form-label"><?= trim(form_error('現象')) ?></span>
+                                    <span class="badge bg-danger"><?= trim(form_error('現象')) ?></span>
                                 <?php } ?>
 
                                 <textarea required name="現象" id="gensho" class="form-control <?php if (form_error('現象')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= set_value('現象') != '' ? trim(set_value('現象')) :  trim($items->c_phenomenon) ?></textarea>
@@ -200,10 +221,10 @@ echo $this->session->flashdata('part_info')
 
                                 <label class="form-label " for="shuriNaiyou"><?= $this->data['REPAIR_DETAIL'] ?></label>
                                 <?php if (trim(set_value('修理内容')) != trim($items->c_repairDet) && set_value('修理内容') != '') { ?>
-                                    <span class="badge bg-primary">更新しました</span>
+                                    <span class="badge bg-success">更新</span>
                                 <?php } ?>
                                 <?php if (form_error('修理内容') != '') { ?>
-                                    <span class="invalid-feedback form-label"><?= trim(form_error('修理内容')) ?></span>
+                                    <span class="badge bg-danger"><?= trim(form_error('修理内容')) ?></span>
                                 <?php } ?>
 
                                 <textarea required name="修理内容" id="shuriNaiyou" class="form-control <?php if (form_error('修理内容')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= set_value('修理内容') != '' ? trim(set_value('修理内容')) :  trim($items->c_repairDet) ?></textarea>
@@ -213,10 +234,10 @@ echo $this->session->flashdata('part_info')
 
                                 <label class="form-label " for="failMech"><?= $this->data['MECHANISM'] ?></label>
                                 <?php if (trim(set_value('fail_mech')) != trim($items->c_failMech) && set_value('fail_mech') != '') { ?>
-                                    <span class="badge bg-primary">更新しました</span>
+                                    <span class="badge bg-success">更新</span>
                                 <?php } ?>
                                 <?php if (form_error('fail_mech') != '') { ?>
-                                    <span class="invalid-feedback form-label"><?= trim(form_error('fail_mech')) ?></span>
+                                    <span class="badge bg-danger"><?= trim(form_error('fail_mech')) ?></span>
                                 <?php } ?>
 
                                 <textarea required name="fail_mech" id="failMech" class="form-control <?php if (form_error('fail_mech')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= set_value('fail_mech') != '' ? trim(set_value('fail_mech')) :  trim($items->c_failMech) ?></textarea>
@@ -226,10 +247,10 @@ echo $this->session->flashdata('part_info')
 
                                 <label class="form-label " for="response"><?= $this->data['RESPONSE'] ?></label>
                                 <?php if (trim(set_value('response')) != trim($items->c_response) && set_value('response') != '') { ?>
-                                    <span class="badge bg-primary">更新しました</span>
+                                    <span class="badge bg-success">更新</span>
                                 <?php } ?>
                                 <?php if (form_error('response') != '') { ?>
-                                    <span class="invalid-feedback form-label"><?= trim(form_error('response')) ?></span>
+                                    <span class="badge bg-danger"><?= trim(form_error('response')) ?></span>
                                 <?php } ?>
 
                                 <textarea required name="response" id="response" class="form-control <?php if (form_error('response')) echo 'is-invalid' ?>" cols="30" rows="5" required><?= set_value('response') != '' ? trim(set_value('response')) :  trim($items->c_response) ?></textarea>
@@ -345,21 +366,34 @@ echo $this->session->flashdata('part_info')
         </div>
     </div>
 
-</div>
+    <style>
+        body {
+            background-color: #F5F5F5
+        }
 
+        span p {
+            margin-bottom: 0;
+        }
 
+        .card-body {
+            background-color: #F4F5F6;
+        }
 
+        .sub-header {
+            top: 30px;
+            left: 40px;
+            background-color: #F4F5F6;
+            width: max-content;
+        }
+    </style>
 
+    <script>
+        $('input, textarea, select').on('click', function() {
+            $(this).removeClass('is-invalid')
+            $(this).parent().find('.invalid-feedback').hide()
+        })
 
-
-
-<style>
-
-</style>
-
-<script>
-    $('input, textarea, select').on('click', function() {
-        $(this).removeClass('is-invalid')
-        $(this).parent().find('.invalid-feedback').hide()
-    })
-</script>
+        $(document).ready(function() {
+            $("#errorNotif").toast("show");
+        });
+    </script>

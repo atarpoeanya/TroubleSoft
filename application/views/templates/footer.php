@@ -19,7 +19,7 @@
     }
 
 
-    .must {
+    /* .must {
       display: inline-block;
       margin: 0 10px 0 0;
       padding: 3px 3px 1px;
@@ -48,11 +48,11 @@
       width: max-content;
       margin: 0 10px 0 10px;
       padding-top: 1px;
-      /* padding: 3px 3px 0px; */  
+      padding: 3px 3px 0px;  
       font-size: 14px;
       line-height: 1;
       vertical-align: 1px;
-    }
+    } */
   </style>
 
   </html>

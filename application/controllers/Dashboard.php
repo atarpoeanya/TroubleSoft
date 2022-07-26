@@ -137,10 +137,10 @@ class Dashboard extends CI_Controller
 
 
             //Validation message
-            'IS_REQUIRED'                           =>  '<i><b>＊空であってはならない</b></i>',
-            'IS_TOO_LONG'                           =>  '<i><b>＊長すぎ</b></i>',
-            'NO_ZERO'                               =>  '<i><b>＊合計を0にすることはできません</b></i>',
-            'NOT_PICK'                              =>  '<i><b>＊何か選んでください</b></i>',
+            'IS_REQUIRED'                           =>  '空であってはならない',
+            'IS_TOO_LONG'                           =>  '長すぎ',
+            'NO_ZERO'                               =>  '合計を0にすることはできません',
+            'NOT_PICK'                              =>  '何か選んでください',
 
 
             //UNSUSED
@@ -472,7 +472,6 @@ class Dashboard extends CI_Controller
                         ->get_spareparts_list();
                 }
 
-
                 $this->load->view('templates/header');
                 $this->load->view('Pages/equipmentFmea', $data);
                 $this->load->view('templates/footer');
@@ -558,10 +557,10 @@ class Dashboard extends CI_Controller
     }
 
     public function edit_data_tool_view($spare_part)
-    {   
-        if(isset($spare_part))
-        $data['temp_spare'] = $spare_part;
-        
+    {
+        if (isset($spare_part))
+            $data['temp_spare'] = $spare_part;
+
         $id = $this->uri->segment(2);
         $data['items'] = $this->Troublelist_model->get_tool_id(intval($id));
         // NEED DATA LIST THIS PART
@@ -637,8 +636,6 @@ class Dashboard extends CI_Controller
         $this->form_validation->set_rules('fail_mech', '13', 'required|max_length[140]');
         $this->form_validation->set_rules('response', '14', 'required|max_length[140]');
 
-
-
         if ($this->form_validation->run() == FALSE) {
             $savedata = array(
                 'error'         =>  validation_errors(),
@@ -662,8 +659,11 @@ class Dashboard extends CI_Controller
         }
     }
 
-    public function edit_data_tool_fmea_view()
+    public function edit_data_tool_fmea_view($spare_part)
     {
+        if (isset($spare_part))
+            $data['temp_spare'] = $spare_part;
+
         $data = $this->data;
         $id = $this->uri->segment(2);
         $data['items'] = $this->Troublelist_model->get_tool_fmea_id(intval($id));
@@ -701,7 +701,7 @@ class Dashboard extends CI_Controller
 
 
         //invoke modal spare parte select
-        $this->load->view('modals/partsSelect');
+        $this->load->view('modals/partSelect_Edit');
 
         //js
         $this->load->view('js/form_js');
@@ -731,8 +731,30 @@ class Dashboard extends CI_Controller
         $this->form_validation->set_rules('対策案', '15', 'required|max_length[140]');
         $this->form_validation->set_rules('対策', '16', 'required|max_length[140]');
 
+        // if ($this->form_validation->run() == FALSE) {
+        //     $this->edit_data_tool_fmea_view();
+        // } else {
+        //     $this->Troublelist_model->update_data_tool_fmea();
+        //     redirect(base_url(), '/');
+        // }
+
         if ($this->form_validation->run() == FALSE) {
-            $this->edit_data_tool_fmea_view();
+            $savedata = array(
+                'error'         =>  validation_errors(),
+                'isEdit'        =>  true,
+                'part_info'     =>  $this->input->post('spareParts', true)
+
+            );
+            $this->session->set_flashdata($savedata);
+            $data['temp_spare'] = [];
+            if (!empty($savedata['part_info'])) {
+
+                $data['temp_spare'] = $this->Troublelist_model
+                    ->get_spareparts_list();
+            }
+
+            $this->edit_data_tool_fmea_view($data['temp_spare']);
+            // $this->edit_data_tool_view($data['temp_spare']);
         } else {
             $this->Troublelist_model->update_data_tool_fmea();
             redirect(base_url(), '/');
