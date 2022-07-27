@@ -24,7 +24,7 @@
     <br>
     <div class="container-fluid" id="all_fmea_list">
         <table class="table table-sm table-striped-columns table-responsive " id="all_trouble_table">
-            <thead>
+            <thead class="table-dark">
                 <tr>
                     <th></th>
                     <th>設備</th>
