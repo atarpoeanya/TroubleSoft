@@ -228,11 +228,11 @@ class Dashboard extends CI_Controller
         f_generate_table_select($data);
     }
 
-    public function get_trouble_list_data()
+    public function get_tool_fmea_list()
     {
         echo json_encode($this->Troublelist_model->get_tool_trouble_fmea_list());
     }
-
+    
     public function get_sparepart_list()
     {
         $data = $this->data;
@@ -821,40 +821,12 @@ class Dashboard extends CI_Controller
     public function all_fmea_list()
     {
         $data = $this->data;
-
+        $this->load->view('js/dashboard_js');
         $this->load->view('templates/header', $data);
         $this->load->view('Pages/all_fmea');
         $this->load->view('templates/footer');
-        $this->load->view('js/dashboard_js');
+        
     }
 
 
-
-    public function get_all_fmea_list_modular()
-    {
-        $data = $this->data;
-
-        // $id = $this->uri->segment(2);
-        // $this->load->view('/templates/header', $data);
-        $this->load->library('table');
-
-        $data = $this->Troublelist_model->get_trouble_fmea_array($_GET['department']);
-
-        $template = array(
-            'table_open'            => '<table class="table table-sm table-striped-columns table-responsive" id="all_trouble_table">',
-
-            'thead_open'            => '<thead class="table-dark">',
-
-            'heading_cell_start'    => '<th style="border-width: 2px;" class="kanjifont table-head text-center border-right border-left">',
-
-            'cell_start'            => '<td style="border-width: 2px;" class="kanjifont table-data text-center align-middle border-right border-left pointer col">',
-
-            'cell_alt_start'        => '<td style="border-width: 2px;" class="kanjifont table-data text-center align-middle border-right border-left pointer col">',
-        );
-
-        $this->table->set_template($template);
-        $this->table->set_heading('設備', '号機', '工程名・工程機能', '故障モード', '故障の影響', 'ライン停止の可能性', '特殊特性等', '故障の潜在原因メカニズム', '予防', '周期', '月', '検出', '対策案', '担当者日程', '対策');
-
-        echo $this->table->generate($data);
-    }
 }

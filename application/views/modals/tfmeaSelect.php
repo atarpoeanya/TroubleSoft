@@ -7,7 +7,7 @@
 
 
             </div>
-            <div class="modal-body" >
+            <div class="modal-body">
                 <div class="col-12">
 
                     <label for="departement_select" class="col-form-label">部署</label>
@@ -77,16 +77,10 @@
             },
 
             complete: function() {
-
-
-
-
                 $(document).ready(function() {
                     // Setup - add a text input to each cell
                     $('#trouble_fmea_table_lite thead tr:eq(0) th').each(function() {
                         var title = $(this).text().trim();
-
-
 
                         if (title.length == 0)
                             $('#search-bar').append('<th></th>');
@@ -100,7 +94,7 @@
                     // DataTable
                     var table = $('#trouble_fmea_table_lite').DataTable({
                         ajax: {
-                            url: '<?= base_url() ?>dashboard/get_trouble_list_data',
+                            url: '<?= base_url() ?>dashboard/get_tool_fmea_list',
                             dataSrc: ''
                         },
                         ordering: true,
@@ -124,26 +118,21 @@
                                 "bSortable": false
                             },
                             {
-
                                 data: 'c_facility',
                                 width: '30%'
                             },
                             {
-
                                 data: 'c_processName',
                                 width: '30%'
                             },
                             {
-
                                 data: 'c_failMode',
                                 width: '35%'
                             },
                             {
-
                                 data: null,
                                 "bSortable": false,
                                 render: function(data, type, row) {
-
                                     return '<button class="btn btn-primary text-nowrap" onclick="show(' + data.c_t203_id + ')" data-bs-dismiss="modal" >登録</button>';
                                 }
                             },
@@ -152,8 +141,6 @@
                                 visible: false
                             }
                         ]
-                     
-
                     });
 
                     // Show and hide function for
@@ -184,6 +171,7 @@
                     // Div selector
                     $('#departement_select').on('change', function() {
                         table.search($(this).val()).draw();
+
                     })
 
                 });

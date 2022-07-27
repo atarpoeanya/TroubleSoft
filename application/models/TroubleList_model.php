@@ -16,19 +16,6 @@ class Troublelist_model extends CI_Model
         return $this->db->get('t203_equipment_fmea')->result();
     }
 
-    public function get_trouble_fmea_array($department)
-    {
-        $query = $this->db->select(['c_facility', 'c_unit', 'c_processName', 'c_failMode', 'c_failImpact', 'c_lineEffect', 'c_specialChar', 'c_failMech', 'c_prevention', 'c_period', 'c_month', 'c_detection', 'c_counterPlan', 'c_picSchedule', 'c_measure']);
-
-        if ($department !== '全部') {
-            return $query->where('c_department', $department)->get('t203_equipment_fmea');
-        } else {
-            return $query->get('t203_equipment_fmea');
-        }
-    } //Dont need this remember to delete
-
-
-
     public function get_sparepart_list()
     {
         return $this->db->get('t202_spareparts')->result();
@@ -458,7 +445,7 @@ class Troublelist_model extends CI_Model
     public function add_sparepart()
     {
         $data = [
-            'c_createdDate'         => date("Y-m-d H:i:s"), 
+            'c_createdDate'         => date("Y-m-d H:i:s"),
             'c_purchaseDate'        => $this->input->post('c_purchaseDate'),
             'c_partName'            => $this->input->post('c_partName'),
             'c_model'               => $this->input->post('c_model'),

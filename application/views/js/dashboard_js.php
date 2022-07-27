@@ -120,17 +120,17 @@
         var hours = $('#hours').val()
         var minutes = $('#minutes').val()
 
-        if (minutes >= 60){
+        if (minutes >= 60) {
             $('#minutes').val(0)
-            $('#hours').val(parseInt(hours)+1)
-        } else if( hours >= 24) {
+            $('#hours').val(parseInt(hours) + 1)
+        } else if (hours >= 24) {
             $('#hours').val(0)
-            $('#days').val(parseInt(days)+1)
+            $('#days').val(parseInt(days) + 1)
         }
 
-        days= isNaN(parseInt(days)) ? 0 : $('#days').val();
-        hours= isNaN(parseInt(hours)) ? 0 : $('#hours').val();
-        minutes= isNaN(parseInt(minutes)) ? 0 : $('#minutes').val();
+        days = isNaN(parseInt(days)) ? 0 : $('#days').val();
+        hours = isNaN(parseInt(hours)) ? 0 : $('#hours').val();
+        minutes = isNaN(parseInt(minutes)) ? 0 : $('#minutes').val();
 
         console.log(days + '  ' + hours + '  ' + minutes)
 
@@ -789,65 +789,84 @@
     }
 
     function getAllFmeaList() {
-        $.ajax({
-            url: "<?php echo base_url(); ?>dashboard/get_all_fmea_list_modular?department=" + $('#busho_fmea').val(),
-            success: function(response) {
-                $("#all_fmea_list").html(response);
-
+        var table = $('#all_trouble_table').DataTable({
+            ajax: {
+                url: '<?= base_url() ?>dashboard/get_tool_fmea_list',
+                dataSrc: ''
             },
-            complete: function() {
-                var table = $('#all_trouble_table').DataTable({
-                    responsive: true,
-                    ordering: false,
-                    info: false,
-                    searching: false,
-                    paging: false,
-                    // orderCellsTop: true,
-                    columns: [{
-                        "width": "3%"
-                    }, {
-                        "width": "3%"
-                    }, {
-                        "width": "8%"
-                    }, {
-                        "width": "8%"
-                    }, {
-                        "width": "12%"
-                    }, {
-                        "width": "6%"
-                    }, {
-                        "width": "6%"
-                    }, {
-                        "width": "6%"
-                    }, {
-                        "width": "6%"
-                    }, {
-                        "width": "3%"
-                    }, {
-                        "width": "3%"
-                    }, {
-                        "width": "12%"
-                    }, {
-                        "width": "12%"
-                    }, {
-                        "width": "6%"
-                    }, {
-                        "width": "6%"
-                    }, ],
-                    scrollX: false,
-                    "language": {
-                        "zeroRecords": "該当する記録は見つかりません",
-                    }
-                });
+            responsive: true,
+            ordering: false,
+            info: false,
+            searching: true,
+            dom: "t",
+            paging: false,
+            orderCellsTop: true,
+            scrollX: false,
+            columnDefs: [{
+                "className": "dt-center",
+                "targets": "_all"
+            }],
+            columns: [{
+                    data: "c_department",
+                    visible: false
+                },
+                {
+                    data: "c_facility",
+                    width: "3%"
+                }, {
+                    data: "c_unit",
+                    width: "3%"
+                }, {
+                    data: "c_processName",
+                    width: "8%"
+                }, {
+                    data: "c_failMode",
+                    width: "8%"
+                }, {
+                    data: "c_failImpact",
+                    width: "12%"
+                }, {
+                    data: "c_lineEffect",
+                    width: "6%"
+                }, {
+                    data: "c_specialChar",
+                    width: "6%"
+                }, {
+                    data: "c_failMech",
+                    width: "6%"
+                }, {
+                    data: "c_prevention",
+                    width: "6%"
+                }, {
+                    data: "c_period",
+                    width: "3%"
+                }, {
+                    data: "c_month",
+                    width: "3%"
+                }, {
+                    data: "c_detection",
+                    width: "12%"
+                }, {
+                    data: "c_counterPlan",
+                    width: "12%"
+                }, {
+                    data: "c_picSchedule",
+                    width: "6%"
+                }, {
+                    data: "c_measure",
+                    width: "6%"
+                },
+            ],
 
-                // var table = $('#all_trouble_table').rowMerge({
-                //     excludedColumns: [1, 2, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-                // });
+            "language": {
+                "zeroRecords": "該当する記録は見つかりません",
             }
         });
+
+        $('#busho_fmea').on('change', function() {
+            table.columns(0).search($(this).val()).draw();
+        })
     }
-
-
 
 
     document.addEventListener("DOMContentLoaded", DATA.onLoad)
