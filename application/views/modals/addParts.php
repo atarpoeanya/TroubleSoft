@@ -65,13 +65,8 @@
                                 <input class="form-control " type="text" name="単位" id="storage" required>
                             </div>
                             <div class="col pt-3">
-<<<<<<< Updated upstream
                                 <label class="form-label" for="arra"><?= $this->data['ARRANGEMENT'] ?> <span class="badge bg-danger">必須</span></label>
                                 <!-- <span class="must form-check-label">必須</span> -->
-=======
-                                <label class="form-label" for="arra"><?= $this->data['ARRANGEMENT'] ?></label>
-                                <span class="badge bg-danger">必須</span>
->>>>>>> Stashed changes
                                 <input class="form-control " type="text" name="単位" id="arra" required>
                             </div>
                         </div>
