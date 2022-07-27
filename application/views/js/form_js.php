@@ -65,14 +65,18 @@
 
                     $('#equipment_parts_list tbody tr').remove()
                     $('.emptyTab').hide()
-
+                    var temp_spare = [];
                     <?php
 
                     $INDEX = 0;
                     foreach ($temp_spare as $item) { ?>
+                        temp_spare.push(<?= $item->c_t202_id ?>);
+                        temp_spare.sort();
+                        $arr_spare.sort();
+                        
                         if (<?= $item->c_t202_id ?> == $arr_spare[<?= $INDEX ?>][0]) {
 
-                            $('#equipment_parts_list tbody').append($('#foots tr')).append('<tr class="' + <?= $item->c_t202_id ?> + '"> <td>' + <?= $item->c_t202_id ?> + '</td> <td>' + "<?= $item->c_partName ?>" + '</td> <td>' + "<?= $item->c_model ?>" + '</td><td></td> <td>' + $arr_spare[<?= $INDEX ?>][1] + '</td> <td><a class="btn btn-primary minus">DELETE</a> </td></tr>')
+                            $('#equipment_parts_list tbody').append($('#foots tr')).append('<tr class="' + <?= $item->c_t202_id ?> + '"> <td>' + <?= $item->c_t202_id ?> + '</td> <td>' + "<?= $item->c_partName ?>" + '</td> <td>' + "<?= $item->c_model ?>" + '</td><td></td> <td>' + $arr_spare[<?= $INDEX ?>][1] + '</td> <td><a class="btn btn-primary minus"><?=$this->data['DELETE_BUTTON']?></a> </td></tr>')
                         }
 
                     <?php $INDEX++;

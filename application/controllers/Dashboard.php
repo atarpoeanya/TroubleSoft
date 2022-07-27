@@ -604,7 +604,8 @@ class Dashboard extends CI_Controller
         $this->load->view('modals/partSelect_Edit', $data);
 
         //js
-        $this->load->view('js/form_js');
+        // $this->load->view('js/form_js');
+        $this->load->view('js/form_edit_js');
     }
 
 
@@ -704,7 +705,8 @@ class Dashboard extends CI_Controller
         $this->load->view('modals/partSelect_Edit');
 
         //js
-        $this->load->view('js/form_js');
+        // $this->load->view('js/form_js');
+        $this->load->view('js/form_edit_js');
     }
 
     public function post_edit_data_tool_fmea()
@@ -753,8 +755,8 @@ class Dashboard extends CI_Controller
                     ->get_spareparts_list();
             }
 
+            
             $this->edit_data_tool_fmea_view($data['temp_spare']);
-            // $this->edit_data_tool_view($data['temp_spare']);
         } else {
             $this->Troublelist_model->update_data_tool_fmea();
             redirect(base_url(), '/');

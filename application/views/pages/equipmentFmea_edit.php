@@ -1,6 +1,3 @@
-<?php
-echo $this->session->flashdata('part_info');
-?>
 
 <?php
 if ($this->session->flashdata('error') != '') {
@@ -303,9 +300,9 @@ if ($this->session->flashdata('error') != '') {
 
                                                         <td style="display: none;"><a class="btn btn-primary minus"><?= $this->data['DELETE_BUTTON']; ?></a> </td>
                                                     </tr>
-                                            </tbody>
-
-                                        <?php } ?>
+                                                    
+                                                    <?php } ?>
+                                                </tbody>
                                         <tfoot class="table-light">
                                             <?php
                                             if (!property_exists($items, 'spare')) :
