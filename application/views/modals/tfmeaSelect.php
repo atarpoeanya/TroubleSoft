@@ -23,7 +23,18 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <div id="fmeaUpper"></div>
+                    <table class="table table-striped table-hover" id="trouble_fmea_table_lite">
+                        <thead class="table-light">
+                            <tr>
+                                <th></th>
+                                <th>設備名</th>
+                                <th>工程名</th>
+                                <th>故障モード</th>
+                                <th></th>
+                            </tr>
+                            <tr id="search-bar"></tr>
+                        </thead>
+                    </table>
                 </div>
 
             </div>
@@ -45,7 +56,7 @@
 </style>
 
 <script>
-    function format(d) {
+    function details(d) {
         return (
             '<table class="table" id="details">' +
             '<tbody>' +
@@ -69,120 +80,109 @@
         })
     }
 
-    // List loader
-    $('#fmeaLite').on('show.bs.modal', function(event) {
-        $.ajax({
-            url: "<?= base_url(); ?>dashboard/get_trouble_list_tool_fmea_lite",
+    $(document).ready(function() {
+        // Setup - add a text input to each cell
+        $('#trouble_fmea_table_lite thead tr:eq(0) th').each(function() {
+            var title = $(this).text().trim();
 
-            success: function(response) {
-                $("#fmeaUpper").html(response)
+            if (title.length == 0)
+                $('#search-bar').append('<th></th>');
+            else if (title.length == 0 && $(this).hasClass('button_column'))
+                $('#search-bar').append('<th class="table-light"></th>');
+            else
+                $('#search-bar').append('<th><input type="text" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
 
+        });
+
+        // DataTable
+        var table = $('#trouble_fmea_table_lite').DataTable({
+            ajax: {
+                url: '<?= base_url() ?>dashboard/get_tool_fmea_list',
+                dataSrc: ''
             },
+            ordering: true,
+            info: false,
+            paging: false,
+            orderCellsTop: true,
+            dom: 't',
+            scrollX: false,
+            "language": {
+                "zeroRecords": "該当する記録は見つかりません",
+            },
+            "columnDefs": [{
+                "className": "dt-center",
+                "targets": "_all"
+            }],
+            columns: [{
+                    className: 'dt-control',
+                    orderable: false,
+                    data: null,
+                    defaultContent: '',
+                    "bSortable": false
+                },
+                {
+                    data: 'c_facility',
+                    width: '30%'
+                },
+                {
+                    data: 'c_processName',
+                    width: '30%'
+                },
+                {
+                    data: 'c_failMode',
+                    width: '35%'
+                },
+                {
+                    data: null,
+                    "bSortable": false,
+                    render: function(data, type, row) {
+                        return '<button class="btn btn-primary text-nowrap" onclick="show(' + data.c_t203_id + ')" data-bs-dismiss="modal" >登録</button>';
+                    }
+                },
+                {
+                    data: 'c_department',
+                    visible: false
+                }
+            ]
+        });
 
-            complete: function() {
-                $(document).ready(function() {
-                    // Setup - add a text input to each cell
-                    $('#trouble_fmea_table_lite thead tr:eq(0) th').each(function() {
-                        var title = $(this).text().trim();
+        // Show and hide function for
+        $('#trouble_fmea_table_lite tbody').on('click', 'td.dt-control', function() {
+            var tr = $(this).closest('tr');
+            var row = table.row(tr);
 
-                        if (title.length == 0)
-                            $('#search-bar').append('<th></th>');
-                        else if (title.length == 0 && $(this).hasClass('button_column'))
-                            $('#search-bar').append('<th class="table-light"></th>');
-                        else
-                            $('#search-bar').append('<th><input type="text" placeholder="Search " class="column_search form-control" id="search-bar-' + title + '" /></th>');
+            if (row.child.isShown()) {
 
-                    });
+                row.child.hide();
+                tr.removeClass('shown');
+            } else {
 
-                    // DataTable
-                    var table = $('#trouble_fmea_table_lite').DataTable({
-                        ajax: {
-                            url: '<?= base_url() ?>dashboard/get_tool_fmea_list',
-                            dataSrc: ''
-                        },
-                        ordering: true,
-                        info: false,
-                        paging: false,
-                        orderCellsTop: true,
-                        dom: 't',
-                        scrollX: false,
-                        "language": {
-                            "zeroRecords": "該当する記録は見つかりません",
-                        },
-                        "columnDefs": [{
-                            "className": "dt-center",
-                            "targets": "_all"
-                        }],
-                        columns: [{
-                                className: 'dt-control',
-                                orderable: false,
-                                data: null,
-                                defaultContent: '',
-                                "bSortable": false
-                            },
-                            {
-                                data: 'c_facility',
-                                width: '30%'
-                            },
-                            {
-                                data: 'c_processName',
-                                width: '30%'
-                            },
-                            {
-                                data: 'c_failMode',
-                                width: '35%'
-                            },
-                            {
-                                data: null,
-                                "bSortable": false,
-                                render: function(data, type, row) {
-                                    return '<button class="btn btn-primary text-nowrap" onclick="show(' + data.c_t203_id + ')" data-bs-dismiss="modal" >登録</button>';
-                                }
-                            },
-                            {
-                                data: 'c_department',
-                                visible: false
-                            }
-                        ]
-                    });
-
-                    // Show and hide function for
-                    $('#trouble_fmea_table_lite tbody').on('click', 'td.dt-control', function() {
-                        var tr = $(this).closest('tr');
-                        var row = table.row(tr);
-
-                        if (row.child.isShown()) {
-
-                            row.child.hide();
-                            tr.removeClass('shown');
-                        } else {
-
-                            row.child(format(row.data())).show();
-                            tr.addClass('shown');
-                        }
-                    });
-
-                    // Apply the search
-                    $('#trouble_fmea_table_lite thead').on('keyup change', ".column_search", function() {
-
-                        table
-                            .column($(this).parent().index())
-                            .search(this.value)
-                            .draw();
-                    });
-
-                    // Div selector
-                    $('#departement_select').on('change', function() {
-                        table.search($(this).val()).draw();
-
-                    })
-
-                });
-
-
-
+                row.child(details(row.data())).show();
+                tr.addClass('shown');
             }
+        });
+
+        // Apply the search
+        $('#trouble_fmea_table_lite thead').on('keyup change', ".column_search", function() {
+            table
+                .column($(this).parent().index())
+                .search(this.value)
+                .draw();
+        });
+
+        // Div selector
+        $('#departement_select').on('change', function() {
+            table.search($(this).val()).draw();
 
         })
+
+    });
+
+    // UI fixer
+    $('#fmeaLite').on('show.bs.modal', function(event) {
+        $('#trouble_fmea_table_lite').width("100%")
+        $('#trouble_fmea_table_lite th').each(function() {
+            $(this).removeAttr("style")
+        });
     })
 </script>
