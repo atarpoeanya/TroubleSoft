@@ -9,15 +9,18 @@
             </div>
             <div class="modal-body">
                 <div class="col-12">
-
                     <label for="departement_select" class="col-form-label">部署</label>
                     <select class="form-control" name="" id="departement_select">
                         <option value="" selected>全部</option>
                         <option value="生技">生技</option>
                         <option value="塗装">塗装</option>
+                        <option value="組付">組付</option>
+                        <option value="生管">生管</option>
+                        <option value="品証">品証</option>
+                        <option value="プレス・溶接">プレス・溶接</option>
+                        <option value="営業">営業</option>
+                        <option value="その他"><b>その他</b></option>
                     </select>
-
-
                 </div>
                 <div class="mb-3">
                     <div id="fmeaUpper"></div>
