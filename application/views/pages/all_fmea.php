@@ -52,6 +52,7 @@
     
     $(document).ready(function() {
         getAllFmeaList();
+        $("#all_trouble_table").removeAttr("style");
     })
     window.addEventListener('beforeprint', (event) => {
         $('header, nav, .select-bar').hide();

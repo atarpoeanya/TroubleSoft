@@ -247,9 +247,12 @@
                         paging: false,
                         scrollResize: true,
                         orderCellsTop: false,
-                        // fixedHeader: true,
+                        fixedHeader: false,
                         scrollY: ($('#main-content').height() - (275 * 90 / 100)),
-                        // "sScrollX": "100%",
+                        scrollX: true,
+                        sScrollX: "100%",
+                        sScrollXInner: "100%",
+                        bScrollCollapse: true,
                         scrollCollapse: true,
                         dom: 'lrt',
                         "language": {
@@ -359,9 +362,13 @@
                         searching: true,
                         paging: false,
                         orderCellsTop: false,
-                        fixedHeader: true,
+                        fixedHeader: false,
                         scrollResize: true,
                         scrollY: ($('#main-content').height() - (275 * 90 / 100)),
+                        scrollX: true,
+                        sScrollX: "100%",
+                        sScrollXInner: "100%",
+                        bScrollCollapse: true,
                         scrollCollapse: true,
                         dom: 'lrt',
                         "language": {
@@ -456,7 +463,10 @@
                     dom: 'lrt',
                     scrollResize: true,
                     scrollY: ($('#main-content').height() - (275 * 90 / 100)),
-
+                    scrollX: true,
+                    sScrollX: "100%",
+                    sScrollXInner: "100%",
+                    bScrollCollapse: true,
                     scrollCollapse: true,
                     "language": {
                         "zeroRecords": "該当する記録は見つかりません",
@@ -801,9 +811,8 @@
             dom: "t",
             paging: false,
             orderCellsTop: true,
-            scrollX: false,
             columnDefs: [{
-                "className": "dt-center",
+                "className": "table-data text-center align-middle",
                 "targets": "_all"
             }],
             columns: [{
