@@ -693,7 +693,7 @@ class Dashboard extends CI_Controller
 
 
         //invoke modal spare parte select
-        $this->load->view('modals/partSelect_Edit');
+        $this->load->view('modals/partsSelect');
 
         //js
         // $this->load->view('js/form_js');

@@ -1,6 +1,4 @@
-<?php
-print_r($temp_spare)
-?>
+
 <script>
     {
         function durToMin() {

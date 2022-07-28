@@ -265,11 +265,11 @@ if ($this->session->flashdata('error') != '') {
 
                             <div class="spare row mt-3">
                                 <div class="col">
-                                    <a href="" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#partsSelect_edit"><?= $this->data['SPARE_LIST_BUTTON'] ?></a>
+                                    <a href="" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#partsSelect"><?= $this->data['SPARE_LIST_BUTTON'] ?></a>
                                 </div>
                                 <div class="col-12 mt-3">
                                     <div class="rounded-2 overflow-hidden p-0">
-                                        <table class="table text-center m-0 nolimit" id="equipment_parts_list_edit">
+                                        <table class="table text-center m-0 nolimit" id="equipment_parts_list">
                                             <thead>
                                                 <tr class="table-dark">
                                                     <td>部品NO</td>
