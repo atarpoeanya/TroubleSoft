@@ -120,13 +120,13 @@
         var hours = $('#hours').val()
         var minutes = $('#minutes').val()
 
-        if (minutes >= 60) {
-            $('#minutes').val(0)
-            $('#hours').val(parseInt(hours) + 1)
-        } else if (hours >= 24) {
-            $('#hours').val(0)
-            $('#days').val(parseInt(days) + 1)
-        }
+        // if (minutes >= 60) {
+        //     $('#minutes').val(minutes % 60)
+        //     $('#hours').val((isNaN(parseInt(hours)) ? $('#hours').val() : 0) + 1)
+        // } else if (hours >= 24) {
+        //     $('#hours').val(hours % 24)
+        //     $('#days').val((isNaN(parseInt(days)) ? $('#days').val() : 0) + 1)
+        // }
 
         days = isNaN(parseInt(days)) ? 0 : $('#days').val();
         hours = isNaN(parseInt(hours)) ? 0 : $('#hours').val();
