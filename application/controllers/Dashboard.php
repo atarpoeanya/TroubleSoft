@@ -652,10 +652,11 @@ class Dashboard extends CI_Controller
 
     public function edit_data_tool_fmea_view($spare_part)
     {
-        if (isset($spare_part))
-            $data['temp_spare'] = $spare_part;
-
         $data = $this->data;
+        if (isset($spare_part)){
+            $data['temp_spare'] = $spare_part;
+        }
+
         $id = $this->uri->segment(2);
         $data['items'] = $this->Troublelist_model->get_tool_fmea_id(intval($id));
         $data['division'] = [
