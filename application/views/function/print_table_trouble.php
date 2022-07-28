@@ -95,4 +95,10 @@ function f_generate_table_select($data)
         min-height: 32px;
         color: #fff;
     }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 </style>
