@@ -67,7 +67,7 @@
                     $('.emptyTab').hide()
                     var temp_spare = [];
                     <?php
-
+                    
                     $INDEX = 0;
                     foreach ($temp_spare as $item) { ?>
                         temp_spare.push(<?= $item->c_t202_id ?>);
