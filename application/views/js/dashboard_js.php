@@ -162,7 +162,7 @@
                         if (title == '発生日時') // For date input type
                             $('#search-bar').append('<th><input type="date" placeholder="検索 =" class="form-control" id="search-bar-' + title + '" /></th>');
                         else if (title == '修理時間（分）') // For separating search logic by removing column_search class
-                            $('#search-bar').append('<th><input type="number" min="1"  placeholder="検索 >=" class="form-control" id="search-bar-time" /hidden><div class="input-group"><input type="number" class="form-control" oninput="durToMinDash()" name="days" id="days" value="0" min="0"><span class="input-group-text p-1" id="">日</span><input type="number" class="form-control" oninput="durToMinDash()" name="hours" id="hours" value="0" min="0"><span class="input-group-text p-1" id="">時間</span><input type="number" class="form-control" oninput="durToMinDash()" name="minutes" id="minutes" value="0" min="0"><span class="input-group-text p-1" id="days">分</span></div></th>');
+                            $('#search-bar').append('<th><input type="number" min="1"  placeholder="検索 >=" class="form-control" id="search-bar-time" /hidden><div class="input-group"><input type="number" class="form-control timepick" oninput="durToMinDash()" name="days" id="days" value="0" min="0"><span class="input-group-text timepick" id="">日</span><input type="number" class="form-control timepick" oninput="durToMinDash()" name="hours" id="hours" value="0" min="0"><span class="input-group-text timepick" id="">時間</span><input type="number" class="form-control timepick" oninput="durToMinDash()" name="minutes" id="minutes" value="0" min="0"><span class="input-group-text timepick" id="days">分</span></div></th>');
                         else if (title.length == 0) //no title column for displaying edit buttons
                             $('#search-bar').append('<th class="button_column buttons" style="display:none; width:150px;"></th>');
                         else
@@ -812,7 +812,7 @@
             paging: false,
             orderCellsTop: true,
             columnDefs: [{
-                "className": "table-data text-center align-middle",
+                "className": "table-data text-center align-middle border-start border-end",
                 "targets": "_all"
             }],
             columns: [{
@@ -875,6 +875,33 @@
         $('#busho_fmea').on('change', function() {
             table.columns(0).search($(this).val()).draw();
         })
+
+    }
+
+    // To merge row that has the same data, didn't work as expected yet (when change busho, the merged row not appeared)
+    function MergeGridCells() {
+        var dimension_cells = new Array();
+        var dimension_col = null;
+        // var columnCount = $("#all_trouble_table tr:first th").length;
+        for (dimension_col = 0; dimension_col <= 5; dimension_col++) {
+            var first_instance = null;
+            var rowspan = 1;
+            $("#all_trouble_table").find('tr').each(function() {
+                var dimension_td = $(this).find('td:nth-child(' + dimension_col + ')');
+
+                if (first_instance === null) {
+                    // must be the first row
+                    first_instance = dimension_td;
+                } else if (dimension_td.text() === first_instance.text()) {
+                    dimension_td.attr('hidden', true);
+                    ++rowspan;
+                    first_instance.attr('rowspan', rowspan);
+                } else {
+                    first_instance = dimension_td;
+                    rowspan = 1;
+                }
+            });
+        }
     }
 
 
