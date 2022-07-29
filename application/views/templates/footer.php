@@ -7,20 +7,6 @@
   </body>
 
   <style>
-    @media (max-width: 1618px) {
-      .timepick {
-        padding-left: 5px;
-        padding-right: 5px;
-      }
-    }
-
-    @media (max-width: 1180px) {
-      .timepick {
-        padding-left: 2px;
-        padding-right: 2px;
-      }
-    }
-
     body {
       margin: 0;
       padding: 10px;

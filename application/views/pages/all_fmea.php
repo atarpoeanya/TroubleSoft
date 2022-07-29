@@ -23,7 +23,7 @@
     </div>
     <br>
     <div class="container-fluid" id="all_fmea_list">
-        <table class="table table-sm table-responsive cell-border" id="all_trouble_table">
+        <table class="table table-sm table-striped-columns table-responsive " id="all_trouble_table">
             <thead class="table-dark">
                 <tr>
                     <th></th>
@@ -49,6 +49,7 @@
 </div>
 
 <script>
+    
     $(document).ready(function() {
         getAllFmeaList();
         $("#all_trouble_table").removeAttr("style");
@@ -65,20 +66,8 @@
     body {
         padding: 0;
     }
-
     #all_fmea_list {
         padding: 0;
         margin: 0;
-    }
-
-    @media print {
-        @page {
-            size: 100%;
-            /* margin: 10%; */
-        }
-
-        html {
-            zoom: 90%;
-        }
     }
 </style>
