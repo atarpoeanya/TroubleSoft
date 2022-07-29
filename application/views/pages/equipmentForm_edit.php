@@ -1,4 +1,24 @@
 
+<?php
+if ($this->session->flashdata('error') != '') {
+?>
+    <div class="toast start-1 bottom-0 position-fixed fade" role="alert" id="errorNotif" aria-live="assertive" aria-atomic="true" style="z-index: 100;" data-bs-delay="3000">
+        <div class="toast-header text-white bg-danger">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+            </svg>
+            <strong class="me-auto fs-5">&nbsp;過去トラブルデータベース</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body fs-5">
+            登録に失敗しました
+        </div>
+    </div>
+<?php
+}
+?>
+
 <div class="d-flex justify-content-center pt-3" id="mainForm">
 
 
@@ -252,43 +272,54 @@
                                                 </tr>
                                             </thead>
 
-                                            <tbody class="table-stripped table-light">
-                                                <?php
-                                                if (property_exists($items, 'spare'))
+                                            <?php
+                                            if (property_exists($items, 'spare')) {
+                                            ?>
+                                                <tbody class="table-stripped table-light">
+                                                    <?php
                                                     foreach ($items->spare as $item) {
-                                                ?>
-                                                    <tr class="border-0">
-                                                        <td class="text-center  pointer">
-                                                            <?= $item->c_t202_id ?>
-                                                        </td>
-                                                        <td class="text-center  pointer">
-                                                            <?= $item->c_partName ?>
-                                                        </td>
-                                                        <td class="text-center  pointer">
-                                                            <?= $item->c_model ?>
-                                                        </td>
-                                                        <td style="display: none;"></td>
-                                                        <td class="text-center  pointer">
-                                                            <?= $item->c_quantity ?>
-                                                        </td>
+                                                    ?>
+                                                        <tr>
+                                                            <td class="text-center  pointer">
+                                                                <?= $item->c_t202_id ?>
+                                                            </td>
+                                                            <td class="text-center  pointer">
+                                                                <?= $item->c_partName ?>
+                                                            </td>
+                                                            <td class="text-center  pointer">
+                                                                <?= $item->c_model ?>
+                                                            </td>
+                                                            <td style="display: none;"></td>
+                                                            <td class="text-center  pointer">
+                                                                <?= $item->c_quantity ?>
+                                                            </td>
 
 
-                                                        <td style="display: none;"><a class="btn btn-primary minus">DELETE</a> </td>
-                                                    </tr>
+                                                            <td style="display: none;"><a class="btn btn-primary minus"><?= $this->data['DELETE_BUTTON'] ?></a> </td>
+                                                        </tr>
 
-                                                    <div class="old_val" hidden>
-                                                        <input type="text" class="id" value="<?= $item->c_t202_id ?>">
-                                                        <input type="text" class="old_amount" value="<?= $item->c_quantity ?>">
-                                                    </div>
+                                                        <div class="old_val" hidden>
+                                                            <input type="text" class="id" value="<?= $item->c_t202_id ?>">
+                                                            <input type="text" class="old_amount" value="<?= $item->c_quantity ?>">
+                                                        </div>
 
-                                                <?php } ?>
-                                            </tbody>
+                                                    <?php } ?>
+                                                </tbody>
+                                            <?php }  else {?>
+                                                <tbody class="table-stripped table-light"></tbody>
+                                                <?php }?>
                                             <tfoot class="table-light">
                                                 <?php
                                                 if (!property_exists($items, 'spare')) :
                                                 ?>
                                                     <tr>
                                                         <td style="height: 100px;" colspan="4" class="text-center emptyTab">
+                                                            <span><?= $this->data['EMPTY_PLACEHOLDER'] ?></span>
+                                                        </td>
+                                                    </tr>
+                                                <?php else : ?>
+                                                    <tr>
+                                                        <td style="height: 100px; display:none;" colspan="4" class="text-center emptyTab">
                                                             <span><?= $this->data['EMPTY_PLACEHOLDER'] ?></span>
                                                         </td>
                                                     </tr>
@@ -312,47 +343,34 @@
         </div>
     </div>
 
-</div>
+    <style>
+        body {
+            background-color: #F5F5F5
+        }
 
+        span p {
+            margin-bottom: 0;
+        }
 
+        .card-body {
+            background-color: #F4F5F6;
+        }
 
+        .sub-header {
+            top: 30px;
+            left: 40px;
+            background-color: #F4F5F6;
+            width: max-content;
+        }
+    </style>
 
+    <script>
+        $('input, textarea, select').on('click', function() {
+            $(this).removeClass('is-invalid')
+            $(this).parent().find('.invalid-feedback').hide()
+        })
 
-
-
-<style>
-    body {
-        background-color: #F5F5F5;
-    }
-
-    .card-body {
-        background-color: #F4F5F6;
-    }
-
-    .sub-header {
-        top: 30px;
-        left: 40px;
-        background-color: #F4F5F6;
-        width: max-content;
-    }
-
-
-    form .form-control {
-
-        /* background-color: #EAECF4; */
-
-    }
-</style>
-
-<script>
-    $('input, textarea, select').on('click', function() {
-        $(this).removeClass('is-invalid')
-        $(this).parent().find('.invalid-feedback').hide()
-    })
-
-
-
-    $(document).ready(function() {
-        minToDur()
-    });
-</script>
+        $(document).ready(function() {
+            // $("#errorNotif").toast("show");
+        });
+    </script>

@@ -1,3 +1,23 @@
+<?php
+if ($this->session->flashdata('error') != '') {
+?>
+    <div class="toast start-1 bottom-0 position-fixed fade" role="alert" id="errorNotif" aria-live="assertive" aria-atomic="true" style="z-index: 100;" data-bs-delay="3000">
+        <div class="toast-header text-white bg-danger">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+            </svg>
+            <strong class="me-auto fs-5">&nbsp;過去トラブルデータベース</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body fs-5">
+            登録に失敗しました
+        </div>
+    </div>
+<?php
+}
+?>
+
 <div class="d-flex justify-content-center pt-3" id="mainForm">
     <div class="row">
         <div class="col">
@@ -181,20 +201,26 @@
 
                                                         <td style="display: none;"><a class="btn btn-primary minus">DELETE</a> </td>
                                                     </tr>
-                                            </tbody>
 
-                                        <?php } ?>
-                                        <tfoot class="table-light">
-                                            <?php
-                                            if (!property_exists($items, 'spare')) :
-                                            ?>
-                                                <tr>
-                                                    <td style="height: 100px;" colspan="4" class="text-center emptyTab">
-                                                        <span><?= $this->data['EMPTY_PLACEHOLDER'] ?></span>
-                                                    </td>
-                                                </tr>
-                                            <?php endif; ?>
-                                        </tfoot>
+                                                <?php } ?>
+                                            </tbody>
+                                            <tfoot class="table-light">
+                                                <?php
+                                                if (!property_exists($items, 'spare')) :
+                                                ?>
+                                                    <tr class="text-white">
+                                                        <td style="height: 100px;" colspan="4" class="text-center emptyTab">
+                                                            <span><?= $this->data['EMPTY_PLACEHOLDER'] ?></span>
+                                                        </td>
+                                                    </tr>
+                                                <?php else : ?>
+                                                    <tr>
+                                                        <td style="height: 100px;" colspan="4" class="text-center emptyTab" style="display: none;">
+                                                            <span><?= $this->data['EMPTY_PLACEHOLDER'] ?></span>
+                                                        </td>
+                                                    </tr>
+                                                <?php endif; ?>
+                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>

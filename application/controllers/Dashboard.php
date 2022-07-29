@@ -613,7 +613,8 @@ class Dashboard extends CI_Controller
         $this->load->view('modals/partSelect_Edit', $data);
 
         //js
-        $this->load->view('js/form_js');
+        // $this->load->view('js/form_js');
+        $this->load->view('js/form_edit_js', $data);
     }
 
 
@@ -644,10 +645,25 @@ class Dashboard extends CI_Controller
         $this->form_validation->set_rules('fail_mech', '13', 'required|max_length[140]');
         $this->form_validation->set_rules('response', '14', 'required|max_length[140]');
 
-        
-
         if ($this->form_validation->run() == FALSE) {
-            $this->edit_data_tool_view();
+            $savedata = array(
+                'error'         =>  validation_errors(),
+                'isEdit'       =>  true,
+                'part_info'     =>  $this->input->post('spareParts', true)
+
+            );
+            $this->session->set_flashdata($savedata);
+
+            if (!empty($savedata['part_info'])) {
+
+                $data['temp_spare'] = $this->Troublelist_model
+                    ->get_spareparts_list();
+            }
+
+            else 
+                $data['temp_spare'] = null;
+
+            $this->edit_data_tool_view($data['temp_spare']);
         } else {
             $data = $this->do_upload();
             $this->Troublelist_model->update_data_tool($data);
