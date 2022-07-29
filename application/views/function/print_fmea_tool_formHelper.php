@@ -4,7 +4,8 @@ function f_generate_table_select($data)
 ?>
     <!-- Probably generate this with function -->
     <p class="sub-header-2 position-relative">
-        &nbsp;SECTION_1_<b>設備の内容</b>&nbsp;</p>
+        <b><?= $data['EQUIPMENT_SECTION_2_F'] ?></b>&nbsp;
+    </p>
     <div class="row border-top p-3 rounded my-auto">
 
 
@@ -20,9 +21,9 @@ function f_generate_table_select($data)
 
 
     <p class="sub-header-2 position-relative">
-        &nbsp;SECTION_3_<b>影響</b>&nbsp;</p>
+        <b><?= $data['SECTION_3_F'] ?></b>&nbsp;
+    </p>
     <div class="row border-top p-3 rounded my-auto">
-
         <div class="col-6 mt-3">
             <label for="start_day" class="form-label"><?= $data['EQUIPMENT_MECHANISM_F'] ?></label>
             <textarea class="form-control" cols="30" rows="6" readonly><?= $data['fmea_tool']->c_failMech ?></textarea>
@@ -43,7 +44,8 @@ function f_generate_table_select($data)
     </div>
 
     <p class="sub-header-2 position-relative">
-        &nbsp;SECTION_4_<b>現在の工程管理</b>&nbsp;</p>
+        <b><?= $data['SECTION_4'] ?></b>&nbsp;
+    </p>
     <div class="row border-top p-3 rounded my-auto">
 
         <div class="col-lg-5 col-5 mt-3">
@@ -58,22 +60,23 @@ function f_generate_table_select($data)
             <label for="start_day" class="form-label"><?= $data['EQUIPMENT_MONTH_F'] ?></label>
             <input required type="text" class="form-control" readonly value="<?= $data['fmea_tool']->c_month ?>">
         </div>
-        <div class="col-12">
-            <div class="col mt-3">
-                <label for="start_day" class="form-label"><?= $data['EQUIPMENT_PREVENTION_F'] ?></label>
-                <textarea class="form-control" cols="30" rows="6" readonly><?= $data['fmea_tool']->c_prevention ?></textarea>
-            </div>
-            <div class="col mt-3">
-                <label for="start_day" class="form-label"><?= $data['EQUIPMENT_DETECTION_F'] ?></label>
-                <textarea class="form-control" cols="30" rows="6" readonly><?= $data['fmea_tool']->c_detection ?></textarea>
-            </div>
+
+        <div class="col-6 mt-3">
+            <label for="start_day" class="form-label"><?= $data['EQUIPMENT_PREVENTION_F'] ?></label>
+            <textarea class="form-control" cols="30" rows="6" readonly><?= $data['fmea_tool']->c_prevention ?></textarea>
         </div>
+        <div class="col-6 mt-3">
+            <label for="start_day" class="form-label"><?= $data['EQUIPMENT_DETECTION_F'] ?></label>
+            <textarea class="form-control" cols="30" rows="6" readonly><?= $data['fmea_tool']->c_detection ?></textarea>
+        </div>
+
 
     </div>
 
 
     <p class="sub-header-2 position-relative">
-        &nbsp;SECTION_5_<b>対策</b>&nbsp;</p>
+        <b><?= $data['SECTION_5'] ?></b>&nbsp;
+    </p>
     <div class="row border-top p-3 rounded my-auto">
 
         <div class="col-6 mt-3">
@@ -93,12 +96,11 @@ function f_generate_table_select($data)
         <div class="col  p-0 rounded-2 overflow-hidden mb-2">
             <table class="table text-center m-0" id="equipment_parts_list_fmea">
                 <thead>
-
                     <tr class="table-dark">
-                        <td>部品NO</td>
-                        <td>部品名</td>
-                        <td>型式</td>
-                        <td>数量</td>
+                        <th>部品NO</th>
+                        <th>部品名</th>
+                        <th>型式</th>
+                        <th>数量</th>
                     </tr>
                 </thead>
                 <tbody class="table-striped table-light">
@@ -134,7 +136,7 @@ function f_generate_table_select($data)
                     ?>
                         <tr>
                             <td style="height: 100px;" colspan="4" class="text-center emptyTab">
-                                <span>EMPTY</span>
+                                <span><?= $data['EMPTY_PLACEHOLDER'] ?></span>
                             </td>
                         </tr>
                     <?php endif; ?>

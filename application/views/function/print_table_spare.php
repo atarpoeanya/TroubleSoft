@@ -43,7 +43,7 @@ function f_generate_table_select($data)
                 break;
 
             default:
-                array_push($head_name, 'MISSING');
+                // array_push($head_name, 'MISSING');
                 break;
         }
     }
@@ -51,7 +51,7 @@ function f_generate_table_select($data)
 ?>
 
     <div class="table-responsive table-wrapper border">
-    <div class="d-flex p-2 border-bottom">
+        <div class="d-flex p-2 border-bottom">
             <div class="my-auto">件数 :&nbsp;</div>
             <div class="my-auto" id="amount-sum"><b><?= count($data['sparePart']) ?></b></div>
         </div>
@@ -96,19 +96,23 @@ function f_generate_table_select($data)
                                 $id = $value;
                         ?>
 
-                                <td class=" table-data text-center align-middle border-end  pointer col ID" style="display:none">
+                                <td class=" table-data text-center align-middle border-end   col ID" style="display:none">
                                     <?= $id ?>
                                 </td>
                             <?php
+                            } elseif ($key == 'c_createdDate') {
+                            ?>
+                                <!-- do nothing -->
+                            <?php
                             } elseif ($key == 'c_quantity') {
                             ?>
-                                <td class=" table-data text-center align-middle border-end  pointer col amount">
+                                <td class=" table-data text-center align-middle border-end   col amount">
                                     <?= $value ?>
                                 </td>
                             <?php
                             } else {
                             ?>
-                                <td class=" table-data text-center align-middle border-end  pointer col">
+                                <td class=" table-data text-center align-middle border-end   col">
                                     <?= $value ?>
                                 </td>
 
@@ -116,9 +120,9 @@ function f_generate_table_select($data)
                             }
                         }
                         ?>
-                        <td class=" table-data text-center align-middle pointer col-md-2 button_column text-nowrap" style="display: none;max-width:150px;width:150px;">
+                        <td class=" table-data text-center align-middle  col-md-2 button_column text-nowrap" style="display: none;max-width:150px;width:150px;">
                             <a class="btn-block btn btn-primary modify-button" onclick="editSpare_populate(this)"><?= $data['UPDATE_BUTTON'] ?></a>
-                            
+
                             <a class="btn-block btn btn-danger modify-button delete" onclick="event.cancelBubble=true; deleteData_sparepart(<?= $item->c_t202_id ?>)"><?= $data['DELETE_BUTTON'] ?></a>
                         </td>
 
@@ -134,10 +138,6 @@ function f_generate_table_select($data)
 }
 ?>
 <style>
-    .pointer:hover {
-        cursor: pointer;
-    }
-
     .table-wrapper {
         background: #fff;
         border-radius: 5px;
@@ -153,8 +153,6 @@ function f_generate_table_select($data)
     div.dataTables_wrapper {
         width: 100%;
     }
-
-    
 </style>
 
 <script>
