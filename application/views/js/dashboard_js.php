@@ -27,16 +27,12 @@
         }
         ?>
 
-
-
     }
 
 
     // Responsive hack, can be delete if unedeed
     //PROBLEM: on browser resize the table on dashboard wont resize too making it either smaller or bigger than the actual space.
     //Might be because DataTable
-
-
 
     $(window).resize(function() {
         // $(window).scrollTop($('#dashboard').height());
@@ -51,7 +47,6 @@
         }
 
     })
-
 
     // 変更 Button toggle
     // Also work as colum resizing,
@@ -75,8 +70,6 @@
             $('.dataTables_empty').attr('colspan', function(i, rs) {
                 return (parseInt(rs) - 1);
             })
-
-
     }
 
     // Normal button switched for choosing the displayed table, using class to manipulate the colors
@@ -84,7 +77,6 @@
     function category_switcher(el) {
         // Get selected A
         var a = $(el).prop('name')
-
 
         switch (a) {
             case '設備':
@@ -100,14 +92,11 @@
                 $("#real").removeClass('bg-white')
                 $("#fmea-s").removeClass('active')
 
-
-
                 break;
             case '予備品':
                 get_sparepartlist();
 
                 $("#real, #fmea-s").hide()
-
 
                 break;
             case '品質':
@@ -117,21 +106,39 @@
             default:
                 break;
         }
-
-
-
     }
 
     function adjust_table() {
         $('table').DataTable().columns.adjust();
     }
 
-
     // 設備 Table Constructor -> Via ajax dashboard/get_troubleList
     // The search bar is dataTables, work on surface level by hiding loaded element
 
+    function durToMinDash() {
+        var days = $('#days').val()
+        var hours = $('#hours').val()
+        var minutes = $('#minutes').val()
 
+        // if (minutes >= 60) {
+        //     $('#minutes').val(minutes % 60)
+        //     $('#hours').val((isNaN(parseInt(hours)) ? $('#hours').val() : 0) + 1)
+        // } else if (hours >= 24) {
+        //     $('#hours').val(hours % 24)
+        //     $('#days').val((isNaN(parseInt(days)) ? $('#days').val() : 0) + 1)
+        // }
 
+        days = isNaN(parseInt(days)) ? 0 : $('#days').val();
+        hours = isNaN(parseInt(hours)) ? 0 : $('#hours').val();
+        minutes = isNaN(parseInt(minutes)) ? 0 : $('#minutes').val();
+
+        console.log(days + '  ' + hours + '  ' + minutes)
+
+        var duration = parseInt(days) * 1440 + parseInt(hours) * 60 + parseInt(minutes) * 1
+
+        $('#search-bar-time').val(duration)
+        $('#search-bar-time').click()
+    }
 
     function get_troubleList() {
         // Toggle Button
@@ -155,7 +162,7 @@
                         if (title == '発生日時') // For date input type
                             $('#search-bar').append('<th><input type="date" placeholder="検索 =" class="form-control" id="search-bar-' + title + '" /></th>');
                         else if (title == '修理時間（分）') // For separating search logic by removing column_search class
-                            $('#search-bar').append('<th><input type="number" min="1" pattern="[0-9]*" placeholder="検索 >=" class="column_search form-control" id="search-bar-time" /></th>');
+                            $('#search-bar').append('<th><input type="number" min="1"  placeholder="検索 >=" class="form-control" id="search-bar-time" /hidden><div class="input-group"><input type="number" class="form-control" oninput="durToMinDash()" name="days" id="days" value="0" min="0"><span class="input-group-text p-1" id="">日</span><input type="number" class="form-control" oninput="durToMinDash()" name="hours" id="hours" value="0" min="0"><span class="input-group-text p-1" id="">時間</span><input type="number" class="form-control" oninput="durToMinDash()" name="minutes" id="minutes" value="0" min="0"><span class="input-group-text p-1" id="days">分</span></div></th>');
                         else if (title.length == 0) //no title column for displaying edit buttons
                             $('#search-bar').append('<th class="button_column buttons" style="display:none; width:150px;"></th>');
                         else
@@ -175,30 +182,43 @@
                             },
                             {
                                 bSortable: true,
-                                width: "7%",
-                                render: function(data, type, row) {
-                                    var days = Math.floor(data / 1440)
-                                    var rem_days = data % 1440
-                                    var hours = Math.floor(rem_days / 60)
-                                    var minutes = data - days * 1440 - hours * 60
-                                    return days + '日 ' + hours + '時間 ' + minutes + '分';
+                                width: "15%",
+                                render: {
+                                    "display": function(data, type, row) {
+                                        var result = ''
+
+                                        var days = Math.floor(data / 1440)
+                                        var rem_days = data % 1440
+                                        var hours = Math.floor(rem_days / 60)
+                                        var minutes = data - days * 1440 - hours * 60
+
+                                        if (days != 0) {
+                                            result += days + '日 '
+                                        }
+
+                                        if (hours != 0) {
+                                            result += hours + '時間 '
+                                        }
+
+                                        if (minutes != 0) {
+                                            result += minutes + '分'
+                                        }
+
+                                        return result;
+                                    }
                                 }
                             },
                             {
                                 bSortable: true,
-                                width: "7%"
+                                width: "6%"
                             },
                             {
                                 bSortable: true,
-                                width: "7%"
+                                width: "6%"
                             },
                             {
                                 bSortable: true,
-                                width: "7%"
-                            },
-                            {
-                                bSortable: true,
-                                width: "15%"
+                                width: "6%"
                             },
                             {
                                 bSortable: true,
@@ -206,11 +226,15 @@
                             },
                             {
                                 bSortable: true,
-                                width: "7%"
+                                width: "15%"
                             },
                             {
                                 bSortable: true,
-                                width: "7%"
+                                width: "6%"
+                            },
+                            {
+                                bSortable: true,
+                                width: "6%"
                             },
                             {
                                 bSortable: false,
@@ -223,21 +247,21 @@
                         paging: false,
                         scrollResize: true,
                         orderCellsTop: false,
-                        // fixedHeader: true,
+                        fixedHeader: false,
                         scrollY: ($('#main-content').height() - (275 * 90 / 100)),
-                        // "sScrollX": "100%",
+                        scrollX: true,
+                        sScrollX: "100%",
+                        sScrollXInner: "100%",
+                        bScrollCollapse: true,
                         scrollCollapse: true,
                         dom: 'lrt',
                         "language": {
                             "zeroRecords": "該当する記録は見つかりません",
                         },
-
                     });
-
 
                     // Apply the search
                     $('#search-bar').on('input change', ".column_search", function() {
-
                         table
                             .column($(this).parent().index())
                             .search(this.value)
@@ -263,19 +287,12 @@
                             event.keyCode == 8 || event.keyCode == 46
                     })
 
-
-
-                    $('#search-bar-time').on('input change', function() {
+                    $('#search-bar-time').on('click', function() {
                         if (this.value)
                             $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
-                                var value = $('#search-bar-time').val().replace(
-                                    /[\uff01-\uff5e]/g,
-                                    function(ch) {
-                                        return String.fromCharCode(ch.charCodeAt(0) - 0xfee0);
-                                    }
-                                );
-                                var time = parseInt(data[1]);
-                                console.log(time)
+                                var value = parseInt($('#search-bar-time').val())
+
+                                var time = data[1];
 
                                 if (isNaN(value) || time >= value) {
                                     return true;
@@ -284,14 +301,11 @@
                                 }
                             });
 
-
                         table.draw();
                         $('#amount-sum').html($('.data-row').not(':hidden').length);
                         // Special search logic to show all data that greater than inputed value for 修理時間（分
 
                     });
-
-
                 });
             }
         });
@@ -304,29 +318,18 @@
         // Toggle Button
         $('#new_spareparts').hide();
         $('#new_trouble').show();
-
         $('#list').children().remove()
-
-
 
         $.ajax({
             url: "<?php echo base_url(); ?>dashboard/get_trouble_list__tool_fmea",
             success: function(response) {
                 $("#list").html(response);
-
-
             },
             complete: function() {
-
-
-
-
                 $(document).ready(function() {
                     // Setup - add a text input to each cell
                     $('#trouble_fmea_table thead tr:eq(1) th').each(function() {
                         var title = $(this).text().trim();
-
-
 
                         if (title.length == 0)
                             $('#search-bar').append('<th class="button_column buttons" style="display:none;width:150px; max-width:150px;"></th>');
@@ -359,9 +362,13 @@
                         searching: true,
                         paging: false,
                         orderCellsTop: false,
-                        fixedHeader: true,
+                        fixedHeader: false,
                         scrollResize: true,
                         scrollY: ($('#main-content').height() - (275 * 90 / 100)),
+                        scrollX: true,
+                        sScrollX: "100%",
+                        sScrollXInner: "100%",
+                        bScrollCollapse: true,
                         scrollCollapse: true,
                         dom: 'lrt',
                         "language": {
@@ -381,10 +388,6 @@
                     });
 
                 });
-
-
-
-
             }
         });
     }
@@ -396,15 +399,13 @@
         $('#new_trouble').hide();
         $('#new_spareparts').show();
         // Toggle Div
-
         $('#list').children().remove()
-
 
         $.ajax({
             url: "<?php echo base_url(); ?>dashboard/get_sparepart_list",
             success: function(response) {
                 $("#list").html(response);
-                $('#search-bar-spare').append('<th colspan="10" class=" pe-3"><input class="form-control border-primary color-primary" type="text" id="search-bar" placeholder="検索 ="></th>');
+                $('#search-bar-spare').append('<th colspan="10" class=" pe-3"><input class="form-control color-primary" type="text" id="search-bar" placeholder="検索 ="></th>');
 
             },
             complete: function() {
@@ -427,13 +428,23 @@
                             bSortable: true
                         },
                         {
-                            bSortable: true
+                            bSortable: true,
+                            render: {
+                                "display": function(data, type, row) {
+                                    return parseFloat(data);
+                                }
+                            }
                         },
                         {
-                            bSortable: true
+                            bSortable: true,
                         },
                         {
-                            bSortable: true
+                            bSortable: true,
+                            render: {
+                                "display": function(data, type, row) {
+                                    return parseFloat(data).toLocaleString('ja-JP-u-ca-japanese') + ' 円';
+                                }
+                            }
                         },
                         {
                             bSortable: true
@@ -452,7 +463,10 @@
                     dom: 'lrt',
                     scrollResize: true,
                     scrollY: ($('#main-content').height() - (275 * 90 / 100)),
-
+                    scrollX: true,
+                    sScrollX: "100%",
+                    sScrollXInner: "100%",
+                    bScrollCollapse: true,
                     scrollCollapse: true,
                     "language": {
                         "zeroRecords": "該当する記録は見つかりません",
@@ -480,9 +494,6 @@
 
         });
     }
-
-
-
 
     function deleteData_tool($id) {
 
@@ -538,7 +549,6 @@
             });
     }
 
-
     function deleteData_sparepart($id) {
 
         var status = $.ajax({
@@ -571,8 +581,6 @@
                                 // DELETE CANCELLED
                             }
                         });
-
-
                 } else {
                     // Delete data from table
                     var conf = swal({
@@ -605,9 +613,7 @@
 
         // Make stock -> 0
 
-
     }
-
 
     function editSpare_populate(el) {
         $id = $(el).parent().siblings('.ID').text().trim()
@@ -700,8 +706,6 @@
                             default:
                                 break;
                         }
-
-
                     }
                 }
             },
@@ -721,7 +725,6 @@
             "c_quantity": $('#quantity').val(),
             "c_unit": $('#unit').val(),
             "c_price": $('#price').val(),
-
             'c_storage': $('#storage').val(),
             'c_arrangement': $('#arra').val(),
         }
@@ -770,22 +773,15 @@
                             case 9:
                                 $('#arra').addClass('is-invalid')
                                 break;
-
-
                             default:
                                 break;
                         }
-
-
                     }
-
                 }
             }
         });
         event.preventDefault();
-
     }
-
 
     // ON FOCUS REMOVE CLASS (Probably solution to the double loop)
 
@@ -803,68 +799,83 @@
     }
 
     function getAllFmeaList() {
-        $.ajax({
-            url: "<?php echo base_url(); ?>dashboard/get_all_fmea_list_modular?department=" + $('#busho_fmea').val(),
-            success: function(response) {
-                $("#all_fmea_list").html(response);
-
+        var table = $('#all_trouble_table').DataTable({
+            ajax: {
+                url: '<?= base_url() ?>dashboard/get_tool_fmea_list',
+                dataSrc: ''
             },
-            complete: function() {
-                var table = $('#all_trouble_table').DataTable({
-                    responsive: true,
-                    ordering: false,
-                    info: false,
-                    searching: false,
-                    paging: false,
-                    // orderCellsTop: true,
-                    columns: [{
-                        "width": "3%"
-                    }, {
-                        "width": "3%"
-                    }, {
-                        "width": "8%"
-                    }, {
-                        "width": "8%"
-                    }, {
-                        "width": "12%"
-                    }, {
-                        "width": "6%"
-                    }, {
-                        "width": "6%"
-                    }, {
-                        "width": "6%"
-                    }, {
-                        "width": "6%"
-                    }, {
-                        "width": "3%"
-                    }, {
-                        "width": "3%"
-                    }, {
-                        "width": "12%"
-                    }, {
-                        "width": "12%"
-                    }, {
-                        "width": "6%"
-                    }, {
-                        "width": "6%"
-                    }, ],
-                    scrollX: false,
-                    "language": {
-                        "zeroRecords": "該当する記録は見つかりません",
-                    }
-                });
+            responsive: true,
+            ordering: false,
+            info: false,
+            searching: true,
+            dom: "t",
+            paging: false,
+            orderCellsTop: true,
+            columnDefs: [{
+                "className": "table-data text-center align-middle",
+                "targets": "_all"
+            }],
+            columns: [{
+                    data: "c_department",
+                    visible: false
+                },
+                {
+                    data: "c_facility",
+                    width: "3%"
+                }, {
+                    data: "c_unit",
+                    width: "3%"
+                }, {
+                    data: "c_processName",
+                    width: "8%"
+                }, {
+                    data: "c_failMode",
+                    width: "8%"
+                }, {
+                    data: "c_failImpact",
+                    width: "12%"
+                }, {
+                    data: "c_lineEffect",
+                    width: "6%"
+                }, {
+                    data: "c_specialChar",
+                    width: "6%"
+                }, {
+                    data: "c_failMech",
+                    width: "6%"
+                }, {
+                    data: "c_prevention",
+                    width: "6%"
+                }, {
+                    data: "c_period",
+                    width: "3%"
+                }, {
+                    data: "c_month",
+                    width: "3%"
+                }, {
+                    data: "c_detection",
+                    width: "12%"
+                }, {
+                    data: "c_counterPlan",
+                    width: "12%"
+                }, {
+                    data: "c_picSchedule",
+                    width: "6%"
+                }, {
+                    data: "c_measure",
+                    width: "6%"
+                },
+            ],
 
-
-                // var table = $('#all_trouble_table').rowMerge({
-                //     excludedColumns: [1, 2, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-                // });
+            "language": {
+                "zeroRecords": "該当する記録は見つかりません",
             }
         });
+
+        $('#busho_fmea').on('change', function() {
+            table.columns(0).search($(this).val()).draw();
+        })
     }
-
-
-
-
 
 
     document.addEventListener("DOMContentLoaded", DATA.onLoad)

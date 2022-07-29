@@ -29,15 +29,9 @@ function f_generate_table_select($data)
             </thead>
             <tbody id="bodys">
                 <?php
-
-
                 foreach ($data['sparePart'] as $item) {
-
                 ?>
-
                     <tr class="data-row">
-
-
                         <td class="kanjifont table-data text-center align-middle border-right border-left pointer col-md-3 ID">
                             <?= $item->c_t202_id ?>
                         </td>
@@ -85,10 +79,6 @@ function f_generate_table_select($data)
 ?>
 <script>
     $(document).ready(function() {
-
-
-
-
         if ($('table').hasClass('nolimit'))
             $('.plus, .minus').removeClass('disabled')
     })
@@ -110,7 +100,7 @@ function f_generate_table_select($data)
         if ($('#foots tr').length == 0) {
             partRow.addClass('table-success')
 
-            $('#foots:last-child').append('<tr class="' + partDetails[0] + '"> <td>' + partDetails[0] + '</td> <td>' + partDetails[1] + '</td> <td>' + partDetails[2] + '</td><td></td> <td>' + 1 + '</td> <td><a class="btn btn-primary minus">DELETE</a> </td></tr>')
+            $('#foots:last-child').append('<tr class="' + partDetails[0] + '"> <td>' + partDetails[0] + '</td> <td>' + partDetails[1] + '</td> <td>' + partDetails[2] + '</td><td></td> <td>' + 1 + '</td> <td><a class="btn btn-primary minus"><?= $this->data['DELETE_BUTTON'] ?></a> </td></tr>')
             the_button.parents().siblings('.amount-added').html(1)
             if (parseInt($('#foots:last-child').find("td:eq(4)").text().trim()) >= parseInt(partDetails[4]))
                 the_button.addClass('disabled')
@@ -150,18 +140,14 @@ function f_generate_table_select($data)
                 })
             } else {
                 partRow.addClass('table-success')
-                $('#foots:last-child').prepend('<tr class="' + partDetails[0] + '"><td>' + partDetails[0] + '</td> <td>' + partDetails[1] + '</td> <td>' + partDetails[2] + '</td> <td></td><td>' + 1 + '</td> <td><a class="btn btn-primary minus">DELETE</a></td> </tr>')
+                $('#foots:last-child').prepend('<tr class="' + partDetails[0] + '"><td>' + partDetails[0] + '</td> <td>' + partDetails[1] + '</td> <td>' + partDetails[2] + '</td> <td></td><td>' + 1 + '</td> <td><a class="btn btn-primary minus"><?= $this->data['DELETE_BUTTON'] ?></a></td> </tr>')
                 the_button.parents().siblings('.amount-added').html(1)
                 if (!$('table').hasClass('nolimit'))
                     if (parseInt(partDetails[3]) == 1 || parseInt(partDetails[3]) == 0) {
                         the_button.addClass('disabled')
                     }
-
             }
-
-
         }
-
     })
 
     // Outirght remove
@@ -170,28 +156,23 @@ function f_generate_table_select($data)
         $(this).parents('tr').remove()
 
         $('#bodys').find('tr').each(function() {
-                            // $(this).find("td:eq(0)").text().trim();
-                            if (id == $(this).find("td:eq(0)").text().trim()){
-                                $(this).removeClass('table-success')
-                                $(this).find("td:eq(4)").html('')
-                            }
-                        })
+            // $(this).find("td:eq(0)").text().trim();
+            if (id == $(this).find("td:eq(0)").text().trim()) {
+                $(this).removeClass('table-success')
+                $(this).find("td:eq(4)").html('')
+            }
+        })
         // check(id)
-
-
-
     })
 
     $('.minus').click(function() {
         var id = $(this).parents('tr').find('.ID').text().trim()
         check(id)
-
     })
 
     function check(id) {
         var flag = 0;
         var itemId = ''
-
 
         $('#foots').find('tr').each(function() {
             itemId = $(this).find("td:eq(0)").text().trim();
@@ -200,7 +181,6 @@ function f_generate_table_select($data)
         })
         if (flag == 1) {
             $('#bodys').find('tr').each(function() {
-
                 // $(this).find("td:eq(0)").text().trim();
                 if (id == $(this).find("td:eq(0)").text().trim()) {
                     $(this).find("td:eq(5)").children('.plus').removeClass('disabled')
@@ -222,12 +202,11 @@ function f_generate_table_select($data)
                             }
                         })
 
-
                     } else {
                         $(this).remove()
                         $('#bodys').find('tr').each(function() {
                             // $(this).find("td:eq(0)").text().trim();
-                            if (id == $(this).find("td:eq(0)").text().trim()){
+                            if (id == $(this).find("td:eq(0)").text().trim()) {
                                 $(this).removeClass('table-success')
                                 $(this).find("td:eq(4)").html('')
                             }

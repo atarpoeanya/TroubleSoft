@@ -146,6 +146,9 @@
                                     case 'c_t202_id':
 
                                         break;
+                                    case 'c_createdDate':
+
+                                        break;
                                     case 'c_purchaseDate':
                                         $thead = '購入日';
                                         break;
@@ -178,7 +181,7 @@
                                         $thead = 'MISSING';
                                         break;
                                 }
-                                if ($thead !== 'c_t202_id') {
+                                if ($thead != 'c_t202_id' && $thead != 'c_createdDate') {
                             ?>
                                     <th class=" table-head text-center border-start">
                                         <?= $thead ?>
@@ -188,7 +191,7 @@
 
                                 } else {
                                 ?>
-                                    <th class="id text-center border-start" style="display:none"></th>
+                                    <th class="text-center border-start" style="display:none"></th>
                             <?php
                                 }
                             }
@@ -202,9 +205,18 @@
                                 <tr>
                                     <?php
                                     foreach ($num as $key => $value) {
-                                        if ($key != 'c_t202_id') {
+                                        if ($key == 'c_createdDate') {
                                     ?>
-                                            <td class="text-center  pointer">
+                                        <?php
+                                        } elseif ($key == 'c_price') {
+                                        ?>
+                                            <td class="text-center">
+                                                <?= preg_replace("/\B(?=(\d{3})+(?!\d))/", ",", floatval($value)) . ' 円' ?>
+                                            </td>
+                                        <?php
+                                        } elseif ($key != 'c_t202_id' && $key != 'c_price') {
+                                        ?>
+                                            <td class="text-center">
                                                 <?= $value ?>
                                             </td>
                                     <?php
@@ -231,5 +243,24 @@
 <style>
     small {
         font-weight: bold;
+    }
+
+    @media print {
+        table {
+            page-break-inside: auto
+        }
+
+        tr {
+            page-break-inside: avoid;
+            page-break-after: auto
+        }
+
+        thead {
+            display: table-header-group
+        }
+
+        tfoot {
+            display: table-footer-group
+        }
     }
 </style>

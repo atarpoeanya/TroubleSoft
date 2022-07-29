@@ -24,7 +24,7 @@ if ($this->session->flashdata('error') != '') {
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title ps-2 pt-2">FMEA FORM</h2>
-                    <form action="/edit_Equipment_fmea/" method="post" class="mt-4 p-4 col mainForm" autocomplete="off" id="equipForm" enctype="multipart/form-data" novalidate>
+                    <form action="<?= base_url() ?>edit_Equipment_fmea/<?= $items->c_t203_id ?>/post" method="post" class="mt-4 p-4 col mainForm" autocomplete="off" id="equipForm" enctype="multipart/form-data" novalidate>
                         <!-- ID -->
                         <input type="hidden" name="id" id="setsubiId" value="<?= $items->c_t203_id ?>">
                         <!-- For Spare part [Id, Amount] -->
@@ -37,13 +37,19 @@ if ($this->session->flashdata('error') != '') {
                             <div class="row row border-top py-3">
 
                                 <div class="col-4 pt-3">
-                                    <label for="busho" class="form-label"><?= $this->data['EQUIPMENT_DEPARTMENT_F'] ?></label>
-                                    <span class="must form-check-label">必須</span>
-                                    <select class="form-select" name="部署" id="busho" required>
+                                    <label class="form-label" for="busho"><?= $this->data['EQUIPMENT_DEPARTMENT_F'] ?></label>
+                                    <?php if (trim(set_value('部署')) != trim($items->c_department) && set_value('部署') != '') { ?>
+                                        <span class="badge bg-success">更新</span>
+                                    <?php } ?>
+                                    <select class="form-select <?= (form_error('部署') ? 'is-invalid' : ''); ?>" name="部署" id="busho" required>
                                         <?php
                                         foreach ($division as $d) :
-                                            if ($d == $items->c_department) : ?>
+                                            if ($d == $items->c_department && ($items->c_department == set_value('部署') || set_value('部署') == '')) : ?>
                                                 <option value="<?= $d ?>" selected><?= $d ?></option>
+
+                                            <?php elseif ($d == set_value('部署') && ($items->c_department != set_value('部署') || set_value('部署') != '')) : ?>
+                                                <option value="<?= $d ?>" selected><?= $d ?></option>
+
                                             <?php else : ?>
                                                 <option value="<?= $d ?>"><?= $d ?></option>
                                         <?php endif;
@@ -52,12 +58,19 @@ if ($this->session->flashdata('error') != '') {
                                 </div>
 
                                 <div class="col-4 pt-3">
-                                    <label for="setsubi" class="form-label"><?= $this->data['EQUIPMENT_FACILITY_F'] ?></label>
-                                    <select class="form-select" name="設備" id="setsubi" required>
+                                    <label class="form-label" for="setsubi"><?= $this->data['EQUIPMENT_FACILITY_F'] ?></label>
+                                    <?php if (trim(set_value('設備')) != trim($items->c_facility) && set_value('設備') != '') { ?>
+                                        <span class="badge bg-success">更新</span>
+                                    <?php } ?>
+                                    <select class="form-select <?= (form_error('設備') ? 'is-invalid' : ''); ?>" name="設備" id="setsubi" required>
                                         <?php
                                         foreach ($tools_name as $t) :
-                                            if ($t == $items->c_facility) : ?>
+                                            if ($t == $items->c_facility && ($items->c_facility == set_value('設備') || set_value('設備') == '')) : ?>
                                                 <option value="<?= $t ?>" selected><?= $t ?></option>
+
+                                            <?php elseif ($t == set_value('設備') && ($items->c_facility != set_value('設備') || set_value('設備') != '')) : ?>
+                                                <option value="<?= $t ?>" selected><?= $t ?></option>
+
                                             <?php else : ?>
                                                 <option value="<?= $t ?>"><?= $t ?></option>
                                         <?php endif;
@@ -66,11 +79,18 @@ if ($this->session->flashdata('error') != '') {
                                 </div>
                                 <div class="col-4 pt-3">
                                     <label class="form-label" for="gouki"><?= $this->data['EQUIPMENT_UNIT_F'] ?></label>
-                                    <select class="form-select" name="号機" id="gouki" required>
+                                    <?php if (trim(set_value('号機')) != trim($items->c_unit) && set_value('号機') != '') { ?>
+                                        <span class="badge bg-success">更新</span>
+                                    <?php } ?>
+                                    <select class="form-select <?= (form_error('号機') ? 'is-invalid' : ''); ?>" name="号機" id="gouki" required>
                                         <?php
                                         foreach ($unit as $u) :
-                                            if ($u == $items->c_unit) : ?>
+                                            if ($u == $items->c_unit && ($items->c_unit == set_value('号機') || set_value('号機') == '')) : ?>
                                                 <option value="<?= $u ?>" selected><?= $u ?></option>
+
+                                            <?php elseif ($u == set_value('号機') && ($items->c_unit != set_value('号機') || set_value('号機') != '')) : ?>
+                                                <option value="<?= $u ?>" selected><?= $u ?></option>
+
                                             <?php else : ?>
                                                 <option value="<?= $u ?>"><?= $u ?></option>
                                         <?php endif;
@@ -79,11 +99,23 @@ if ($this->session->flashdata('error') != '') {
                                 </div>
                                 <div class="col-6 pt-3">
                                     <label for="kouteiNa" class="form-label"><?= $this->data['EQUIPMENT_PROCESS_NAME_F'] ?></label>
-                                    <input type="text" class="form-control" id="kouteiNa" name="工程名" value="<?= $items->c_processName ?>" required>
+                                    <?php if (trim(set_value('工程名')) != trim($items->c_processName) && trim(set_value('工程名')) != '') { ?>
+                                        <span class="badge bg-success">更新</span>
+                                    <?php } ?>
+                                    <?php if (form_error('工程名') != '') { ?>
+                                        <span class="badge bg-danger"><?= trim(form_error('工程名')) ?></span>
+                                    <?php } ?>
+                                    <input type="text" class="form-control <?php if (form_error('工程名')) echo 'is-invalid'; ?>" id="kouteiNa" name="工程名" value="<?= set_value('工程名') != '' ? trim(set_value('工程名')) :  trim($items->c_processName) ?>" required>
                                 </div>
                                 <div class="col-6 pt-3">
                                     <label for="mode" class="form-label"><?= $this->data['EQUIPMENT_FAIL_MODE_F'] ?></label>
-                                    <input type="text" class="form-control" id="mode" name="故障モード" value="<?= $items->c_failMode ?>" required>
+                                    <?php if (trim(set_value('故障モード')) != trim($items->c_failMode) && set_value('故障モード') != '') { ?>
+                                        <span class="badge bg-success">更新</span>
+                                    <?php } ?>
+                                    <?php if (form_error('故障モード') != '') { ?>
+                                        <span class="badge bg-danger"><?= trim(form_error('故障モード')) ?></span>
+                                    <?php } ?>
+                                    <input type="text" class="form-control <?php if (form_error('故障モード')) echo 'is-invalid'; ?>" id="mode" name="故障モード" value="<?= set_value('故障モード') != '' ? trim(set_value('故障モード')) :  trim($items->c_failMode) ?>" required>
                                 </div>
                             </div>
 
@@ -94,20 +126,44 @@ if ($this->session->flashdata('error') != '') {
 
                                 <div class="col-6 pt-3">
                                     <label for="mech" class="form-label"><?= $this->data['EQUIPMENT_MECHANISM_F'] ?></label>
-                                    <textarea class="form-control" id="mech" name="fail_mech" cols="30" rows="5" required><?= $items->c_failMech ?></textarea>
+                                    <?php if (trim(set_value('fail_mech')) != trim($items->c_failMech) && set_value('fail_mech') != '') { ?>
+                                        <span class="badge bg-success">更新</span>
+                                    <?php } ?>
+                                    <?php if (form_error('fail_mech') != '') { ?>
+                                        <span class="badge bg-danger"><?= trim(form_error('fail_mech')) ?></span>
+                                    <?php } ?>
+                                    <textarea class="form-control <?php if (form_error('fail_mech')) echo 'is-invalid'; ?>" id="mech" name="fail_mech" cols="30" rows="5" required><?= set_value('fail_mech') != '' ? trim(set_value('fail_mech')) :  trim($items->c_failMech) ?></textarea>
                                 </div>
 
                                 <div class="col-6 pt-3">
                                     <label for="fail_impact" class="form-label"><?= $this->data['EQUIPMENT_FAIL_IMPACT_F'] ?></label>
-                                    <textarea class="form-control" cols="30" rows="5" id="fail_impact" name="故障の影響" required><?= $items->c_failImpact ?></textarea>
+                                    <?php if (trim(set_value('故障の影響')) != trim($items->c_failImpact) && set_value('故障の影響') != '') { ?>
+                                        <span class="badge bg-success">更新</span>
+                                    <?php } ?>
+                                    <?php if (form_error('故障の影響') != '') { ?>
+                                        <span class="badge bg-danger"><?= trim(form_error('故障の影響')) ?></span>
+                                    <?php } ?>
+                                    <textarea class="form-control <?php if (form_error('故障の影響')) echo 'is-invalid'; ?>" cols="30" rows="5" id="fail_impact" name="故障の影響" required><?= set_value('故障の影響') != '' ? trim(set_value('故障の影響')) :  trim($items->c_failImpact) ?></textarea>
                                 </div>
                                 <div class="col-6 pt-3">
                                     <label for="line_effect" class="form-label"><?= $this->data['EQUIPMENT_LINE_EFFECT_F'] ?></label>
-                                    <input id="line_effect" name="ライン停止の可能性" class="form-control" required value="<?= $items->c_lineEffect ?>">
+                                    <?php if (trim(set_value('ライン停止の可能性')) != trim($items->c_lineEffect) && set_value('ライン停止の可能性') != '') { ?>
+                                        <span class="badge bg-success">更新</span>
+                                    <?php } ?>
+                                    <?php if (form_error('ライン停止の可能性') != '') { ?>
+                                        <span class="badge bg-danger"><?= trim(form_error('ライン停止の可能性')) ?></span>
+                                    <?php } ?>
+                                    <input id="line_effect" name="ライン停止の可能性" class="form-control <?php if (form_error('ライン停止の可能性')) echo 'is-invalid'; ?>" required value="<?= set_value('ライン停止の可能性') != '' ? trim(set_value('ライン停止の可能性')) :  trim($items->c_lineEffect) ?>">
                                 </div>
                                 <div class="col-6 pt-3">
                                     <label for="special_char" class="form-label"><?= $this->data['EQUIPMENT_SPECIAL_CHAR_F'] ?></label>
-                                    <input type="text" class="form-control" id="special_char" name="特殊特性等" value="<?= $items->c_specialChar ?>" required>
+                                    <?php if (trim(set_value('特殊特性等')) != trim($items->c_specialChar) && set_value('特殊特性等') != '') { ?>
+                                        <span class="badge bg-success">更新</span>
+                                    <?php } ?>
+                                    <?php if (form_error('特殊特性等') != '') { ?>
+                                        <span class="badge bg-danger"><?= trim(form_error('特殊特性等')) ?></span>
+                                    <?php } ?>
+                                    <input type="text" class="form-control <?php if (form_error('特殊特性等')) echo 'is-invalid'; ?>" id="special_char" name="特殊特性等" value="<?= set_value('特殊特性等') != '' ? trim(set_value('特殊特性等')) :  trim($items->c_specialChar) ?>" required>
                                 </div>
                             </div>
 
@@ -116,12 +172,19 @@ if ($this->session->flashdata('error') != '') {
                             <div class="row row border-top py-3">
 
                                 <div class="col-4 pt-3">
-                                    <label for="pic" class="form-label"><?= $this->data['EQUIPMENT_PIC_SCHEDULE_F'] ?></label>
-                                    <select class="form-select" id="pic" name="担当者日程" required>
+                                    <label class="form-label" for="pic"><?= $this->data['EQUIPMENT_PIC_SCHEDULE_F'] ?></label>
+                                    <?php if (trim(set_value('担当者日程')) != trim($items->c_picSchedule) && set_value('担当者日程') != '') { ?>
+                                        <span class="badge bg-success">更新</span>
+                                    <?php } ?>
+                                    <select class="form-select <?= (form_error('担当者日程') ? 'is-invalid' : ''); ?>" name="担当者日程" id="pic" required>
                                         <?php
                                         foreach ($inspector_ as $i) :
-                                            if ($i == $items->c_picSchedule) : ?>
+                                            if ($i == $items->c_picSchedule && ($items->c_picSchedule == set_value('担当者日程') || set_value('担当者日程') == '')) : ?>
                                                 <option value="<?= $i ?>" selected><?= $i ?></option>
+
+                                            <?php elseif ($i == set_value('担当者日程') && ($items->c_picSchedule != set_value('担当者日程') || set_value('担当者日程') != '')) : ?>
+                                                <option value="<?= $i ?>" selected><?= $i ?></option>
+
                                             <?php else : ?>
                                                 <option value="<?= $i ?>"><?= $i ?></option>
                                         <?php endif;
@@ -130,21 +193,44 @@ if ($this->session->flashdata('error') != '') {
                                 </div>
                                 <div class="col-2 pt-3">
                                     <label for="period" class="form-label"><?= $this->data['EQUIPMENT_PERIOD_F'] ?></label>
-                                    <input type="text" class="form-control" id="period" name="周期" value="<?= $items->c_period ?>" required>
+                                    <?php if (trim(set_value('周期')) != trim($items->c_period) && set_value('周期') != '') { ?>
+                                        <span class="badge bg-success">更新</span>
+                                    <?php } ?>
+                                    <?php if (form_error('周期') != '') { ?>
+                                        <span class="badge bg-danger"><?= trim(form_error('周期')) ?></span>
+                                    <?php } ?>
+                                    <input type="text" class="form-control <?php if (form_error('周期')) echo 'is-invalid'; ?>" id="period" name="周期" value="<?= set_value('周期') != '' ? trim(set_value('周期')) :  trim($items->c_period) ?>" required>
                                 </div>
                                 <div class="col-2 pt-3">
                                     <label for="month" class="form-label"><?= $this->data['EQUIPMENT_MONTH_F'] ?></label>
-                                    <input type="text" class="form-control" id="month" name="月" value="<?= $items->c_month ?>" required>
+                                    <?php if (trim(set_value('月')) != trim($items->c_month) && set_value('月') != '') { ?>
+                                        <span class="badge bg-success">更新</span>
+                                    <?php } ?>
+                                    <?php if (form_error('月') != '') { ?>
+                                        <span class="badge bg-danger"><?= trim(form_error('月')) ?></span>
+                                    <?php } ?>
+                                    <input type="text" class="form-control <?php if (form_error('月')) echo 'is-invalid'; ?>" id="month" name="月" value="<?= set_value('月') != '' ? trim(set_value('月')) :  trim($items->c_month) ?>" required>
                                 </div>
                                 <div class="col-6 pt-3">
                                     <label for="prevention" class="form-label"><?= $this->data['EQUIPMENT_PREVENTION_F'] ?></label>
-                                    <textarea class="form-control" name="予防" id="prevention" cols="30" rows="5" required><?= $items->c_prevention ?></textarea>
+                                    <?php if (trim(set_value('予防')) != trim($items->c_prevention) && set_value('予防') != '') { ?>
+                                        <span class="badge bg-success">更新</span>
+                                    <?php } ?>
+                                    <?php if (form_error('予防') != '') { ?>
+                                        <span class="badge bg-danger"><?= trim(form_error('予防')) ?></span>
+                                    <?php } ?>
+                                    <textarea class="form-control <?php if (form_error('予防')) echo 'is-invalid'; ?>" name="予防" id="prevention" cols="30" rows="5" required><?= set_value('予防') != '' ? trim(set_value('予防')) :  trim($items->c_prevention) ?></textarea>
                                 </div>
                                 <div class="col-6 pt-3">
                                     <label for="detection" class="form-label"><?= $this->data['EQUIPMENT_DETECTION_F'] ?></label>
-                                    <textarea class="form-control" name="検出" id="detection" cols="30" rows="5" required><?= $items->c_detection ?></textarea>
+                                    <?php if (trim(set_value('検出')) != trim($items->c_detection) && set_value('検出') != '') { ?>
+                                        <span class="badge bg-success">更新</span>
+                                    <?php } ?>
+                                    <?php if (form_error('検出') != '') { ?>
+                                        <span class="badge bg-danger"><?= trim(form_error('検出')) ?></span>
+                                    <?php } ?>
+                                    <textarea class="form-control <?php if (form_error('検出')) echo 'is-invalid'; ?>" name="検出" id="detection" cols="30" rows="5" required><?= set_value('検出') != '' ? trim(set_value('検出')) :  trim($items->c_detection) ?></textarea>
                                 </div>
-
                             </div>
 
 
@@ -154,12 +240,24 @@ if ($this->session->flashdata('error') != '') {
 
                                 <div class="col-6 pt-3">
                                     <label for="counter" class="form-label"><?= $this->data['EQUIPMENT_COUNTER_PLAN_F'] ?></label>
-                                    <textarea class="form-control" name="対策案" id="counter" cols="30" rows="5" required><?= $items->c_counterPlan ?></textarea>
+                                    <?php if (trim(set_value('対策案')) != trim($items->c_counterPlan) && set_value('対策案') != '') { ?>
+                                        <span class="badge bg-success">更新</span>
+                                    <?php } ?>
+                                    <?php if (form_error('対策案') != '') { ?>
+                                        <span class="badge bg-danger"><?= trim(form_error('対策案')) ?></span>
+                                    <?php } ?>
+                                    <textarea class="form-control <?php if (form_error('対策案')) echo 'is-invalid'; ?>" name="対策案" id="counter" cols="30" rows="5" required><?= set_value('対策案') != '' ? trim(set_value('対策案')) :  trim($items->c_counterPlan) ?></textarea>
                                 </div>
 
                                 <div class="col-6 pt-3">
                                     <label for="measure" class="form-label"><?= $this->data['EQUIPMENT_MEASURE_F'] ?></label>
-                                    <textarea class="form-control" name="対策" id="measure" cols="30" rows="5" required><?= $items->c_measure ?></textarea>
+                                    <?php if (trim(set_value('対策')) != trim($items->c_measure) && set_value('対策') != '') { ?>
+                                        <span class="badge bg-success">更新</span>
+                                    <?php } ?>
+                                    <?php if (form_error('対策') != '') { ?>
+                                        <span class="badge bg-danger"><?= trim(form_error('対策')) ?></span>
+                                    <?php } ?>
+                                    <textarea class="form-control <?php if (form_error('対策')) echo 'is-invalid'; ?>" name="対策" id="measure" cols="30" rows="5" required><?= set_value('対策') != '' ? trim(set_value('対策')) :  trim($items->c_measure) ?></textarea>
                                 </div>
 
                             </div>
@@ -199,7 +297,7 @@ if ($this->session->flashdata('error') != '') {
                                                             <?= $num->c_quantity ?>
                                                         </td>
 
-                                                        <td style="display: none;"><a class="btn btn-primary minus">DELETE</a> </td>
+                                                        <td style="display: none;"><a class="btn btn-primary minus"><?= $this->data['DELETE_BUTTON']; ?></a> </td>
                                                     </tr>
 
                                                 <?php } ?>
@@ -232,12 +330,7 @@ if ($this->session->flashdata('error') != '') {
 
                                     <a class="btn btn-warning float-end  me-5" href='<?= base_url(); ?>'><?= $this->data['CANCEL_BUTTON'] ?></a>
                                     <button type="submit" name="edit_fmea" class="btn btn-primary float-end me-1" value="登録" id="submitTrouble"><?= $this->data['SUBMIT_BUTTON']; ?></button>
-
-
-
                                 </div>
-
-
                     </form>
                 </div>
             </div>
@@ -252,7 +345,11 @@ if ($this->session->flashdata('error') != '') {
         background-color: #F5F5F5
     }
 
-    .card-body{
+    span p {
+        margin-bottom: 0;
+    }
+
+    .card-body {
         background-color: #F4F5F6;
     }
 
@@ -262,15 +359,16 @@ if ($this->session->flashdata('error') != '') {
         background-color: #F4F5F6;
         width: max-content;
     }
-
-    form .form-control {
-
-        /* background-color: #EAECF4; */
-
-    }
 </style>
 
 
 <script>
+    $('input, textarea, select').on('click', function() {
+        $(this).removeClass('is-invalid')
+        $(this).parent().find('.invalid-feedback').hide()
+    })
 
+    $(document).ready(function() {
+        $("#errorNotif").toast("show");
+    });
 </script>

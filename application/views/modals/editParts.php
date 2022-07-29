@@ -42,7 +42,7 @@
                                 <div class="col pt-3">
                                     <label class="form-label" for="quantity_edit"><?= $this->data['QUANTITY'] ?></label>
                                     <span class="must form-check-label">必須</span>
-                                    <input class="form-control" type="text" name="数量_edit" id="quantity_edit" value="<?= $spare->c_quantity ?>" required>
+                                    <input class="form-control" type="number" name="数量_edit" id="quantity_edit" value="<?= floatval($spare->c_quantity) ?>" required>
                                 </div>
                                 <div class="col pt-3">
                                     <label class="form-label" for="unit_edit"><?= $this->data['UNIT'] ?></label>
@@ -54,7 +54,7 @@
                                     <span class="must form-check-label">必須</span>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">￥</span>
-                                        <input class="form-control" type="text" name="金額_edit" id="price_edit" value="<?= $spare->c_price ?>" required>
+                                        <input class="form-control" type="number" name="金額_edit" id="price_edit" value="<?= floatval($spare->c_price) ?>" required>
                                     </div>
                                 </div>
                             </div>
